@@ -5,12 +5,12 @@ nav_order: 1
 permalink: /
 ---
 
-# DB Collector automation
+# Introduction
 
-Text for the DB Collectors explaining what and why
+Intro text WIP
 
 ---
 
 # Disclaimer
 
-Help with AI and so on
+AI has been used as a supporting tool for the creation of this document, as well as for the error detection and fixing of my code.
