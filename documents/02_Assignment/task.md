@@ -25,8 +25,6 @@ This will decrease the manual labor involved in improving our visibility for our
 
 ## Goals
 
-The goal of this project is as follows:
-
 **Reduce the time spent manually creating collectors.**
 
 **Reduce the likelihood of errors.**
