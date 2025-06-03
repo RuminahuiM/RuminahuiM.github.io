@@ -1,0 +1,10 @@
+title: Sem01
+description: "DB Collector automation"
+remote_theme: just-the-docs/just-the-docs
+
+url: https://JJotace.github.io/SEM01/
+
+aux_links:
+  JIRA Project: to do
+
+footer_content: "2025 Juan Cardoso Sem01 for the Technische Berufsschule Zürich, course Cloud Native Engineer"
