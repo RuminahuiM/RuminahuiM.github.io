@@ -23,29 +23,39 @@ This project will be centered around the automation of the process of database c
 
 This will decrease the manual labor involved in improving our visibility for our oracle databases, pushing us to easily onboard all of them and offer the end user a better experience by noticing issues before they happen, or allow us to react faster to them.
 
-## Goals
+### Project Goals (SMART)
 
-**Reduce the time spent manually creating collectors.**
-
-**Reduce the likelihood of errors.**
-
-**Create a better experience for the end user by providing a better overview of our databases**
- 
-**The Ansible playbook should be able to distinguish and set up the collector in exactly the same way, regardless of the runtime/environment in which it is running.**
+- **Specific**: Automate the creation of Oracle database collectors in AppDynamics using Ansible.
+- **Measurable**: Reduce manual configuration time by at least 90%.
+- **Attractive**: Improve the end-user experience through better support made possible thanks to having more visibility and faster database onboarding.
+- **Realistic**: Using existing company infrastructure and tools such as REX and AppDynamics.
+- **Timed**: Complete and deploy the automation within the project duration.
 
 ## Steps
 
 1. **Analyze and plan**
-   - Explanation
+   - Indentify all the databases assigned to our team that haven't yet been onboarded.
+   - Define exactly what the code should do and how.
+   - Plan according to our current UBS architecture (dev, test, preprod, prod...)
 
 2. **Ansible Playbook**
-   - Explanation
+   - Design and implement an Ansible playbook that can configure oracle database collectors in AppDynamics.
+   - The playbook will be able to tell in which environment we are and use the correct template accordingly.
+   - Extra vars will be used in case of needing special values such as ports other than the default.
 
 3. **Documentation**
-   - Explanation
+   - Detailed technical documentation.
+   - Description of the architecture, technologies and steps.
+   - Screenshots and diagrams to help understand the processes.
 
 4. **Testing and Deployment**
-   - Explanation
+   - Playbook validation through REX testing in all environments.
+   - Documenting of test results.
+   - Problem solving of possible issues found during the testing phase.
+
+## Deliverable Results
+   - Automated database collector playbook written in ansible and deployed through REX.
+   - Techincal documentation.
 
 ## Assessment criteria
 
