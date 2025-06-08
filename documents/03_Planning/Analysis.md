@@ -1,6 +1,6 @@
 ---
 layout: default
-title: 3.3 Analysis
+title: 3.3 SWOT Analysis
 parent: 3. Planning
 nav_order: 3
 ---
