@@ -2,7 +2,7 @@
 layout: default
 title: 4.2 Structure
 parent: 4. Ansible
-nav_order: 4
+nav_order: 2
 ---
 
 # 4.2 Structure of the ansible controller
