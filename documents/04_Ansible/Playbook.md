@@ -83,6 +83,7 @@ Extra Var 04: OUM Identifier for the database or SLL Certificate of the database
 
 This will part of the code is in charge of noticing in which environment this playbook is being ran in, and execute the part of the code that belongs to said environment.
 It also displays the value saved in the variable for verification purposes.
+{% raw %}
 ```yaml
   - name: get_runtime
     shell: |
@@ -97,4 +98,5 @@ It also displays the value saved in the variable for verification purposes.
     debug:
      msg: "runtime is {{ runtime }}"
 ```
+{% endraw %}
 
