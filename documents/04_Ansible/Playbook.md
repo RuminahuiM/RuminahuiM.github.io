@@ -25,7 +25,7 @@ As I have made this project for my company, I am not allowed to share the entire
 - Gather facts is a default in every playbook, but in this case it is not needed, so I have left it in but commented out for completion purposes.
 - tasks defines the start of the playbook and the actions it will take.
 
-```
+```yaml
 - name: oracleansible-ops
   hosts: localhost
 #  gather_facts: yes
