@@ -16,6 +16,15 @@ This is an example order of how my playbook would be executed and how the overvi
 
 <img src="../../resources/images/REX_Order_Example.PNG" alt="REX_Deployer" width="1000">
 
+## Requirements
+
+In order for a database collector to be created, I will need a few different informations that will be added by the person executing the playbook in the form of extra vars. This information can be found in a tool called ISAC, which keeps inventory of everything in our network.
+
+- **Collector Name**: This is the name the collector will have in our monitoring tool. The user will fill this following our current naming convention.
+- **Hostname**:       This is the FQDN (Fully Qualified Name) of the server hosting the database.
+- **Database Name**:  This is the FQDN of the database. 
+- **SSL Cert**:       This is the OUM Idenfitier of the database or also known as SSL Certificate in the string, it is another FQDN similar to the database's.
+
 ## Code
 
 As I have made this project for my company, I am not allowed to share the entirety of the code, as to not breach any security of privacy policies, but I will share bits and pieces and explain every part of it within this documentation.
@@ -62,7 +71,7 @@ Extra Var 02: Host is saved in this variable.
 ```
 {% endraw %}
 
-Extra Var 03: Database FQDN (fully qualified name)
+Extra Var 03: Database FQDN
 {% raw %}
 ```yaml
   - name: database_name
