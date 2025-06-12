@@ -40,12 +40,14 @@ Extra Var 01: Requestor gives desired name as per company guidelines.
     set_fact:
      collector: "{{ collector_name }}"
 ```
+```
 
 For verification purposes, the collector name gets written in the output thanks to the below:
 ```
   - name:
     debug:
      msg: "This is the collector of the database: {{ collector_name }}"
+```
 ```
 
 Extra Var 02: Host is saved in this variable.
@@ -54,12 +56,14 @@ Extra Var 02: Host is saved in this variable.
     set_fact:
      host: "{{ host }}"
 ```
+```
 
 Extra Var 03: Database FQDN (fully qualified name)
 ```
   - name: database_name
     set_fact:
      db_user: "{{ database_name }}"
+```
 ```
 
 Extra Var 04: OUM Identifier for the database or SLL Certificate of the database.
@@ -68,6 +72,7 @@ Extra Var 04: OUM Identifier for the database or SLL Certificate of the database
     set_fact:
      db_user: "{{ ssl_cert }}"
 
+```
 ```
 
 This will part of the code is in charge of noticing in which environment this playbook is being ran in, and execute the part of the code that belongs to said environment.
@@ -85,4 +90,5 @@ It also displays the value saved in the variable for verification purposes.
   - name: show_runtime
     debug:
      msg: "runtime is {{ runtime }}"
+```
 ```
