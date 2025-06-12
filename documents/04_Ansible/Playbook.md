@@ -45,37 +45,41 @@ Extra Var 01: Requestor gives desired name as per company guidelines.
 
 
 For verification purposes, the collector name gets written in the output thanks to the below:
-```
+{% raw %}
+```yaml
   - name:
     debug:
      msg: "This is the collector of the database: {{ collector_name }}"
 ```
-
+{% endraw %}
 
 Extra Var 02: Host is saved in this variable.
-```
+{% raw %}
+```yaml
   - name: host
     set_fact:
      host: "{{ host }}"
 ```
-
+{% endraw %}
 
 Extra Var 03: Database FQDN (fully qualified name)
-```
+{% raw %}
+```yaml
   - name: database_name
     set_fact:
      db_user: "{{ database_name }}"
 ```
-
+{% endraw %}
 
 Extra Var 04: OUM Identifier for the database or SLL Certificate of the database.
-```
+{% raw %}
+```yaml
   - name: ssl_cert
     set_fact:
      db_user: "{{ ssl_cert }}"
 
 ```
-
+{% endraw %}
 
 This will part of the code is in charge of noticing in which environment this playbook is being ran in, and execute the part of the code that belongs to said environment.
 It also displays the value saved in the variable for verification purposes.
