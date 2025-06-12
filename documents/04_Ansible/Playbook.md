@@ -18,12 +18,13 @@ This is an example order of how my playbook would be executed and how the overvi
 
 ## Requirements
 
-In order for a database collector to be created, I will need a few different informations that will be added by the person executing the playbook in the form of extra vars. This information can be found in a tool called ISAC, which keeps inventory of everything in our network.
+In order for a database collector to be created, I will need a few different pieces of information that will be added by the person executing the playbook in the form of extra vars. This information can be found in a tool called ISAC, which keeps inventory of everything in our network.
 
 - **Collector Name**: This is the name the collector will have in our monitoring tool. The user will fill this following our current naming convention.
 - **Hostname**:       This is the FQDN (Fully Qualified Name) of the server hosting the database.
 - **Database Name**:  This is the FQDN of the database. 
-- **SSL Cert**:       This is the OUM Idenfitier of the database or also known as SSL Certificate in the string, it is another FQDN similar to the database's.
+- **SSL Cert**:       This is the database identifier or also known as SSL Certificate in the string, it is another FQDN similar to the database's.
+
 
 ## Code
 
@@ -109,3 +110,13 @@ It also displays the value saved in the variable for verification purposes.
 ```
 {% endraw %}
 
+### JBDC String
+
+A JDBC string for an Oracle database in AppDynamics is a URL that tells the AppDynamics agent how to connect to the Oracle database. It includes the protocol, driver type, host, port, and database identifier.
+This string is coded into my playbook with help of the extra vars above as follows:
+
+{% raw %}
+```
+jdbc:oracle:thin:@(DESCRIPTION = (ADDRESS_LIST = (ADDRESS = (PROTOCOL = TCPS)(HOST = {{ host }} )(PORT = 1522)))(CONNECT_DATA = (SERVICE_NAME = {{ database_name }}))  (SECURITY = (SSL_SERVER_CERT_DN = \"{{ ssl_cert }},OU=OracleDB,OU=CA,O=UBS,C=CH\")))
+```
+{% endraw %}
