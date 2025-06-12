@@ -14,7 +14,7 @@ The playbook is saved across all environments and able to be deployed in any of 
 
 This is an example order of how my playbook would be executed and how the overview of this tool looks like.
 
-<img src="../../resources/images/REX_Order_Example.PNG" alt="REX_Deployer" width="1000">
+<img src="../../resources/images/REX_Order_Example.PNG" alt="REX_Deployer" width="2000">
 
 ## Requirements
 
