@@ -1,10 +1,29 @@
 ---
 layout: default
-title: 1. Introduction
+title: 0. Übersicht
 nav_order: 1
 permalink: /
 ---
 
-# Introduction
+# Semesterarbeit HF Cloud
+Titel des Projekts
+Name der Studierenden
+Klasse / Studiengang
+Semester / Datum
+Betreuende Lehrperson
 
-Dynamic Groups introduction & Verzeichniss
+# Inhaltsverzeichnis
+Wird automatisch generiert
+Optional: Abbildungsverzeichnis / Tabellenverzeichnis
+
+# Abstract / Management Summary
+Kurze Zusammenfassung der Zielsetzung, des Vorgehens und der wichtigsten Ergebnisse.
+
+
+# Anhang
+• Quellcode-Auszüge
+• Screenshots
+• Projektpläne / Diagramme
+• Protokolle
+• Glossar (falls nötig)
+• Quellenverzeichnis
