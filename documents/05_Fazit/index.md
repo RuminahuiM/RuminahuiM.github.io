@@ -12,9 +12,8 @@ has_children: true
 
 • Reflexion über den Projektverlauf
 • Was lief gut, was nicht?
+    -> zu viele sidequests
 • Persönliche Erkenntnisse
+    -> aus step 4 kopieren
 • Mögliche Weiterentwicklung
-
-
-
-
+    -> TODO's die noch anstehen auflisten
