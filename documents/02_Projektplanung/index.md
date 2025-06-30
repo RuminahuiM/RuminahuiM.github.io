@@ -33,14 +33,14 @@ nochmals??? maybe anforderungen. aufjedenfall ziele nach smart prinzip - FRAGE T
     - SharePoint-MS Lists, Power BI Dashboards, Sentinel-Integration.
 
 ### 2. Kernkomponenten
-| Komponente                  | Beschreibung                                                                                                                                         | Output                      |
-|-----------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------|
-| **Abteilungs-Inventar**     | Zentrale SharePoint/MS Lists-Liste aller Departments & Sub-Departments mit Codes, Beschreibungen, Ownern, Parent-Child-Beziehungen.                     | Abteilungs-Inventar         |
-| **Dynamic Group Provisioning** | Automatisierte Erstellung & Pflege von Distribution- und Security-Groups pro DeptCode.                                                               | Dynamic Group Provisioning  |
-| **Digital Assets Katalog**  | Definition aller Asset-Typen (Lizenzen, Rollen, Policies, Apps).                                                                                     | Digital Assets Katalog      |
-| **Naming Policy**           | Azure AD Naming Policy: `<DeptCode>_<Type>`                                                                                                          | Naming Policy               |
-| **Fallback-Gruppe**         | „General“ für ungültige Codes, löst Review-Workflow aus.                                                                                             | Fallback-Gruppe             |
-            
+| Komponente | Beschreibung | Output |
+|--|--|--|
+| **Abteilungs-Inventar** | Zentrale SharePoint/MS Lists-Liste aller Departments & Sub-Departments mit Codes, Beschreibungen, Ownern, Parent-Child-Beziehungen. | Abteilungs-Inventar |
+| **Dynamic Group Provisioning** | Automatisierte Erstellung & Pflege von Distribution- und Security-Groups pro DeptCode. | Dynamic Group Provisioning |
+| **Digital Assets Katalog** | Definition aller Asset-Typen (Lizenzen, Rollen, Policies, Apps). | Digital Assets Katalog |
+| **Naming Policy** | Azure AD Naming Policy: `<DeptCode>_<Type>` | Naming Policy |
+| **Fallback-Gruppe** | „General“ für ungültige Codes, löst Review-Workflow aus. | Fallback-Gruppe |
+
 
 ### 3. Digital Assets definition
 
@@ -63,13 +63,13 @@ Microsoft 365-SKUs, Add-On-Subscriptions, Feature-Lizenzen.
 
 #### Department Lifecycle
 
-Erstellen:  
+**Erstellen:**  
 Forms/JIRA → Dept-Owner → IT → HR-Validation → Provisioning → Stakeholder-Notification  
 
-Ändern:  
+**Ändern:**  
 JIRA Change-Request → Approval Chain → Regel-Anpassung → Automatische Propagation  
 
-Archivieren:  
+**Archivieren:**  
 Forms/JIRA → Approval → Expiration Policy (180 Tage) → Asset-Revoke
 
 #### Sub-Department / Rollen
