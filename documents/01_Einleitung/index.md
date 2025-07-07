@@ -111,19 +111,8 @@ Innerhalb der Semesterabeit ist das Ziel, eine Pilotphase mit der Abteilung ICT 
 - Service Users handling in Azure AD
 
 
-
-
-
-Notes (irrelevant für chatgpt!):
-• Relevanz / Motivation ??
-• Abgrenzung - out of scope?? oder was ist gemeint?
-• Methodik - detailiertes vorgehen - jira, meetings, azure automation, evaluation von logic apps
-• Projektorganisation
-
-
-
-
-
+------
+-----
 
 
 

@@ -27,13 +27,13 @@ nochmals??? maybe anforderungen. aufjedenfall ziele nach smart prinzip - FRAGE T
     - Mail-enabled Distribution Groups (<DeptCode>_DL)  
     - Security Groups (<DeptCode>_SG)  
 
-3. Asset-Zuweisung  
+3. **Asset-Zuweisung**  
     - Über Azure AD-Connector, Intune-Connector, Graph API oder ARM-Templates zugeordnet.  
 
-4. Workflows & Automatisierung  
+4. **Workflows & Automatisierung**  
     - Microsoft Forms (Intake) + Logic Apps / Power Automate (Approval & Provisioning).  
 
-5. Übersichten & Reporting  
+5. **Übersichten & Reporting**  
     - SharePoint-MS Lists, Power BI Dashboards, Sentinel-Integration.
 
 ----
