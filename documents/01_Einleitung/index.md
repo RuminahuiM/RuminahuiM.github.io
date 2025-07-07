@@ -30,7 +30,6 @@ Die HR‑Userdaten wurden teilweise bereits über ein script synchronisiert. All
 ----
 
 ### Funktionale Anforderungen
----
 
 **Stammdaten & Inventar**
 - Zentrale SharePoint/MS Lists-Liste aller Abteilungen & Sub-Abteilungen mit Codes, Beschreibungen, Ownern und Parent-Child-Beziehungen
@@ -58,7 +57,6 @@ Die HR‑Userdaten wurden teilweise bereits über ein script synchronisiert. All
 ----
 
 ### Prozessanforderungen
-----
 
 **Abteilungs-Lifecycle**
 - Erstellen, Ändern, archivieren von Abteilungen mit Forms/SharePoint-List Intake, Genehmigungsworkflow, Inventory-Update und Provisioning
@@ -83,7 +81,6 @@ Die HR‑Userdaten wurden teilweise bereits über ein script synchronisiert. All
 ----
 
 ## Ziele der Arbeit
-----
 
 ### Automatisierte Berechtigungsverwaltung: 
 Implementierung dynamischer Gruppen in Azure, die basierend auf dem Abteilungscode Berechtigungen (z. B. für SharePoint, Intune, Mailverteiler) automatisch zuweisen. 
