@@ -24,25 +24,13 @@ Wird automatisch generiert TODO
 
 # Abstract
 
-## Ziele
-Bei diesem Projekt geht es darum, ein besseres/möglichst automatisiertes Berechtigungs + Zugangsmanagement zu erschaffen.
-Im moment wird zugang zu apps, mailverteiler rollen und Daten, manuell berechtigt. Teilweise werden Gruppen eingesetzt und teilweise werden berechtigungen einzelnen usern zugewiesen.
-Das Projekt entstand aus der anfrage heraus, automatische Mailverteiler zu haben, welche nicht mehr gepflegt werden müssen.
-Wir haben uns überlegt, das wir die Abteilungsdaten aus dem HR Tool (BC + SwissSalary modul) auslesen können (jeder user hat ein Abteilungscode zugewiesen) und diese verwenden können um pro abteilung sicherheitsgruppen und mailverteiler erstellen können, welchen wir die jeweilig benötigten Tools und berechtigungen (Digital Assets) zuweisen können.
-Das ganze wird Hauptsächlich mit Powershell Runbooks in Azure automation umgesetzt.
+## Zielsetzung
+Ziel dieses Projekts ist die Einführung eines möglichst automatisierten Berechtigungs- und Zugangsmanagements in einer hybriden Azure-Umgebung. Derzeit erfolgen Berechtigungen auf Applikationen, Mailverteilern und Daten teils manuell, teils über statische Gruppen. Ausgangspunkt war der Wunsch nach automatischen Mailverteilern, die keiner manuellen Pflege mehr bedürfen.
 
-Als erweiterung, haben wir uns überlegt, das wir pro "Digital Asset" eine Sicherheitsgruppe erstellen können, um jedes Asset nur einmal einrichten zu können. Wir führen eine Liste der Abteilungen und der zugewiesenen Assets und dadurch werden die Assets automatisch den entsprechenden Abteilungsgruppen zugewiesen.
+Geplant ist, die Abteilungs­informationen aus dem HR-System (Business Central sowie SwissSalary-Modul) über synchronisierte extensionAttribute auszulesen. Basierend auf dem jeweiligen Abteilungscode werden für jede Abteilung dynamische Sicherheitsgruppen und Mailverteiler erstellt, denen anschließend die benötigten digitalen Assets (Tools, Berechtigungen, Lizenzen usw.) zugewiesen werden.Die Automatisierung wird überwiegend mittels PowerShell-Runbooks in Azure Automation realisiert.
 
-Da wir eine grosse firma sind, bringt das mit sich, dass wir viele Assets nutzen und diese sich pro Abteilung unterscheiden.
-Da man jedes Asset einzeln in unser konzept einbeten muss, bringt das einen langwirigen Prozess mit sich, in dem wir für jede Abteilung die Assets durchgehen, einpflegen und den entsprechenden gruppen zuweisen.
-Deshalb ist in der Projektarbeit nur angedacht, ein MVP mit einer Pilotphase zu machen. Das effektive enrollment über die gesamt Firma erfolgt nach abschluss der Arbeit über mehrere Monate.
-
-genauere Details zur Zielsetzung in der Einleitung (01-Einleitung)
-
-### Digital Assets definition
-Im folgenden wird Definitiert um was es sich bei Digital Assets handelt, beziehungsweise was wir als Digital Assets bezeichen.
-Diese Assets werden von uns in zukunft einmalig eingerichtet werden und dann den entsprechenden Gruppen zugewiesen.
-Diese Definition wird nach bedarf im späteren Verlauf des Porjekts erweitert.
+### Defintion "Digital Assets"
+Im Rahmen dieses Projekts werden „Digital Assets“ als einmalig zu konfigurierende Ressourcen verstanden, die Abteilungsgruppen später zugeordnet werden. Die Definition kann im Projektverlauf erweitert werden.
 
 **Zugriffs- & Sicherheits-Assets**
 Azure AD-Rollen, RBAC, Conditional Access, PIM, Local AD Access  
@@ -65,54 +53,47 @@ Power BI Workspaces, Azure Functions/Logic Apps Zugriffe, Entitlement Management
 ----
 
 ## Vorgehen
+
 ### Projektmanagement:
-Für das Projektmanagement verweden wir bereits JIRA in unserer Abteilung, weshalb ich entschieden habe, das Projekt ebenfalls in JIRA zu managen.
-Ich führe das Projekt im Scrum Modell durch. Dabei mache ich Sprints die jeweils zwei Wochen andauern, da ich zwischendurch andere aufgaben erledigen muss und ich somit genug tasks in einem sprint erledigen kann.
-Ich habe das projekt in mehrere Phasen aufgeteilt und darunter detailiertere Tasks erfasst. 
-Details folgen unter punkt 02-Projektplanung
+Das Projekt wird mittels Scrum-Framework in JIRA organisiert. Geplant sind Zwei-Wochen-Sprints, um neben den Projektaufgaben parallel weitere IT-Pflichten erfüllen zu können. Die übergeordneten Phasen und einzelnen Tasks sind in JIRA detailliert angelegt (siehe Kapitel 02 – Projektplanung).
 
 ### Involvierte Personen:
-David Feser (Abteilungsleiter): Stakelholder/Auftragsgeber, anforderungen angegeben
-Saskia Haas - Zuständig für interne Kommunikation an User
-Dodoe Mannale - Projektmanagement + Umsetzung + Review(mit den andern beiden)
+**David Feser (Abteilungsleiter):** Stakeholder und Auftraggeber
+**Saskia Haas:** Verantwortlich für interne Kommunikation
+**Dodoe Mannale:** Projektleitung, Umsetzung, Review
+**Alain Knaff:** PowerBI & BC Spezialist, Teilaufgaben
 
 ### Ausführung
-TODO - weglassen? weiss nicht genau was hier rein soll. Detailierte umsetzungsbeschreibung erfolgt in anderem kapitel
+TODO - weglassen? weiss nicht genau was hier rein soll. Detailierte umsetzungsbeschreibung erfolgt in anderem kapitel. evtl kurze zsfassung
 
 ### Dokumentation:
-Durch die erfassung der einzelnen Tasks in JIRA, ist es sinnvoll in diesen Tasks Kommentare über den verlauf der Umsetzung zu dokumentieren.
-Wo immer ich es für nötig gehalten habe, habe ich Details und Probleme direkt in den JIRA Tasks dokumentiert.
+Alle Umsetzungsschritte und Entscheidungen werden in den JIRA-Tasks dokumentiert. Zusätzlich werden die in JIRA generierten Sprint-Berichte als Nachweis der erledigten Arbeiten in den Anhang übernommen.
 
-Für die Dokumentation des Sprints und jeweils erledigten Tasks gibt es eine Funktion in JIRA die Sprint Berichte erstellt. Diese Berichte werde ich im späteren Verlauf der Dokumentation aufzeigen.
+
 
 ### Testing
 TODO - Vorgehen für Testing?
 es gibt nicht wirklich die möglichkeit Unit Tests oder so zu machen. Weshalb ich einfach immer wieder die Scripts 
 
 ### Pilotphase
-Die Pilotphase besteht aus zwei Teilen. Einerseits gibt es eine einzelne Pilotphase, für die automatisierten Mailverteiler, da dies ursprünglich eine Anforderung aus dem Management und schon länger erwünscht ist. 
-Andererseits gibt es eine zweite Pilotphase in der die Funktionalität des automatisierten Asset Managements getestet werden.
+Die Pilotphase gliedert sich in zwei Teilphasen: Erstens erfolgt die Pilotierung des automatisierten Mailverteilungskonzepts, da dies bereits seit Längerem eine zentrale Forderung des Managements war. Zweitens wird in einer separaten Teilphase die Funktionalität des automatisierten Digital Asset Managements getestet.
 
 **Automatisierte Mailverteiler**
-Für die Mailverteiler wird der gesamte Bereich Services als Testobject dienen. Darunter sind mehrere Abteilungen, unter anderem auch die ICT.
-Dabei erstelle ich mit dem Script, welches automatisch die Department Gruppen und Mailverteiler erstellt, erstmal nur die Gruppen für den Bereicht Services. Da ich als input im Moment ein CSV verwende, kann ich aus diesem alle anderen Abteilungen erstmal für die Pilotphase entfernen.
-
-Die Pilotphase startet am 26.06.2025. Saskia übernimmt dabei die Kommunikation an die betroffenen User.
-Die User werden eine Woche vor Start der Pilotphase über die neuen Mailverteiler und den Start der Pilotphase informiert.
-Wir teilen Ihnen dabei eine Tabelle mit den bisherigen Mailverteilern und den neuen Mailverteiler. Dazu die Anweisung nur noch die neuen Mailverteiler zu verwenden und ein Feedback Formular. Ausserdem stehen Saskia und ich für Fragen über Mail zur Verfügung.
+Die Pilotphase beginnt am 26.06.2025 und umfasst zuerst die Abteilung „Services“ (inklusive Teilabteilungen wie ICT). Saskia Haas koordiniert die Anwender­kommunikation. Eine Woche vor Start werden betroffene Nutzer über das Verfahren informiert und zu Feedback via Formular eingeladen.
 
 
 **Automatisiertes Digital Asset Management**
-TODO - Detials müssen noch ausgearbeitet werden.
-Pilotphase startet erstmal mit der ICT abteilung und einigen wenigen Assets aus verschiedenen Kategorien.
+Die zweite Pilotphase richtet sich auf die Abteilung ICT und testet die Zuweisung ausgewählter Digital Assets aus unterschiedlichen Kategorien. TODO - link (Details in Kapitel 05 – Pilotierung Digital Assets.)
 
 ----
 
-## Output -> TODO hierhin platzieren für eine bessere übersicht?
+## Output
+(Hier wird eine Übersicht der erzielten Ergebnisse eingefügt.) TODO
 
 ----
 
 ## Fazit? -> TODO
+(Kurzes Resümee und Lessons Learned – wird am Ende der Arbeit ergänzt.)
 kurzes Fazit werde ich gegen ende der Projektarbeit hier erfassen
 - Viel zu grosses projekt
 - zeit und komplexität der scripts massiv unterschätzt

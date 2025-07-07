@@ -10,14 +10,16 @@ has_children: true
 
 ## Vorwort
 
-Als erstes möchte ich kurz etwas über dieses Projekt klarstellen. 
-Ich habe mich mit dem Projekt im zusammenhang mit der Semsesterarbeit etwas übernommen. Ich hatte das Projekt für kleiner gehalten, da ich einerseits unterschätzt habe wie viel scripts dafür erstellt werden müssen und andererseits viel mehr probleme auftraten als erwartet.
-Das Porjekt erfüllt im aktuellen Status die meisten gesetzten Ziele der Zielsetzung die ich für die Semesterarbeit gesetzt habe, allerdings muss noch viel daran gefeilt werden. Als Proof of Concept ist es jedoch ausreichend und der Plan für das weitere Vorgehen ist definiert und wird in nächster Zeit entsprechend umgesetzt.
+Das vorliegende Projekt zur automatisierten Verwaltung von Assets und Mailverteilern via Azure Dynamic Groups hat sich im Verlauf als umfassender erwiesen als ursprünglich angenommen. Die Entwicklung zahlreicher PowerShell‑Runbooks und die Integration verschiedener Systeme waren aufwändiger als erwartet und erforderten eine iterative Herangehensweise. Dennoch erfüllt der aktuelle Proof of Concept die definierten Projektziele ausreichend. Der weitere Projektfahrplan ist festgelegt und wird in den späteren Kapiteln genauer beschrieben.
+
+Abbildung 1: Zeitlicher Verlauf des Projektumfangs und Meilensteine des Proof of Concept.
 
 ----
 
 ## Ausgangslage
-In unserer bestehenden Azure-Hybrid-Umgebung werden Benutzerberechtigungen heute weitgehend manuell verwaltet. Dies führt zu inkonsistenten Zugriffsrechten, redundanten Gruppenstrukturen und erhöhten Sicherheits- und Compliance-Risiken. Die HR-Daten (Abteilungscodes) werden bereits per Azure AD Connect in ein extensionAttribute synchronisiert – dieses Potenzial soll genutzt werden, um über dynamisch erzeugte Azure AD-Gruppen automatisierte Asset-Zuweisungen umzusetzen.
+In der vorhandenen Azure‑Hybrid‑Umgebung werden Benutzerberechtigungen bislang überwiegend manuell vergeben. Dies führt zu inkonsistenten Zugriffsrechten, redundanten und unübersichtlichen Gruppenstrukturen und erhöhten Sicherheits- und Compliance‑Risiken.
+
+Die HR‑Userdaten wurden teilweise bereits über ein script synchronisiert. Allerdings ist der Prozess bisher noch nicht vollständig automatisiert gewesen. Dieses Potenzial soll nun genutzt werden, um automatisierte Berechtigungszuweisungen mittels dynamischer Azure AD‑Gruppen zu realisieren.
 
 **Problemstellung:**
 
@@ -82,9 +84,6 @@ In unserer bestehenden Azure-Hybrid-Umgebung werden Benutzerberechtigungen heute
 
 ## Ziele der Arbeit
 ----
-
-### Definierte SMART Ziele - TODO
-TODO - untere Ziele zu SMART Zielen umschreiben denke ich ist am besten
 
 ### Automatisierte Berechtigungsverwaltung: 
 Implementierung dynamischer Gruppen in Azure, die basierend auf dem Abteilungscode Berechtigungen (z. B. für SharePoint, Intune, Mailverteiler) automatisch zuweisen. 
