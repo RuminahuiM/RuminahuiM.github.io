@@ -14,9 +14,13 @@ Klasse / Studiengang: ITCNE25 - Cloud Native HF
 Semester / Datum: 01 Semester - 09.07.2025 TODO
 Betreuende Lehrperson: Samuel Müller (Azure), Caeser Roth (Projektmanagement)
 
+----
+
 # Inhaltsverzeichnis
 
 Wird automatisch generiert TODO
+
+----
 
 # Abstract
 
@@ -57,6 +61,8 @@ Microsoft 365-SKUs, Add-On-Subscriptions, Feature-Lizenzen.
 
 **Weitere Ressourcen**
 Power BI Workspaces, Azure Functions/Logic Apps Zugriffe, Entitlement Management Packages PowerApp Zugriffe.
+
+----
 
 ## Vorgehen
 ### Projektmanagement:
@@ -100,10 +106,20 @@ Wir teilen Ihnen dabei eine Tabelle mit den bisherigen Mailverteilern und den ne
 TODO - Detials müssen noch ausgearbeitet werden.
 Pilotphase startet erstmal mit der ICT abteilung und einigen wenigen Assets aus verschiedenen Kategorien.
 
-# Output -> TODO hierhin platzieren für eine bessere übersicht?
+----
 
-# Fazit? -> TODO
+## Output -> TODO hierhin platzieren für eine bessere übersicht?
+
+----
+
+## Fazit? -> TODO
 kurzes Fazit werde ich gegen ende der Projektarbeit hier erfassen
+- Viel zu grosses projekt
+- zeit und komplexität der scripts massiv unterschätzt
+- pseudo code zur einschätzung machen nextes mal
+- Pilot schief gelaufen
+
+----
 
 # Anhang
 • Quellcode-Auszüge - Runbooks?? + beschreibunng TODO

@@ -8,6 +8,14 @@ has_children: true
 # 1. Einleitung
 {: .no_toc }
 
+## Vorwort
+
+Als erstes möchte ich kurz etwas über dieses Projekt klarstellen. 
+Ich habe mich mit dem Projekt im zusammenhang mit der Semsesterarbeit etwas übernommen. Ich hatte das Projekt für kleiner gehalten, da ich einerseits unterschätzt habe wie viel scripts dafür erstellt werden müssen und andererseits viel mehr probleme auftraten als erwartet.
+Das Porjekt erfüllt im aktuellen Status die meisten gesetzten Ziele der Zielsetzung die ich für die Semesterarbeit gesetzt habe, allerdings muss noch viel daran gefeilt werden. Als Proof of Concept ist es jedoch ausreichend und der Plan für das weitere Vorgehen ist definiert und wird in nächster Zeit entsprechend umgesetzt.
+
+----
+
 ## Ausgangslage
 In unserer bestehenden Azure-Hybrid-Umgebung werden Benutzerberechtigungen heute weitgehend manuell verwaltet. Dies führt zu inkonsistenten Zugriffsrechten, redundanten Gruppenstrukturen und erhöhten Sicherheits- und Compliance-Risiken. Die HR-Daten (Abteilungscodes) werden bereits per Azure AD Connect in ein extensionAttribute synchronisiert – dieses Potenzial soll genutzt werden, um über dynamisch erzeugte Azure AD-Gruppen automatisierte Asset-Zuweisungen umzusetzen.
 
@@ -17,7 +25,10 @@ In unserer bestehenden Azure-Hybrid-Umgebung werden Benutzerberechtigungen heute
 - Dezentrale Mailverteilererstellung erzeugt Duplikate und unübersichtliche Gruppenstrukturen.
 - Intune-App-Verteilung und SharePoint-Berechtigungen sind momentan nur unzureichend automatisiert.
 
+----
+
 ### Funktionale Anforderungen
+---
 
 **Stammdaten & Inventar**
 - Zentrale SharePoint/MS Lists-Liste aller Abteilungen & Sub-Abteilungen mit Codes, Beschreibungen, Ownern und Parent-Child-Beziehungen
@@ -42,7 +53,10 @@ In unserer bestehenden Azure-Hybrid-Umgebung werden Benutzerberechtigungen heute
 **Test- und Validierungsframework**
 - Wird mit der Pilotgruppe ICT getestet, sobald Konzept und Workflows definiert sind
 
+----
+
 ### Prozessanforderungen
+----
 
 **Abteilungs-Lifecycle**
 - Erstellen, Ändern, archivieren von Abteilungen mit Forms/SharePoint-List Intake, Genehmigungsworkflow, Inventory-Update und Provisioning
@@ -64,14 +78,13 @@ In unserer bestehenden Azure-Hybrid-Umgebung werden Benutzerberechtigungen heute
 - JIRA-Change Requests für Änderungen an den Flows oder Definitionen
 - Changes werden von System Engineers gehandhabt
 
+----
+
 ## Ziele der Arbeit
+----
 
 ### Definierte SMART Ziele - TODO
-TODO - untere Ziele zu SMART Zielen umschreiben
-• Relevanz / Motivation ??
-• Abgrenzung - out of scope?? oder was ist gemeint?
-• Methodik - detailiertes vorgehen - jira, meetings, azure automation, evaluation von logic apps
-• Projektorganisation
+TODO - untere Ziele zu SMART Zielen umschreiben denke ich ist am besten
 
 ### Automatisierte Berechtigungsverwaltung: 
 Implementierung dynamischer Gruppen in Azure, die basierend auf dem Abteilungscode Berechtigungen (z. B. für SharePoint, Intune, Mailverteiler) automatisch zuweisen. 
@@ -101,10 +114,15 @@ Innerhalb der Semesterabeit ist das Ziel, eine Pilotphase mit der Abteilung ICT 
 - Eigenständige Licensing Groups
 - Service Users handling in Azure AD
 
-## Verwendung von AI - TODO
 
 
 
+
+Notes (irrelevant für chatgpt!):
+• Relevanz / Motivation ??
+• Abgrenzung - out of scope?? oder was ist gemeint?
+• Methodik - detailiertes vorgehen - jira, meetings, azure automation, evaluation von logic apps
+• Projektorganisation
 
 
 

@@ -9,6 +9,19 @@ has_children: true
 
 {: .no_toc }
 
+## Swiss Salary zu AD Sync
+
+-> Status 
+-> Testing & Results
+-> rating / review
+-> planed changes
+
+## 
+
+
+## Full combination / Full Projekt - TODO -> choose a
+
+
 
 • Darstellung und Analyse der Resultate
     -> Resultate AD Sync + Rollback (noch fehlerhaft)
