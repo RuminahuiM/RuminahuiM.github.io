@@ -140,6 +140,7 @@ Code gelöscht → Auto-Removal aus Gruppen → Lizenz-Revoke & Mailbox-Disable
 - **Evaluierungskriterien:** Mitgliedszahlen, Provisioning-Dauer, Fehlerquote, Nutzerfeedback, Alle benötigten Assets zugewiesen  
 - **Rollout-Plan:** Sukzessive Aufnahme weiterer Abteilungen nach erfolgreicher Pilot-Review. Jeweils zuerst vorhandene Assets aufnehmen, zuweisen, ausrollen, testen, alte zuweisungen entfernen.
 
+
 ## Projektstrukturplan -> Phasenaufteilung in JIRA TODO
     -> Vorgehen in JIRA
 ## Zeitplanung - TODO
@@ -166,8 +167,6 @@ ungefähre Zeitplanung aufschreiben + aufschreiben das nur enddaten aber keine s
 TODO - Managed identities z.b , least priviledge, etc
 
 ----
-
-## Projektplan JIRA - TODO
 
 
 ## Kommunikationsplan TODO
