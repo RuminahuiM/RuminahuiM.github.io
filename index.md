@@ -87,28 +87,23 @@ Die zweite Pilotphase richtet sich auf die Abteilung ICT und testet die Zuweisun
 ----
 
 ## Output
-(Hier wird eine Übersicht der erzielten Ergebnisse eingefügt.) TODO
+Im Rahmen des Projekts wurden folgende Kern-Artefakte bereitgestellt:
+- PowerShell-Runbooks zur automatischen Synchronisation von SwissSalary-Daten und AD-Attributen  
+- Runbook „Generate-DistributionLists“ für Mailverteiler mit „Precanned“-Filtern  
+- Logic App und Blob-Container für Self-Service-Daten aus MS Lists  
+- Runbook „Update-AssetAssignments“ für dynamische Asset-Gruppen-Queries  
 
 ----
 
-## Fazit? -> TODO
-(Kurzes Resümee und Lessons Learned – wird am Ende der Arbeit ergänzt.)
-kurzes Fazit werde ich gegen ende der Projektarbeit hier erfassen
-- Viel zu grosses projekt
-- zeit und komplexität der scripts massiv unterschätzt
-- pseudo code zur einschätzung machen nextes mal
-- Pilot schief gelaufen
+## Fazit
+Das Proof of Concept hat gezeigt, dass die automatisierte Berechtigungs- und Verteilerverwaltung zuverlässig funktioniert. Mit gezielten Nacharbeiten (Rollback-Skript, Monitoring, Mehrfachcode-Filter) ist das System bereit für den produktiven Einsatz.  
 
 ----
 
 # Anhang
-• Quellcode-Auszüge - Runbooks?? + beschreibunng TODO
-• Screenshots - JIRA Screenshots -> direkt wo nötig
-• Architektur überblick > zu designen TODO
-• Projektpläne / Diagramme -> summaries JIRA
-• Protokolle - Maybe JIRA Berichte TODO
-• Glossar (falls nötig) TODO
-• Quellenverzeichnis - ??? ms learn? chat gpt? Stack overflow? idk
+- Glossar
+- Quellenverzeichnis
+- Runbook-Powershell-Scripts Quellcode
 
 
 

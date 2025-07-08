@@ -16,6 +16,3 @@ has_children: true
 ## runbooks -> Github link + beschreibung
 
 TODO - jedes runbooks als datei hinzufügen
-
-## Summaries from JIRA
-

@@ -7,17 +7,21 @@ nav_order: 2
 
 {: .no_toc }
 
-# Produkte / Artefakte / Komponenten (TODO - find the best title)
+# Produkte / Artefakte / Komponenten
 
-Dieses Projekt besteht aus verschiedenen Komponenten/Features. Deshalb teile ich im folgenden, dass Porjekt in verschiedene Artefakte ein, die aus dem Projekt entstanden sind und die wiederum diverse komponenten benötigen aber jeweils nur 1 feature darstellen.
+Dieses Projekt besteht aus mehreren Artefakten, die jeweils eine eigene Funktionalität bereitstellen und unterschiedliche technische Komponenten nutzen.
 
-## Swiss Salary zu AD Synchronisation
+## SwissSalary-zu-AD-Synchronisation
 
-TODO - passt der name artefakte? ansonsten ersetzen
+**Artefakt-Bezeichnung:** SwissSalary-to-AD Sync
 
-Dieses Artefakt war usprünglich nicht als teil dieses Projekts angedacht. Allerdings ist es nötig, damit dieses Projekt funktioniert. Zuerst wollte ich es im vorhinein vorbereiten aber das wurde selbst zu komplex und ausserdem ist es eigentlich schon teil des projekts, da es eine dependencie darstellt.
+Dieses Artefakt war ursprünglich nicht als Teil dieses Projekts geplant, hat sich jedoch als unverzichtbare Voraussetzung herausgestellt. Ziel ist es, die in SwissSalary (Business Central) verwalteten Mitarbeiterdaten—wie Abteilung, Standort und Sprache—regelmäßig und vollständig in das lokale Active Directory zu übertragen. Bislang erfolgte der Abgleich manuell:
 
-Dabei geht es darum, das wir ja aktuell die Mitarbeiter Daten wie z.b. Abteilung, Standort, Sprache, etc nur im HR Tool pflegen. Allerdings wollen wir diese in unser AD synchronisieren. Bisher wurde das bereits gemacht, allerdings unregelmässig, mit einem script das manuell mit daten gefüttert und ausgeführt werden musste. Dies führt zu inkosistenzien und ist unnötig aufwendig. Ausserdem wird es dardurch nicht wirklich aktuell gehalten und es wurden nicht alle benötigten daten Synchronisiert.
+1. CSV-Export aus Business Central  
+2. Manuelles Kopieren auf einen Server  
+3. Ausführung eines PowerShell-Skripts mit den aktuellen Daten  
+
+Diese Vorgehensweise führte zu Inkonsistenzen, hohem manuellem Aufwand und lückenhafter Datenaktualität, da nicht alle erforderlichen Attribute synchronisiert wurden.
 
 **Welche Benutzer-Daten werden Synchronisiert?** 
 - EmployeeID: ID auss SwissSalary
@@ -39,22 +43,33 @@ Dabei geht es darum, das wir ja aktuell die Mitarbeiter Daten wie z.b. Abteilung
 - CountryFullname: Bezug auf Anstellungsstandort
 - CountryNumeric: wird durch kleine funktion generiert. Entspricht codes die von Microsoft für das dropdownmenu in der AD verwendet werden und müssen mit-angepasst werden.
 
-> PS: wo es selbstverständlich ist, habe ich keine erklärung hinzugefügt
+> Hinweis: wo es selbstverständlich ist, habe ich keine erklärung hinzugefügt
 
 ### Ablauf / Flow
 
-Hier eine grobe übersicht des Ablaufs:
+Nachfolgend eine strukturierte Übersicht des Prozessablaufs:
 
-1. Daten werden von HR in Swiss Salary (BC backend) angepasst
-2. PowerBI Dataflow erstellt Report aller aktiven user + Abteilungen
-3. PowerBi Reports werden als CSV in DataLake Gen2 Storage (az storage account) abgespeichert
-4. Einmal täglich wird das Runbook "Get-PBIUserData" ausgelöst. Dieses holt die Daten aus dem Storage Account, transformiert sie in Json und löst ein neuen automation job mit dem Runbook "Update-UserdataLocalAD" auf dem Hybrid Worker aus.
-5. Das Runbook "Update-UserdataLocalAD" wird auf dem Hybrid Runbook Worker ausgelöst. Dort vergleicht es die neuen Userdaten mit dem aktuellen Stand und Updated diese oder alarmiert entsprechend.
-6. Das zweite runbook erstellt ebenfalls Logs und ein Backup CSV, welches zusammen mit einem weiteren Powershell Runbook verwendet werden kann um ein rollback auf den vorherigen zustand bzw auf einen der Backup CSV's auszuführen 
+1. **Datenpflege im HR-System**  
+   Die HR-Verantwortlichen passen Mitarbeiterattribute (z. B. Abteilung, Standort, Sprache) in SwissSalary (Business Central) an.  
+2. **Erzeugung des Power BI-Reports**  
+   Ein Dataflow in Power BI erstellt täglich einen Report aller aktiven Benutzer und deren Abteilungszuordnung.  
+3. **Persistierung im Data Lake**  
+   Die Power BI-Reports werden automatisch als CSV-Dateien im Azure Data Lake Gen2 (Storage Account) abgelegt.  
+4. **Start des Runbooks „Get-PBIUserData“**  
+   Ein geplanter Trigger im Azure Automation Account löst einmal täglich das Runbook **Get-PBIUserData** aus.  
+   - Liest die neuesten CSVs aus dem Storage Container ein  
+   - Wandelt die Daten in JSON um  
+   - Startet das zweite Runbook **Update-UserdataLocalAD** auf dem Hybrid Runbook Worker  
+5. **AD-Aktualisierung auf dem Hybrid Worker**  
+   Das Runbook **Update-UserdataLocalAD** vergleicht die JSON-Daten mit dem aktuellen lokalen AD-Zustand und:  
+   - Aktualisiert geänderte Attribute  
+   - Protokolliert Abweichungen und wirft bei kritischen Änderungen Alarme  
+6. **Backup & Rollback-Vorbereitung**  
+   Parallel zur Aktualisierung werden Logs und eine Backup-CSV erzeugt. Eine spätere Rollback funktion kann anhand dieser Backup-Dateien den vorherigen AD-Zustand wiederherstellen.
 
 **Runbook "Get-PBIUserData"**
 
-TODO - an CHATGPT - füge hier eine knappe beschreibung des scripts hinzu
+Dieses PowerShell-Runbook lädt das aktuellste Employee-CSV-Snapshot aus einem Azure Storage Container (Power BI Export), reichert die Datensätze um Länderinformationen (Name und numerischer Code) an und konvertiert sie in ein JSON-Format. Anschließend wird die JSON-Datei wieder in das Storage-Konto geschrieben und – sofern nicht im Testmodus – der nachgelagerte Runbook-Job Update-UserdataLocalAD auf einem Hybrid Worker gestartet, um die lokalen AD-Attribute der Benutzer zu aktualisieren. Parameter ermöglichen die Anpassung von Storage- und Runbook-Kontext, Pfaden sowie Testmodi.
 
 ```PowerShell
 Param(
@@ -225,9 +240,9 @@ if (-not $TestMode){
 
 **Runbook "Update-UserdataLocalAD"**
 
-> PS: Dieses script wird auf dem Hybrid Runbook worker ausgeführt
+Dieses PowerShell-Runbook wird lokal auf einem Hybrid Worker ausgeführt und liest die JSON-Datei mit den Benutzerattributen aus Azure Storage ein. Es stellt sicher, dass alle benötigten PowerShell-Module (ActiveDirectory, Az.Accounts, Az.Storage) verfügbar sind, sichert bestehende AD-Benutzerdaten in einer Backup-CSV, und vergleicht dann pro Benutzer die eingehenden Werte mit den aktuellen AD-Attributen. Abweichungen werden protokolliert und – außerhalb des Testmodus – direkt mit Set-ADUser in Active Directory übernommen. Zusätzlich werden alte Log- und Backup-Dateien automatisch anhand einer einstellbaren Aufbewahrungsdauer bereinigt.
 
-TODO - an CHATGPT - füge hier eine knappe beschreibung des scripts hinzu
+> Hinweis: Dieses script wird auf dem Hybrid Runbook worker ausgeführt
 
 ```PowerShell
 param(
@@ -521,9 +536,9 @@ Stop-Transcript
 
 **Runbook "Start-RollbackFromBackupCSV"**
 
-> PS: Dieses script wird auf dem Hybrid Runbook worker ausgeführt
+Dieses PowerShell-Runbook stellt Active-Directory-Attribute anhand einer zuvor erstellten Backup-CSV wieder her. Es sichert die benötigten AD-Module, lädt die Backup-Datei aus dem lokalen Backup-Verzeichnis, und vergleicht für jeden Eintrag die aktuellen AD-Werte mit den gesicherten Werten. Abweichungen werden protokolliert und – außerhalb des Testmodus – über Set-ADUser zurückgesetzt. Parallel dazu wird ein Transkript geführt und alte Logdateien automatisch verwaltet.
 
-TODO - an CHATGPT - füge hier eine knappe beschreibung des scripts hinzu
+> Hinweis: Dieses script wird auf dem Hybrid Runbook worker ausgeführt
 
 ```PowerShell
 param(
@@ -690,31 +705,36 @@ Stop-Transcript
 
 ## Mail Distribution List Generation & Updates
 
-Bei diesem Artefakt dient der erstellung der automatisch befüllten Mailverteilerlisten. Dies war der Ursprung des Projekts. Es wurde gewünscht, dass neue Mitarbeiter automatisch in die entsprechenden Mailverteiler befüllt werden und diese somit nicht mehr von den jeweiligen Abteilungsleiterinnen gepflegt werden müssen.
+Bei diesem Artefakt steht die automatische Erstellung und Pflege der abteilungsbezogenen Mailverteilerlisten im Mittelpunkt. Ziel ist es, neue Mitarbeitende automatisch in die jeweils zuständigen Verteiler aufzunehmen und die manuelle Pflege durch Abteilungsleitungen zu entlasten.
 
-Dabei soll der Mailverteiler einer Abteilung, immer auch alle user der Sub-Abteilungen beinhalten. Deshalb ist auch der "ParentCode" in den Abteilungsdaten angegeben. Dadurch kann das script, alle subabteilungen finden und die Query für den Mailverteiler entsprechend um deren Abteilungscodes erweitern
+- Jeder Mailverteiler (`<DeptCode>_DL`) einer Abteilung enthält auch alle Benutzer der zugehörigen Sub-Abteilungen.  
+- Der `ParentCode` in der Abteilungsdefinition ermöglicht es, alle Sub-Abteilungen dynamisch zu ermitteln und deren Codes in die Filterabfrage aufzunehmen.
 
-Zuerst hatte ich die Queries mit einem custom advanced filter erstellt. Allerdings stellte sich in der Pilotphase raus, dass dadurch die zugewiesenen user nicht eingesehen werden können.
-Ich habe es nun umgestellt sodass es sogennante "Precanned" filter nutzt. Dies sind von Microsoft vordefinierte filterfunktionen. Die GUI funktioniert nur korrect, wenn diese Filterfunktionen verwendet werden. 
-Das funktioniert nun auch, allerdings nur wenn ich einen einzelnen Abteilungscode verwende. Scheinbar müsste ich mehrere abteilungscodes mit Commas trennen können um mehrere Abteilungscodes abfragen zu können, dies klappt in der realität aber noch nicht so ganz.
+Ursprünglich nutzte ich für die Queries einen benutzerdefinierten Advanced-Filter. In der Pilotphase wurde jedoch deutlich, dass damit keine Mitglieder in der GUI angezeigt werden können. Daraufhin stellte ich auf die von Microsoft vordefinierten **„Precanned“** Filter um. Diese bieten GUI-Kompatibilität und funktionieren zuverlässig – allerdings aktuell nur für einzelne Abteilungscodes. Die Kombination mehrerer Codes mit Komma-Trennung klappt derzeit nicht vollständig und wird nach Abschluss der Semesterarbeit weiter optimiert.
 
-Dieses Problem werde ich im nächsten Sprint angehen. Dies ist jedoch dann nach abschluss der Semesterarbeit und nicht mehr teil des Scopes. 
-
-> Dieses Script wird auf dem Hybrid Runbook worker ausgeführt, da das Exchange Online Modul ein Kompatibilitätsproblem mit Azure Automation hat. Es kann sich allerdings einfach vom Server (Hybrid Runbook Worker) aus mit der Managed Identity an Exchange online authentifizieren.
+> Hinweis: Dieses Runbook läuft auf dem Hybrid Runbook Worker, da das Exchange Online PowerShell-Modul in Azure Automation nicht vollständig unterstützt wird. Die Authentifizierung erfolgt unkompliziert über die System Managed Identity des Servers.
 
 ### Ablauf / Flow
 
-Hier eine grobe übersicht des Ablaufs:
-1. Das Script holt sich die zuletzt aktualisierten Daten der Abteilungsliste die auf dem Azure Storage Account abgelegt ist. (Im moment sind das die Daten aus PowerBI, werde es aber noch anpassen, damit es sich die Daten aus der MS List holt, da wie erwähnt die Abteilungen in Swiss Salary nicht sauber geführt sind).
-2. Das Script bereit alle benötigten Parameter vor
-3. Das Script iteriert über alle subabteilungen einer abteilung und bereitet dadurch die entsprechende query für jede Abteilung vor.
-4. Das script vergleicht die aktuell existierenden Mailverteiler mit den Daten und erfasst, ob die Mailverteiler bereits erstellt wurden. Falls nicht erstellt es die Mailverteiler neu.
-5. Falls die Mailverteiler bereits existieren aber änderungen in den Daten verzeichnet sind, wird es die Mailverteiler entsprechend anpassen
+1. **Lesen der Abteilungsdaten**  
+   Das Script lädt die aktuellste Abteilungsliste aus dem Azure Storage Account (derzeit Power BI-CSV, zukünftig MS List).  
+2. **Parameter-Vorbereitung**  
+   Vorlage aller notwendigen Filterparameter für jede Abteilung.  
+3. **Sub-Abteilungen ermitteln**  
+   Ermitteln aller Sub-Abteilungen anhand des `ParentCode` und Zusammenstellung der Codes.  
+4. **Vergleich & Neuanlage**  
+   Abgleich vorhandener Verteilerlisten mit den berechneten Filtern – bei fehlenden Listen erfolgt die Neuanlage.  
+5. **Aktualisierung bestehender Verteiler**  
+   Bei Änderungen in den Abteilungsdaten passt das Script die Filter der bereits bestehenden Verteiler entsprechend an.  
 
-> Note: Das script wird warhscheinlich einmal täglich ausgeführt. Allerdings ist das noch nicht abgeklärt da es noch nicht so relevant ist.
+> Hinweis: Die genaue Ausführungsfrequenz (z. B. täglich) wird derzeit noch abgestimmt und ist nicht zwingend Teil des aktuellen Projektumfangs.
+
 
 **Runbook "Generate-DepartmentGroups"**
-TODO - an CHATGPT - füge hier eine knappe beschreibung des scripts hinzu
+
+Dieses PowerShell-Runbook liest eine CSV mit Abteilungs-Codes und deren Hierarchie aus einem Azure Storage Container ein, baut daraus eine strukturierte Abteilungs-Tabelle inklusive Eltern-Kind-Beziehungen und Sonder-Codes auf und verbindet sich anschließend per Managed Identity mit Exchange Online. Für jede Abteilung wird ein hierarchischer Alias generiert (z. B. dl_srv_ict_sys), ein entsprechender SMTP-Filter aller zugehörigen Codes erstellt und dann über die Exchange-Cmdlets entweder eine neue Dynamic Distribution Group angelegt oder eine bestehende aktualisiert. Mit den Parametern TestMode und Force lassen sich gefahrlos Tests durchführen und Alt-Objekte umbenennen, bevor die finale Erstellung bzw. Aktualisierung in der Produktivumgebung erfolgt.
+
+> Hinweis: Dieses Runbook wird auf dem Hybrid Runbook Worker ausgeführt
 
 ```PowerShell
 Param(
@@ -1075,55 +1095,43 @@ Write-Output "All dynamic distribution groups have been created/updated."
 
 ### Geplante Änderungen
 
-Das Script heisst aktuel "Generate-DepartmentGroups" da es ursprunglich dazu gedacht war Mailverteiler und Security Groups für Abteilungen zu erstellen. Allerdings fallen die Security Groups wie bereits erwähnt weg und somit wird es umbenannt und angepasst um nur mailverteiler für Abteilungen zu erstellen.
+Das Runbook heißt aktuell **„Generate-DepartmentGroups“**, da es ursprünglich sowohl Mailverteiler als auch Sicherheitsgruppen für Abteilungen anlegen sollte. Da die Security-Groups nun entfallen, wird das Skript entsprechend umbenannt und auf die reine Erstellung von Mailverteilern fokussiert (z. B. **„Generate-DistributionLists“**).
 
-Ausserdem werde ich das Problem mit der Abfrage mehrerer Abteilungscodes noch angehen. Gemäss Microsofts eigener Dokumentation auf learn.microsoft.com, sollte es möglich sein mehrere Values mitzugeben. Es sollte also lösbar sein.
-Danach sollten auch die user entsprechend richtig angezeigt werden.
+Ein weiterer geplanter Schritt ist die Lösung des Problems bei der Abfrage mehrerer Abteilungscodes. Microsofts Dokumentation auf learn.microsoft.com weist darauf hin, dass dynamische Gruppen-Abfragen mehrere Werte per Komma unterstützen sollten. Nach Abschluss der Semesterarbeit werde ich die Filterlogik anpassen und testen, so dass auch kombinierte Abteilungscodes korrekt verarbeitet und in der GUI angezeigt werden.
 
-## Asset Assigment Handling
+## Asset Assignment Handling
 
-Beim dritten Artefakt, geht es darum, die Asset zuweisung zu handhaben. Hierfür haben wir die beiden MS Listen die miteinander verknüpft sind. Wenn in der Abteilungsliste ein Asset an eine Abteilung zugewiesen wird, wird entsprechend ein script ausgelöst, dass diese zuweisung vornimmt.
+Beim dritten Artefakt geht es um die automatische Zuweisung von Digital Assets. Dazu werden die beiden Microsoft Lists in SharePoint („Departments Inventory“ und „Digital Assets Catalog“) genutzt. Sobald in der Departments Inventory ein Asset einer Abteilung zugewiesen wird, löst ein Skript die entsprechende Zuweisung aus:
 
-Dabei werden die Daten zuerst bei jeglichen Updates in der MS List durch eine Logic App in ein Azure Storage Account synchronisiert.
+1. Eine Logic App synchronisiert Änderungen aus beiden MS Lists in einen Blob-Container des Azure Storage Accounts.  
+2. Ein Runbook (z. B. täglich) prüft, ob sich Zuweisungen geändert haben, und erstellt bei Bedarf eine neue Filter-Query für die jeweilige Asset-Gruppe.  
+3. Benutzer werden automatisch der dynamischen Azure AD Security Group zugewiesen, die das Asset repräsentiert (z. B. Zugriff auf eine Site, eine App oder eine Lizenz).
 
-Später wenn das script läuft (läuft in regelmässigen zyklus durch z.b einmal am tag), überprüft das script ob Asset zuweisungen verändert wurden. Falls ja erstellt es eine neue Query für das entsprechende Asset, welches die Abteilungen entfernt/hinzufügt. 
+### Storage Account Container „manualdb“
 
-Die user werden dann durch die Query automatisch der Dynamischen Asset Gruppe (achtung Asset gruppe ist meine persönliche bezeichnung dafür. Hier geht es um eine Dynamische Azure Security Group) zugewiesen und erhalten somit die freigabe für das Asset (also z.B acces auf eine Site oder App oder eine bestimmte lizenz wird zugewiesen etc.).
+Für den Zwischenschritt im Self-Service- und Automatisierungs-Workflow wurde im bestehenden ADLS Gen2 Storage Account ein zusätzlicher Container **`manualdb`** angelegt mit drei Verzeichnissen:
 
-### Storage Account Container "manualdb"
+- **AssetsCatalog**: JSON-Export des Digital Assets Catalog  
+- **DepartmentsRAW**: Rohdaten der Departments Inventory (unverarbeitet)  
+- **Departments**: Bereinigte, normierte Abteilungsdaten  
 
-Weil das ganze projekt noch im Anfangsstadium ist, habe ich der einfachheithalber den gleich storage account weiterverwendet wie für PowerBI. Ich habe allerdings einen zweiten Container darin erstellt und ihn "manualdb" bennant. Dies wird später noch angepasst.
+Logic App und Automation Account greifen über ihre System Managed Identities auf diesen Container zu.
 
-Darin befinden sich 3 Directories. Eine für den Assets Catalog, eine für die unverarbeiteten Daten aus dem Department Inventory und eine für die bereinigten Abteilungsdaten.
+### Logic App – MS List zu Storage Account synchronisieren
 
-Die Logic App und der Automation Account haben beide über ihre jeweiligen Managed Identity Schreibzugriff auf dem Storage Account.
+Eine einzelne Logic App sorgt für die Datensynchronisation, um die Komplexität direkter REST-Aufrufe an die SharePoint-API zu vermeiden:
 
-TODO - Bild der struktur im storage account einfügen
+1. **Trigger:** Änderung in einer der beiden MS Lists  
+2. **Parallele Flows:**  
+   - **AssetsCatalog-Flow:** Wandelt neue Asset-Datensätze in JSON um und speichert sie in `manualdb/AssetsCatalog`.  
+   - **DepartmentsRAW-Flow:** Exportiert die Departments Inventory als JSON in `manualdb/DepartmentsRAW`.  
+3. **Nachgelagerter Automation Job:** Startet das Runbook **LogicAppHelper-SimplifyDepartmentsData**, das die RAW-Daten bereinigt und das Ergebnis in `manualdb/Departments` ablegt.
 
-### Logic App - MS List zu Storage Account Synchronisieren
-
-Für diesen Simplen Prozess habe ich mich entschieden eine Logic App statt einem Runbook zu verwenden, da ich ansonsten HTTPS requests über das MS Graph interface hätte machen müssen, was vorallem die Berechtigungslage unnötig verkompliziert hätte.
-
-Stattdessen habe ich einen Service User erstellt, welcher Leseberechtigungen auf der ICT Site hat, auf der die beiden MS Lists gespeichert sind (später können diese Berechtingungen allenfalls noch weiter eingeschränkt werden). Dann habe ich diesen im Connector hinterlegt. 
-
-Das passwort für den Benutzer wird irgendwann auslaufen und muss erneuert werden. Hierfür muss ich mir noch eine Lösung überlegen. Allerdings hatte da eine niedrigere priorität und ich hatte leider keine Zeit mehr dies zu lösen.
-
-**Ablauf / Flow**
-Hier eine grobe übersicht des Ablaufs der Logic App:
-1. Connector erkennt änderung an MS List und triggered die Logic App
-2. Logic App hat zwei Parallele Abläufe die ausgelöst werden
-    - Der erste Ablauf convertiert die Daten des Asset Katalogs direct in JSON und speichert diese als Blob im Storage account.
-    - Der zweite Ablauf convertiert die Daten nur soweit wie möglich aus der Department List. Einige felder mit verschachtelten werden wie z.B die zugewiesenen Assets, können allerdings nicht so einfach convertiert werden. Deshalb speichert es die Daten als JSON in einer separaten Directory im Container im Storage account als "RAW" Daten.
-3. Ein Automation Job wird ausgelöst, welcher das Runbook "LogicAppHelper-SimplifyDepartmentsData" startet.
-4. Das Helper Runbook, holt sich die zuletzt aktualisierten Daten aus dem Storage account
-5. Es filtert die benötigten daten raus und generiert ein "cleaned" JSON.
-6. Das JSON wird dann im Storage account in der Directory "Departments" abgelegt.
-
-TODO - Bild von Logic app einfügen
-
+TODO - *Abb. X: Struktur des Containers „manualdb“ und Ablauf der Logic App*  
 
 **Runbook "LogicAppHelper-SimplifyDepartmentsData"**
-TODO - an CHATGPT - füge hier eine knappe beschreibung des scripts hinzu
+
+Dieses PowerShell-Skript liest die rohe Departments-JSON aus einem Azure Storage-Container ein, bereinigt und transformiert die Daten (z. B. Zusammenführen von Asset-Arrays, Standardisierung des „ApprovedbyIT“-Werts, Trennung von Security-Gruppen), erzeugt daraus eine flache PSCustomObject-Struktur und schreibt das aufbereitete JSON mit Zeitstempel zurück in das Storage-Konto. Dabei sorgen einfache Parameter für die Konfiguration von Storage-Account, Container und Pfaden.
 
 ```PowerShell
 Param(
@@ -1190,19 +1198,6 @@ Write-Output $Departmentlist #>
 
 ### --------------------------- Cleanup Data ----------------------------------
 
-<# # Unescape the JSON string to handle escape characters
-$unescapedJson = [System.Text.RegularExpressions.Regex]::Unescape($Departmentlist)
-
-# Clean the JSON string
-$cleanedJson = $unescapedJson.Replace('@odata','odata') #>
-
-<# Write-Output "Cleaned JSON: "
-Write-Output $cleanedJson #>
-
-<# $Departments = ConvertFrom-Json $Departmentlist # TODO - changed to not replace or escape
-
-Write-Output "Department List"
-Write-Output $Departments #>
 
 $result = @()
 
@@ -1272,17 +1267,19 @@ try {
 
 ### Assignment Logic Ablauf / Flow
 
-Hier eine grobe übersicht des Ablaufs:
-1. Daten auf der MS List werden geändert und Logic App synchronisiert die Daten in den Storage Account
-2. Einmal täglich wird das "Update-AssetAssignments" Script gestartet
-3. Das script holt sich die zuletzt aktualisierten Daten aus dem Storage Account
-4. Es erstellt eine Liste aller Assets und welche Abteilungen in der Query vorhanden sein müssen.
-5. Dann übeprüft es den aktuellen zustand der Queries und vergleicht diese mit den neuen Daten.
-6. Falls änderungen gefunden werden, passt es die Queries der Asset Groups entsprechend an.
+Hier eine grobe Übersicht des Ablaufs:
+
+1. Änderungen in den MS Lists werden erkannt und durch die Logic App in den Storage Account synchronisiert.  
+2. Einmal täglich wird das Runbook **Update-AssetAssignments** ausgelöst.  
+3. Das Skript lädt die neuesten JSON-Dateien aus dem Storage Account.  
+4. Es erstellt eine Liste aller Assets und ermittelt, welche Abteilungscodes in den Filter-Queries enthalten sein müssen.  
+5. Es vergleicht die bestehenden Dynamic Group-Queries mit den neuen Vorgaben.  
+6. Bei Abweichungen passt das Skript die Queries der jeweiligen Asset-Gruppen automatisch an.  
+
 
 **Runbook "Update-AssetAssignments"**
 
-TODO - an CHATGPT - füge hier eine knappe beschreibung des scripts hinzu
+Dieses PowerShell-Runbook lädt die bereinigten Department- und Asset-Katalog-JSONs aus Azure Storage, ermittelt anhand der freigegebenen DepartmentCodes, welche Sicherheitsgruppen („Assets“) für welche Abteilungen dynamische Membership-Regeln benötigen, und aktualisiert über Microsoft Graph (Get-MgGroup/Update-MgGroup) die membershipRule jeder Dynamic-Group entsprechend. Mit TestMode lassen sich die Regel-Änderungen zunächst per -WhatIf prüfen, bevor sie produktiv angewendet werden.
 
 ```PowerShell
 Param(
@@ -1502,11 +1499,30 @@ foreach ($asset in $AssetList) {
 
 ```
 
+## Self-Service
 
-## Self Service
+Für Endanwender steht ein schlankes Self-Service-Interface in Microsoft Teams zur Verfügung. Über zukünftige MS Forms können berechtigte Personen und System Engineers können die Abteilungen verwalten:
 
-TODO - erstelle hier eine kurze beschreibung aus den infos die du bisher hast
+1. **Neue Abteilungen anlegen**  
+   - Direkte Pflege in der MS List „Departments Inventory“  
+   - Auswahl benötigter Digital Assets über Dropdown aus dem „Digital Assets Catalog“  
+   - Automatische Auslöse-Logik: Ein PowerShell-Runbook übernimmt nach Freigabe durch den System Engineer die Provisionierung (Mailverteiler, Asset-Gruppen)
 
-## Logging & Auditing - TODO -> not sure where to put this - TODO less prio 
+2. **Individuelle Mailverteiler anfragen (noch nicht erstellt)**  
+   - Formular-basierter Intake (MS Forms), eingebettet in SharePoint/Teams  
+   - Automatisierter Genehmigungs-Workflow 
+   - Nach Freigabe Anlage durch das „Generate-DistributionLists“-Runbook
 
-TODO - beschreibe hier das ich alerting für failed runbooks und logic app erstellen möchte, dies leider zeitlich nicht mehr möglich war bisher. ich werde das nachholen
+3. **Übersicht und Statusabfrage**  
+   - Echtzeit-Ansicht aller existierenden Mailverteiler und Asset-Gruppen  
+   - Anzeige von Genehmigungs- und Provisionierungsstatus
+
+Damit entfällt die manuelle Nachpflege durch Abteilungsleitungen, und alle Anfragen lassen sich nachvollziehbar dokumentieren und automatisiert abarbeiten.
+
+## Logging & Auditing
+
+Geplante Erweiterung:  
+- **Alerting für fehlgeschlagene Runbook- und Logic App-Ausführungen** über Azure Monitor Alerts / Log Analytics  
+- **Audit-Logs** aller wichtigen Schritte (Sync, Provisionierung, Asset-Zuweisung) in einem zentralen Log Analytics Workspace  
+
+Aufgrund begrenzter Projektzeit konnte die vollständige Implementierung dieser Monitoring- und Alerting-Funktionalitäten bisher nicht realisiert werden. Nach Abschluss der Semesterarbeit wird ein entsprechendes Setup nachgeführt, um Betriebsstabilität und Compliance sicherzustellen.  

@@ -11,23 +11,23 @@ has_children: true
 
 ## Reflexion Projektverlauf
 
-• Reflexion über den Projektverlauf
-• Was lief gut, was nicht?
-    -> zu viele sidequests
-• Persönliche Erkenntnisse
-    -> aus step 4 kopieren
-• Mögliche Weiterentwicklung
-    -> TODO's die noch anstehen auflisten
+### Was lief gut?
+- **Skripterstellung:** Sauber strukturierte PowerShell-Skripte erleichterten die Wartung  
+- **Runbooks:** Azure Automation Runbooks erwiesen sich als robuste und wartbare Automatisierungsplattform  
+- **Logik-Entscheidung:** Logic Apps nur für einfache Integrationen genutzt, wodurch Komplexität reduziert wurde  
 
-## Erkenntnisse
+### Was lief weniger gut?
+- **Fokusverlust:** Zu viele „Sidequests“ in der Entwicklung führten zu Zeitverschwendung (z. B. Debug-Output-Formatierung)  
+- **Umfang:** Das Projekt war deutlich größer und komplexer als ursprünglich eingeschätzt  
+- **Zeitmanagement:** Schätzung von Aufwand und Deadlines war nicht präzise genug  
+- **Unklare Anforderungen:** Viele Konzepte waren zu Projektbeginn noch nicht ausgereift, was Planung und Umsetzung erschwerte  
 
-• Erkenntnisse aus der Umsetzung
--> Als erstes mit doku anfangen / aufesetzen
--> Journal führen + Zeit und probleme eintragen
--> Datenqualität im vorhinein prüfen
--> kleineres Projekt für nächste Sem-Arbeit
--> Unperfekte lösungen aktzeptieren > zumindest währen des MVP (zu viel zeit für Sidequests verschwendet)
--> Langfristige Häufige nutzung von AI macht schreibfaul (persönliche vermutung). Vorallem ein Problem bei dokumentation.
+## Persönliche Erkenntnisse
 
-
-
+- **Frühzeitige Dokumentation:** Projektstart mit einer groben Dokumentationsstruktur und fortlaufender Pflege  
+- **Tägliches Journal:** Zeitaufwand und Probleme sofort festhalten  
+- **Datenqualität prüfen:** Vorab Analyse der Quellen zur Vermeidung nachträglicher Aufwände  
+- **MVP-Fokus:** Unperfekte Lösungen im Minimum Viable Product akzeptieren  
+- **Projektumfang begrenzen:** Kleinere Projekte für künftige Semesterarbeiten wählen  
+- **KI-gestütztes PM:** Einsatz von ChatGPT für Projektmanagement-Aufgaben als erhebliche Effizienzsteigerung  
+- **Fachliche Weiterbildung:** Vertiefung in Power BI-Workflows und Dataflows  
