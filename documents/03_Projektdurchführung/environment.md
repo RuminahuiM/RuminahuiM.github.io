@@ -9,130 +9,141 @@ nav_order: 1
 
 # Environment Setup 
 
-Aufgrund von übersichtlichkeit, werde ich kurz die gesamte umgebung und dessen komponenten erklären die benötigt wird für diese automatisierung. Es war zwar nicht so, dass ich die umgebung vollständig bereits geplant hatte und vorbereiten konnte bevor ich anfing die einzelnen teile zu bauen, allerdings erscheint es mir einfach für die dokumentation übersichtlicher diese teile zu bündeln.
+Für eine übersichtliche Dokumentation werden die zentralen Komponenten und Umgebungen zusammenhängend beschrieben, die für die Automatisierung der Dynamic Groups benötigt werden.  
 
-----
+## PowerBI mit DataLake Gen 2 Ablage
 
-## PowerBI / BC mit DataLake Gen 2 Ablage
+Die HR-Daten werden in Business Central (SwissSalary-Modul) verwaltet und über Power BI aufbereitet:
 
-Da die HR Daten im Moment in Bussiness Central gepseichert werden, konnten wir diese wie gesagt in powerBi auslesen um ein Report zu erstellen, das nur die benötigten daten enthält. Dafür habe ich mich mit unserem PowerBi spezialisten abgesprochen. Bisher wurde bereits ein CSV erstellt welches die nötigen user daten enthielt. Dieses wurde dann hin und wieder manuell heruntergeladen und auf einen Server kopiert um ein script auszuführen, welches die user daten auf der lokalen AD aktualisierte.
+**Dataflow und Berichtserstellung**
+In Zusammenarbeit mit dem Power BI-Spezialisten wurde ein Dataflow angelegt, der die relevanten Tabellen (Mitarbeiterstammdaten und Abteilungsinventar) extrahiert und in zwei CSV-Dateien im Data Lake abspeichert.
+- Tabelle "Mitarbeiter": Enthält Benutzerattribute wie Abteilungs- und Sprachcodes.
+- Tabelle "Abteilungen": Liste aller gültigen Abteilungscodes mit Bezeichnung.
 
-Allerdings wollte ich direkt auf diese daten von einem Az automation account aus zugreifen um den vorgang vollständig zu automatisieren. Nach einiger recherche und tests, fand ich heraus das ich um auf den aktuellen report zugreifen zu müssen, eine HTTPS abfrage machen müsste. Ich wollte allerdings möglichst alles mit managed identities handhaben da dies sicherer und angenehmer ist. Für Http requests brauch ich entweder einen Service user oder eine App Registration, auf die ich mich wieder mit einem Secret authentifizieren muss, welchen ich wiederum irgendwo abspeichern und regelmässig erneuern muss. Das würde zu kompliziert werden. 
+**Data Lake Gen2 Anbindung**
+Ein neues Power BI-Workspace ist mit einem ADLS Gen2 Storage Account verknüpft. Power BI legt automatisiert tägliche Snapshots der Dataflows als CSV-Dateien mit Zeitstempel im Storage ab.
 
-Deshalb habe ich schlussendlich ein neues Workspace in PowerBi erstellt und dieses mit einem Datalake Gen2 Speicher verbunden.
-Ein solcher speicher ist im Hintergund ein Azure Storage account, welcher mit powerbi verknüpft wird. Dabei werden die Daten die im Workspace gespeichert sind regelmässig in den Storage Account abgelegt.
-
-In PowerBI hat Alain ( der PowerBi experte) einen Dataflow mit den von mir gewünschten daten erstellt. Dabei werden 2 Tabellen generiert. Eine mit den Mitarbeitern und ihren Daten und eine Liste aller abteilungen. Diese werden im Storage account als Data Blob (Datei), im csv format mit dem aktuellem datum gespeichert.
-
-Somit kann ich nun meinem Az automation Account (bzw. dessen managed identity) direkten zugriff auf dem Storage account geben. Dadurch kann er die Darin gepspeicherten daten auslesen und dann verarbeiten.
+**Zugriff über Managed Identity**
+Der Azure Automation Account verwendet eine System Managed Identity, die Leseberechtigung auf den entsprechenden Storage-Container erhält. Somit werden die CSV-Dateien direkt per PowerShell eingelesen und verarbeitet.
 
 TODO - Bild von powerBI Dataflow  
 TODO - Bild von PowerBI DataLake Gen2 connection
 TODO - Bild von Daten in AZ Storage account
+Abb. 4.1: Power BI Dataflow und Gen2-Verbindung
 
 ----
 
 ## AZ Automation Account (dev-environment)
 
-Für die Entwicklungsphase, wollte ich es einfach halten, um mich erstmal auf die benötigten automatisierungen fokusieren zu können. Deshalb habe ich für den Moment nur einen einzelnen Az Automation Account mit dem Namen "Main-Test" erstellt. Dieser Automation account soll als Test und Entwicklungsumgebung für diverse automatisierungen zur verfügung stellen. Danach kann jeweils ein Projekt spezifischer account als produktiv umgebung erstellt werden. Bei diesem sollen die Berechtigungen dann etwas stärker eingeeschränkt werden (wenn möglich ) und auch alerts, sowie die triggers für die Runbooks korrekt eingestellt werden.
-
 Alle Runbooks die ich darin erstelle, sind powershell 7.2 Runbooks.
+
+Für die Entwicklungs- und Testphase wurde ein Azure Automation Account mit dem Namen "Main-Test" angelegt:
+
+**Runbook-Typ:** PowerShell 7.2 Runbooks
+**Zweck:** Zentrale Entwicklungs- und Testumgebung für alle Automatisierungsskripte
+**Zukünftige Prod-Umgebung:** Nach der Pilotphase wird ein separater, produktiver Automation Account eingerichtet, in dem restriktivere Zugriffsrechte und Alerts definiert werden.
 
 TODO - Bild der Az account overview
 
-## Managed identity
-Der Automtion Account verfügt über eine System Managed Identity. Diese wird wo nötig berechtigt (z.B. auf dem Storage account, auf entra ID und exchange online). Dadurch kann der Automation account direkt auf andere Ressourcen des Tenants zugreifen, ohne zusätzliche Passwörter zu benötigen.
+### Managed identity
+Der Automation Account verfügt über eine System Managed Identity, die folgenden Zugriffsrechten zugewiesen wurde:
+
+- **Storage Blob Reader** auf dem Data Lake Gen2
+- **Entra Groups Administrator** für Gruppen- und Benutzerabfragen
+- **Exchange-Berechtigungen** zur Verwaltung von Distribution Groups
 
 TODO - Bild der Managed Identity
 
-## Key Vault
-Für manche Dinge, konnte ich die Managed Identity leider nicht verwerden. Deshalb nutze ich zusötzlich dazu, den Credentials Vault im Automation Account. Darin sind zugangsdaten für zwei Service User abgelegt.
+### Key Vault
+Für Credentials, die nicht über Managed Identity abgedeckt werden können, wird der Credential Vault des Automation Accounts genutzt:
 
-TODO - Bild des Key Vaults
+- **Service User AD:** Kennwort für lokale AD-Änderungen (Least-Privilege-Account zum Schreiben der ExtensionAttributes)
+- **Service User SharePoint:** Anmeldedaten für SharePoint-API-Zugriffe in einer unterstützenden Logic App
 
-Einer wird benötigt, um auf der lokalen AD Änderungen vornehmen zu können. Dieser Service User besitzt nur eingeschränkte berechtigungen um die benötigten Attribute and den Usern in unserer user OU anpassen zu können. Ansonsten besitzt er keine weiteren Berechtigungen, um dem Least-Priviledge prinzip zu entsprechen.
+TODO - Bild einfügen
 
-Der zweite Benutzer wird benötigt um auf Sharepoint zuzugreifen. Es ist zwar scheinbar möglich, eine App Registration zu erstellen, allerdings ist die Berechtigung davon recht mühsam. Nachdem ich mich mehrere Stunden daran versuchte, entschied ich mich dazu, die Sharepoint connection stattdesen mit einem ServiceUser und einer Logic app zu lösen. Genaueres dazu später.
+----
 
 ## Hybrid Runbook Worker 
-TODO - verlinken der einrichtungsanleitung die ich verwendet habe
 
-Da wir eine Hybrid AD umgebung haben (also eine lokale ad die auf Azure synchronisiert wird), müssen manche änderungen, wie z.B die user properties anpassungen, auf der Lokalen AD umgesetzt werden. Um aber über Powershell auf die lokale AD zuzugreifen, muss das script lokal auf einem Server laufen, der sich in der Domäne befindet. Hierfür kann man einen Hybrid Runbook Worker auf einem Domänen-Server installieren, welcher Jobs von Azure Automation Accounts ausführen kann. 
+Ein Hybrid Runbook Worker wurde auf dem lokalen AD-Connect-Server installiert, um PowerShell-Skripte unmittelbar in der On-Premise-Umgebung auszuführen. Dies ermöglicht lokale AD-Änderungen (z. B. Anpassung von User-Attributen) und reduziert Ausführungszeiten und Azure-Kosten, da die Hauptlast on-premises verarbeitet wird.
 
-Da wir einen eigenen Server für den AD Sync verwenden (also ein server auf den der AD Connect installiert ist), habe ich in absprache mit unserem Abteilungsleiter, einen Hybrid Runbook Worker installiert. Dieser führt das Script aus, welches die User auf der Lokalen AD updated.
-
-TODO - Bild des hybrid workers im AZ automation account
-
-PS: Ausserdem ist mir dabei aufgefallen, das runbooks darauf viel schneller ausgeführt werden können und keine kosten erzeugen, da es ja der lokale server ist der die hauptarbeit leistet. Da die ausführung der benötigten runbook allerdings sowieso höchstens ein paar rappen im monat kostet (es gibt eine bestimmte compute quota von runbooks die täglich gratis ausgeführt werden kann), ist dies nicht umbedingt nötig. Für den Moment lasse ich diese entscheidung offen.
+----
 
 ## Powershell Modules
-Ich musste für meine Scripts zustätzlich folgende Module im Az Automtion Account importieren:
+Für die Runbooks wurden folgende Module importiert:
 TODO - modulliste erstellen
 
 ----
 
 ## Sharepoint
 
-Sharepoint wird bei der HEKS (dem unternehmen wo ich arbeite. ps. diese notiz ist an chatgpt gerichtet) als Zentrale Ablage, vorallem für interne Kommunikation und öffentliche Ablagen verwendet. Auch tickets können bei uns über eine Sharepoint Seite erstellt werden.
-Deshalb war es nur logisch, dass die benötigten Self-Service möglichkeiten und Übersichten, welche für dieses Projekt benötigt werden, in Sharepoint abgelegt werden.
+Als Self-Service-Interface und Inventar werden zwei Microsoft Lists in SharePoint Online verwendet.
 
-## MS List 
+### Departments Inventory
 
-Ich habe in unserer ICT Bibliothek, zwei MS Listen erstellt. Die Listen "Departments Inventory" und "Digital Assets Catalog" enthalten die benötigten Daten für die automatisierung und dienen gleichzeitig als interface um flows auslösen zu können.
+In der Liste **„Departments Inventory“** werden Abteilungen gepflegt, da die HR-Liste in Business Central unvollständig ist und sich nicht direkt für die Automatisierung eignet. System Engineers können hier neue Abteilungen anlegen und mit Digital Assets aus dem **Digital Assets Catalog** verknüpfen. Bevor die Provisionierung erfolgt, muss der Status **„Approved“** manuell auf **YES** gesetzt werden. Anschließend führt jeweils ein PowerShell-Runbook:
+
+- die Erstellung des dynamischen Mailverteilers durch  
+- die automatische Zuweisung aller in **AssignedAssets** definierten Assets  
+
+Ursprünglich war geplant, zusätzlich eine dynamische Sicherheitsgruppe pro Abteilung anzulegen. Dieser Schritt wurde jedoch aufgrund eines technischen Limitationsfehlers (siehe Kapitel „Herausforderungen & Lösungen“) vorerst ausgesetzt.
+
+**Felder der MS List „Departments Inventory“**  
+- **Title:** Name der Abteilung  
+- **AssignedAssets:** Dropdown-Auswahl aus dem **Digital Assets Catalog**; Komma-getrennte Liste der Asset-Namen (z. B. „Intune, EntraAdmin, SRV-SharepointSite“)  
+- **AssignedAssetsSecurityGroups:** Dropdown-Auswahl aus dem Katalog; Komma-getrennte Liste der zugehörigen SecurityGroup-Namen  
+- **DepartmentCode:** Abteilungscode für die Filterung in Dynamic Groups  
+- **Approved:** YES/NO (Standard: NO); manuelle Freigabe zur Ausführung des Provisioning-Runbooks  
+- **SpecialCodes:** Zusätzliche Abteilungscodes (z. B. ICT1, ICT2) für Unterteams  
+- **ParentCode:** Code der übergeordneten Abteilung, notwendig für verschachtelte Mailinglisten  
+
+### Digital Assets Catalog
+
+In der Liste **„Digital Assets Catalog“** werden alle Digital Assets erfasst, die automatisiert zugewiesen werden können. Jedes Asset ist einer eigenen dynamischen Sicherheitsgruppe zugeordnet. System Engineers wählen aus dieser Liste die gewünschten Assets aus, die auf Abteilungsebene zugewiesen werden sollen. Die Runbooks nutzen die Einträge zur Erstellung und Zuweisung der entsprechenden Gruppen.
+
+**Felder der MS List „Digital Assets Catalog“**  
+- **Title:** Name des Digital Assets  
+- **SecurityGroup:** Dynamische Sicherheitsgruppe für die Asset-Zuweisung  
+- **Description:** Beschreibung des Assets und dessen Einsatzzweck  
+
+### Teams-Integration
+
+Die beiden MS Lists wurden in einem Teams-Kanal als Registerkarten eingebunden, um direkte Bearbeitung und Monitoring durch das System Engineering-Team zu ermöglichen:
 
 TODO - bild der beiden listen einfügen
 
-### Departments Inventory
-In der Liste "Departments Inventory" können wir Abteilungen eintragen (Die liste aus dem HR ist leider unvollständig und nicht für eine automatisierung zu gebrauchen, weshalb wir momentan eine zusätzliche Liste manuell führen müssen). Darin können der Abteilung Assets aus dem Digital Assets Katalog zugewiesen werden. Die Abteilung muss ausserdem von der IT approved werden. Sobald eine Abteilung approved wird, wird die Abteilung mithilfe einiger Scripts erstellt. Dabei wird ein dynamischer Mailverteiler erstellt und die entsprechenden Assets werden automatisch zugewisen.
+----
 
-Ursprünglich war angedacht, dass ausserdem eine Sircherheitsgruppe für die Abteilung erstellt wird, allerdings ist das aufrund eines Problems weggefallen (TODO - link zur problem erklärung einfügen sobald erfasst)
+## Datenablage in Storage Account für Verarbeitung
 
-**Eigenschaften der MS List**
- - **Title:** Name der Abteilung
- - **AssignedAssets:** Mit Asset Katalog verknüpft (kann aus dropdown ausgewählt werden). Ist eine komma getrente liste der namen aller zugewiesenen assets (bsp. "Intune, EntraAdmin, SRV-SharepointSite").
- - **AssignedAssetsSecurityGroups:** Mit Asset Katalog verknüpft. Ist eine komma getrente liste der SecurityGroups der zugewiesenen assets
- - **DepartmentCode:** Abteilungscode für Userzuordnung
- - **Approved:** YES/NO - standardmässig auf NO. Wird von System Engineers auf approved gesetzt sobald die Daten stimmen und die Erstellung der Abteilung ausgeführt werden darf
- - **SpecialCodes:**  Zustätzliche abteilungscodes (z.b teilt die HR manchmal abteilungen in teams auf und fügt nummern an den code an. Bsp ICT1, ICT2, etc)
- - **ParentCode:** Abteilungscode der übergeordneten abteilung. Hauptsächlich benötigt für Mailverteiler.
+Um die Verarbeitung der in den Microsoft Lists **„Departments Inventory“** und **„Digital Assets Catalog“** gespeicherten Daten mit PowerShell zu vereinfachen, wurde im bestehenden ADLS Gen2 Storage Account ein eigener Blob-Container **`manualdb`** angelegt. Dort werden die einzelnen Listen in JSON Format abgelegt.
 
-### Digital Assets Catalog
-In der Liste "Digital Assets Catalog" werden alle Assets nach und nach erfasst. Dabei wird ein Asset so eingerichtet, das es mit einer einzelnen dynamischen Sicherheitsgruppe zugewiesen werden kann. Dann wird in dieser liste die entsprechende Sicherheitsgruppe erfasst, damit user automatisch zugewiesen werden können. Die Assets aus diesem Katalog können in der Departments Liste ausgewählt weren um sie abteilungen zuzuweisen.
-
-**Eigenschaften der MS List**
-- **Title:** Name des Assets
-- **SecurityGroup:** Manuell eingerichtete dynamische Security Group für die Asset zuweisung
-- **Description:** Beschreibung des Assets und wofür es benötigt wird
-
-## Teams integration
-
-Die beiden Listen können in der Teams App direkt in einem Team Channel als Panel hinzugefügt werden um somit das ganze direkt aus Teams steuern zu können. Ich habe diese für den Moment in einem Channel verfügbar gemacht, der nur für uns System Engineers zu verfügung steht.
-
-- TODO bild der beiden Listen integriert in unser System Engineer Team Channel zeigen
-
-## Datenablage in Storage account für verarbeitung¨
-
-Um die verarbeitung der Daten mithilfe von Powershell zu vereinfachen, habe ich einen Zwischenschritt hinzugefügt. Wie zuvor schonmal erwähnt, habe ich hierfür eine Logic app erstellt. Diese Synchronisiert die Daten mit einem Storage account und speichert diese als JSON ein, sodass ich sie später direkt einlesen kann. Genaueres dazu später.
+Die Runbooks greifen direkt auf diese JSON-Dateien zu und können die Daten so ohne zusätzliche API-Aufrufe lokal einlesen und verarbeiten. 
 
 ----
 
 ## Logic apps 
 
-Wie bereits erwähnt habe ich für die Connection zu Sharepoint ebenfalls eine Logic App erstellt. Für diese habe ich ebenfalls eine Managed Identity aktiviert. Diese ist Berechtigt, auf den Storage account zu schreiben (PS: im moment nutze ich den gleichen DataLakeGen2 storage, nur das ich darin einen eigenen Container erstellt habe. Ich will allerdings daraus einen eigenen Azure Storage machen, da dies eine bessere abtrennung der komponenten ermöglicht). Ausserdem ist die Logic app berechtigt azure automation jobs zu verwalten (im moment auf dem Main-Test Automation account). Dies ist nötig, da ich ein Problem mit dem auslesen bestimmter Sharepoint daten mit der Logic App hatte. Deshalb habe ich ein kleines Powershell Helper script (runbook) geschrieben, welches von der Logic app ausgelöst wird. Dieses bereinigt die Daten.
+Für die Verbindung zu SharePoint wurde eine einzelne Logic App erstellt, die über einen User auf Sharepoint authentifiziert wird, um den Sharepoint Connector zu verwenden. Dies zu implementieren stellte sich als vesentlich simpler heraus, als die Daten über ein Runbook auszulesen. Sie besitzt:
 
+- **Schreibzugriff** auf den Azure Data Lake Gen2 (aktuell im selben Storage-Account, künftig geplant als separater Azure Storage zur besseren Abtrennung der Komponenten)  
+- **Lesezugriff** auf der Sharepoint Site in welcher die MS-Listen abgelegt sind.
+- **Rechte zur Verwaltung von Azure Automation Jobs** im Automation Account „Main-Test“
 
-## Geplante Anpassungen für Poduktiv-Umgebung - TODO less prio
+Die Logic App übernimmt:
 
-TODO - an chatgpt: bitte versuche hier aus vorangegangenen beschreibungen dinge auszulisten
+1. Die **Synchronisation** der benötigten SharePoint-Daten in den Storage-Container.  
+2. Das **Auslösen** eines kleinen PowerShell-Runbooks (Helper-Runbook), das Datensätze bereinigt und normiert, damit sie vollständig über Skripte verarbeitet werden können.
 
-- right now everything is in dev environment
-    -> powerbi setup & Sync
-    -> dev umgebung setup
-    -> az automation
-    -> hybrid runbook worker
-    -> Sharepoint
-    -> 
+Dieser Ansatz war nötig, da das direkte Auslesen bestimmter SharePoint-Inhalte in Logic Apps an Grenzen stieß. Durch die Kombination von Logic App + Helper-Runbook bleibt der Workflow einfach, sicher und wartbar.
 
-- planned split ups
-- planned permission changes
-- planned alerting on failed automation jobs & logic app
+----
+
+## Ausblick: Produktiv-Umgebung
+
+Für die spätere produktive Umgebung sind geplant:
+
+- Aufteilung in Development- und Production-Accounts
+- Feingranulares Rollen- und Berechtigungsmanagement im Automation Account
+- Alerts und Monitoring für fehlerhafte Runbook- und Logic App-Ausführungen
