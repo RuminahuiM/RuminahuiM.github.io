@@ -17,6 +17,7 @@ Abbildung 1: Zeitlicher Verlauf des Projektumfangs und Meilensteine des Proof of
 ----
 
 ## Ausgangslage
+
 In der vorhandenen Azure‑Hybrid‑Umgebung werden Benutzerberechtigungen bislang überwiegend manuell vergeben. Dies führt zu inkonsistenten Zugriffsrechten, redundanten und unübersichtlichen Gruppenstrukturen und erhöhten Sicherheits- und Compliance‑Risiken.
 
 Die HR‑Userdaten wurden teilweise bereits über ein script synchronisiert. Allerdings ist der Prozess bisher noch nicht vollständig automatisiert gewesen. Dieses Potenzial soll nun genutzt werden, um automatisierte Berechtigungszuweisungen mittels dynamischer Azure AD‑Gruppen zu realisieren.
@@ -28,6 +29,8 @@ Die HR‑Userdaten wurden teilweise bereits über ein script synchronisiert. All
 - Intune-App-Verteilung und SharePoint-Berechtigungen sind momentan nur unzureichend automatisiert.
 
 ----
+
+## Anforderungen
 
 ### Funktionale Anforderungen
 
@@ -94,6 +97,8 @@ Definition und Implementierung klarer Prozesse zur Aufnahme neuer Abteilungen, R
 ### Pilotphase 
 Innerhalb der Semesterabeit ist das Ziel, eine Pilotphase mit der Abteilung ICT zu starten, in der das Konzept bereits für eine Abteilung getestet werden kann. Alle anderen Abteilungen werden nach Abschluss der Semesterarbeit nach und nach hinzugefügt.
 
+----
+
 ## Abgrenzung (Scope)
 
 **In Scope:**
@@ -109,25 +114,3 @@ Innerhalb der Semesterabeit ist das Ziel, eine Pilotphase mit der Abteilung ICT 
 - SharePoint-Berechtigungen-Reengineering
 - Eigenständige Licensing Groups
 - Service Users handling in Azure AD
-
-
-------
------
-
-
-
-# Notes für späteres Editing
-
-Dies in ziele integrieren. im Konpzept erfasse (ADG-18 Jira Task)
-
-
-2. Zielsetzung
-
-Automatisierte Zuweisung von Digital Assets  
-Dynamische Azure AD-Gruppen je Abteilung (bzw. Sub-Abteilung) basierend auf dem HR-extensionAttribute für Berechtigungen, Lizenzen, App- und Mail-Verteiler-Zuweisungen.  
-
-Transparente Prozesse und Self-Service  
-Definierte Workflows für Lifecycle (Erstellen, Ändern, Archivieren) von Departments, Mail-Verteilern und Assets. Überblicks-Dashboards auf SharePoint/MS Lists zur Self-Service-Recherche.  
-
-Governance, Auditing & Skalierbarkeit  
-Zentrales Monitoring aller Änderungen, Audit-Log-Integration und Erweiterbarkeit um neue Departments oder Asset-Typen ohne Eingriffe in Basisarchitektur.
