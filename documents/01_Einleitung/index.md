@@ -6,7 +6,8 @@ has_children: true
 ---
 
 # 1. Einleitung
-{: .no_toc }
+
+{:toc}
 
 ## Vorwort
 
