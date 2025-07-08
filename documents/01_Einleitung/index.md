@@ -9,13 +9,13 @@ has_children: true
 
 # 1. Einleitung
 
-{:toc}
-
 ## Vorwort
 
 Das vorliegende Projekt zur automatisierten Verwaltung von Assets und Mailverteilern via Azure Dynamic Groups hat sich im Verlauf als umfassender erwiesen als ursprünglich angenommen. Die Entwicklung zahlreicher PowerShell‑Runbooks und die Integration verschiedener Systeme waren aufwändiger als erwartet und erforderten eine iterative Herangehensweise. Dennoch erfüllt der aktuelle Proof of Concept die definierten Projektziele ausreichend. Der weitere Projektfahrplan ist festgelegt und wird in den späteren Kapiteln genauer beschrieben.
 
-Abbildung 1: Zeitlicher Verlauf des Projektumfangs und Meilensteine des Proof of Concept.
+In der folgenden Grafik sieht man, dass die anzahl Tasks über den Verlauf der Semesterarbeit massiv gestiegen ist. Der Chart stellt die erledigten und neu erstellten Tasks in einer Timeline dar.
+
+![Report - Created vs Resolved Issues](../../resources/images/JiraChart1.png)
 
 ----
 

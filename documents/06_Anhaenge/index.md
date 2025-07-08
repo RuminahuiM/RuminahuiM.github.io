@@ -9,8 +9,6 @@ has_children: true
 
 # Anhänge
 
-## Fachbegriffe erläutern
-
 ## Quellen
 - chatgpt.com
 - learn.microsoft.com

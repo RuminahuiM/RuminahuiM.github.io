@@ -23,7 +23,6 @@ Ausserdem habe ich rausgefunden, dass es constraints gibt was die aktualisierung
 
 Nach diesen Recherchen entschied ich, für jede Abteilung eine Dynamische Gruppe zu erstellen und für jedes "Digital Asset" eine Gruppe zu erstellen. Dann würde die jeweilige asset gruppe den 'memberoff' filter nutzen, um alle user der zugewiesenen abteilungen zuzuweisen. Ich hätte auch in den Asset Gruppen direkt nach den Abteilungscodes der user filtern können, allerdings hielt ich das für weniger nachhaltig. Im verlauf des Projektes hat sich das geändert, aber auch hierzu später mehr beim Kapitel "Herausforderungen & Lösungen"
 
-
 Nun musste ich entscheiden, ob ich die benötigten automatisierungen lieber mit Logic Apps oder azure automation runbooks lösen wollte.
 Ich hatte bereits früher viel mit Logic apps und runbooks gearbeitet allerdings war es da jeweils eine Logic app und runbooks wurden bloss zur hilfe für komplexere Codeabläufe verwendet. 
 Dabei habe ich auch Probleme der Logic apps kennengelernt. An sich sind logic Apps etwas gutes. Es ist eine möglichkeit automatisationen zu erstellen ohne scripten können zu müssen. Dies sorgt dafür, dass jeder es theoretisch verstehen und maintainen kann. Allerdings stimmt dies in der Realtität nicht so ganz. Auch logic apps können teilweise sehr komplex werden und wenns um berechtigungen und gewisse Spezielle actions geht, muss man sich trotzdem reinlesen.

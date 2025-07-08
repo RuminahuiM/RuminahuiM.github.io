@@ -68,11 +68,11 @@ TODO - weglassen? weiss nicht genau was hier rein soll. Detailierte umsetzungsbe
 ### Dokumentation:
 Alle Umsetzungsschritte und Entscheidungen werden in den JIRA-Tasks dokumentiert. Zusätzlich werden die in JIRA generierten Sprint-Berichte als Nachweis der erledigten Arbeiten in den Anhang übernommen.
 
-
-
 ### Testing
-TODO - Vorgehen für Testing?
-es gibt nicht wirklich die möglichkeit Unit Tests oder so zu machen. Weshalb ich einfach immer wieder die Scripts 
+TODO - test cases definieren:
+- werden die userdaten korrekt in der AD hinterlegt?
+- werden Maildistribution & Department Groups korrekt erstellt?
+- Werden die Assets korrekt den Derpartment Groups zugewiesen?
 
 ### Pilotphase
 Die Pilotphase gliedert sich in zwei Teilphasen: Erstens erfolgt die Pilotierung des automatisierten Mailverteilungskonzepts, da dies bereits seit Längerem eine zentrale Forderung des Managements war. Zweitens wird in einer separaten Teilphase die Funktionalität des automatisierten Digital Asset Managements getestet.
@@ -109,3 +109,11 @@ kurzes Fazit werde ich gegen ende der Projektarbeit hier erfassen
 • Protokolle - Maybe JIRA Berichte TODO
 • Glossar (falls nötig) TODO
 • Quellenverzeichnis - ??? ms learn? chat gpt? Stack overflow? idk
+
+
+
+
+
+NOTES:
+
+replace all ß and quotes „“
