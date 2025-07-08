@@ -5,8 +5,9 @@ parent: 3. Projektdurchführung
 nav_order: 3
 ---
 
+{: .no_toc }
+
 #  Herausforderungen & Lösungen
-{:toc}
 
 ## HR Daten auslesen
 

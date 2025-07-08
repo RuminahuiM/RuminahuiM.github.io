@@ -5,6 +5,7 @@ parent: 2. Projektplanung
 nav_order: 1
 ---
 
+{: .no_toc }
 
 ## Konzepentwurf & Architektur
 

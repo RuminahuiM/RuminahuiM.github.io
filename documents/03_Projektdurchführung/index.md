@@ -5,8 +5,9 @@ nav_order: 4
 has_children: true
 ---
 
-# 3. Projektdurchführung 
 {: .no_toc }
+
+# 3. Projektdurchführung
 
 ## Recherche / Analyse
 

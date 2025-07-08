@@ -5,6 +5,8 @@ nav_order: 2
 has_children: true
 ---
 
+{: .no_toc }
+
 # 1. Einleitung
 
 {:toc}

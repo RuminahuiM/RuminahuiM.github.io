@@ -5,8 +5,9 @@ parent: 3. Projektdurchführung
 nav_order: 1
 ---
 
+{: .no_toc }
+
 # Environment Setup 
-{:toc}
 
 Aufgrund von übersichtlichkeit, werde ich kurz die gesamte umgebung und dessen komponenten erklären die benötigt wird für diese automatisierung. Es war zwar nicht so, dass ich die umgebung vollständig bereits geplant hatte und vorbereiten konnte bevor ich anfing die einzelnen teile zu bauen, allerdings erscheint es mir einfach für die dokumentation übersichtlicher diese teile zu bündeln.
 

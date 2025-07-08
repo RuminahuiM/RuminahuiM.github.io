@@ -5,8 +5,8 @@ parent: 3. Projektdurchführung
 nav_order: 4
 ---
 
+{: .no_toc }
+
 
 # Sprint Reviews
-{:toc}
-
     -> jeden einzelnen Sprint durchgehen

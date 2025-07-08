@@ -5,6 +5,8 @@ parent: 2. Projektplanung
 nav_order: 2
 ---
 
+{: .no_toc }
+
 ## Projektstrukturplan -> Phasenaufteilung in JIRA TODO
     -> Vorgehen in JIRA
 ## Zeitplanung - "Sprints" TODO - > angebliche geplante sprints

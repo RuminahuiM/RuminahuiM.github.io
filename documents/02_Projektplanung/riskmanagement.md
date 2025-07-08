@@ -5,6 +5,8 @@ parent: 2. Projektplanung
 nav_order: 3
 ---
 
+{: .no_toc }
+
 # Risikomanagement
 
 ## SWOT Analysis

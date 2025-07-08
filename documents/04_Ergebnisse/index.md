@@ -5,8 +5,9 @@ nav_order: 5
 has_children: true
 ---
 
+{: .no_toc }
+
 # 4. Ergebnisse / Analyse
-{:toc}
 
 um es verständlich zu halten, werde ich die zuvor definierten Produkte/Artefakte die zum Projekt gehören, einzeln durchgehen und jeweils dessen Ergebnisse, reviewen und geplante anpassungen ansprechen.
 

@@ -5,9 +5,9 @@ parent: 3. Projektdurchführung
 nav_order: 2
 ---
 
-# Produkte / Artefakte / Komponenten (TODO - find the best title)
-{:toc}
+{: .no_toc }
 
+# Produkte / Artefakte / Komponenten (TODO - find the best title)
 
 Dieses Projekt besteht aus verschiedenen Komponenten/Features. Deshalb teile ich im folgenden, dass Porjekt in verschiedene Artefakte ein, die aus dem Projekt entstanden sind und die wiederum diverse komponenten benötigen aber jeweils nur 1 feature darstellen.
 
