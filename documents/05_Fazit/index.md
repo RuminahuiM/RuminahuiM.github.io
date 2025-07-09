@@ -17,8 +17,8 @@ has_children: true
 - **Logik-Entscheidung:** Logic Apps nur für einfache Integrationen genutzt, wodurch Komplexität reduziert wurde  
 
 ### Was lief weniger gut?
-- **Fokusverlust:** Zu viele „Sidequests“ in der Entwicklung führten zu Zeitverschwendung (z. B. Debug-Output-Formatierung)  
-- **Umfang:** Das Projekt war deutlich größer und komplexer als ursprünglich eingeschätzt  
+- **Fokusverlust:** Zu viele "Sidequests" in der Entwicklung führten zu Zeitverschwendung (z. B. Debug-Output-Formatierung)  
+- **Umfang:** Das Projekt war deutlich grösser und komplexer als ursprünglich eingeschätzt  
 - **Zeitmanagement:** Schätzung von Aufwand und Deadlines war nicht präzise genug  
 - **Unklare Anforderungen:** Viele Konzepte waren zu Projektbeginn noch nicht ausgereift, was Planung und Umsetzung erschwerte  
 

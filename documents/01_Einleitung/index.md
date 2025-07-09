@@ -45,7 +45,7 @@ Die HR‑Userdaten wurden teilweise bereits über ein script synchronisiert. All
 
 **Naming Policy & Fallback**
 - Azure AD Naming Policy gemäss definition des ICT Teams
-- Fallback-Gruppe “General” (oder "undefined") für ungültige Codes, inklusive Review-Workflow
+- Fallback-Gruppe "General” (oder "undefined") für ungültige Codes, inklusive Review-Workflow
 
 **Request & Approval**
 - Microsoft Forms in SharePoint → Logic Apps → Multi-Stage-Approval (Antragsteller → Abteilungs-Owner → IT) → automatisierte Gruppenprovisionierung (z.B. für neue Abteilungen oder Mailverteiler)

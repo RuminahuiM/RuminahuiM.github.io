@@ -82,16 +82,16 @@ Als Self-Service-Interface und Inventar werden zwei Microsoft Lists in SharePoin
 
 ### Departments Inventory
 
-In der Liste **„Departments Inventory“** werden Abteilungen gepflegt, da die HR-Liste in Business Central unvollständig ist und sich nicht direkt für die Automatisierung eignet. System Engineers können hier neue Abteilungen anlegen und mit Digital Assets aus dem **Digital Assets Catalog** verknüpfen. Bevor die Provisionierung erfolgt, muss der Status **„Approved“** manuell auf **YES** gesetzt werden. Anschließend führt jeweils ein PowerShell-Runbook:
+In der Liste **"Departments Inventory"** werden Abteilungen gepflegt, da die HR-Liste in Business Central unvollständig ist und sich nicht direkt für die Automatisierung eignet. System Engineers können hier neue Abteilungen anlegen und mit Digital Assets aus dem **Digital Assets Catalog** verknüpfen. Bevor die Provisionierung erfolgt, muss der Status **"Approved"** manuell auf **YES** gesetzt werden. Anschliessend führt jeweils ein PowerShell-Runbook:
 
 - die Erstellung des dynamischen Mailverteilers durch  
 - die automatische Zuweisung aller in **AssignedAssets** definierten Assets  
 
-Ursprünglich war geplant, zusätzlich eine dynamische Sicherheitsgruppe pro Abteilung anzulegen. Dieser Schritt wurde jedoch aufgrund eines technischen Limitationsfehlers (siehe Kapitel „Herausforderungen & Lösungen“) vorerst ausgesetzt.
+Ursprünglich war geplant, zusätzlich eine dynamische Sicherheitsgruppe pro Abteilung anzulegen. Dieser Schritt wurde jedoch aufgrund eines technischen Limitationsfehlers (siehe Kapitel "Herausforderungen & Lösungen") vorerst ausgesetzt.
 
-**Felder der MS List „Departments Inventory“**  
+**Felder der MS List "Departments Inventory"**  
 - **Title:** Name der Abteilung  
-- **AssignedAssets:** Dropdown-Auswahl aus dem **Digital Assets Catalog**; Komma-getrennte Liste der Asset-Namen (z. B. „Intune, EntraAdmin, SRV-SharepointSite“)  
+- **AssignedAssets:** Dropdown-Auswahl aus dem **Digital Assets Catalog**; Komma-getrennte Liste der Asset-Namen (z. B. "Intune, EntraAdmin, SRV-SharepointSite")  
 - **AssignedAssetsSecurityGroups:** Dropdown-Auswahl aus dem Katalog; Komma-getrennte Liste der zugehörigen SecurityGroup-Namen  
 - **DepartmentCode:** Abteilungscode für die Filterung in Dynamic Groups  
 - **Approved:** YES/NO (Standard: NO); manuelle Freigabe zur Ausführung des Provisioning-Runbooks  
@@ -100,9 +100,9 @@ Ursprünglich war geplant, zusätzlich eine dynamische Sicherheitsgruppe pro Abt
 
 ### Digital Assets Catalog
 
-In der Liste **„Digital Assets Catalog“** werden alle Digital Assets erfasst, die automatisiert zugewiesen werden können. Jedes Asset ist einer eigenen dynamischen Sicherheitsgruppe zugeordnet. System Engineers wählen aus dieser Liste die gewünschten Assets aus, die auf Abteilungsebene zugewiesen werden sollen. Die Runbooks nutzen die Einträge zur Erstellung und Zuweisung der entsprechenden Gruppen.
+In der Liste **"Digital Assets Catalog"** werden alle Digital Assets erfasst, die automatisiert zugewiesen werden können. Jedes Asset ist einer eigenen dynamischen Sicherheitsgruppe zugeordnet. System Engineers wählen aus dieser Liste die gewünschten Assets aus, die auf Abteilungsebene zugewiesen werden sollen. Die Runbooks nutzen die Einträge zur Erstellung und Zuweisung der entsprechenden Gruppen.
 
-**Felder der MS List „Digital Assets Catalog“**  
+**Felder der MS List "Digital Assets Catalog"**  
 - **Title:** Name des Digital Assets  
 - **SecurityGroup:** Dynamische Sicherheitsgruppe für die Asset-Zuweisung  
 - **Description:** Beschreibung des Assets und dessen Einsatzzweck  
@@ -117,7 +117,7 @@ TODO - bild der beiden listen einfügen
 
 ## Datenablage in Storage Account für Verarbeitung
 
-Um die Verarbeitung der in den Microsoft Lists **„Departments Inventory“** und **„Digital Assets Catalog“** gespeicherten Daten mit PowerShell zu vereinfachen, wurde im bestehenden ADLS Gen2 Storage Account ein eigener Blob-Container **`manualdb`** angelegt. Dort werden die einzelnen Listen in JSON Format abgelegt.
+Um die Verarbeitung der in den Microsoft Lists **"Departments Inventory"** und **"Digital Assets Catalog"** gespeicherten Daten mit PowerShell zu vereinfachen, wurde im bestehenden ADLS Gen2 Storage Account ein eigener Blob-Container **`manualdb`** angelegt. Dort werden die einzelnen Listen in JSON Format abgelegt.
 
 Die Runbooks greifen direkt auf diese JSON-Dateien zu und können die Daten so ohne zusätzliche API-Aufrufe lokal einlesen und verarbeiten. 
 
@@ -129,14 +129,14 @@ Für die Verbindung zu SharePoint wurde eine einzelne Logic App erstellt, die ü
 
 - **Schreibzugriff** auf den Azure Data Lake Gen2 (aktuell im selben Storage-Account, künftig geplant als separater Azure Storage zur besseren Abtrennung der Komponenten)  
 - **Lesezugriff** auf der Sharepoint Site in welcher die MS-Listen abgelegt sind.
-- **Rechte zur Verwaltung von Azure Automation Jobs** im Automation Account „Main-Test“
+- **Rechte zur Verwaltung von Azure Automation Jobs** im Automation Account "Main-Test"
 
 Die Logic App übernimmt:
 
 1. Die **Synchronisation** der benötigten SharePoint-Daten in den Storage-Container.  
 2. Das **Auslösen** eines kleinen PowerShell-Runbooks (Helper-Runbook), das Datensätze bereinigt und normiert, damit sie vollständig über Skripte verarbeitet werden können.
 
-Dieser Ansatz war nötig, da das direkte Auslesen bestimmter SharePoint-Inhalte in Logic Apps an Grenzen stieß. Durch die Kombination von Logic App + Helper-Runbook bleibt der Workflow einfach, sicher und wartbar.
+Dieser Ansatz war nötig, da das direkte Auslesen bestimmter SharePoint-Inhalte in Logic Apps an Grenzen stiess. Durch die Kombination von Logic App + Helper-Runbook bleibt der Workflow einfach, sicher und wartbar.
 
 ----
 

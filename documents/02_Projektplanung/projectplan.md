@@ -136,7 +136,7 @@ Für die erfolgreiche Umsetzung des Projekts standen folgende Ressourcen zur Ver
 ## Personelle Ressourcen
 - **Projektleitung und Umsetzung (100 %):** Ich habe sämtliche Aufgaben von der Anforderungsanalyse über die Konzeption bis hin zur technischen Implementierung eigenständig übernommen.
 
-- **Unterstützung Kommunikation:** Saskia Haas war für die Abstimmung der Kommunikationsmaßnahmen verantwortlich. 
+- **Unterstützung Kommunikation:** Saskia Haas war für die Abstimmung der Kommunikationsmassnahmen verantwortlich. 
 
 ## Wichtige Kommunikations‑Tasks (Pilotphase)
 - Erstellung und Versand der Pilotankündigung an beteiligte Abteilungen
@@ -163,7 +163,7 @@ Ein klar strukturierter Kommunikationsplan stellt sicher, dass alle Beteiligten 
 
 **Verantwortlich:** Saskia Haas
 **Zielgruppe:** Pilotabteilungen (Services, ICT)
-**Maßnahmen:**
+**Massnahmen:**
 - Versand einer technischen Einführung und Anleitung per E‑Mail
 - Organisation allfälliger online Einführungen für die zu implementierende Prozesse
 - Bereitstellung eines zentralen Feedback-Forms

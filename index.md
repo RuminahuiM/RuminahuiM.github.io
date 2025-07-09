@@ -26,10 +26,10 @@ Betreuende Lehrperson: Samuel Müller (Azure), Caeser Roth (Projektmanagement)
 ## Zielsetzung
 Ziel dieses Projekts ist die Einführung eines möglichst automatisierten Berechtigungs- und Zugangsmanagements in einer hybriden Azure-Umgebung. Derzeit erfolgen Berechtigungen auf Applikationen, Mailverteilern und Daten teils manuell, teils über statische Gruppen. Ausgangspunkt war der Wunsch nach automatischen Mailverteilern, die keiner manuellen Pflege mehr bedürfen.
 
-Geplant ist, die Abteilungs­informationen aus dem HR-System (Business Central sowie SwissSalary-Modul) über synchronisierte extensionAttribute auszulesen. Basierend auf dem jeweiligen Abteilungscode werden für jede Abteilung dynamische Sicherheitsgruppen und Mailverteiler erstellt, denen anschließend die benötigten digitalen Assets (Tools, Berechtigungen, Lizenzen usw.) zugewiesen werden.Die Automatisierung wird überwiegend mittels PowerShell-Runbooks in Azure Automation realisiert.
+Geplant ist, die Abteilungs­informationen aus dem HR-System (Business Central sowie SwissSalary-Modul) über synchronisierte extensionAttribute auszulesen. Basierend auf dem jeweiligen Abteilungscode werden für jede Abteilung dynamische Sicherheitsgruppen und Mailverteiler erstellt, denen anschliessend die benötigten digitalen Assets (Tools, Berechtigungen, Lizenzen usw.) zugewiesen werden.Die Automatisierung wird überwiegend mittels PowerShell-Runbooks in Azure Automation realisiert.
 
 ### Defintion "Digital Assets"
-Im Rahmen dieses Projekts werden „Digital Assets“ als einmalig zu konfigurierende Ressourcen verstanden, die Abteilungsgruppen später zugeordnet werden. Die Definition kann im Projektverlauf erweitert werden.
+Im Rahmen dieses Projekts werden "Digital Assets" als einmalig zu konfigurierende Ressourcen verstanden, die Abteilungsgruppen später zugeordnet werden. Die Definition kann im Projektverlauf erweitert werden.
 
 **Zugriffs- & Sicherheits-Assets**
 Azure AD-Rollen, RBAC, Conditional Access, PIM, Local AD Access  
@@ -63,22 +63,22 @@ Das Projekt wird mittels Scrum-Framework in JIRA organisiert. Geplant sind Zwei-
 **Alain Knaff:** PowerBI & BC Spezialist, Teilaufgaben
 
 ### Ausführung
-TODO - weglassen? weiss nicht genau was hier rein soll. Detailierte umsetzungsbeschreibung erfolgt in anderem kapitel. evtl kurze zsfassung
+Die Automatisierung erfolgt über Azure Automation Runbooks (PowerShell 7.2) und eine unterstützende Logic App, die Dataflows aus Power BI und MS Lists in ADLS Gen2 persistiert. Tägliche Trigger lösen das Datenaufbereitungs-Runbook aus, das anschliessend auf einem Hybrid Runbook Worker lokale AD-Änderungen ausführt. Managed Identities sichern dabei den Zugriff auf alle relevanten Ressourcen.
 
 ### Dokumentation:
 Alle Umsetzungsschritte und Entscheidungen werden in den JIRA-Tasks dokumentiert. Zusätzlich werden die in JIRA generierten Sprint-Berichte als Nachweis der erledigten Arbeiten in den Anhang übernommen.
 
 ### Testing
-TODO - test cases definieren:
-- werden die userdaten korrekt in der AD hinterlegt?
-- werden Maildistribution & Department Groups korrekt erstellt?
-- Werden die Assets korrekt den Derpartment Groups zugewiesen?
+Folgende Testfälle stellen die korrekte Funktionsweise sicher:
+- **AD-Synchronisation:** Werden die Benutzerattribute (Abteilung, Standort, Sprache) zuverlässig im lokalen AD aktualisiert?  
+- **Mailverteiler & Department Groups:** Werden Verteilerlisten und Abteilungsgruppen in Exchange/Azure AD korrekt erstellt?  
+- **Asset-Zuweisung:** Erhalten die Department-Gruppen die definierten Assets (Security Groups, Lizenzen, Apps) entsprechend der MS Lists-Zuordnung?  
 
 ### Pilotphase
 Die Pilotphase gliedert sich in zwei Teilphasen: Erstens erfolgt die Pilotierung des automatisierten Mailverteilungskonzepts, da dies bereits seit Längerem eine zentrale Forderung des Managements war. Zweitens wird in einer separaten Teilphase die Funktionalität des automatisierten Digital Asset Managements getestet.
 
 **Automatisierte Mailverteiler**
-Die Pilotphase beginnt am 26.06.2025 und umfasst zuerst die Abteilung „Services“ (inklusive Teilabteilungen wie ICT). Saskia Haas koordiniert die Anwender­kommunikation. Eine Woche vor Start werden betroffene Nutzer über das Verfahren informiert und zu Feedback via Formular eingeladen.
+Die Pilotphase beginnt am 26.06.2025 und umfasst zuerst die Abteilung "Services" (inklusive Teilabteilungen wie ICT). Saskia Haas koordiniert die Anwender­kommunikation. Eine Woche vor Start werden betroffene Nutzer über das Verfahren informiert und zu Feedback via Formular eingeladen.
 
 
 **Automatisiertes Digital Asset Management**
@@ -89,9 +89,9 @@ Die zweite Pilotphase richtet sich auf die Abteilung ICT und testet die Zuweisun
 ## Output
 Im Rahmen des Projekts wurden folgende Kern-Artefakte bereitgestellt:
 - PowerShell-Runbooks zur automatischen Synchronisation von SwissSalary-Daten und AD-Attributen  
-- Runbook „Generate-DistributionLists“ für Mailverteiler mit „Precanned“-Filtern  
+- Runbook "Generate-DistributionLists" für Mailverteiler mit "Precanned"-Filtern  
 - Logic App und Blob-Container für Self-Service-Daten aus MS Lists  
-- Runbook „Update-AssetAssignments“ für dynamische Asset-Gruppen-Queries  
+- Runbook "Update-AssetAssignments" für dynamische Asset-Gruppen-Queries  
 
 ----
 
@@ -104,11 +104,3 @@ Das Proof of Concept hat gezeigt, dass die automatisierte Berechtigungs- und Ver
 - Glossar
 - Quellenverzeichnis
 - Runbook-Powershell-Scripts Quellcode
-
-
-
-
-
-NOTES:
-
-replace all ß and quotes „“

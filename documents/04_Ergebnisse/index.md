@@ -19,7 +19,7 @@ Funktioniert grundsätzlich; der Trigger für die tägliche Ausführung ist noch
 ### Testing & Ergebnisse
 - Probelauf mit dem Parameter `-WhatIf` zeigte die korrekten Anpassungen.  
 - Testlauf für einen einzelnen Benutzer bestätigte die fehlerfreie Attributaktualisierung.  
-- Vollständiger Lauf über alle User: Stichprobennahmen bestätigten eine ordnungsgemäße Datenaktualität.
+- Vollständiger Lauf über alle User: Stichprobennahmen bestätigten eine ordnungsgemässe Datenaktualität.
 
 ### Review & Bewertung
 Das Artefakt erfüllt die Anforderungen eines Proof of Concept. Vor dem produktiven Einsatz müssen jedoch:
@@ -32,12 +32,12 @@ Das Artefakt erfüllt die Anforderungen eines Proof of Concept. Vor dem produkti
 Teilweise funktionsfähig: Die Pilotphase wurde nach wenigen Tagen abgebrochen. Die Mailverteiler werden korrekt erstellt, jedoch werden keine Benutzer in der GUI angezeigt. Mit einzelnen Abteilungscodes funktioniert das Runbook nach der letzten Änderung zuverlässig, die Abfrage mehrerer Codes ist jedoch weiterhin fehlerhaft.
 
 ### Testing & Ergebnisse
-- In der Pilotphase wurden alle Verteiler für die „Services“-Abteilungen erstellt.  
+- In der Pilotphase wurden alle Verteiler für die "Services"-Abteilungen erstellt.  
 - Die Filter-Queries lieferten die korrekten Ergebnisse, und Testmails wurden erfolgreich versendet.  
 - Die Verteiler erschienen jedoch weder im Exchange-Adressbuch noch zeigten sie Mitglieder in Outlook an.
 
 ### Review & Bewertung
-Das Artefakt erfüllt den Großteil der Anforderungen. Das verbleibende Hauptproblem ist die gleichzeitige Abfrage mehrerer Abteilungscodes. Gemäß Microsoft-Dokumentation sollte dies möglich sein und wird in einem Folge-Sprint (außerhalb des aktuellen Scopes) adressiert.
+Das Artefakt erfüllt den Grossteil der Anforderungen. Das verbleibende Hauptproblem ist die gleichzeitige Abfrage mehrerer Abteilungscodes. Gemäss Microsoft-Dokumentation sollte dies möglich sein und wird in einem Folge-Sprint (ausserhalb des aktuellen Scopes) adressiert.
 
 
 ## Asset Assignment Handling
@@ -58,7 +58,7 @@ Das Artefakt erfüllt vollständig die definierten Anforderungen und war das am 
 ## Self Service
 
 ### Status
-Die MS Lists („Departments Inventory“ und „Digital Assets Catalog“) sind eingerichtet, die zugehörigen Self-Service-Prozesse (z. B. MS Forms-Intake, automatisierte Ticket-Erstellung) wurden jedoch noch nicht finalisiert.
+Die MS Lists ("Departments Inventory" und "Digital Assets Catalog") sind eingerichtet, die zugehörigen Self-Service-Prozesse (z. B. MS Forms-Intake, automatisierte Ticket-Erstellung) wurden jedoch noch nicht finalisiert.
 
 ### Testing & Ergebnisse
 - Änderungen in den MS Lists lösen erfolgreich die Logic App aus und aktualisieren die JSON-Daten im Azure Storage Account.  
@@ -77,7 +77,7 @@ Noch nicht implementiert – aus zeitlichen Gründen und aufgrund der geringeren
 Keine Tests durchgeführt.
 
 ### Review & Bewertung  
-Die Anforderungen wurden nicht erfüllt. Die Architektur für Alerting (Azure Monitor Alerts für fehlgeschlagene Runbook- und Logic App-Ausführungen) und Audit-Logging (Log Analytics Workspace, regelmäßige Reports) ist jedoch bereits definiert und entsprechende Tasks sind dokumentiert.
+Die Anforderungen wurden nicht erfüllt. Die Architektur für Alerting (Azure Monitor Alerts für fehlgeschlagene Runbook- und Logic App-Ausführungen) und Audit-Logging (Log Analytics Workspace, regelmässige Reports) ist jedoch bereits definiert und entsprechende Tasks sind dokumentiert.
 
 ----
 
@@ -113,4 +113,4 @@ Definition und Implementierung klarer Prozesse zur Aufnahme neuer Abteilungen, R
 ### Pilotphase  
 Innerhalb der Semesterarbeit sollte eine Pilotphase mit der Abteilung ICT durchgeführt werden, um das Konzept an einer realen Abteilung zu validieren.
 
-**Bewertung:** **Teilweise erreicht.** Die Mailverteiler-Pilotphase wurde planmäßig gestartet und lieferte wertvolle Erkenntnisse. Die Asset-Zuweisungs-Pilotphase wurde durch Tests an einer Beispielgruppe ersetzt, um die Automatisierung zu verifizieren.
+**Bewertung:** **Teilweise erreicht.** Die Mailverteiler-Pilotphase wurde planmässig gestartet und lieferte wertvolle Erkenntnisse. Die Asset-Zuweisungs-Pilotphase wurde durch Tests an einer Beispielgruppe ersetzt, um die Automatisierung zu verifizieren.

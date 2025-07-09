@@ -38,7 +38,7 @@ nav_order: 1
 | **Dynamic Group Provisioning** | Automatisierte Erstellung & Pflege von Distribution- und Security-Groups pro DeptCode. | Dynamic Group Provisioning |
 | **Digital Assets Katalog** | Definition aller Asset-Typen (Lizenzen, Rollen, Policies, Apps). | Digital Assets Katalog |
 | **Naming Policy** | Azure AD Naming Policy: `<DeptCode>_<Type>` | Naming Policy |
-| **Fallback-Gruppe** | „General“ für ungültige Codes, löst Review-Workflow aus. | Fallback-Gruppe |
+| **Fallback-Gruppe** | "General" für ungültige Codes, löst Review-Workflow aus. | Fallback-Gruppe |
 
 ----
 

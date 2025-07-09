@@ -15,7 +15,7 @@ Dieses Projekt besteht aus mehreren Artefakten, die jeweils eine eigene Funktion
 
 **Artefakt-Bezeichnung:** SwissSalary-to-AD Sync
 
-Dieses Artefakt war ursprünglich nicht als Teil dieses Projekts geplant, hat sich jedoch als unverzichtbare Voraussetzung herausgestellt. Ziel ist es, die in SwissSalary (Business Central) verwalteten Mitarbeiterdaten—wie Abteilung, Standort und Sprache—regelmäßig und vollständig in das lokale Active Directory zu übertragen. Bislang erfolgte der Abgleich manuell:
+Dieses Artefakt war ursprünglich nicht als Teil dieses Projekts geplant, hat sich jedoch als unverzichtbare Voraussetzung herausgestellt. Ziel ist es, die in SwissSalary (Business Central) verwalteten Mitarbeiterdaten—wie Abteilung, Standort und Sprache—regelmässig und vollständig in das lokale Active Directory zu übertragen. Bislang erfolgte der Abgleich manuell:
 
 1. CSV-Export aus Business Central  
 2. Manuelles Kopieren auf einen Server  
@@ -55,7 +55,7 @@ Nachfolgend eine strukturierte Übersicht des Prozessablaufs:
    Ein Dataflow in Power BI erstellt täglich einen Report aller aktiven Benutzer und deren Abteilungszuordnung.  
 3. **Persistierung im Data Lake**  
    Die Power BI-Reports werden automatisch als CSV-Dateien im Azure Data Lake Gen2 (Storage Account) abgelegt.  
-4. **Start des Runbooks „Get-PBIUserData“**  
+4. **Start des Runbooks "Get-PBIUserData"**  
    Ein geplanter Trigger im Azure Automation Account löst einmal täglich das Runbook **Get-PBIUserData** aus.  
    - Liest die neuesten CSVs aus dem Storage Container ein  
    - Wandelt die Daten in JSON um  
@@ -69,7 +69,7 @@ Nachfolgend eine strukturierte Übersicht des Prozessablaufs:
 
 **Runbook "Get-PBIUserData"**
 
-Dieses PowerShell-Runbook lädt das aktuellste Employee-CSV-Snapshot aus einem Azure Storage Container (Power BI Export), reichert die Datensätze um Länderinformationen (Name und numerischer Code) an und konvertiert sie in ein JSON-Format. Anschließend wird die JSON-Datei wieder in das Storage-Konto geschrieben und – sofern nicht im Testmodus – der nachgelagerte Runbook-Job Update-UserdataLocalAD auf einem Hybrid Worker gestartet, um die lokalen AD-Attribute der Benutzer zu aktualisieren. Parameter ermöglichen die Anpassung von Storage- und Runbook-Kontext, Pfaden sowie Testmodi.
+Dieses PowerShell-Runbook lädt das aktuellste Employee-CSV-Snapshot aus einem Azure Storage Container (Power BI Export), reichert die Datensätze um Länderinformationen (Name und numerischer Code) an und konvertiert sie in ein JSON-Format. Anschliessend wird die JSON-Datei wieder in das Storage-Konto geschrieben und – sofern nicht im Testmodus – der nachgelagerte Runbook-Job Update-UserdataLocalAD auf einem Hybrid Worker gestartet, um die lokalen AD-Attribute der Benutzer zu aktualisieren. Parameter ermöglichen die Anpassung von Storage- und Runbook-Kontext, Pfaden sowie Testmodi.
 
 ```PowerShell
 Param(
@@ -240,7 +240,7 @@ if (-not $TestMode){
 
 **Runbook "Update-UserdataLocalAD"**
 
-Dieses PowerShell-Runbook wird lokal auf einem Hybrid Worker ausgeführt und liest die JSON-Datei mit den Benutzerattributen aus Azure Storage ein. Es stellt sicher, dass alle benötigten PowerShell-Module (ActiveDirectory, Az.Accounts, Az.Storage) verfügbar sind, sichert bestehende AD-Benutzerdaten in einer Backup-CSV, und vergleicht dann pro Benutzer die eingehenden Werte mit den aktuellen AD-Attributen. Abweichungen werden protokolliert und – außerhalb des Testmodus – direkt mit Set-ADUser in Active Directory übernommen. Zusätzlich werden alte Log- und Backup-Dateien automatisch anhand einer einstellbaren Aufbewahrungsdauer bereinigt.
+Dieses PowerShell-Runbook wird lokal auf einem Hybrid Worker ausgeführt und liest die JSON-Datei mit den Benutzerattributen aus Azure Storage ein. Es stellt sicher, dass alle benötigten PowerShell-Module (ActiveDirectory, Az.Accounts, Az.Storage) verfügbar sind, sichert bestehende AD-Benutzerdaten in einer Backup-CSV, und vergleicht dann pro Benutzer die eingehenden Werte mit den aktuellen AD-Attributen. Abweichungen werden protokolliert und – ausserhalb des Testmodus – direkt mit Set-ADUser in Active Directory übernommen. Zusätzlich werden alte Log- und Backup-Dateien automatisch anhand einer einstellbaren Aufbewahrungsdauer bereinigt.
 
 > Hinweis: Dieses script wird auf dem Hybrid Runbook worker ausgeführt
 
@@ -536,7 +536,7 @@ Stop-Transcript
 
 **Runbook "Start-RollbackFromBackupCSV"**
 
-Dieses PowerShell-Runbook stellt Active-Directory-Attribute anhand einer zuvor erstellten Backup-CSV wieder her. Es sichert die benötigten AD-Module, lädt die Backup-Datei aus dem lokalen Backup-Verzeichnis, und vergleicht für jeden Eintrag die aktuellen AD-Werte mit den gesicherten Werten. Abweichungen werden protokolliert und – außerhalb des Testmodus – über Set-ADUser zurückgesetzt. Parallel dazu wird ein Transkript geführt und alte Logdateien automatisch verwaltet.
+Dieses PowerShell-Runbook stellt Active-Directory-Attribute anhand einer zuvor erstellten Backup-CSV wieder her. Es sichert die benötigten AD-Module, lädt die Backup-Datei aus dem lokalen Backup-Verzeichnis, und vergleicht für jeden Eintrag die aktuellen AD-Werte mit den gesicherten Werten. Abweichungen werden protokolliert und – ausserhalb des Testmodus – über Set-ADUser zurückgesetzt. Parallel dazu wird ein Transkript geführt und alte Logdateien automatisch verwaltet.
 
 > Hinweis: Dieses script wird auf dem Hybrid Runbook worker ausgeführt
 
@@ -710,7 +710,7 @@ Bei diesem Artefakt steht die automatische Erstellung und Pflege der abteilungsb
 - Jeder Mailverteiler (`<DeptCode>_DL`) einer Abteilung enthält auch alle Benutzer der zugehörigen Sub-Abteilungen.  
 - Der `ParentCode` in der Abteilungsdefinition ermöglicht es, alle Sub-Abteilungen dynamisch zu ermitteln und deren Codes in die Filterabfrage aufzunehmen.
 
-Ursprünglich nutzte ich für die Queries einen benutzerdefinierten Advanced-Filter. In der Pilotphase wurde jedoch deutlich, dass damit keine Mitglieder in der GUI angezeigt werden können. Daraufhin stellte ich auf die von Microsoft vordefinierten **„Precanned“** Filter um. Diese bieten GUI-Kompatibilität und funktionieren zuverlässig – allerdings aktuell nur für einzelne Abteilungscodes. Die Kombination mehrerer Codes mit Komma-Trennung klappt derzeit nicht vollständig und wird nach Abschluss der Semesterarbeit weiter optimiert.
+Ursprünglich nutzte ich für die Queries einen benutzerdefinierten Advanced-Filter. In der Pilotphase wurde jedoch deutlich, dass damit keine Mitglieder in der GUI angezeigt werden können. Daraufhin stellte ich auf die von Microsoft vordefinierten **"Precanned"** Filter um. Diese bieten GUI-Kompatibilität und funktionieren zuverlässig – allerdings aktuell nur für einzelne Abteilungscodes. Die Kombination mehrerer Codes mit Komma-Trennung klappt derzeit nicht vollständig und wird nach Abschluss der Semesterarbeit weiter optimiert.
 
 > Hinweis: Dieses Runbook läuft auf dem Hybrid Runbook Worker, da das Exchange Online PowerShell-Modul in Azure Automation nicht vollständig unterstützt wird. Die Authentifizierung erfolgt unkompliziert über die System Managed Identity des Servers.
 
@@ -732,7 +732,7 @@ Ursprünglich nutzte ich für die Queries einen benutzerdefinierten Advanced-Fil
 
 **Runbook "Generate-DepartmentGroups"**
 
-Dieses PowerShell-Runbook liest eine CSV mit Abteilungs-Codes und deren Hierarchie aus einem Azure Storage Container ein, baut daraus eine strukturierte Abteilungs-Tabelle inklusive Eltern-Kind-Beziehungen und Sonder-Codes auf und verbindet sich anschließend per Managed Identity mit Exchange Online. Für jede Abteilung wird ein hierarchischer Alias generiert (z. B. dl_srv_ict_sys), ein entsprechender SMTP-Filter aller zugehörigen Codes erstellt und dann über die Exchange-Cmdlets entweder eine neue Dynamic Distribution Group angelegt oder eine bestehende aktualisiert. Mit den Parametern TestMode und Force lassen sich gefahrlos Tests durchführen und Alt-Objekte umbenennen, bevor die finale Erstellung bzw. Aktualisierung in der Produktivumgebung erfolgt.
+Dieses PowerShell-Runbook liest eine CSV mit Abteilungs-Codes und deren Hierarchie aus einem Azure Storage Container ein, baut daraus eine strukturierte Abteilungs-Tabelle inklusive Eltern-Kind-Beziehungen und Sonder-Codes auf und verbindet sich anschliessend per Managed Identity mit Exchange Online. Für jede Abteilung wird ein hierarchischer Alias generiert (z. B. dl_srv_ict_sys), ein entsprechender SMTP-Filter aller zugehörigen Codes erstellt und dann über die Exchange-Cmdlets entweder eine neue Dynamic Distribution Group angelegt oder eine bestehende aktualisiert. Mit den Parametern TestMode und Force lassen sich gefahrlos Tests durchführen und Alt-Objekte umbenennen, bevor die finale Erstellung bzw. Aktualisierung in der Produktivumgebung erfolgt.
 
 > Hinweis: Dieses Runbook wird auf dem Hybrid Runbook Worker ausgeführt
 
@@ -1095,19 +1095,19 @@ Write-Output "All dynamic distribution groups have been created/updated."
 
 ### Geplante Änderungen
 
-Das Runbook heißt aktuell **„Generate-DepartmentGroups“**, da es ursprünglich sowohl Mailverteiler als auch Sicherheitsgruppen für Abteilungen anlegen sollte. Da die Security-Groups nun entfallen, wird das Skript entsprechend umbenannt und auf die reine Erstellung von Mailverteilern fokussiert (z. B. **„Generate-DistributionLists“**).
+Das Runbook heisst aktuell **"Generate-DepartmentGroups"**, da es ursprünglich sowohl Mailverteiler als auch Sicherheitsgruppen für Abteilungen anlegen sollte. Da die Security-Groups nun entfallen, wird das Skript entsprechend umbenannt und auf die reine Erstellung von Mailverteilern fokussiert (z. B. **"Generate-DistributionLists"**).
 
 Ein weiterer geplanter Schritt ist die Lösung des Problems bei der Abfrage mehrerer Abteilungscodes. Microsofts Dokumentation auf learn.microsoft.com weist darauf hin, dass dynamische Gruppen-Abfragen mehrere Werte per Komma unterstützen sollten. Nach Abschluss der Semesterarbeit werde ich die Filterlogik anpassen und testen, so dass auch kombinierte Abteilungscodes korrekt verarbeitet und in der GUI angezeigt werden.
 
 ## Asset Assignment Handling
 
-Beim dritten Artefakt geht es um die automatische Zuweisung von Digital Assets. Dazu werden die beiden Microsoft Lists in SharePoint („Departments Inventory“ und „Digital Assets Catalog“) genutzt. Sobald in der Departments Inventory ein Asset einer Abteilung zugewiesen wird, löst ein Skript die entsprechende Zuweisung aus:
+Beim dritten Artefakt geht es um die automatische Zuweisung von Digital Assets. Dazu werden die beiden Microsoft Lists in SharePoint ("Departments Inventory" und "Digital Assets Catalog") genutzt. Sobald in der Departments Inventory ein Asset einer Abteilung zugewiesen wird, löst ein Skript die entsprechende Zuweisung aus:
 
 1. Eine Logic App synchronisiert Änderungen aus beiden MS Lists in einen Blob-Container des Azure Storage Accounts.  
 2. Ein Runbook (z. B. täglich) prüft, ob sich Zuweisungen geändert haben, und erstellt bei Bedarf eine neue Filter-Query für die jeweilige Asset-Gruppe.  
 3. Benutzer werden automatisch der dynamischen Azure AD Security Group zugewiesen, die das Asset repräsentiert (z. B. Zugriff auf eine Site, eine App oder eine Lizenz).
 
-### Storage Account Container „manualdb“
+### Storage Account Container "manualdb"
 
 Für den Zwischenschritt im Self-Service- und Automatisierungs-Workflow wurde im bestehenden ADLS Gen2 Storage Account ein zusätzlicher Container **`manualdb`** angelegt mit drei Verzeichnissen:
 
@@ -1127,11 +1127,11 @@ Eine einzelne Logic App sorgt für die Datensynchronisation, um die Komplexität
    - **DepartmentsRAW-Flow:** Exportiert die Departments Inventory als JSON in `manualdb/DepartmentsRAW`.  
 3. **Nachgelagerter Automation Job:** Startet das Runbook **LogicAppHelper-SimplifyDepartmentsData**, das die RAW-Daten bereinigt und das Ergebnis in `manualdb/Departments` ablegt.
 
-TODO - *Abb. X: Struktur des Containers „manualdb“ und Ablauf der Logic App*  
+TODO - *Abb. X: Struktur des Containers "manualdb" und Ablauf der Logic App*  
 
 **Runbook "LogicAppHelper-SimplifyDepartmentsData"**
 
-Dieses PowerShell-Skript liest die rohe Departments-JSON aus einem Azure Storage-Container ein, bereinigt und transformiert die Daten (z. B. Zusammenführen von Asset-Arrays, Standardisierung des „ApprovedbyIT“-Werts, Trennung von Security-Gruppen), erzeugt daraus eine flache PSCustomObject-Struktur und schreibt das aufbereitete JSON mit Zeitstempel zurück in das Storage-Konto. Dabei sorgen einfache Parameter für die Konfiguration von Storage-Account, Container und Pfaden.
+Dieses PowerShell-Skript liest die rohe Departments-JSON aus einem Azure Storage-Container ein, bereinigt und transformiert die Daten (z. B. Zusammenführen von Asset-Arrays, Standardisierung des "ApprovedbyIT"-Werts, Trennung von Security-Gruppen), erzeugt daraus eine flache PSCustomObject-Struktur und schreibt das aufbereitete JSON mit Zeitstempel zurück in das Storage-Konto. Dabei sorgen einfache Parameter für die Konfiguration von Storage-Account, Container und Pfaden.
 
 ```PowerShell
 Param(
@@ -1279,7 +1279,7 @@ Hier eine grobe Übersicht des Ablaufs:
 
 **Runbook "Update-AssetAssignments"**
 
-Dieses PowerShell-Runbook lädt die bereinigten Department- und Asset-Katalog-JSONs aus Azure Storage, ermittelt anhand der freigegebenen DepartmentCodes, welche Sicherheitsgruppen („Assets“) für welche Abteilungen dynamische Membership-Regeln benötigen, und aktualisiert über Microsoft Graph (Get-MgGroup/Update-MgGroup) die membershipRule jeder Dynamic-Group entsprechend. Mit TestMode lassen sich die Regel-Änderungen zunächst per -WhatIf prüfen, bevor sie produktiv angewendet werden.
+Dieses PowerShell-Runbook lädt die bereinigten Department- und Asset-Katalog-JSONs aus Azure Storage, ermittelt anhand der freigegebenen DepartmentCodes, welche Sicherheitsgruppen ("Assets") für welche Abteilungen dynamische Membership-Regeln benötigen, und aktualisiert über Microsoft Graph (Get-MgGroup/Update-MgGroup) die membershipRule jeder Dynamic-Group entsprechend. Mit TestMode lassen sich die Regel-Änderungen zunächst per -WhatIf prüfen, bevor sie produktiv angewendet werden.
 
 ```PowerShell
 Param(
@@ -1504,14 +1504,14 @@ foreach ($asset in $AssetList) {
 Für Endanwender steht ein schlankes Self-Service-Interface in Microsoft Teams zur Verfügung. Über zukünftige MS Forms können berechtigte Personen und System Engineers können die Abteilungen verwalten:
 
 1. **Neue Abteilungen anlegen**  
-   - Direkte Pflege in der MS List „Departments Inventory“  
-   - Auswahl benötigter Digital Assets über Dropdown aus dem „Digital Assets Catalog“  
+   - Direkte Pflege in der MS List "Departments Inventory"  
+   - Auswahl benötigter Digital Assets über Dropdown aus dem "Digital Assets Catalog"  
    - Automatische Auslöse-Logik: Ein PowerShell-Runbook übernimmt nach Freigabe durch den System Engineer die Provisionierung (Mailverteiler, Asset-Gruppen)
 
 2. **Individuelle Mailverteiler anfragen (noch nicht erstellt)**  
    - Formular-basierter Intake (MS Forms), eingebettet in SharePoint/Teams  
    - Automatisierter Genehmigungs-Workflow 
-   - Nach Freigabe Anlage durch das „Generate-DistributionLists“-Runbook
+   - Nach Freigabe Anlage durch das "Generate-DistributionLists"-Runbook
 
 3. **Übersicht und Statusabfrage**  
    - Echtzeit-Ansicht aller existierenden Mailverteiler und Asset-Gruppen  

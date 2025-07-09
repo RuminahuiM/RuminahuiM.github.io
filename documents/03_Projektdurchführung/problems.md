@@ -23,13 +23,13 @@ Im Verlauf des Projekts sind verschiedene technische und organisatorische Frages
 
 **Herausforderung:** Bestimmte AD-Attribute (z. B. Name, UPN, E-Mail) dürfen aufgrund interner Vorgaben und potenzieller Nebeneffekte nicht automatisiert geändert werden.
 
-**Lösung:** Implementierung einer Ausnahme-Liste, die sensible Attribute von der automatischen Aktualisierung ausschließt. Künftige Änderungen an UPN oder E-Mail sollen über einen Alarm- und Genehmigungsprozess gesteuert werden.
+**Lösung:** Implementierung einer Ausnahme-Liste, die sensible Attribute von der automatischen Aktualisierung ausschliesst. Künftige Änderungen an UPN oder E-Mail sollen über einen Alarm- und Genehmigungsprozess gesteuert werden.
 
 ## Testverfahren und Rollback-Probleme
 
 **Herausforderung:** Das geplante Rollback-Skript hat zunächst nicht wie erwartet funktioniert. Fehlende Tests in der Produktivumgebung erschwerten die Validierung.
 
-**Lösung:** Vorab-Tests mit dem `-WhatIf`-Parameter zur Simulation der Änderungen, anschließend Tests an einem einzelnen Benutzer. Das Rollback-Skript wird vor dem Produktivstart überarbeitet und vollumfänglich getestet.
+**Lösung:** Vorab-Tests mit dem `-WhatIf`-Parameter zur Simulation der Änderungen, anschliessend Tests an einem einzelnen Benutzer. Das Rollback-Skript wird vor dem Produktivstart überarbeitet und vollumfänglich getestet.
 
 ## Runbook-Debugging und Fehlermeldungen
 

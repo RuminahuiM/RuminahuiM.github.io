@@ -11,7 +11,7 @@ nav_order: 3
 # Risikomanagement
 # Risikomanagement
 
-Ein effektives Risikomanagement identifiziert und bewertet potenzielle Gefahren für das Projekt und definiert gezielte Gegenmaßnahmen. Basierend auf dem Architektur- und Konzeptentwurf lassen sich folgende Risiken sowie Maßnahmen ableiten.
+Ein effektives Risikomanagement identifiziert und bewertet potenzielle Gefahren für das Projekt und definiert gezielte Gegenmassnahmen. Basierend auf dem Architektur- und Konzeptentwurf lassen sich folgende Risiken sowie Massnahmen ableiten.
 
 ## 1. Identifikation und Bewertung wesentlicher Projektrisiken
 
@@ -26,9 +26,9 @@ Ein effektives Risikomanagement identifiziert und bewertet potenzielle Gefahren 
 | **Single Point of Failure (Person)**          | Projektdurchführung und Wissen liegen bei einer Person → Risiko bei Ausfall oder Überlastung                          | Hoch                   | Hoch           |
 | **Akzeptanz und Usability**                   | Fachabteilungen nutzen Self-Service-Elemente nicht wie vorgesehen → hoher manueller Aufwand für IT                    | Mittel                 | Mittel         |
 
-## 2. Gegenmaßnahmen und Monitoring
+## 2. Gegenmassnahmen und Monitoring
 
-| **Risiko**                             | **Gegenmaßnahme**                                                                                              |
+| **Risiko**                             | **Gegenmassnahme**                                                                                              |
 |----------------------------------------|---------------------------------------------------------------------------------------------------------------|
 | HR-Synchronisationsfehler              | Einrichtung einer Testumgebung. Rollback möglichkeit für Änderungen        |
 | Fehlerhafte Dynamic Group Queries      | Fallback Gruppe für Queries Implementieren             |
@@ -37,8 +37,8 @@ Ein effektives Risikomanagement identifiziert und bewertet potenzielle Gefahren 
 | Komplexität der Workflow-Prozesse      | Dokumentation der Workflow-Schritte in SharePoint-Listen       |
 | Integrationsänderungen in Systeme      | Versioniertes Deployment von Runbooks und Templates         |
 | Single Point of Failure (Person)       | Fortlaufende Pflege einer zentralen Projektdokumentation. Durchführung von Knowledge-Transfer-Sessions    |
-| Akzeptanz und Usability                | Onboarding-Schulungen und Benutzerworkshops. Einrichtung eines Feedback-Kanals und regelmäßiges Review   |
+| Akzeptanz und Usability                | Onboarding-Schulungen und Benutzerworkshops. Einrichtung eines Feedback-Kanals und regelmässiges Review   |
 
 ## 3. Zusammenfassung
 
-Dieses Risikomanagement stellt sicher, dass technische, organisatorische und finanzielle Risiken frühzeitig adressiert werden. Durch regelmäßiges Monitoring, automatisierte Tests sowie klare Dokumentations- und Schulungsmaßnahmen wird das Projekt resilienter gegenüber Veränderungen und Ausfällen.
+Dieses Risikomanagement stellt sicher, dass technische, organisatorische und finanzielle Risiken frühzeitig adressiert werden. Durch regelmässiges Monitoring, automatisierte Tests sowie klare Dokumentations- und Schulungsmassnahmen wird das Projekt resilienter gegenüber Veränderungen und Ausfällen.
