@@ -9,7 +9,6 @@ nav_order: 3
 
 ---- 
 # Risikomanagement
-# Risikomanagement
 
 Ein effektives Risikomanagement identifiziert und bewertet potenzielle Gefahren für das Projekt und definiert gezielte Gegenmassnahmen. Basierend auf dem Architektur- und Konzeptentwurf lassen sich folgende Risiken sowie Massnahmen ableiten.
 

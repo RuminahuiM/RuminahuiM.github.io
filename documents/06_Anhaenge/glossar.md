@@ -1,7 +1,7 @@
 ---
 layout: default
-title: Anhänge
-parent: 3. Projektdurchführung
+title: Glossar
+parent: Anhänge
 nav_order: 1
 ---
 
