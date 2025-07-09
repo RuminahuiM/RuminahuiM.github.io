@@ -1127,7 +1127,8 @@ Eine einzelne Logic App sorgt für die Datensynchronisation, um die Komplexität
    - **DepartmentsRAW-Flow:** Exportiert die Departments Inventory als JSON in `manualdb/DepartmentsRAW`.  
 3. **Nachgelagerter Automation Job:** Startet das Runbook **LogicAppHelper-SimplifyDepartmentsData**, das die RAW-Daten bereinigt und das Ergebnis in `manualdb/Departments` ablegt.
 
-TODO - *Abb. X: Struktur des Containers "manualdb" und Ablauf der Logic App*  
+![Logic App DataSync Flow ](../../resources/images/LogicApp.png)
+![Struktur des Containers "manualdb" ](../../resources/images/AZS-ManualDB.png)
 
 **Runbook "LogicAppHelper-SimplifyDepartmentsData"**
 

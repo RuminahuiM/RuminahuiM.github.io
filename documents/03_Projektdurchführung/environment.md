@@ -20,16 +20,16 @@ In Zusammenarbeit mit dem Power BI-Spezialisten wurde ein Dataflow angelegt, der
 - Tabelle "Mitarbeiter": Enthält Benutzerattribute wie Abteilungs- und Sprachcodes.
 - Tabelle "Abteilungen": Liste aller gültigen Abteilungscodes mit Bezeichnung.
 
+![PowerBI Dataflow](../../resources/images/PBI-Dataflows.png)
+
 **Data Lake Gen2 Anbindung**
 Ein neues Power BI-Workspace ist mit einem ADLS Gen2 Storage Account verknüpft. Power BI legt automatisiert tägliche Snapshots der Dataflows als CSV-Dateien mit Zeitstempel im Storage ab.
 
+![PowerBI DataLake Gen2 Connection](../../resources/images/PBI-DataLake.png)
+![Daten in AZ Storage account](../../resources/images/PBI-AzStorageData.png)
+
 **Zugriff über Managed Identity**
 Der Azure Automation Account verwendet eine System Managed Identity, die Leseberechtigung auf den entsprechenden Storage-Container erhält. Somit werden die CSV-Dateien direkt per PowerShell eingelesen und verarbeitet.
-
-TODO - Bild von powerBI Dataflow  
-TODO - Bild von PowerBI DataLake Gen2 connection
-TODO - Bild von Daten in AZ Storage account
-Abb. 4.1: Power BI Dataflow und Gen2-Verbindung
 
 ----
 
@@ -43,7 +43,7 @@ Für die Entwicklungs- und Testphase wurde ein Azure Automation Account mit dem 
 **Zweck:** Zentrale Entwicklungs- und Testumgebung für alle Automatisierungsskripte
 **Zukünftige Prod-Umgebung:** Nach der Pilotphase wird ein separater, produktiver Automation Account eingerichtet, in dem restriktivere Zugriffsrechte und Alerts definiert werden.
 
-TODO - Bild der Az account overview
+![Az Account Overview](../../resources/images/AutomationAcc.png)
 
 ### Managed identity
 Der Automation Account verfügt über eine System Managed Identity, die folgenden Zugriffsrechten zugewiesen wurde:
@@ -52,7 +52,8 @@ Der Automation Account verfügt über eine System Managed Identity, die folgende
 - **Entra Groups Administrator** für Gruppen- und Benutzerabfragen
 - **Exchange-Berechtigungen** zur Verwaltung von Distribution Groups
 
-TODO - Bild der Managed Identity
+![Az Account Managed Identity](../../resources/images/AAc-ManagedIdentity.png)
+![Az Account Managed Identity Permissions](../../resources/images/AAc-ManagedIdentityPermissions.png)
 
 ### Key Vault
 Für Credentials, die nicht über Managed Identity abgedeckt werden können, wird der Credential Vault des Automation Accounts genutzt:
@@ -60,19 +61,12 @@ Für Credentials, die nicht über Managed Identity abgedeckt werden können, wir
 - **Service User AD:** Kennwort für lokale AD-Änderungen (Least-Privilege-Account zum Schreiben der ExtensionAttributes)
 - **Service User SharePoint:** Anmeldedaten für SharePoint-API-Zugriffe in einer unterstützenden Logic App
 
-TODO - Bild einfügen
-
+![Az Account Key Vault](../../resources/images/AAc-KeyVault.png)
 ----
 
 ## Hybrid Runbook Worker 
 
 Ein Hybrid Runbook Worker wurde auf dem lokalen AD-Connect-Server installiert, um PowerShell-Skripte unmittelbar in der On-Premise-Umgebung auszuführen. Dies ermöglicht lokale AD-Änderungen (z. B. Anpassung von User-Attributen) und reduziert Ausführungszeiten und Azure-Kosten, da die Hauptlast on-premises verarbeitet wird.
-
-----
-
-## Powershell Modules
-Für die Runbooks wurden folgende Module importiert:
-TODO - modulliste erstellen
 
 ----
 
@@ -111,7 +105,8 @@ In der Liste **"Digital Assets Catalog"** werden alle Digital Assets erfasst, di
 
 Die beiden MS Lists wurden in einem Teams-Kanal als Registerkarten eingebunden, um direkte Bearbeitung und Monitoring durch das System Engineering-Team zu ermöglichen:
 
-TODO - bild der beiden listen einfügen
+![Digital Assets Catalog](../../resources/images/MSList-Assets.png)
+![Departments Inventory](../../resources/images/MSList-Departments.png)
 
 ----
 

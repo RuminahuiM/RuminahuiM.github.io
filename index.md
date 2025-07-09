@@ -11,13 +11,8 @@ permalink: /
 Titel des Projekts: Azure Dynamic Groups - Access Governance Concept 
 Name der Studierenden: Dodoe Ruminahui Mannale
 Klasse / Studiengang: ITCNE25 - Cloud Native HF
-Semester / Datum: 01 Semester - 09.07.2025 TODO
+Semester / Datum: 01 Semester - 09.07.2025
 Betreuende Lehrperson: Samuel Müller (Azure), Caeser Roth (Projektmanagement)
-
-----
-
-**Inhaltsverzeichnis**
- TODO
 
 ----
 
@@ -82,7 +77,7 @@ Die Pilotphase beginnt am 26.06.2025 und umfasst zuerst die Abteilung "Services"
 
 
 **Automatisiertes Digital Asset Management**
-Die zweite Pilotphase richtet sich auf die Abteilung ICT und testet die Zuweisung ausgewählter Digital Assets aus unterschiedlichen Kategorien. TODO - link (Details in Kapitel 05 – Pilotierung Digital Assets.)
+Die zweite Pilotphase richtet sich auf die Abteilung ICT und testet die Zuweisung ausgewählter Digital Assets aus unterschiedlichen Kategorien.
 
 ----
 

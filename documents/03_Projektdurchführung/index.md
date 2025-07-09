@@ -32,10 +32,10 @@ Zu Beginn des Projekts stand eine vertiefte Recherche im Fokus, um sämtliche te
 
 ### Weitere offene Fragen, die im weiteren Projektverlauf geklärt wurden:
 
-Vollständigkeit der Abteilungsliste in Business Central (siehe Kapitel TODO- einfügen)
+Vollständigkeit der Abteilungsliste in Business Central
 
 Vorhandene manuelle AD- und Exchange-Gruppen ohne konsistentes Namensschema
 
 Detaillierte Klassifikation der benötigten Berechtigungsarten (vgl. Digital Assets Definition)
 
-Einrichtung und Prüfung der Azure Dynamic Membership-Quotas (TODO)
+Einrichtung und Prüfung der Azure Dynamic Membership-Quotas

@@ -16,8 +16,8 @@ nav_order: 1
 
 2. **Azure AD Dynamic Groups**  
     - Queries auf extensionAttribute erzeugen:  
-    - Mail-enabled Distribution Groups (<DeptCode>_DL)  
-    - Security Groups (<DeptCode>_SG)  
+    - Dynamic Mail Distribution Groups (“dl_parentdepartment_subdepartment_subdepartment” etc. )  
+    - Security Groups (EID_D_Department_DEPARTMENTCODE)  
 
 3. **Asset-Zuweisung**  
     - Über Azure AD-Connector, Intune-Connector, Graph API oder ARM-Templates zugeordnet.  
@@ -37,7 +37,7 @@ nav_order: 1
 | **Abteilungs-Inventar** | Zentrale SharePoint/MS Lists-Liste aller Departments & Sub-Departments mit Codes, Beschreibungen, Ownern, Parent-Child-Beziehungen. | Abteilungs-Inventar |
 | **Dynamic Group Provisioning** | Automatisierte Erstellung & Pflege von Distribution- und Security-Groups pro DeptCode. | Dynamic Group Provisioning |
 | **Digital Assets Katalog** | Definition aller Asset-Typen (Lizenzen, Rollen, Policies, Apps). | Digital Assets Katalog |
-| **Naming Policy** | Azure AD Naming Policy: `<DeptCode>_<Type>` | Naming Policy |
+| **Naming Policy** | Azure AD Naming Policy: `EID_D_Department_DEPARTMENTCODE` | Naming Policy |
 | **Fallback-Gruppe** | "General" für ungültige Codes, löst Review-Workflow aus. | Fallback-Gruppe |
 
 ----
@@ -121,7 +121,7 @@ Code gelöscht → Auto-Removal aus Gruppen → Lizenz-Revoke & Mailbox-Disable
     - Abteilungs-Katalog mit  Abteilung, Beschreibung, zugewiesenen Assets
     - Digital Assets-Katalog mit Asset, zugehörigen Gruppen, Beschreibung
 
-2. **Asset-Inventory Dashboard** - TODO -> muss aus dem Scope genommen werden. Zeitlich nicht umsetzbar  
+2. **Asset-Inventory Dashboard**
     - Power BI-Bericht: Gruppen, Mitglieder, Asset-Counts, Stale-Group Warnings  
 
 ----

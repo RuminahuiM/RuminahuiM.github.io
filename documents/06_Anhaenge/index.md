@@ -9,10 +9,19 @@ has_children: true
 
 # Anhänge
 
+## Glossar
+[Glossar](./glossar.md)
+
 ## Quellen
+
 - chatgpt.com
 - learn.microsoft.com
 
-## runbooks -> Github link + beschreibung
+## Runbooks
 
-TODO - jedes runbooks als datei hinzufügen
+[Generate-DepartmentGroups](../../resources/documents/Generate-DepartmentGroups.ps1)
+[Get-PBIUserData](../../resources/documents/Get-PBIUserData.ps1)
+[LogicAppHelper-SimplifyDepartmentsData](../../resources/documents/LogicAppHelper-SimplifyDepartmentsData.ps1)
+[Start-RollbackFromBackupCSV](../../resources/documents/Start-RollbackFromBackupCSV.ps1)
+[Update-AssetAssignments](../../resources/documents/Update-AssetAssignments.ps1)
+[Update-UserdataLocalAD](../../resources/documents/Update-UserdataLocalAD.ps1)
