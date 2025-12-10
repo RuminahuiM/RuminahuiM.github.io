@@ -166,19 +166,20 @@ Struktur Retrospective:
 
 ## Zeitplan
 
-Sprint 0 - Initial Planung und Setup
-Datum: 17. Nov - 30. Nov
+**Sprint 0 - Initial Planung und Setup** <br>
+**Datum:** 17. Nov - 30. Nov
 
-Sprint 1 - HUGO + CI MVP
-Datum: 10. Dez - 24. Dez
+**Sprint 1 - HUGO + CI MVP** <br>
+**Datum:** 10. Dez - 24. Dez
 
-Ferien - 24.12.2025 - 04.01.2026
+**Ferien** <br>
+**Datum:** 24.12.2025 - 04.01.2026
 
-Sprint 2 - 
-Datum: 04. Jan - 18. Jan
+**Sprint 2 -** <br>
+**Datum:** 04. Jan - 18. Jan
 
-Sprint 3 - Abschluss
-Datum: 18. Jan - 28. Jan
+**Sprint 3 - Abschluss** <br>
+**Datum:** 18. Jan - 28. Jan
 
 ---
 
