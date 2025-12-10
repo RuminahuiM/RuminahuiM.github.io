@@ -1,3 +1,5 @@
 {
-    "azureAutomation.directory.basePath": "c:\\Users\\dodoe.mannale"
+    "azureAutomation.directory.basePath": "c:\\Users\\dodoe.mannale",
+    "editor.wordWrap": "on",
+    "editor.wordWrapColumn": 60
 }

@@ -172,17 +172,60 @@ Datum: 18. Jan - 28. Jan
 
 # Scrum Sprints
 
-## Sprint 0 
+## Sprint 0 - Setup
+Im ersten Sprint, bzw. im Sprint 0, ging es darum den Porjektplan zu erstellen und die Entwicklungsumgebung einzurichten.
+Da es in meinen Augen eher Vorbereitung für ein funktionierendes Scrum Projekt ist und noch kein richtiger Sprint, werde ich in diesem Sprint keine vollständige Sprint Review machen.
+Jedenfalls keine mit Videoaufnahme und auch grundsätzlich eine gekürztere Version.
 
 ### Sprint Planing
+Am Anfang dieses Sprints, gab es noch kein Product Backlog, weshalb ich Theoretisch innerhalb des Sprints die entsprechenden Backlog Items in den Sprint eingefügt habe.
+
+Folgende Backlog items habe ich für den Sprint 0 eingeplant:
+1. Initialen Projektplan in JIRA erstellen [SCRUM-119](https://rumidesigns.atlassian.net/browse/SCRUM-119)
+2. PRJ Doku erstellen (github pages initial) [SCRUM-120](https://rumidesigns.atlassian.net/browse/SCRUM-120)
+3. Als Projektleiter möchte ich ein zentrales GitHub‑Repo mit Branchenschutz, damit ich sauber arbeiten kann [SCRUM-12](https://rumidesigns.atlassian.net/browse/SCRUM-12)
+4. Als TBZ Schüler benötige ich eine Projektdokumentation gemäss den Vorgaben der TBZ [SCRUM-15](https://rumidesigns.atlassian.net/browse/SCRUM-15)
+5. Als Entwickler möchte ich meine lokale Umgebung bereit haben, damit Builds/CLI funktionieren [SCRUM-17](https://rumidesigns.atlassian.net/browse/SCRUM-17)
+
+![Planned Sprint 0](..\..\resources\images\Sprint_0_Plan.png)
 
 ### Sprint Review
+
+Da ich wie erwähnt, für den Sprint 0 keine vollständige Sprint Review machen werde, wird es in diesem Sprint Review keine Demos geben. Ich werde allerdings kurz die Backlog Items sowie dessen Status hier schriftlich durchgehen und aufgetretene Probleme erläutern.
+
+| Eingeplante Backlog Items | Demo | Status |
+|----------|----------|----------|
+| [SCRUM-119](https://rumidesigns.atlassian.net/browse/SCRUM-119) | NO DEMO | Erledigt. JIRA umgebung ist ersstellt und User stories eingeplant |
+| [SCRUM-120](https://rumidesigns.atlassian.net/browse/SCRUM-120) | NO DEMO | Erledigt. Github Pages Projektdoku erstellt und Struktur erstellt |
+| [SCRUM-12](https://rumidesigns.atlassian.net/browse/SCRUM-12) | NO DEMO | Erledigt. Github Repository für das zu erstellende Produkt ist erstellt |
+| [SCRUM-15](https://rumidesigns.atlassian.net/browse/SCRUM-15) | NO DEMO | In Arbeit. Ich habe die Initiale Dokumentationsstruktur vorbereitet und angefangen die Dokumentation auszufüllen. Allerdings kann diese Story erst als abgeschlossen gelten, wenn die Doku fertig ist. |
+| [SCRUM-17](https://rumidesigns.atlassian.net/browse/SCRUM-17) | NO DEMO | In Arbeit. Ich habe angefangen meine Dev-Umgebung einzurichten, allerdings sind noch viele Subtasks offen geblieben |
+
+#### Herausforderungen & Lösungen
+1. **Zeitplanung:** In dieser Zeitspanne kamen in meinem Privatleben viele Dinge zusammen, was mir wenig Zeit für das Projekt lies. Ich hatte leider die Zeitplanung auch noch nicht gemacht, was das ganze erschwerte und wodurch ich in diesem Sprint nicht so richtig vorran kam.
+Um das in zuukunft zu verhindern, habe ich die Grobe Zeitplanung der Sprints abgeschlossen und mir entsprechend Zeit für die nächsten zwei Wochen eingeplant. Ich möchte nun jede Woche kurz einplanen, wann ich mir Zeit für das Projekt nehme.
+
+2. **Verpasste besprechung:** Leider habe ich die erste Porjektbesprechung mit Parisi Corrado verpasst. Diese hätte mir wahrscheinlich sehr geholfen, da es mir etwas schwer fällt die Vorbereitungen für ein Scrum Porjekt richtig zu machen und ich da eine zweite Meinung gebrauchen könnte.
+Ich habe vor diese Besprechung noch vor Ende Dezember nachzuholen, warte allerdings noch auf eine Rückmeldung ob das möglich ist.
+
+3. **Ungewisse Komplexität:** Da ich viele verschiedene Tools für dieses Projekt einsetze und ich die meisten davon noch nicht richtig kenne, fällt mir die Planung der Tasks etwas schwer. Vorallem wenn es um sowas wie CloudFront geht, das ich erst durch die Recherche für dieses Projekt entdeckt habe und noch nicht so richtig anschauen konnte.
+Hierbei hat mir die Planung zusammen mit ChatGPT sehr geholfen, da es bereits 'weiss' welche Tasks z.B. zur Einrichtung von CloudFront gehören. Ich habe nun die Tasks so übernommen, werde aber erst wenn es soweit ist, feststellen können, ob ChatGPT mir das korrekt angegeben hat. Ich muss also damit rechnen, evtl. mehr Zeit investieren zu müssen als erwartet bei solchen Tasks.
+
+#### Next Sprint
+
+**Ziel:**
+Ziel für den nächsten Sprint, ist es ein MVP zu erstellen. Dabei werde ich mich darauf fokusieren, das HUGO Template vorzubereiten und Github Actions einzurichten.
+Für dieses Projekt ist das Wichtigste nämlich, am Schluss ein öffentliches Portfolio zu haben, welches sich nach jedem Commit aktualisiert. Die zusätzlichen Features sind weniger Relevant.
+
+**Tasks die übernommen werden:**
+- [SCRUM-15](https://rumidesigns.atlassian.net/browse/SCRUM-15) wird erstmal übernommen. Ich kläre noch ob es nötig ist, das in jeden Sprint mitzunehmen, oder ob es mehr Sinn macht, dies ander hanzuhaben.
+- [SCRUM-17](https://rumidesigns.atlassian.net/browse/SCRUM-17) wird übernommen und hat nun die höchste Priorität.
 
 ### Sprint Retrospective
 
 ---
 
-## Sprint 1 
+## Sprint 1 - MVP
 
 ### Sprint Planing
 
