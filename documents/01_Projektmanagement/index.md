@@ -39,6 +39,9 @@ Auch liegt eine vollständige Betriebsdoku für die Verwendung des Produkts vor.
 
 ## Architektur
 
+TODO - Skizze erstellen und einfügen
+
+---
 
 ## SWOT Analyse
 
@@ -103,6 +106,8 @@ Auch liegt eine vollständige Betriebsdoku für die Verwendung des Produkts vor.
 
 ## Übersicht Projektvorgehen
 
+ TODO - Projektvorgehen detailiert beschreiben
+
 ---
 
 # Projekmanagement
@@ -116,7 +121,7 @@ Sprint‑Länge: 2 Wochen.
 
 Zeremonien (pro Sprint):
 - Planung (45 min)
-- Daily (10 min, alleine reicht kurzer Check)
+- Daily (kurzer check und nur an Tagen, an denen am Projekt weitergearbeitet wird)
 - Review & Retro (30 min)
 
 Story‑Points‑Skala: 1, 2, 3, 5, 8, 13
@@ -132,6 +137,22 @@ umgesetzt, gebaut/getestet, PR gemergt (falls nötig), live geprüft, kurze Doku
 
 Sontige Notes für Doku:Als MVP gilt basically HUGO site auf AWS, die auf git push aktualisiert wird.
 Ansible zum ausrollen/aufbauen der infrastruktur hinzuzufügen, ist zusatz
+
+Struktur Sprint Review:
+- welcome & rules
+- what will and will not be demonstrated?
+- list all items from the sprint. will it be demoed? Status?
+- Do the demos (solicit feedback while going down the list)
+- Discuss problems and  opotunities
+- share product backlog
+- next sprint -> wich items will we take over to it?
+- conclude, thanks and praise
+
+Struktur Retrospective:
+- what went well?
+- what went wrong?
+- How can this be improved?
+- What problems did i encounter and how were the resolved?
 
 ---
 
@@ -185,11 +206,11 @@ Jedenfalls keine mit Videoaufnahme und auch grundsätzlich eine gekürztere Vers
 Am Anfang dieses Sprints, gab es noch kein Product Backlog, weshalb ich Theoretisch innerhalb des Sprints die entsprechenden Backlog Items in den Sprint eingefügt habe.
 
 Folgende Backlog items habe ich für den Sprint 0 eingeplant:
-1. Initialen Projektplan in JIRA erstellen [SCRUM-119](https://rumidesigns.atlassian.net/browse/SCRUM-119)
-2. PRJ Doku erstellen (github pages initial) [SCRUM-120](https://rumidesigns.atlassian.net/browse/SCRUM-120)
-3. Als Projektleiter möchte ich ein zentrales GitHub‑Repo mit Branchenschutz, damit ich sauber arbeiten kann [SCRUM-12](https://rumidesigns.atlassian.net/browse/SCRUM-12)
-4. Als TBZ Schüler benötige ich eine Projektdokumentation gemäss den Vorgaben der TBZ [SCRUM-15](https://rumidesigns.atlassian.net/browse/SCRUM-15)
-5. Als Entwickler möchte ich meine lokale Umgebung bereit haben, damit Builds/CLI funktionieren [SCRUM-17](https://rumidesigns.atlassian.net/browse/SCRUM-17)
+- Initialen Projektplan in JIRA erstellen [SCRUM-119](https://rumidesigns.atlassian.net/browse/SCRUM-119)
+- PRJ Doku erstellen (github pages initial) [SCRUM-120](https://rumidesigns.atlassian.net/browse/SCRUM-120)
+- Als Projektleiter möchte ich ein zentrales GitHub‑Repo mit Branchenschutz, damit ich sauber arbeiten kann [SCRUM-12](https://rumidesigns.atlassian.net/browse/SCRUM-12)
+- Als TBZ Schüler benötige ich eine Projektdokumentation gemäss den Vorgaben der TBZ [SCRUM-15](https://rumidesigns.atlassian.net/browse/SCRUM-15)
+- Als Entwickler möchte ich meine lokale Umgebung bereit haben, damit Builds/CLI funktionieren [SCRUM-17](https://rumidesigns.atlassian.net/browse/SCRUM-17)
 
 ![Planned Sprint 0](..\..\resources\images\Sprint_0_Plan.png)
 
@@ -225,6 +246,9 @@ Für dieses Projekt ist das Wichtigste nämlich, am Schluss ein öffentliches Po
 - [SCRUM-15](https://rumidesigns.atlassian.net/browse/SCRUM-15) wird erstmal übernommen. Ich kläre noch ob es nötig ist, das in jeden Sprint mitzunehmen, oder ob es mehr Sinn macht, dies ander hanzuhaben.
 - [SCRUM-17](https://rumidesigns.atlassian.net/browse/SCRUM-17) wird übernommen und hat nun die höchste Priorität.
 
+**Neue Inputs:**
+- Was auch wichtig sein wird, ist im nächsten Sprint die Architektur des Pordukts zu skizzieren und die Skizze in der Dokumentation nachzutragen. Das ist bereits ein SubTask von [SCRUM-15](https://rumidesigns.atlassian.net/browse/SCRUM-15), aber ich möchte einfach nochmals besonderen Fokus darauf setzen. Ich habe die Priorisierung des Tasks entsprechend erhöht.
+
 ### Sprint Retrospective
 
 **Was war gut?**
@@ -241,8 +265,20 @@ Von nun an Plane ich jede Woche, sowie am beginn jedes Sprints, meine Zeit ein, 
 ---
 
 ## Sprint 1 - MVP
+In diesem Sprint werde ich ein MVP erstellen, welches eine HUGO-Website & Github Actions beinhaltet, wodurch die Seite auf Commit aktualisiert werden soll. Den Einsatz von Ansible und AWS lasse ich noch aussen vor. Falls allerdings Hugo und Github Actions weniger Zeit beanspruchen als erwartet, werde ich das MVP mit ansible und AWS erweitern.
+
+Ansible und AWS sollen verwendet werden, um das Projekt öffentlich verfügbar und reproduzierbar zu machen. Beides ist weniger relevant, da das Hauptziel des ganzen Projekts, ist ein Portfolio zu haben, welches sich bei Commits automatisch aktualisiert.
 
 ### Sprint Planing
+Folgende Backlog items habe ich für den Sprint 1 eingeplant:
+
+- Als Entwickler möchte ich meine lokale Umgebung bereit haben, damit Builds/CLI funktionieren. [SCRUM-17](https://rumidesigns.atlassian.net/browse/SCRUM-17)
+- MVP Workflow um die HUGO Site lokal zu bauen definieren [SCRUM-132](https://rumidesigns.atlassian.net/browse/SCRUM-132)
+- Als Besucher möchte ich eine startfähige Hugo‑Seite sehen, damit ich einen ersten Eindruck bekomme [SCRUM-18](https://rumidesigns.atlassian.net/browse/SCRUM-18)
+- Als Besucher möchte ich Navigation und 2–3 Projektseiten, damit Inhalte auffindbar sind. [SCRUM-19](https://rumidesigns.atlassian.net/browse/SCRUM-19)
+- Als TBZ Schüler benötige ich eine Projektdokumentation gemäss den Vorgaben der TBZ [SCRUM-15](https://rumidesigns.atlassian.net/browse/SCRUM-15)
+
+![Planned Sprint 1](..\..\resources\images\Sprint_1_Plan.png)
 
 ### Sprint Review
 
@@ -253,6 +289,11 @@ Von nun an Plane ich jede Woche, sowie am beginn jedes Sprints, meine Zeit ein, 
 ## Sprint 2 
 
 ### Sprint Planing
+Folgende Backlog items habe ich für den Sprint 2 eingeplant:
+-  [SCRUM-]()
+-  [SCRUM-]()
+
+![Planned Sprint 2](..\..\resources\images\Sprint_2_Plan.png)
 
 ### Sprint Review
 
@@ -263,6 +304,11 @@ Von nun an Plane ich jede Woche, sowie am beginn jedes Sprints, meine Zeit ein, 
 ## Sprint 3 
 
 ### Sprint Planing
+Folgende Backlog items habe ich für den Sprint 3 eingeplant:
+-  [SCRUM-]()
+-  [SCRUM-]()
+
+![Planned Sprint 2](..\..\resources\images\Sprint_3_Plan.png)
 
 ### Sprint Review
 
