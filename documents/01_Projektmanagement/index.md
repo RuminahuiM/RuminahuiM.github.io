@@ -167,6 +167,10 @@ Datum: 18. Jan - 28. Jan
 
 - Leider verpasst da falsch terminiert - TODO ausführen
 
+### Zwischengespräch 02
+
+### Zwischengespräch 03
+
 
 ---
 
@@ -222,6 +226,17 @@ Für dieses Projekt ist das Wichtigste nämlich, am Schluss ein öffentliches Po
 - [SCRUM-17](https://rumidesigns.atlassian.net/browse/SCRUM-17) wird übernommen und hat nun die höchste Priorität.
 
 ### Sprint Retrospective
+
+**Was war gut?**
+Die Initiale Planung des Projekts ist abgeschlossen. Die Dokumentation ist live verfügbar und die Struktur der Dokumentation ist vorgegeben.
+Dadurch ist das wichtigste vorbereitet um das Projekt sauber durchzuführen, auch wenn noch einige Details fehlen.
+
+**Was war nicht gut?**
+Die Zeitplanung war in diesem Sprint nicht gut. Ich habe mir nicht richtig eingeplant, wann ich an dem Projekt arbeite und so wurde das Projekt stark verzögert.
+Ausserdem habe ich die Zwischenbesprechung auf ein falsches Datum eingeplant und diese dadurch verpasst. Wenn man den PRJ-Leiter als Stakeholder für dieses Projekt ansieht, habe ich somit ein sehr wichtiges Meeting verpasst. Das wäre in einem echten Projekt nicht aktzeptabel und darf deshalb nicht nochmals vorkommen.
+
+**Welche Massnahmen können ergriffen werden?**
+Von nun an Plane ich jede Woche, sowie am beginn jedes Sprints, meine Zeit ein, welche ich für das Projekt verwenden möchte. Ausserdem plane ich für den nächsten Sprint mehr Zeit ein als üblich, da ich verlorene Zeit aufholen muss, um das Projekt rechtzeitig abschliessen zu können.
 
 ---
 
