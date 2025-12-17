@@ -41,6 +41,15 @@ Auch liegt eine vollständige Betriebsdoku für die Verwendung des Produkts vor.
 
 TODO - Skizze erstellen und einfügen
 
+### Entscheidungen - TODO
+
+- HUGO in generall
+- HUGO Theme: Stack https://github.com/CaiJimmy/hugo-theme-stack
+- Hosting Provider / Cloud : AWS
+- CI handler: Github Actions
+- why Ansible for Deployment / Reproducibility 
+
+
 ---
 
 ## SWOT Analyse
