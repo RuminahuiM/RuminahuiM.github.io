@@ -54,7 +54,7 @@ TODO - Skizze erstellen und einfügen
 
 ## SWOT Analyse
 
-## Stärken (Strengths)
+### Stärken (Strengths)
 
 - Ich habe ein klar abgegrenztes technisches Ziel:  
   Hugo-Portfolio + AWS (S3, CloudFront, ACM, DNS) + Ansible + GitHub Actions. Das ist modern, praxisnah und gut vorzeigbar.
@@ -65,7 +65,7 @@ TODO - Skizze erstellen und einfügen
 - Der Scope ist technisch fokussiert:  
   Eine statische Seite, ein Repo, eine Pipeline. Keine unnötigen Backend- oder Datenbank-Baustellen.
 
-## Schwächen (Weaknesses)
+### Schwächen (Weaknesses)
 
 - Es sind viele Technologien gleichzeitig im Spiel (Hugo, Ansible, AWS, IAM/OIDC, DNS, GitHub Actions).  
   Das erhöht Komplexität und Fehlerrisiko.
@@ -76,7 +76,7 @@ TODO - Skizze erstellen und einfügen
 - Gefahr, sich in Details zu verlieren  
   (Theme-Tuning, Performance-Feinschliff, „nice to have“ Features).
 
-## Chancen (Opportunities)
+### Chancen (Opportunities)
 
 - Das Projekt eignet sich sehr gut als späteres Portfolio-Beispiel:  
   „Ich habe eine komplette Cloud-/DevOps-Lösung selbst aufgebaut.“
@@ -87,7 +87,7 @@ TODO - Skizze erstellen und einfügen
 - Es gibt reichlich Stoff für eine gute Dokumentation und Präsentation:  
   Architekturdiagramme, Abläufe, Screenshots, Erläuterungen zu IAM/OIDC/DNS.
 
-## Risiken/Bedrohungen (Threats)
+### Risiken/Bedrohungen (Threats)
 
 - Zeitdruck und Scope Creep:  
   Wenn ich immer neue Ideen einbaue (WAF, Multi-Stage, komplexe Rollbacks, fancy Themes), kann das MVP zu spät oder nur halb fertig werden.
@@ -98,7 +98,7 @@ TODO - Skizze erstellen und einfügen
 - Bewertungssicht der Schule:  
   Wenn ich zu stark ins Technische abdrifte und Projektmanagement/Dokumentation vernachlässige, wirkt das in der Bewertung negativ.
 
-## Wichtige Massnahmen
+### Wichtige Massnahmen
 
 - **Klares MVP definieren und zuerst umsetzen**  
   Hugo lokal → AWS-Infrastruktur → Domain/HTTPS → CI/CD → „Push → Live“.  
@@ -119,7 +119,7 @@ TODO - Skizze erstellen und einfügen
 
 ---
 
-# Projekmanagement
+# Projekmanagement Methodik
 
 ## Scrum Definitions - TODO Cleanup notes
 
@@ -292,7 +292,53 @@ Folgende Backlog items habe ich für den Sprint 1 eingeplant:
 
 ### Sprint Review
 
+In diesem Sprint ging es darum ein MVP zu erstellen. Dafür hatte ich geplant ein Template Portfolio zu erstellen und ein Workflow für Github Actions zu erstellen, welches die Seite baut und aktualisiert. Dabei habe ich allerdings rausgefunden, dass Hugo bzw das Stack Template, das meiste bereits abgdeckt. Genaueres dazu aber später.
+
+| Eingeplante Backlog Items | Demo | Status |
+|----------|----------|----------|
+| [SCRUM-18](https://rumidesigns.atlassian.net/browse/SCRUM-18) | DEMO | Grösstenteils erledigt. Technische Dokumentation muss noch ausgeführt werden |
+| [SCRUM-19](https://rumidesigns.atlassian.net/browse/SCRUM-19) | DEMO | Erledigt. Teplate Portfolio erstellt |
+| [SCRUM-15](https://rumidesigns.atlassian.net/browse/SCRUM-15) | NO DEMO | Ongoing Task. Architektur skizze erstellt & Doku erweitert |
+| [SCRUM-17](https://rumidesigns.atlassian.net/browse/SCRUM-17) | NO DEMO | Erledigt. Dev Umgebung vollständig eingerichtet |
+| [SCRUM-17](https://rumidesigns.atlassian.net/browse/SCRUM-17) | NO DEMO | Canceled. Github Actions Workflow bereits gegeben |
+
+#### DEMO - SCRUM-18 & SCRUM-19
+
+In dieser kurzen Demo zeige ich die Live-Seite die aus dem bearbeitetem Template erstellt wird. Dies stellt den MVP dar. Das Endprodukt wird ähnlich aussehen, nur anders gehostet werden. Ihr könnt auch die Live-Seite selbst auschecken unter [https://ruminahuim.github.io/portfolio/](https://ruminahuim.github.io/portfolio/).
+
+<video controls playsinline preload="metadata" width="100%">
+  <source src="{{ '/resources/videos/SCRUM-59_lokaleVorschauTest.mp4' | relative_url }}" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+
+> [Source Video File](../../resources/videos/SCRUM-59_lokaleVorschauTest.mp4)
+
+#### Herausforderungen & Lösungen
+
+1. **Mangeldende Recherche im Vorhinein:**
+
+2. **Organisation:**
+
+3. **Favicon wird nicht aktualisiert:**
+
+#### Next Sprint
+
+**Ziel:**
+
+**Tasks die übernommen werden:**
+- [SCRUM-15](https://rumidesigns.atlassian.net/browse/SCRUM-15) wird erstmal übernommen. Ich kläre noch ob es nötig ist, das in jeden Sprint mitzunehmen, oder ob es mehr Sinn macht, dies ander hanzuhaben.
+- [SCRUM-17](https://rumidesigns.atlassian.net/browse/SCRUM-17) wird übernommen und hat nun die höchste Priorität.
+
+**Neue Inputs:**
+
+
 ### Sprint Retrospective
+
+**Was war gut?**
+**Was war nicht gut?**
+**Welche Massnahmen können ergriffen werden?**
+
+
 
 ---
 
