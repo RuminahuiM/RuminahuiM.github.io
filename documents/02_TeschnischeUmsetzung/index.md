@@ -31,6 +31,9 @@ Steps taken for hugo setup:
 - Found that posting can be delayed by setting future date
 - Tested Local view (SCRUM-59) - TODO insert video
 
+## TODO - eigenheiten später entdeckt
+- Uglyurls nötig um cloudfront nutzen zu können
+
 #### How to Use
 - klurz erklären wie neue Projekte erstellt werden.
 -> copy template folder. Edit details (TODO- ausführen)
@@ -79,6 +82,29 @@ aws --version
 - Created new respository for Ansible code -> "hugo-portfolio-starter"
 - 
 
+#### Test Hosting on AWS
+- create s3 bucket
+- build hugo website local
+- Upload public files 
+- Testing - 403
+- Problem - bucket policy hat gefehlt:
+
+```
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "PublicReadGetObject",
+            "Effect": "Allow",
+            "Principal": "*",
+            "Action": "s3:GetObject",
+            "Resource": "arn:aws:s3:::test-hugohosting01/*"
+        }
+    ]
+}
+```
+
+
 
 ### Github Actions
 
@@ -90,5 +116,7 @@ aws --version
 ### Use Cases
 
 ## Herausforderungen
+
+- a
 
 ## Testingprotocoll & Results
