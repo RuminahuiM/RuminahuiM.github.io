@@ -297,7 +297,7 @@ In diesem Sprint ging es darum ein MVP zu erstellen. Dafür hatte ich geplant ei
 | Eingeplante Backlog Items | Demo | Status |
 |----------|----------|----------|
 | [SCRUM-18](https://rumidesigns.atlassian.net/browse/SCRUM-18) | DEMO | Grösstenteils erledigt. Technische Dokumentation muss noch ausgeführt werden |
-| [SCRUM-19](https://rumidesigns.atlassian.net/browse/SCRUM-19) | DEMO | Erledigt. Teplate Portfolio erstellt |
+| [SCRUM-19](https://rumidesigns.atlassian.net/browse/SCRUM-19) | DEMO | Erledigt. Template Portfolio erstellt |
 | [SCRUM-15](https://rumidesigns.atlassian.net/browse/SCRUM-15) | NO DEMO | Ongoing Task. Architektur skizze erstellt & Doku erweitert |
 | [SCRUM-17](https://rumidesigns.atlassian.net/browse/SCRUM-17) | NO DEMO | Erledigt. Dev Umgebung vollständig eingerichtet |
 | [SCRUM-17](https://rumidesigns.atlassian.net/browse/SCRUM-17) | NO DEMO | Canceled. Github Actions Workflow bereits gegeben |
@@ -316,21 +316,31 @@ In dieser kurzen Demo zeige ich die Live-Seite die aus dem bearbeitetem Template
 #### Herausforderungen & Lösungen
 
 1. **Mangeldende Recherche im Vorhinein:**
+Ich habe in diesem Sprint festgestellt, dass ich nicht genug Informationen über die Funktionsweise von HUGO gesammelt hattte. Es hat sich rausgestellt das HUGO bereits so gebaut ist, dass bei einem Git Push, automatisch durch vordefinierte Github Actions Workflows, die Seite gebaut wird. Wenn diese über Github Pages gehostet wird, was eigentlich der Standard ist, wird die Live-Seite sommit auch automatisch aktualisiert. Dadurch Schien mir das Projekt nicht mehr so relevant. Was auch einen Einfluss auf meine Motivation in dem Projekt hatte.
+
+Ich habe mich entschieden das Projekt trotzdem wie geplant weiterzuführen. Mein Projekt beinhaltet das Hosting auf AWS und das aufbauen der Hosting Umgebung mittels Ansible-Code, weshalb es als Lernprojekt trotzdem wirkungsvoll ist, obwohl das eigentliche Produkt, welches daraus entsteht, nicht unbedingt für die effektive Verwendung in der Realtität relevant ist. 
 
 2. **Organisation:**
+Ich hatte bisher noch kein Richtiges System/Vorgehen für mich definiert, um solche Projekte bzw. spezifisch die Schulprojekte durchzuführen. Dadurch ist der Ablauf meiner Projekte noch etwas chaotisch. Das Verwalten des Projekts in JIRA und die neue Dokumentationsstrukur, welche ich in diesem Projekt aufbaue, werden mir dabei helfen, zukünftige Projekte strukturierter durchzuführen.
 
 3. **Favicon wird nicht aktualisiert:**
+Beim anpassen des Templates, konnte ich das Favicon der Seite nicht anpassen. Gemäss der Dokumentation, sollte ich es genau so ersetzen, wie ich es getan habe. Ich konnte nicht herrausfinden, was genau das Problem war.
+
+Da dies ein weniger Relevantes Detail ist, habe ich ein Task im Backlog erstellt und verschiebe dessen Erledigung zum Schluss.
+
+4. **Mangelnde Kommunikation mit den Stakeholders:**
+In diesem Projekt sind die Lehrer, welche die Arbeit kontrollieren, meine Stakeholder. Ich leider bisher zu wenig Updates zu dem Projekt mit ihnen geteilt, was die Beurteilung des Projekts für sie erschwert.
+
+Ich werde in den nächsten Sprints darauf achten, nach jeder Session, ein Update zu senden.
 
 #### Next Sprint
 
 **Ziel:**
+Im nächsten Sprint, geht es darum, via Ansible die Hosting Struktur aufzubauen. Ich muss also über Ansible auf AWS zugreifen und dort entsprechend ein S3 Bucket (Oder evtl eine EC2 Instanz) einrichten. Auch soll entsprechend CloudFront konfiguriert werden, um die Seite zu publizieren.
 
 **Tasks die übernommen werden:**
-- [SCRUM-15](https://rumidesigns.atlassian.net/browse/SCRUM-15) wird erstmal übernommen. Ich kläre noch ob es nötig ist, das in jeden Sprint mitzunehmen, oder ob es mehr Sinn macht, dies ander hanzuhaben.
-- [SCRUM-17](https://rumidesigns.atlassian.net/browse/SCRUM-17) wird übernommen und hat nun die höchste Priorität.
-
-**Neue Inputs:**
-
+- [SCRUM-15](https://rumidesigns.atlassian.net/browse/SCRUM-15) wird erstmal übernommen. Ich kläre noch ob es nötig ist, das in jeden Sprint mitzunehmen, oder ob es mehr Sinn macht, dies anders handzuhaben.
+- [SCRUM-18](https://rumidesigns.atlassian.net/browse/SCRUM-18) wird übernommen und hat nun die höchste Priorität.
 
 ### Sprint Retrospective
 
