@@ -345,10 +345,20 @@ Im nächsten Sprint, geht es darum, via Ansible die Hosting Struktur aufzubauen.
 ### Sprint Retrospective
 
 **Was war gut?**
+Aufgrund der bestehenden Hugo funktionalität, war es sehr einfach ein MVP für das Projekt zu machen und zu Demonstrieren.
+
+Ausserdem konnte ich die Struktur für die Dokumentation vollständig festlegen und habe mir dadurch ein einfacheres System für solche Projekte aufgebaut.
+
 **Was war nicht gut?**
+Ich habe zu wenig mit den Stakeholders kommuiniziert, was zu dessen Unzufriedenheit geführt hat. Dies muss in Zukunft anders gehandhabt werden.
+
+Ausserdem hat sich rausgestellt, dass dieses Projekt weniger reale Relevanz hat, als ich dachte.
+
+Der Effektive Technische Teil der Arbeit (z.B. AWS mit Ansible einrichten), wurde aufgrund meiner Sprint Planung noch nicht angegangen, weshalb der Komplexer Part der Arbeit noch ansteht, obwohl die Deadline bereits ende dieses Monats ist. Dadurch könnte das Projekt noch aufgrund mangelnder Zeit scheitern, falls es für die nächsten Sprints nicht richtig verwaltet wird. 
+
+
 **Welche Massnahmen können ergriffen werden?**
-
-
+Ich werde von nun an, nach jeder Session, ein Update an die Stakeholders senden und auch nach kleineren Änderungen, ein Commits auf die Repository pushen, um die Kommunikation zu den Stakeholdern zu verbessern.
 
 ---
 
