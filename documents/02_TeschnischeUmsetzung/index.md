@@ -87,7 +87,7 @@ aws --version
 - build hugo website local
 - Upload public files 
 - Testing - 403
-- Problem - bucket policy hat gefehlt:
+- Problem - bucket policy hat gefehlt:  
 
 ```
 {
@@ -103,6 +103,10 @@ aws --version
     ]
 }
 ```
+- resultat screenshot einfügen
+
+#### Test CloudFront hinzufügen
+
 
 
 
