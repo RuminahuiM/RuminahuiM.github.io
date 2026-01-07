@@ -38,8 +38,8 @@ Auch liegt eine vollständige Betriebsdoku für die Verwendung des Produkts vor.
 ---
 
 ## Architektur
-
-TODO - Skizze erstellen und einfügen
+ TODO - erläutern
+[Architektur Skizze](../../resources/images/architektur.png)
 
 ### Entscheidungen - TODO
 
