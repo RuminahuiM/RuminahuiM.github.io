@@ -388,47 +388,160 @@ Folgende Backlog items habe ich für den Sprint 2 eingeplant:
 
 ### Sprint Review
 
+Wie bereits erwähnt, habe ich in diesem Sprint den Ansible Anteil und somit das Schlussendliche Produkt des Porjektes erstellt. Ich habe dabei zuerst alle Komponenten, die für das Hosting des Hugo Portfolios benötigt wurden, einmal manuell eingerichtet wodurch ich testen konnte, wie es genau fuktioniert. Auch konnte ich feststellen wo Probleme auftreten können und worauf man achten muss. 
+Danach konnte ich das ganze mit unterstüzung von AI recht einfach in Ansible Code umwandeln. Dabei habe ich jeweils beschrieben welche Komponenten ich benötigte und den Code, den AI erstellt hat reviewed, getested und debuged. So konnte ich nach und nach die Komponenten hinzufügen und testen. 
+Zum Schluss habe ich diverse vollständige Tests durchgeführt und anpassungen gemacht, sowie auch eine Benutzeranleitung erstellt und nach und nach angepasst.
+
 | Eingeplante Backlog Items | Demo | Status |
 |----------|----------|----------|
 | [SCRUM-15](https://rumidesigns.atlassian.net/browse/SCRUM-15) | NO DEMO | Weiter bearbeitet, allerdings noch lange nicht abgeschlossen |
-| [SCRUM-18](https://rumidesigns.atlassian.net/browse/SCRUM-18) | DEMO | Grösstenteils erledigt. Technische Dokumentation muss noch ausgeführt werden |
-| [SCRUM-19](https://rumidesigns.atlassian.net/browse/SCRUM-19) | NO DEMO | Erledigt |
-| [SCRUM-20](https://rumidesigns.atlassian.net/browse/SCRUM-20) | NO DEMO | Erledigt |
-| [SCRUM-21](https://rumidesigns.atlassian.net/browse/SCRUM-21) | NO DEMO | Erledigt |
-| [SCRUM-22](https://rumidesigns.atlassian.net/browse/SCRUM-22) | NO DEMO | Erledigt |
-| [SCRUM-23](https://rumidesigns.atlassian.net/browse/SCRUM-23) | NO DEMO | Erledigt |
-| [SCRUM-24](https://rumidesigns.atlassian.net/browse/SCRUM-24) | NO DEMO | Erledigt |
-| [SCRUM-25](https://rumidesigns.atlassian.net/browse/SCRUM-25) | NO DEMO | Erledigt |
-| [SCRUM-26](https://rumidesigns.atlassian.net/browse/SCRUM-26) | NO DEMO | Erledigt |
-| [SCRUM-28](https://rumidesigns.atlassian.net/browse/SCRUM-28) | NO DEMO | Erledigt |
-| [SCRUM-29](https://rumidesigns.atlassian.net/browse/SCRUM-29) | NO DEMO | Erledigt |
-| [SCRUM-33](https://rumidesigns.atlassian.net/browse/SCRUM-33) | NO DEMO | Erledigt |
-| [SCRUM-133](https://rumidesigns.atlassian.net/browse/SCRUM-133) | NO DEMO | Erledigt |
-| [SCRUM-147](https://rumidesigns.atlassian.net/browse/SCRUM-147) | NO DEMO | Erledigt |
+| [SCRUM-18](https://rumidesigns.atlassian.net/browse/SCRUM-18) | NO DEMO | Bereits erledigt. Subtask wurde im letzten Sprint versehentlich nicht als abgeschlossen markiert |
+| [SCRUM-19](https://rumidesigns.atlassian.net/browse/SCRUM-19) | NO DEMO | Dupliziert eigentlich SCRUM 18, wurde deshalb als gecancelled markiert. |
+| [SCRUM-20](https://rumidesigns.atlassian.net/browse/SCRUM-20) | DEMO | Erledigt. Zertifikat wurde manuell erstellt und Ansible Role wurde erstellt und getestet |
+| [SCRUM-21](https://rumidesigns.atlassian.net/browse/SCRUM-21) | DEMO | Erledigt. S3 Bucket wurde manuell erstellt und Ansible Role wurde erstellt und getestet |
+| [SCRUM-22](https://rumidesigns.atlassian.net/browse/SCRUM-22) | NO DEMO | Erledigt. Wurde im TASK SCRUM-21 miterledigt. |
+| [SCRUM-23](https://rumidesigns.atlassian.net/browse/SCRUM-23) | DEMO | Erledigt. IAM Rolle wurde manuell erstellt und Ansible Role wurde erstellt und getestet |
+| [SCRUM-24](https://rumidesigns.atlassian.net/browse/SCRUM-24) | DEMO | Erledigt. Github to S3 Deployment Workflow gebaut und getestet |
+| [SCRUM-25](https://rumidesigns.atlassian.net/browse/SCRUM-25) | NO DEMO | Cancelled. Da die Github Repository bereits die Versionierung durch die funktion als Repository handelt, und man einfach alte versionen wiederherstellen und pushen kann, ist keine weitere Versionierung nötig |
+| [SCRUM-26](https://rumidesigns.atlassian.net/browse/SCRUM-26) | NO DEMO | Cancelled. Der Kosten Monitor wird nicht automatish erstellt, da für das Monitoring die Billing-Informationen des Users angepasst werden müssen. Dies sollte der User manuell einrichten falls benötigt. |
+| [SCRUM-28](https://rumidesigns.atlassian.net/browse/SCRUM-28) | DEMO | Erledigt. Cloudfront wurde manuell erstellt und Ansible Role wurde erstellt und getestet |
+| [SCRUM-29](https://rumidesigns.atlassian.net/browse/SCRUM-29) | NO DEMO | Erledigt. Domain gekauft und entsprechend konfiguriert. |
+| [SCRUM-33](https://rumidesigns.atlassian.net/browse/SCRUM-33) | DEMO | Erledigt. Route53 DNS wurde manuell erstellt und Ansible Role wurde erstellt und getestet |
+| [SCRUM-133](https://rumidesigns.atlassian.net/browse/SCRUM-133) | DEMO | Erledigt. Es besteht ein mit Ansible reproduzierbare umgebung, die alles benötigte einrichtet. Es kann in wenigen schritten ausgefürht werden und diese sind dokumentiert. |
+| [SCRUM-147](https://rumidesigns.atlassian.net/browse/SCRUM-147) | NO DEMO | Cancelled. Dieser Task wurde stattdessen als Subtask von SCRUM-15 neu erfasst |
+
+#### DEMO - Ansible TODO-> videos verlinken & Beschreibung anpassen
+
+In dieser Demo, wird die ausführung der Ansible Plabooks demonstriert 
+
+<video controls playsinline preload="metadata" width="100%">
+  <source src="{{ '/resources/videos/Sprint2_Demo.mp4' | relative_url }}" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+
+> [Source Video File](../../resources/videos/Sprint2_Demo.mp4)
+
+#### DEMO - Github Actions TODO-> videos verlinken
+
+Beschreibung
+
+<video controls playsinline preload="metadata" width="100%">
+  <source src="{{ '/resources/videos/Sprint2_Demo.mp4' | relative_url }}" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+
+> [Source Video File](../../resources/videos/Sprint2_Demo.mp4)
+
+#### Herausforderungen & Lösungen
+
+**1. Debugging:**
+Das debuggen war dank der Unterstüzung von Codex, eigentlich nicht an sich eine Schwierige Herausforderung, allerdings war es der grösste Teil der Arbeit, welche ich für diesen Sprint machen musste. Nach jeder Änderung musste man halt nochmals das ganze ausführen und teilweise auch auf DNS Propagation oder die Validierung des Zertifikats warten.
+Nicht die anspruchsvollste Herausforderung, allerdings doch ein grosser Zeitaufwand, selbst mit der Hilfe von AI Tools.
+
+**2. Testing:** 
+Wie bereits erwähnt, musste man immer wieder einzelne Komponenten oder die ganze Infrastruktur löschen und neu erstellen. Deshalb habe ich relativ früh angefangen, ein "destroy"- und ein "redeploy"- Playbook erstellt. Diese löschen die zuvor erstellte Infrastruktur und können auch nur einzelne komponenten löschen/neu erstellen. Als Default Eistellung, lasse ich das Zertfikat und die Route53 (DNS) Einstellungen. Denn wenn diese neu erstellt werden, muss man ein paar Stunden warten um die Website wieder live zu sehen. Sie sollten also nur für vollständige Tests verwendet werden.
+
+**3. Zertifikat Validierung:**
+Um die Website über HTTPS mit der eigenen Domäne nutzen zu können, muss man ein Zertifikat dafür erstellen und das über DNS validieren. Das Problem hierbei, ist dass dieser Prozess mehrere Stunden dauern kann. Damit nachher aber alles korrekt funktioniert, muss es nach der Validierung auch in der CloudFront konfiguration angehängt werden. Ich habe keinen Weg gefunden, dieses anzuhängen, bevor es validiert wurde. 
+
+Somit gab es nur 2 Optionen. Die erste ist, dass man ein Wartefenster einbaut, indem Ansible wartet, bis das Zertifikat als validiert markiert wurde und hängt es danach an.
+Die Zweite Option, ist ein weiteres Playbook zu erstellen, dass ausgeführt wird, sobald das Zertifikat validiert wurde und das entsprechend das Zertifikat bei CloudFront änhängt.
+
+Mit der ersten Option, müsste man den PC auf dem man Ansible laufen lässt, für mehrere Stunden im Hintergrund laufen lassen. Dies ist vielleicht eine Valide Option für einen Server, aber dieses Produkt richtet sich an Privatpersonen, die das ganze einfach auf ihrem normalen PC ausführen wollen.
+
+Deshalb habe ich ein "post_validation" Playbook erstellt. Sobald das Zertifikat validiert wurde, kann man dieses ausführen und es schliesst das Setup ab. Nach eine Weile ist die Seite dann bereits online.
+
+**4. Credentials in den Commits:**
+Während der Entwicklung des Ansible Codes, habe ich die gleichen User Credentials immer wieder benötigt, um auf AWS zugreifen zu können. Der einfachheit halber habe ich diese im Readme File eingetragen um sie immer wieder rauskopieren zu können. Dies war ein grosser Fehler.
+
+Abgesehen davon, dass jemand meine Credentials während der Entwicklung des Projekts missbrauchen hätte können, falls ich diese durch ein Push hochgeladen hätte, entstand noch ein Weiteres Problem.
+Die Credentials waren nun in einer Menge Commits gespeichert und da Github ein Sicherheitsfeature hat, welches solche Credentials erkennt und den Upload blockiert, konnte ich meine Commits nicht mehr pushen.
+
+Das habe ich leider recht spät gemerkt. Ich musste also schlussendlich in alle Commits rein und die Credentials dort rauslöschen. Das war recht mühsam, selbst mit der Unterstüzung von AI.
+
+Ausserdem hatte ich auch noch versehentlich in einem test-branch gearbeitet und musste den Main branch überschreiben.
+
+**5. Tasks in JIRA mit AI geplant:**
+Das dies ein grösseres Problem war, habe ich erst im Zwischengespräch bemerkt, welches ich mit Parisi Corrado hatte. 
+
+Ursprünglich hatte ich die Tasks/Stories im JIRA alle mithilfe von AI erstellt, da ich mir noch nicht sicher war, wie man Stories richtig erfasst.
+Die Struktur des ganzen war dadurch dann aber sehr chaotisch. Ich habe zwar selbst die Epics erstellt und sommit ein wenig Struktur bewahren können, aber es gab zu viele zu kleine Tasks oder Tasks die doppelt erfasst wurden etc.
+
+Auch war die Art wie ich die Stories im Jira erfasst hatte nicht die beste. Ich habe die Story-beschreibungen direkt als Titel der Stories genommen. Dadurch konnte man sich nur Schwer ein richtigen überblick im JIRA machen.
+
+Ich habe nun noch einiges aufgeräumt, die Titel angepasst und den inhalt in die Beschreibung geschrieben. Aktzeptanzkriterien und Subtasks habe ich um Zeit zu sparen in diesem Projekt allerdings so gelassen wie sie waren.
+
+Nun habe ich ein besseres verständnis von Stories und wie man ein Scrum Projekt richtig aufsetzt. Deshalb werde ich das im nächsten Projekt besser erfassen können.
+
+#### Next Sprint
+
+**Ziel:**
+Der nächste Sprint ist gleichzeitig der letzte. Dannach steht bereits die Abgabe des Projekts an. In diesem Sprint geht es also darum, dass Projekt vollständig abzuschliessen. Das heisst, finaler Test und feinschliff des Produkts, Projektdokumentation abschliessen und Präsentation/Demo vorbereiten.
+
+**Tasks die übernommen werden:**
+- [SCRUM-15](https://rumidesigns.atlassian.net/browse/SCRUM-15) Ongoing Task. Muss im folgenden Sprint abgeschlossen werden.
+- [SCRUM-133](https://rumidesigns.atlassian.net/browse/SCRUM-133) Dokumentation grösstenteils abgeschlossen, allerdings kann es noch für den User vereinfacht werden.
 
 ### Sprint Retrospective
+
+**Was war gut?**
+Ich bin konnte den Ansible Code viel schneller fertig stellen als ursprünglich erwartet. Dadurch hatte ich mehr Zeit das Produkt möglichst gut zu machen.
+
+Durch die Rückmeldung von Armin Dörzbach konnte ich auch einige wichtige Änderungen machen, um die Qualität des Endprodukts zu verbessern.
+
+Ausserdem bin ich sehr zufrieden mit dem Endprodukt. Im letzten Sprint habe ich erwähnt, dass ich dachte dieses Produkt hätte keinen realen Wert. Allerdings denke ich doch das es sehr gut eingesetzt werden kann. Es gibt viele HUGO User die ihre Seite lieber auf AWS hosten möchten als auf Github pages und dies vereinfacht den Prozess dafür ungemein. Und man kann man die Infrastruktur jederzeit neu erstellen, bei ausfällen oder falls man es einfach ne Weile nicht mehr benötigt und es dann doch wieder einsetzen möchte etc.
+
+**Was war nicht gut?**
+Ich war etwas nächlässig mit dem Nachtragen der erledigten Arbeiten in JIRA. Dadurch hat JIRA nicht mehr den eigentlichen Status des Projekts dargestellt. Das wiederum kann auch Metriken verfälschen und Stakeholder können sich nicht auf die dortigen Informationen verlassen.
+
+**Welche Massnahmen können ergriffen werden?**
+Für das nächste Projekt, werde ich JIRA ohne AI aufsetzen und das Projekt besser strukturieren. Daruch wird es dann auch viel einfacher den korrekten Status nachzutragen und ich bin motivierter das auch richtig umzusetzen.
+
+AI war zwar trotzdem hilfreich, da ich zuvor nie ein Scrum Projekt aufgesetzt hatte, aber da ich jetzt ein besseres Verständniss dafür habe, denke ich das es effektiver ist auf AI bei diesem Schritt zu verzichten.
 
 ---
 
 ## Sprint 3 - Abschluss
 
-Testing again for Q&A, Dokumentation fertigstellen, Demo video für User Guide & Präsentation
+In diesem Spürint schliessem wir das Projekt ab. Es gibt einige Tasks die das Produkt verbessern sollen, aber hauptsächlich geht es darum das Produkt nochmals vollständig zu testen (zur Qualitätssicherung) und die Dokumentation abzuschliessen. Ausserdem möchte ich noch eine Demo vorbereiten. Einerseits für die kommende Dokumentation, andereseits aber auch um ein Video-Guide zu erstellen, welches in der Produkt-Repository angezeigt werden soll.
 
 ### Sprint Planing
 Folgende Backlog items habe ich für den Sprint 3 eingeplant:
--  [SCRUM-]()
--  [SCRUM-]()
+- Reproduzierbares Setup mit wenigen Befehlen [SCRUM-133](https://rumidesigns.atlassian.net/browse/SCRUM-133)
+- 404 Error Seite [SCRUM-31](https://rumidesigns.atlassian.net/browse/SCRUM-31)
+- Template generalisieren [SCRUM-148](https://rumidesigns.atlassian.net/browse/SCRUM-148)
+- Portfolio Template und Ansible Code in einer Repo zusammenführen [SCRUM-150](https://rumidesigns.atlassian.net/browse/SCRUM-150)
+- "How to use"  dokumentation [SCRUM-14](https://rumidesigns.atlassian.net/browse/SCRUM-14)
+- Test Cases definieren für Abschlusstests & Testen [SCRUM-143](https://rumidesigns.atlassian.net/browse/SCRUM-143)
+- Screenshots der Ausführung dokumentieren [SCRUM-16](https://rumidesigns.atlassian.net/browse/SCRUM-16)
+- Projektdokumentation für TBZ [SCRUM-15](https://rumidesigns.atlassian.net/browse/SCRUM-15)
+- Demo Video für Präsentation und User Guide erstellen [SCRUM-151](https://rumidesigns.atlassian.net/browse/SCRUM-151)
+- Präsentation des Projekts vorbereiten [SCRUM-27](https://rumidesigns.atlassian.net/browse/SCRUM-27)
+- Projekt offiziell abgeben [SCRUM-154](https://rumidesigns.atlassian.net/browse/SCRUM-154)
 
-![Planned Sprint 2](..\..\resources\images\Sprint_3_Plan.png)
+![Planned Sprint 3](..\..\resources\images\Sprint_3_Plan.png)
 
 ### Sprint Review
 
 | Eingeplante Backlog Items | Demo | Status |
 |----------|----------|----------|
-| [SCRUM-18](https://rumidesigns.atlassian.net/browse/SCRUM-18) | DEMO | Grösstenteils erledigt. Technische Dokumentation muss noch ausgeführt werden |
-| [SCRUM-19](https://rumidesigns.atlassian.net/browse/SCRUM-19) | DEMO | Erledigt. Template Portfolio erstellt |
-| [SCRUM-15](https://rumidesigns.atlassian.net/browse/SCRUM-15) | NO DEMO | Ongoing Task. Architektur skizze erstellt & Doku erweitert |
-| [SCRUM-17](https://rumidesigns.atlassian.net/browse/SCRUM-17) | NO DEMO | Erledigt. Dev Umgebung vollständig eingerichtet |
-| [SCRUM-17](https://rumidesigns.atlassian.net/browse/SCRUM-17) | NO DEMO | Canceled. Github Actions Workflow bereits gegeben |
+| [SCRUM-](https://rumidesigns.atlassian.net/browse/SCRUM-) | NO DEMO | desc |
+| [SCRUM-](https://rumidesigns.atlassian.net/browse/SCRUM-) | NO DEMO | desc |
+| [SCRUM-](https://rumidesigns.atlassian.net/browse/SCRUM-) | NO DEMO | desc |
+| [SCRUM-](https://rumidesigns.atlassian.net/browse/SCRUM-) | NO DEMO | desc |
+| [SCRUM-](https://rumidesigns.atlassian.net/browse/SCRUM-) | NO DEMO | desc |
+| [SCRUM-](https://rumidesigns.atlassian.net/browse/SCRUM-) | NO DEMO | desc |
+| [SCRUM-](https://rumidesigns.atlassian.net/browse/SCRUM-) | NO DEMO | desc |
+| [SCRUM-](https://rumidesigns.atlassian.net/browse/SCRUM-) | NO DEMO | desc |
+| [SCRUM-](https://rumidesigns.atlassian.net/browse/SCRUM-) | NO DEMO | desc |
+
+
+#### Herausforderungen & Lösungen
 
 ### Sprint Retrospective
+
+**Was war gut?**
+
+**Was war nicht gut?**
+
+**Welche Massnahmen können ergriffen werden?**

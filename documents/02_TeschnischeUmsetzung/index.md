@@ -108,9 +108,6 @@ aws --version
 #### Test CloudFront hinzufügen
 
 
-
-<<<<<<< HEAD
-
 #### Best Practice changes
 
 ##### Lock down S3 bucket
@@ -234,12 +231,6 @@ Policy to attach:
 }
 
 ```
-
-
-
-
-=======
->>>>>>> cb0495af5668c072148505c333edefe14d038fe3
 
 ### Github Actions
 
