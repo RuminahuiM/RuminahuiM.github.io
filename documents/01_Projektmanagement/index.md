@@ -200,8 +200,7 @@ Struktur Retrospective:
 
 ### Zwischengespräch 02
 
-### Zwischengespräch 03
-
+- TODO: besprechung beschreiben -> vorallem Tasks in JIRA sollten anders erstellt und besser getracked werden
 
 ---
 
@@ -362,22 +361,58 @@ Ich werde von nun an, nach jeder Session, ein Update an die Stakeholders senden 
 
 ---
 
-## Sprint 2 
+## Sprint 2 - AWS Ansible
+
+In diesem Sprint sollte, das eigentliche Produkt zu erstellt werden. Das Ziel des Projekts ist ja eine reproduzierbare Infrastruktur auf AWS zu erstellen, auf welche das Portfolio gehostet werden soll. In diesem Sprint erstellte ich dafür die Infrastruktur einmal manuell, um die genaue Konfiguration festzuslegen und erstellte dann entsprechenden den Ansible Code zur automatischen Einrichtung des ganzen. Das ganze wurde natürlich auch entsprechend nach und nach getestet.
 
 ### Sprint Planing
 Folgende Backlog items habe ich für den Sprint 2 eingeplant:
--  [SCRUM-]()
--  [SCRUM-]()
+- Projektdokumentation für TBZ [SCRUM-15](https://rumidesigns.atlassian.net/browse/SCRUM-15) wurde wieder übernommen, da erst am Schluss des Projekts abgeschlossen werden kann.
+- Hugo Portfolio einrichten [SCRUM-18](https://rumidesigns.atlassian.net/browse/SCRUM-18) wurde aus letztem Sprint übernommen, da noch ein subtask nicht als erledigt markiert war.
+- Beispiele für Projekt posts erstellen [SCRUM-19](https://rumidesigns.atlassian.net/browse/SCRUM-19)
+- ACM Zertifikat [SCRUM-20](https://rumidesigns.atlassian.net/browse/SCRUM-20)
+- Privaten S3 Bucket einrichten [SCRUM-21](https://rumidesigns.atlassian.net/browse/SCRUM-21)
+- Bucket Policy definieren [SCRUM-22](https://rumidesigns.atlassian.net/browse/SCRUM-22)
+- Github Deployment to S3 - IAM Role [SCRUM-23](https://rumidesigns.atlassian.net/browse/SCRUM-23)
+- Github Deployment to S3 - Actions Workflow bauen [SCRUM-24](https://rumidesigns.atlassian.net/browse/SCRUM-24)
+- Versionierung des Hugo Portfolios [SCRUM-25](https://rumidesigns.atlassian.net/browse/SCRUM-25)
+- Kosten Monitor [SCRUM-26](https://rumidesigns.atlassian.net/browse/SCRUM-26)
+- CloudFront einrichten [SCRUM-28](https://rumidesigns.atlassian.net/browse/SCRUM-28)
+- Domain kaufen & einrichten [SCRUM-29](https://rumidesigns.atlassian.net/browse/SCRUM-29)
+- Route53 DNS Setup [SCRUM-33](https://rumidesigns.atlassian.net/browse/SCRUM-33)
+- Reproduzierbares Setup mit wenigen Befehlen [SCRUM-133](https://rumidesigns.atlassian.net/browse/SCRUM-133)
+- Bisherige Technische Dokumentation ausführen [SCRUM-147](https://rumidesigns.atlassian.net/browse/SCRUM-147)
 
 ![Planned Sprint 2](..\..\resources\images\Sprint_2_Plan.png)
+> Leider habe ich vergessen am Anfang des Sprints ein Screenshot zu machen, weshalb das Bild den Status der Tasks nach beendigung des Sprints anzeigt
 
 ### Sprint Review
+
+| Eingeplante Backlog Items | Demo | Status |
+|----------|----------|----------|
+| [SCRUM-15](https://rumidesigns.atlassian.net/browse/SCRUM-15) | NO DEMO | Weiter bearbeitet, allerdings noch lange nicht abgeschlossen |
+| [SCRUM-18](https://rumidesigns.atlassian.net/browse/SCRUM-18) | DEMO | Grösstenteils erledigt. Technische Dokumentation muss noch ausgeführt werden |
+| [SCRUM-19](https://rumidesigns.atlassian.net/browse/SCRUM-19) | NO DEMO | Erledigt |
+| [SCRUM-20](https://rumidesigns.atlassian.net/browse/SCRUM-20) | NO DEMO | Erledigt |
+| [SCRUM-21](https://rumidesigns.atlassian.net/browse/SCRUM-21) | NO DEMO | Erledigt |
+| [SCRUM-22](https://rumidesigns.atlassian.net/browse/SCRUM-22) | NO DEMO | Erledigt |
+| [SCRUM-23](https://rumidesigns.atlassian.net/browse/SCRUM-23) | NO DEMO | Erledigt |
+| [SCRUM-24](https://rumidesigns.atlassian.net/browse/SCRUM-24) | NO DEMO | Erledigt |
+| [SCRUM-25](https://rumidesigns.atlassian.net/browse/SCRUM-25) | NO DEMO | Erledigt |
+| [SCRUM-26](https://rumidesigns.atlassian.net/browse/SCRUM-26) | NO DEMO | Erledigt |
+| [SCRUM-28](https://rumidesigns.atlassian.net/browse/SCRUM-28) | NO DEMO | Erledigt |
+| [SCRUM-29](https://rumidesigns.atlassian.net/browse/SCRUM-29) | NO DEMO | Erledigt |
+| [SCRUM-33](https://rumidesigns.atlassian.net/browse/SCRUM-33) | NO DEMO | Erledigt |
+| [SCRUM-133](https://rumidesigns.atlassian.net/browse/SCRUM-133) | NO DEMO | Erledigt |
+| [SCRUM-147](https://rumidesigns.atlassian.net/browse/SCRUM-147) | NO DEMO | Erledigt |
 
 ### Sprint Retrospective
 
 ---
 
-## Sprint 3 
+## Sprint 3 - Abschluss
+
+Testing again for Q&A, Dokumentation fertigstellen, Demo video für User Guide & Präsentation
 
 ### Sprint Planing
 Folgende Backlog items habe ich für den Sprint 3 eingeplant:
@@ -387,5 +422,13 @@ Folgende Backlog items habe ich für den Sprint 3 eingeplant:
 ![Planned Sprint 2](..\..\resources\images\Sprint_3_Plan.png)
 
 ### Sprint Review
+
+| Eingeplante Backlog Items | Demo | Status |
+|----------|----------|----------|
+| [SCRUM-18](https://rumidesigns.atlassian.net/browse/SCRUM-18) | DEMO | Grösstenteils erledigt. Technische Dokumentation muss noch ausgeführt werden |
+| [SCRUM-19](https://rumidesigns.atlassian.net/browse/SCRUM-19) | DEMO | Erledigt. Template Portfolio erstellt |
+| [SCRUM-15](https://rumidesigns.atlassian.net/browse/SCRUM-15) | NO DEMO | Ongoing Task. Architektur skizze erstellt & Doku erweitert |
+| [SCRUM-17](https://rumidesigns.atlassian.net/browse/SCRUM-17) | NO DEMO | Erledigt. Dev Umgebung vollständig eingerichtet |
+| [SCRUM-17](https://rumidesigns.atlassian.net/browse/SCRUM-17) | NO DEMO | Canceled. Github Actions Workflow bereits gegeben |
 
 ### Sprint Retrospective
