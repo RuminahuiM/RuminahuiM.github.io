@@ -262,29 +262,30 @@ Deshalb habe ich ein "post_validation" Playbook erstellt. Sobald das Zertifikat 
 
 **Ansible Architektur**
 
-> Note: Dies folgende Beschreibung wurde mit ChatGPT erstellt, da es durch direkten Zugriff auf den Code das ganze sehr effizient einsehen kann und da ein Grossteil des Codes bereits durch ChatGPT erstellt wurde.
+> Note: Dies folgende Beschreibung der Ansible Architektur wurde mit ChatGPT erstellt, da es durch direkten Zugriff auf den Code das ganze sehr effizient einsehen kann und da ein Grossteil des Codes bereits durch ChatGPT erstellt wurde.
 
-> **Architekturüberblick**
-> **Ausführungskontext:** `ansible/ansible.cfg` setzt Inventory und Rollenpfad; `ansible/inventory/hosts.yml` definiert > localhost als Ziel, AWS-Region wird pro Play gesetzt.
-> **Orchestrierung:** Die Playbooks koordinieren den Lebenszyklus, Rollen kapseln die Fachlogik pro AWS-Service.
-> **Modularität:** Funktionen sind über `*_enabled` schaltbar; Zustände über `*_state` und Behalte-Flags `keep_*` > steuerbar.
-> **Datenfluss:** Rollen setzen Fakten (IDs/ARNs/Domain-Namen) und nutzen sie zur Auflösung von Abhängigkeiten.
-> **Ausgaben:** Ein Output-Modul stellt GitHub-Variablen und DNS-Infos für die nächsten Schritte bereit.
-> 
-> **Playbook-Fluss**
-> **Provisioning:** `ansible/playbooks/site.yml` setzt die AWS-Umgebung, initialisiert Variablen und führt die Rollen in > definierter Reihenfolge aus.
-> **Post-Validation:** `ansible/playbooks/post_validation.yml` aktualisiert nach der ACM-Validierung CloudFront und DNS.
-> **Destroy:** `ansible/playbooks/destroy.yml` setzt States auf absent, räumt Records, deaktiviert CloudFront und entfernt > Ressourcen.
-> **Redeploy:** `ansible/playbooks/redeploy.yml` kombiniert Destroy und Site für einen sauberen Neustart.
-> 
-> **Rollen-Module**
-> **Storage/CDN:** `ansible/roles/s3_static_site` verwaltet das Bucket; `ansible/roles/cloudfront_distribution` erstellt > die Distribution, OAI und S3-Policy.
-> **TLS-Zertifikate:** `ansible/roles/acm_certificate` beantragt Zertifikate, liest Validierungs-Records und prüft den > Status.
-> **DNS-Zone:** `ansible/roles/route53_hosted_zone` erstellt die Hosted Zone und liefert Nameserver.
-> **DNS-Records:** `ansible/roles/route53_records` legt A/AAAA-Alias-Records an und bereinigt sie beim Abbau.
-> **Deployment-Identity:** `ansible/roles/github_deployer_role` richtet GitHub-OIDC und eine Deploy-Rolle inkl. Policies > ein.
-> **IAM & Outputs:** `ansible/roles/iam_role` erzeugt zusätzliche Rollen; `ansible/roles/deployment_outputs` gibt GitHub-Variablen und Next-Steps aus.
-> - ChatGPT, https://chatgpt.com
+**Architekturüberblick**
+**Ausführungskontext:** `ansible/ansible.cfg` setzt Inventory und Rollenpfad; `ansible/inventory/hosts.yml` definiert > localhost als Ziel, AWS-Region wird pro Play gesetzt.
+**Orchestrierung:** Die Playbooks koordinieren den Lebenszyklus, Rollen kapseln die Fachlogik pro AWS-Service.
+**Modularität:** Funktionen sind über `*_enabled` schaltbar; Zustände über `*_state` und Behalte-Flags `keep_*` > steuerbar.
+**Datenfluss:** Rollen setzen Fakten (IDs/ARNs/Domain-Namen) und nutzen sie zur Auflösung von Abhängigkeiten.
+**Ausgaben:** Ein Output-Modul stellt GitHub-Variablen und DNS-Infos für die nächsten Schritte bereit.
+
+**Playbook-Fluss**
+**Provisioning:** `ansible/playbooks/site.yml` setzt die AWS-Umgebung, initialisiert Variablen und führt die Rollen in > definierter Reihenfolge aus.
+**Post-Validation:** `ansible/playbooks/post_validation.yml` aktualisiert nach der ACM-Validierung CloudFront und DNS.
+**Destroy:** `ansible/playbooks/destroy.yml` setzt States auf absent, räumt Records, deaktiviert CloudFront und entfernt > Ressourcen.
+**Redeploy:** `ansible/playbooks/redeploy.yml` kombiniert Destroy und Site für einen sauberen Neustart.
+ 
+**Rollen-Module**
+**Storage/CDN:** `ansible/roles/s3_static_site` verwaltet das Bucket; `ansible/roles/cloudfront_distribution` erstellt > die Distribution, OAI und S3-Policy.
+**TLS-Zertifikate:** `ansible/roles/acm_certificate` beantragt Zertifikate, liest Validierungs-Records und prüft den > Status.
+**DNS-Zone:** `ansible/roles/route53_hosted_zone` erstellt die Hosted Zone und liefert Nameserver.
+**DNS-Records:** `ansible/roles/route53_records` legt A/AAAA-Alias-Records an und bereinigt sie beim Abbau.
+**Deployment-Identity:** `ansible/roles/github_deployer_role` richtet GitHub-OIDC und eine Deploy-Rolle inkl. Policies > ein.
+**IAM & Outputs:** `ansible/roles/iam_role` erzeugt zusätzliche Rollen; `ansible/roles/deployment_outputs` gibt GitHub-Variablen und Next-Steps aus.
+
+
 
 **AWS CLI User Setup um über Ansible zuzugreifen:**
 Damit man über Ansible auf die AWS CLI zugreifen kann, muss am Anfang ein temporärer User erstellt werden mit einem Access Key und bestimmten Berechtigungen.
