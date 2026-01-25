@@ -9,34 +9,57 @@ has_children: true
 
 # Technische Umsetzung
 
+In diesem Abschnitt, beschreibe ich die Technische Umsetzung des Projekts und die schlussendliche Funktionsweise des Produktes.
+
+TODO - kurze zsfassung des kommenden Inhalts
+
 ## Initial Setup / Entwicklungsumgebung 
 
+Im folgenden erläutere ich, wie ich meine Entwicklungsumgebung eigerichtet habe. Wichtig dabei ist, dass ich auf einem Windows Gerät arbeite und für Ansible eine WSL Instanz verwende. Auf diese Insatz greife ich direkt über VSCode zu. Genaueres dazu später.
+
 ### Hugo Setup
-Steps taken for hugo setup:
-- download hugo extended version (on windows) - (COMMAND: winget install Hugo.Hugo.Extended)
-- Install hugo stack theme
-- Install go (installer)
-- Install dart sass (Add PATH variable + move folder)
-- Create github portfolio site (quickstart template) (https://stack.jimmycai.com/guide/getting-started)
-- Setup my hugo site as I want it on my windows pc
+
+Wenn man eine Hugo Website auf Github Pages oder auf AWS hosten will, muss man eigentlich Hugo nicht direkt auf seinem Gerät installieren.
+Die entsprechenden Github Workflows, führen den Build command mit der neusten Hugo version in einer temporären Umgebung aus. Die daraus generierte statische Seite wird dann in einen Public ordner geladen und dieser wird veröffentlicht. 
+
+Allerdings wollte ich sicherstellen, dass mein bearbeitetes template richtig 'builded' und dass ich die Error Meldungen direkt einsehen kann, um allfällige Probleme einfacher debuggen zu können.
+
+Hier eine kurze Anleitung um dieses Setup einzurichten:
+1. Hugo auf windows installieren. Wichtig ist hierbei die 'extended' Version zu installieren, da diese für das Stack Theme benötigt wird
+```cmd
+winget install Hugo.Hugo.Extended
+```
+2. Go über den MSI installer installieren wie unter [https://go.dev/doc/install](https://go.dev/doc/install) beschrieben.
+3. Dart Sass gemäss [Hugo Anleitung](https://gohugo.io/functions/css/sass/#dart-sass) installieren. Dafür habe ich persönlich die [prebuilt binaries](github.com/sass/dart-sass/releases/latest) zur installation verwendet und entsprechend mit zur PATH Variable hinzugefügt.
+4. Nun kann man das [starter Template](https://github.com/CaiJimmy/hugo-theme-stack-starter) nutzen, das JimmyCai, der ersteller des Stack Themes, vorbereitet hat. Dafür einfach seine Repository Klonen und umbennenen. Ich habe diese für den Moment "portfolio" benannt.
+5. Nun kann ich lokal das Template anpassen und mit Hugo testen.
+
 
 #### Template anpassen
-- setup parameters, links, picture, titel etc
-- Creating new posts: "hugo new post/POSTNAME/index.md" in terminal
-- important -> change metadata "draft: true" to false to publish
-- Changed Metadata
-- Deleted preexisting posts all but syntax -> made into full cheatsheet
-- Created Project template post -> can be copied to create new posts
- -> aufbau der struktur gemäss vorgaben für Semesterarbeit (TODO struktur ausführen)
-- Found that posting can be delayed by setting future date
-- Tested Local view (SCRUM-59) - TODO insert video
 
-## TODO - eigenheiten später entdeckt
-- Uglyurls nötig um cloudfront nutzen zu können
+Ich habe das Template entsprechend meiner Vorstellungen angepasst. Dafür habe ich vorallem irrelevante Beispiel Posts entfernt, einen eigenen Beispiel Post erstellt und alle Syntax tipps, die das vorherige Template gelistet hat, in einem Post 'Markdown Cheatsheet' zusammengefasst.
 
-#### How to Use
-- klurz erklären wie neue Projekte erstellt werden.
--> copy template folder. Edit details (TODO- ausführen)
+Um neue Posts zu erstellen, kann man den Befehl "hugo new post/POSTNAME/index.md" nutzen oder ein existierenden Post 
+
+So sah meine Version zu dem Zeitpunkt aus:
+
+<video controls playsinline preload="metadata" width="100%">
+  <source src="{{ '/resources/videos/SCRUM-59_lokaleVorschauTest.mp4' | relative_url }}" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+
+> [Source Video File](../../resources/videos/SCRUM-59_lokaleVorschauTest.mp4)
+
+Diese Version hatte ich auch mit den Lehrern geteilt. Eine Weile hatte ich diese auf Github Pages veröffentlicht. 
+
+Wie ihr seht, hatte ich es zum Testen bereits mit etwas persönlichem Inhalt beschrieben. Dies habe ich später wieder genralisieren müssen, um daraus ein wiederverwendbares Produkt zu machen.
+
+**Wichtige Erkentnisse**
+Ich habe in diesem Schritt einiges ausprobiert, um zu verstehen wie Hugo funktioniert. Folgende Erkentnisse habe ich daraus entnommen:
+- Hugo muss nicht lokal installiert/'builded' werden, wenn es über Github pages veröffentlicht wird. Das Template bietet bereits ein Github Workflow für den build und deployment Prozess.
+- Um neue Posts zu erstellen muss nicht unbedingt der entsprechende Hugo Befehl verwendet werden und es ist praktischer ein vorherigen Post-Odner einfach zu kopieren.
+- In der Metadata der Posts, können Posts als Draft markiert werden, wodurch diese nicht veröffentlicht werden. 
+- Auch kann ein Veröffentlichungsdatum geplant werden. Wenn dies während dem build Prozess in der Zukunft liegt, wird der Post auch nicht veröffentlicht.
 
 ### Ansible & AWS
 

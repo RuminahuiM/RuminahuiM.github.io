@@ -420,6 +420,7 @@ Folgende Backlog items habe ich für den Sprint 2 eingeplant:
 - Bisherige Technische Dokumentation ausführen [SCRUM-147](https://rumidesigns.atlassian.net/browse/SCRUM-147)
 
 ![Planned Sprint 2](..\..\resources\images\Sprint_2_Plan.png)
+
 > Leider habe ich vergessen am Anfang des Sprints ein Screenshot zu machen, weshalb das Bild den Status der Tasks nach beendigung des Sprints anzeigt
 
 ### Sprint Review
