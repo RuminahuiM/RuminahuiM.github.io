@@ -509,7 +509,7 @@ Als Trusted Entity wird die eigene Repository eingetragen mit dem gewünschten b
 
 Der Workflow ist einerseits in der Produkt Repository [hier](https://github.com/RuminahuiM/hugo-portfolio-setup/blob/main/.github/workflows/deployToS3.yml) zu finden. Ihr könnt ihn aber auch direkt hier einsehen:
 <details>
-<summary>IAM policy JSON</summary>
+<summary>Github Workflow</summary>
 
 ```yml
 # Workflow for building and deploying a Hugo site to S3
