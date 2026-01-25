@@ -147,47 +147,43 @@ Github Actions ist genau für solche Automatisierungen gebaut. Die CI Scripts ü
 
 # Projekmanagement Methodik
 
-## Scrum Definitions - TODO Cleanup notes
+## Scrum Definitions
 
-Definitions:
-Scrum‑Regeln, Schätzung, Definitionen
+**Grundlagen:** Scrum‑Regeln, Schätzung, Definitionen.
 
-Sprint‑Länge: 2 Wochen.
+**Sprint‑Länge:** 2 Wochen.
 
-Zeremonien (pro Sprint):
+**Zeremonien (pro Sprint):**
 - Planung (45 min)
-- Daily (kurzer check und nur an Tagen, an denen am Projekt weitergearbeitet wird)
+- Daily (kurzer Check und nur an Tagen, an denen am Projekt weitergearbeitet wird)
 - Review & Retro (30 min)
 
-Story‑Points‑Skala: 1, 2, 3, 5, 8, 13
-1–2 = sehr klein
-3–5 = normal
-8+ = groß → evtl. aufteilen
+**Story‑Points‑Skala:** 1, 2, 3, 5, 8, 13  
+1–2 = sehr klein  
+3–5 = normal  
+8+ = gross → evtl. aufteilen
 
-Definition of Ready (DoR):
+**Definition of Ready (DoR):** 
 Ziel klar, Akzeptanzkriterien notiert, nötige Zugangsdaten vorhanden.
 
-Definition of Done (DoD):
-umgesetzt, gebaut/getestet, PR gemergt (falls nötig), live geprüft, kurze Doku/Notiz aktualisiert.
+**Definition of Done (DoD):**
+Umgesetzt, gebaut/getestet, live geprüft, kurze Doku/Notiz aktualisiert.
 
-Sontige Notes für Doku:Als MVP gilt basically HUGO site auf AWS, die auf git push aktualisiert wird.
-Ansible zum ausrollen/aufbauen der infrastruktur hinzuzufügen, ist zusatz
+**Struktur Sprint Review:**
+- Begrüssung & Regeln erklären
+- Was wird gezeigt, was nicht?
+- Alle Sprint‑Items listen: Demo ja/nein, Status
+- Demos durchführen (Feedback direkt einholen)
+- Probleme und Chancen besprechen
+- Product Backlog teilen
+- Nächster Sprint: welche Items nehmen wir mit?
+- Abschluss: Danke und Anerkennung
 
-Struktur Sprint Review:
-- welcome & rules
-- what will and will not be demonstrated?
-- list all items from the sprint. will it be demoed? Status?
-- Do the demos (solicit feedback while going down the list)
-- Discuss problems and  opotunities
-- share product backlog
-- next sprint -> wich items will we take over to it?
-- conclude, thanks and praise
-
-Struktur Retrospective:
-- what went well?
-- what went wrong?
-- How can this be improved?
-- What problems did i encounter and how were the resolved?
+**Struktur Retrospective:**
+- Was lief gut?
+- Was lief schlecht?
+- Wie kann ich das verbessern?
+- Welche Probleme gab es und wie habe ich sie gelöst?
 
 ---
 
@@ -222,11 +218,25 @@ Struktur Retrospective:
 
 ### Zwischengespräch 01
 
-- Leider verpasst da falsch terminiert - TODO ausführen
+Leider habe ich das erste Zwischengespräch verpasst, da ich das Datum falsch in meinem Kalender eingetragen hatte.
+Weil ausserdem kurz darauf Weihnachtsferien starteten, gab es keine weitere Termine, um das Gespräch nachzuholen.
 
 ### Zwischengespräch 02
 
-- TODO: besprechung beschreiben -> vorallem Tasks in JIRA sollten anders erstellt und besser getracked werden
+Am 13. Januar, hatte ich ein Zwischengespräch mit Parisi Corrado.
+Dabei habe ich den aktuellen Stand des Porjekts erklärt und eine kurze Ausführung demonstriert.
+
+**Ergebnisse**
+Wir stellten fest, dass das Projekt technisch an einem guten Punkt war, allerdings wurde im JIRA nicht der aktuelle Zustand wieder gespiegelt.
+Ausserdem besprachen wir die Struktur der User Stories und wie diese angepasst werden sollte. 
+
+Wir sprachen auch darüber, wie AI für die Planung verwendet werden kann und wie nicht.
+
+**Erkentnisse**
+Nach dem Gespräch hatte ich ein besseres Verständnis davon, wie man User Stories in JIRA erfassen sollte und konnte diese entsprechend anpassen.
+Da das Projekt bereits im Endspurt war, habe ich nicht alle Empfehlungen umgesetzt, so habe ich die Aktzeptanzkriterien und Subtask beide drin gelassen.
+
+Für das nächste Projekt werde ich die Planung im JIRA ohne unterstüzung von AI erstellen oder diese lediglich verwenden um Details auszuarbeiten.
 
 ---
 
