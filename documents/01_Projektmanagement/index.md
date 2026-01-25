@@ -38,17 +38,48 @@ Auch liegt eine vollständige Betriebsdoku für die Verwendung des Produkts vor.
 ---
 
 ## Architektur
- TODO - erläutern
+Im folgenden Bild, seht ihr eine vereinfachte Darstellung der geplanten Architektur für dieses Produkt:
+
 [Architektur Skizze](../../resources/images/architektur.png)
 
-### Entscheidungen - TODO
+Wie ihr sehen könnt, ist das Ziel eine Repository zu haben, welche bei einem Push die Hugo Seite erstellt (build) und diese auf einen S3 Bucket hochlädt. Dieser S3 Bucket wird von CloudFront als Datenablage verwendet. CloudFront stellt vereinfach gesagt einen Webserver dar, welcher die Seite zur Verfügung stellt. 
 
-- HUGO in generall
-- HUGO Theme: Stack https://github.com/CaiJimmy/hugo-theme-stack
-- Hosting Provider / Cloud : AWS
-- CI handler: Github Actions
-- why Ansible for Deployment / Reproducibility 
+> Note: Die Funktionsweise von CloudFront ist etwas komplizierter als ein normaler Webserver. Es bietet viele Vorteile wie schnelleren Zugriff durch chaching und weiteres. 
 
+### Entscheidungen
+
+**Warum HUGO?**
+Hugo ist ein modernes Tool, um aus simplen Markdown, statische Websiten zu generieren, die modernen Standards entsprechen.
+Es wird von vielen für Dokumentation, Blogs, etc. verwendet und wird aktiv weiter entwickelt.
+
+**HUGO Theme: Stack**
+Es gibt sehr viele verschiedene Themes für Hugo. Ihr könnt diese [hier](https://themes.gohugo.io) nachschauen.
+
+Stack fand ich persönlich am ansprechendsten was Ästethik und Funktionalität angeht. Es scheint mir die beste Option für ein Portfolio das auf Hugo basiert.
+
+> Source Link: https://github.com/CaiJimmy/hugo-theme-stack
+
+**Hosting Provider AWS**
+Für das Hosting verwende ich AWS aus diversen gründen.
+
+- Automatisierung über Ansible scheint einfach, bzw. es gibt viele Resourcen zu diesem Thema
+- Durch die TBZ haben wir ein Test Lab und man kann auch ein eigenen Test-Account als Entwickler erstellen. (Keine Entwicklungskosten)
+- Das Hosting einer solchen Seite auf AWS ist auch Kostengünstig, nachdem das Test-Budget aufgebraucht ist. Wodurch es langfristig als günstiges Hosting verwendet werden kann.
+- Dieses Setup beinhaltet diverse Themen aus den letzten Modulen AWS, Ansible, CI
+
+**Ansible für Deployment**
+Hierbei ging es hauptsächlich um den Lerneffekt.
+
+Ansible kann zwar genutzt werden um Ressourcen zu deployen, wie ich es in diesem Fall nutze, allerdings ist es eigentlich dazu gedacht diverse Ressourcen zentral zu verwalten.
+
+Es ist nicht dazu gedacht Ressourcen einmalig zu erstellen. Für sowas sollte eigentlich sowas wie Terraform verwendet werden.
+
+Ich wollte aber Ansible besser kennenlernen und habe mich deshalb dafür entschieden, dass Projekt damit umzusetzen.
+
+**Github Actions** 
+Dies ist die einfachste Lösung, um auf Push einer Repository eine Aktion auszuführen.
+
+Github Actions ist genau für solche Automatisierungen gebaut. Die CI Scripts über einen anderen Handler zu handhaben, hätte das ganze komplizierter gemacht und evtl. auch Zusatzkosten erzeugt.
 
 ---
 
@@ -112,11 +143,6 @@ Auch liegt eine vollständige Betriebsdoku für die Verwendung des Produkts vor.
 - **Dokumentation laufend mitführen**  
   Wichtige Entscheidungen und Stolpersteine zeitnah festhalten, statt alles am Ende zu rekonstruieren.  
   So stützt die Doku die Bewertung und gleichzeitig mein eigenes Portfolio.
-
-## Übersicht Projektvorgehen
-
- TODO - Projektvorgehen detailiert beschreiben
-
 ---
 
 # Projekmanagement Methodik
