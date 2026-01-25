@@ -569,23 +569,48 @@ Folgende Backlog items habe ich für den Sprint 3 eingeplant:
 
 | Eingeplante Backlog Items | Demo | Status |
 |----------|----------|----------|
-| [SCRUM-](https://rumidesigns.atlassian.net/browse/SCRUM-) | NO DEMO | desc |
-| [SCRUM-](https://rumidesigns.atlassian.net/browse/SCRUM-) | NO DEMO | desc |
-| [SCRUM-](https://rumidesigns.atlassian.net/browse/SCRUM-) | NO DEMO | desc |
-| [SCRUM-](https://rumidesigns.atlassian.net/browse/SCRUM-) | NO DEMO | desc |
-| [SCRUM-](https://rumidesigns.atlassian.net/browse/SCRUM-) | NO DEMO | desc |
-| [SCRUM-](https://rumidesigns.atlassian.net/browse/SCRUM-) | NO DEMO | desc |
-| [SCRUM-](https://rumidesigns.atlassian.net/browse/SCRUM-) | NO DEMO | desc |
-| [SCRUM-](https://rumidesigns.atlassian.net/browse/SCRUM-) | NO DEMO | desc |
-| [SCRUM-](https://rumidesigns.atlassian.net/browse/SCRUM-) | NO DEMO | desc |
-
+| [SCRUM-133](https://rumidesigns.atlassian.net/browse/SCRUM-133) | NO DEMO | Erledigt. Hier musste nur noch Dokumentation abgeschlossen werden. Wird nicht demonstriert, da es im letzten Sprint bereits eine Demo gab |
+| [SCRUM-14](https://rumidesigns.atlassian.net/browse/SCRUM-14) | NO DEMO | Erledigt. Gehört eigentlich in SCRUM-133 rein. Wurde im Produktrepository dokumentiert. |
+| [SCRUM-31](https://rumidesigns.atlassian.net/browse/SCRUM-31) | NO DEMO | Cancelled. HUGO und CloudFront haben bereits eingebaute 404 Seiten. |
+| [SCRUM-148](https://rumidesigns.atlassian.net/browse/SCRUM-148) | NO DEMO | Erledigt. Template wurde vollständig generalisiert |
+| [SCRUM-150](https://rumidesigns.atlassian.net/browse/SCRUM-150) | NO DEMO | Erledigt. Hugo Template wurde in die Ansible Repo eingefügt |
+| [SCRUM-143](https://rumidesigns.atlassian.net/browse/SCRUM-143) | NO DEMO | Test Cases in technischer Dokumentation erfasst und Tests erfolgreich durchgeführt |
+| [SCRUM-16](https://rumidesigns.atlassian.net/browse/SCRUM-16) | NO DEMO | Cancelled. Gehört eignetlich in SCRUM-15 hinein. |
+| [SCRUM-15](https://rumidesigns.atlassian.net/browse/SCRUM-15) | NO DEMO | desc |
+| [SCRUM-151](https://rumidesigns.atlassian.net/browse/SCRUM-151) | NO DEMO | Erledigt. Alle Demo Videos wurden aufgenommen und editiert |
+| [SCRUM-27](https://rumidesigns.atlassian.net/browse/SCRUM-27) | NO DEMO | desc |
+| [SCRUM-154](https://rumidesigns.atlassian.net/browse/SCRUM-154) | NO DEMO | Wird Erldigt. Nach Abschluss des Reviews wird das Projekt abgegeben. |
 
 #### Herausforderungen & Lösungen
+
+**Demo Videos**
+Für die Demo Videos musste sehr vieles stimmen. Diese aufzunehmen, war um einiges Mühsamer als ich erwartet hatte.
+
+Ausserdem konnte ich diese leider nicht in die Dokumentationsrepository hochlanden. 
+
+TODO - Lösung für videoverlinkung beschreiben
+
+**Live Demo**
+Für die Live Demo muss ich leider bereits Route53 und ein Zertifikat zurücklassen, da ich das Produkt ansonsten nicht live demonstrieren kann, aufgrund der Wartezeiten für DNS Propagation und validierung des Zertifikats.
+
+Solange ich beides vorbereite kann ich den trotzdem die Playbooks ausführen, was für eine solche Demo gut genug ist. Zertfikat und Route53 werden einfach behalten wenn die bereits vorhanden sind.
+
+**Struktur Technische Dokumentation**
+Ich denke die Struktur die ich für die Technische Dokumentation vorbereitet hatte, ist nicht Optimal. 
+
+Leider konnte ich diese zeitlich nicht mehr gross anpassen. Für das nächste Projekt möchte ich aber eine bessere Struktur am Anfang des Projekts mit Unterstützung eines Ausbildners ausarbeiten.
 
 ### Sprint Retrospective
 
 **Was war gut?**
+Der User Guide für das Produkt ist sehr ausführlich dokumentiert und ich denke das Endprodukt ist auf jedenfall ein Erfolg. Ich habe zum erstenmal eine meiner Automatisierung so einfach anzuwenden / zu reproduzieren gemacht und damit zum ersten mal ein wirkliches Produkt aus einer Automatisierung gemacht.
+
+Ausserdem konnte ich die Dokumentation rechtzeitig fertig stellen und eine gute Präsentation vorbereiten.
 
 **Was war nicht gut?**
 
+Ich bin nicht sehr zufrieden mit der Struktur der Projektdokumentation im aktuellen Zustand. Da ich über das ganze Projekt etwas Schwierigkeiten mit dem Zeitmanagement hatte, kann ich das aber auch nicht mehr wirklich korrigieren für dieses Projekt. 
+
 **Welche Massnahmen können ergriffen werden?**
+
+Im ersten Projekt hatte ich meinen Fokus eher auf dem Technischen Part des Projekts. In diesem Projekt war der Fokus für mich eher auf Projektmanagement mittels Scrum. Ich denke im nächsten Projekt sollte ich einen grössen Fokus auf die Dokumentation legen, um eine Grundlage für künftige Projekte zu legen. 
