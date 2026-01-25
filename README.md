@@ -1,9 +1,10 @@
 # RuminahuiM.github.io
 
-This is the Projectmanagement Documentation for my semester project 02
+Alle Ressourcen können unter den folgenden Repositories gefunden werden:
 
-Here you find all the Relevant Resource-Links to review my Project:
-[Project Management Documentation](https://ruminahuim.github.io/)
-[JIRA Project](https://rumidesigns.atlassian.net/jira/software/projects/SCRUM/summary)
-[Product Repository](https://github.com/RuminahuiM/portfolio)
-[Product Maual - Coming Soon](URL)
+**Dokumentation des Projekts:**[https://github.com/RuminahuiM/RuminahuiM.github.io](https://github.com/RuminahuiM/RuminahuiM.github.io)
+> Auch unter "[https://ruminahuim.github.io](https://ruminahuim.github.io)" öffentlich einsehbar
+
+**Produktrepository des Projekts:** [https://github.com/RuminahuiM/hugo-portfolio-setup](https://github.com/RuminahuiM/hugo-portfolio-setup)
+
+**JIRA Projekt:**[JIRA Project](https://rumidesigns.atlassian.net/jira/software/projects/SCRUM/summary)
