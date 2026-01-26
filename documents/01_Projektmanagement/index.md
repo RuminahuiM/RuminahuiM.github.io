@@ -451,30 +451,42 @@ Zum Schluss habe ich diverse vollständige Tests durchgeführt und anpassungen g
 
 In dieser Demo, wird die ausführung der Ansible Plabooks demonstriert. Im ersten Video wird die Initiale ausführung gezeigt. Diese bereitet alles vor, sodass nur noch das Zertifikat in CloudFront angehängt werden muss. Im Zweiten Video wird das Post_Validation Plabook ausgeführt, welches das Zertifikat anhängt. 
 
-<video controls playsinline preload="metadata" width="100%">
-  <source src="{{ '/resources/videos/FirstDeployment.mp4' | relative_url }}" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
+**First Deployment**
+<iframe
+  width="560"
+  height="315"
+  src="https://www.youtube.com/embed/HH7YeFT5xP0"
+  title="YouTube video player"
+  frameborder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+  allowfullscreen>
+</iframe>
 
-> [Source Video File](../../resources/videos/FirstDeployment.mp4)
+**Post Validation Playbook**
+<iframe
+  width="560"
+  height="315"
+  src="https://www.youtube.com/embed/44EqOA40HrY"
+  title="YouTube video player"
+  frameborder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+  allowfullscreen>
+</iframe>
 
-<video controls playsinline preload="metadata" width="100%">
-  <source src="{{ '/resources/videos/PostValidationPlaybook.mp4' | relative_url }}" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
 
-> [Source Video File](../../resources/videos/PostValidationPlaybook.mp4)
+#### DEMO - Github Actions
 
-#### DEMO - Github Actions TODO-> videos verlinken
+In diesem kurzen Video wird nochmals kurz gezeigt, wie mit dem Github Worflow, die Seite hochgeladen werden kann.
 
-Beschreibung
-
-<video controls playsinline preload="metadata" width="100%">
-  <source src="{{ '/resources/videos/Sprint2_Demo.mp4' | relative_url }}" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
-
-> [Source Video File](../../resources/videos/Sprint2_Demo.mp4)
+<iframe
+  width="560"
+  height="315"
+  src="https://www.youtube.com/embed/MbWbkMBvexs"
+  title="YouTube video player"
+  frameborder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+  allowfullscreen>
+</iframe>
 
 #### Herausforderungen & Lösungen
 
@@ -576,19 +588,17 @@ Folgende Backlog items habe ich für den Sprint 3 eingeplant:
 | [SCRUM-150](https://rumidesigns.atlassian.net/browse/SCRUM-150) | NO DEMO | Erledigt. Hugo Template wurde in die Ansible Repo eingefügt |
 | [SCRUM-143](https://rumidesigns.atlassian.net/browse/SCRUM-143) | NO DEMO | Test Cases in technischer Dokumentation erfasst und Tests erfolgreich durchgeführt |
 | [SCRUM-16](https://rumidesigns.atlassian.net/browse/SCRUM-16) | NO DEMO | Cancelled. Gehört eignetlich in SCRUM-15 hinein. |
-| [SCRUM-15](https://rumidesigns.atlassian.net/browse/SCRUM-15) | NO DEMO | desc |
+| [SCRUM-15](https://rumidesigns.atlassian.net/browse/SCRUM-15) | NO DEMO | Erledigt. Projektdokumentation wurde abgeschlossen und hochgeladen. |
 | [SCRUM-151](https://rumidesigns.atlassian.net/browse/SCRUM-151) | NO DEMO | Erledigt. Alle Demo Videos wurden aufgenommen und editiert |
-| [SCRUM-27](https://rumidesigns.atlassian.net/browse/SCRUM-27) | NO DEMO | desc |
+| [SCRUM-27](https://rumidesigns.atlassian.net/browse/SCRUM-27) | NO DEMO | Erledigt. Präsentation für Mittwoch ist vorbereitet. |
 | [SCRUM-154](https://rumidesigns.atlassian.net/browse/SCRUM-154) | NO DEMO | Wird Erldigt. Nach Abschluss des Reviews wird das Projekt abgegeben. |
 
 #### Herausforderungen & Lösungen
 
 **Demo Videos**
-Für die Demo Videos musste sehr vieles stimmen. Diese aufzunehmen, war um einiges Mühsamer als ich erwartet hatte.
+Für die Demo Videos musste sehr vieles stimmen. Diese aufzunehmen, war um einiges Mühsamer als ich erwartet hatte. Oftmals musste ich teile mehrfach aufnehmen.
 
-Ausserdem konnte ich diese leider nicht in die Dokumentationsrepository hochlanden. 
-
-TODO - Lösung für videoverlinkung beschreiben
+Ausserdem konnte ich diese leider nicht in die Dokumentationsrepository hochlanden. Stattdessen musste ich diese auf Youtube als nicht gelistete Videos hochladen und mit einem iframe element in dieser Dokumentation verlinken.
 
 **Live Demo**
 Für die Live Demo muss ich leider bereits Route53 und ein Zertifikat zurücklassen, da ich das Produkt ansonsten nicht live demonstrieren kann, aufgrund der Wartezeiten für DNS Propagation und validierung des Zertifikats.
