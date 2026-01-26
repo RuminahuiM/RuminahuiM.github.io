@@ -1,5 +1,7 @@
 # Quellenverzeichnis 
 
+> Hinweis: Dieses Glossar wurde mit Unterstützung von ChatGPT erstellt (Basierend auf meinen Notierten Quellen).
+
 1. **Cai, Jimmy (o. J.)** – *Getting Started (Stack Theme Guide)*. Website.  
    URL: https://stack.jimmycai.com/guide/getting-started  
    Kurzbeschreibung: Einstiegsdokumentation zum Hugo-Theme **Stack** (Grundkonzepte, Setup/Struktur, erste Konfigurationsschritte).
