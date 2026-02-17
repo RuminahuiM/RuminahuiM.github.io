@@ -42,11 +42,11 @@ Im folgenden Bild, seht ihr eine vereinfachte Darstellung der geplanten Architek
 
 **Version 1:**
 
-[Architektur Skizze](../../resources/images/architektur.png)
+![Architektur Skizze](../../resources/images/architektur.png)
 
 **Version 2:**
 
-[Architektur Skizze](../../resources/images/architekturV2.png)
+![Architektur Skizze](../../resources/images/architekturV2.png)
 
 Wie ihr sehen könnt, ist das Ziel eine Repository zu haben, welche bei einem Push die Hugo Seite erstellt (build) und diese auf einen S3 Bucket hochlädt. Dieser S3 Bucket wird von CloudFront als Datenablage verwendet. CloudFront stellt vereinfach gesagt einen Webserver dar, welcher die Seite zur Verfügung stellt. 
 
