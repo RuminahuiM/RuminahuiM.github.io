@@ -19,6 +19,7 @@ Gebaut mit Material for MkDocs, gleiche Version und gleiches Theme wie die Proje
 | `docs/ueber-mich.md` | Über mich |
 | `docs/assets/images/` | Profilbild |
 | `docs/stylesheets/extra.css` | Aussehen der Projektkarten |
+| `docs/documents/` | Nur Weiterleitungen: alte URLs der Hugo-Doku (bis November 2026 direkt unter ruminahuim.github.io) auf `/hugo-portfolio-semesterarbeit/` |
 | `.github/workflows/pages.yml` | Build mit `mkdocs build --strict` und Deployment auf GitHub Pages |
 
 ## Neues Projekt hinzufügen
