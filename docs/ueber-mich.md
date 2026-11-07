@@ -7,7 +7,7 @@ hide:
 
 Ich bin Dodoe Rumiñahui Mannale, System Engineer aus Zürich mit Fokus auf Automatisierung und AI.
 
-Ich automatisiere Infrastruktur und Prozesse rund um Microsoft 365 und Azure und baue AI-Systeme, die ich im Alltag wirklich einsetze. Parallel vertiefe ich im HF-Studium Cloud Native meine Kenntnisse in Containern, Kubernetes und CI/CD.
+Mein Schwerpunkt ist die Automatisierung von Infrastruktur und Prozessen rund um Microsoft 365 und Azure, dort habe ich die meiste Erfahrung. Zunehmend arbeite ich auch mit AWS und automatisiere dort Infrastruktur und Deployments. Daneben baue ich AI-Systeme, die ich im Alltag wirklich einsetze. Parallel vertiefe ich im HF-Studium Cloud Native meine Kenntnisse in Containern, Kubernetes und CI/CD.
 
 ## Studium
 
