@@ -1,0 +1,28 @@
+# Projektliste der Portfolio-Seite.
+# Ein neues Projekt = ein neuer Eintrag unter "projects". Reihenfolge egal,
+# die Seite sortiert automatisch nach "start" (neueste zuerst).
+# Anleitung und Feldbeschreibung: README.md, Abschnitt "Neues Projekt hinzufügen".
+
+categories:
+  - id: semesterarbeiten
+    title: Semesterarbeiten
+    page: semesterarbeiten.md
+  - id: weitere-projekte
+    title: Weitere Projekte
+    page: weitere-projekte.md
+
+projects: []
+
+# Vorlage zum Kopieren (unter "projects:" einfügen und "[]" entfernen):
+#
+#  - title: RDG als DevOps-Projekt mit KI-Wartung
+#    category: semesterarbeiten          # semesterarbeiten | weitere-projekte
+#    semester: 4                         # optional, nur bei Semesterarbeiten
+#    topics: [DevOps, Projektmanagement]  # Themenfelder
+#    start: "2026-10"                    # JJJJ-MM, in Anführungszeichen
+#    end: "2027-01"                      # optional, leer lassen = laufend
+#    status: laufend                     # optional, freier Text
+#    summary: >
+#      Ein bis zwei Sätze, worum es im Projekt geht.
+#    page: https://ruminahuim.github.io/rdg-semesterarbeit/
+#    repo: https://github.com/RuminahuiM/rdg-semesterarbeit

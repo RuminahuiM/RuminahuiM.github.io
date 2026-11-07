@@ -1,0 +1,111 @@
+# RuminahuiM.github.io
+
+Portfolio-Hauptseite von Dodoe Rumiñahui Mannale. Sie sammelt meine Semesterarbeiten (TBZ, Dipl. Informatiker/in HF, ITCNE25) und weitere Projekte. Jedes Projekt hat ein eigenes Repository mit eigener Pages-Seite, die Hauptseite verlinkt nur darauf.
+
+**Lesen:** <https://ruminahuim.github.io/>
+
+Gebaut mit Material for MkDocs, gleiche Version und gleiches Theme wie die Projektseiten (Referenz: [rdg-semesterarbeit](https://github.com/RuminahuiM/rdg-semesterarbeit)).
+
+## Aufbau
+
+| Pfad | Inhalt |
+| --- | --- |
+| `data/projects.yml` | Projektliste: Kategorien und ein Eintrag pro Projekt |
+| `hooks/projects.py` | MkDocs-Hook: rendert die Projektliste als Karten, prüft die Einträge |
+| `docs/index.md` | Startseite: Vorstellung und alle Projekte |
+| `docs/semesterarbeiten.md` | Nur Semesterarbeiten |
+| `docs/weitere-projekte.md` | Nur weitere Projekte, erscheint in der Navigation erst mit dem ersten Eintrag |
+| `docs/ueber-mich.md` | Über mich |
+| `docs/stylesheets/extra.css` | Aussehen der Projektkarten |
+| `.github/workflows/pages.yml` | Build mit `mkdocs build --strict` und Deployment auf GitHub Pages |
+
+## Neues Projekt hinzufügen
+
+1. In `data/projects.yml` unter `projects:` einen Eintrag ergänzen. Die Vorlage steht am Ende der Datei. Beim allerersten Eintrag `projects: []` durch `projects:` ersetzen.
+
+    ```yaml
+    projects:
+      - title: Titel des Projekts
+        category: semesterarbeiten
+        semester: 4
+        topics: [DevOps, Projektmanagement]
+        start: "2026-10"
+        end: "2027-01"
+        summary: >
+          Ein bis zwei Sätze, worum es geht.
+        page: https://ruminahuim.github.io/<repo-name>/
+        repo: https://github.com/RuminahuiM/<repo-name>
+    ```
+
+2. Lokal prüfen (siehe unten). Bei einem Fehler in der YAML bricht der Build mit einer Meldung ab, die Projekt und Feld nennt.
+3. Committen und pushen:
+
+    ```powershell
+    git add data/projects.yml
+    git commit -m "Projekt <Name> ergänzt"
+    git push
+    ```
+
+Die Reihenfolge in der Datei spielt keine Rolle. Die Seite sortiert nach `start`, neueste zuerst.
+
+### Felder
+
+| Feld | Pflicht | Beschreibung |
+| --- | --- | --- |
+| `title` | ja | Titel des Projekts |
+| `category` | ja | ID einer Kategorie aus `categories`: `semesterarbeiten` oder `weitere-projekte` |
+| `start` | ja | Beginn als `"JJJJ-MM"`, in Anführungszeichen |
+| `summary` | ja | Ein bis zwei Sätze |
+| `page` oder `repo` | mindestens eines | Vollständige URL der Projektseite bzw. des Repositorys |
+| `end` | nein | Ende als `"JJJJ-MM"`. Leer bedeutet laufend, die Karte zeigt dann "seit ..." |
+| `semester` | nein | Nummer der Semesterarbeit |
+| `topics` | nein | Themenfelder als Liste, z.B. `[Cloud, CI/CD]` |
+| `status` | nein | Freier Text, z.B. `laufend` oder `abgeschlossen` |
+
+### Neue Kategorie
+
+Unter `categories` einen Eintrag mit `id`, `title` und `page` ergänzen, dazu eine Seite in `docs/` mit dem Platzhalter `<!-- projekte: <id> -->`. Die Startseite zeigt die neue Kategorie automatisch, die Navigation ebenfalls, sobald es einen Eintrag gibt.
+
+## Projektseiten und Hauptseite
+
+- Ein Projekt-Repo mit eigener Pages-Seite ist unter `https://ruminahuim.github.io/<repo-name>/` erreichbar. Es hat Vorrang vor einem gleichnamigen Ordner dieser Hauptseite. Deshalb in `docs/` keine Ordner mit dem Namen eines Projekt-Repos anlegen.
+- Neue Projektseite: `mkdocs.yml`, `requirements.txt` und `.github/workflows/pages.yml` aus [rdg-semesterarbeit](https://github.com/RuminahuiM/rdg-semesterarbeit) übernehmen, damit alles gleich aussieht. `site_url` auf `https://ruminahuim.github.io/<repo-name>/` setzen.
+
+## Lokal ansehen und prüfen (PowerShell)
+
+Einmalig im Repo-Ordner:
+
+```powershell
+py -m venv .venv
+.\.venv\Scripts\Activate.ps1
+pip install -r requirements.txt
+```
+
+Danach:
+
+```powershell
+.\.venv\Scripts\Activate.ps1
+mkdocs serve          # Vorschau auf http://127.0.0.1:8000, lädt bei Änderungen neu
+mkdocs build --strict # gleiche Prüfung wie im Workflow
+```
+
+## Deployment
+
+Jeder Push auf `main` baut die Seite mit GitHub Actions und veröffentlicht sie. Voraussetzung ist die einmalige Einstellung im Repo unter **Settings > Pages > Build and deployment > Source: GitHub Actions**.
+
+## Später: eigene Domain
+
+Noch nicht umgesetzt. Was eine Custom Domain auf dieser Hauptseite bedeuten würde (Stand GitHub Docs, November 2026):
+
+- Bekommt die Hauptseite eine eigene Domain, gilt sie automatisch für alle öffentlichen Projektseiten desselben Kontos. Aus `ruminahuim.github.io/rdg-semesterarbeit/` wird dann `<domain>/rdg-semesterarbeit/`.
+- Ein einzelnes Projekt kann eine eigene Domain bekommen und überschreibt damit die geerbte. Die geerbte Domain lässt sich pro Projekt nicht abschalten, nur auf der Hauptseite ganz entfernen.
+- Private Projektseiten sind nicht betroffen.
+- Die Domain wird unter **Settings > Pages > Custom domain** gesetzt. Bei Deployment über einen eigenen Actions-Workflow wird eine `CNAME`-Datei ignoriert und ist nicht nötig.
+- GitHub empfiehlt, die Domain vorher im Konto zu verifizieren, um Domain-Takeover zu verhindern.
+- Nachziehen: `site_url` in allen `mkdocs.yml`, die URLs in `data/projects.yml` und Links in den Projekt-READMEs. Ob die alten `github.io`-Links weiterleiten, sagen die Docs nicht ausdrücklich, das nach der Umstellung testen.
+
+Quellen: [About custom domains and GitHub Pages](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/about-custom-domains-and-github-pages), [Managing a custom domain](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site)
+
+## Hinweis zur Theme-Version
+
+Material for MkDocs ist seit November 2025 im Maintenance-Modus, 9.7 ist die letzte Feature-Version. Die Versionen sind in `requirements.txt` fest gepinnt (`mkdocs==1.6.1`, `mkdocs-material==9.7.7`), damit Hauptseite und Projektseiten gleich bauen. Ein Wechsel, z.B. auf den Nachfolger Zensical, sollte für alle Repos gemeinsam erfolgen. Dabei prüfen, ob der Hook in `hooks/projects.py` weiter unterstützt wird.

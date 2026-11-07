@@ -1,0 +1,5 @@
+# MkDocs build output
+site/
+.cache/
+__pycache__/
+.venv/

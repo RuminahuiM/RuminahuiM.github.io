@@ -1,0 +1,69 @@
+site_name: Dodoe Rumiñahui Mannale
+site_description: "Portfolio: Semesterarbeiten und Projekte von Dodoe Rumiñahui Mannale"
+site_author: Dodoe Rumiñahui Mannale
+site_url: https://ruminahuim.github.io/
+repo_url: https://github.com/RuminahuiM/RuminahuiM.github.io
+repo_name: RuminahuiM/RuminahuiM.github.io
+edit_uri: edit/main/docs/
+
+theme:
+  name: material
+  language: de
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.top
+    - navigation.indexes
+    - navigation.footer
+    - search.highlight
+    - content.code.copy
+    - toc.follow
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Dunkles Design
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Helles Design
+
+extra_css:
+  - stylesheets/extra.css
+
+markdown_extensions:
+  - tables
+  - admonition
+  - attr_list
+  - md_in_html
+  - footnotes
+  - toc:
+      permalink: true
+  - pymdownx.details
+  - pymdownx.superfences
+
+plugins:
+  - search:
+      lang: de
+
+# Rendert die Projektliste aus data/projects.yml in die Seiten (siehe README).
+# Fuegt "Weitere Projekte" automatisch in die Navigation ein, sobald es dort Eintraege gibt.
+hooks:
+  - hooks/projects.py
+
+validation:
+  links:
+    anchors: warn
+
+# Die Seite ist erst in der Navigation, wenn es Eintraege gibt (macht der Hook).
+not_in_nav: |
+  /weitere-projekte.md
+
+nav:
+  - Start: index.md
+  - Semesterarbeiten: semesterarbeiten.md
+  - Über mich: ueber-mich.md

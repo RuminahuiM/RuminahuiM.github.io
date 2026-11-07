@@ -1,0 +1,47 @@
+/* Portfolio-Startseite und Projektkarten. Farben nur ueber Theme-Variablen,
+   damit Hell- und Dunkelmodus automatisch stimmen. */
+
+.md-typeset .portfolio-lead {
+  font-size: 1.05rem;
+  color: var(--md-default-fg-color--light);
+  margin-top: -0.4rem;
+}
+
+.md-typeset .portfolio-meta {
+  display: block;
+  font-size: 0.7rem;
+  color: var(--md-default-fg-color--light);
+}
+
+.md-typeset .portfolio-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+}
+
+.md-typeset .portfolio-tag {
+  font-size: 0.64rem;
+  line-height: 1.6;
+  padding: 0 0.5rem;
+  border-radius: 0.8rem;
+  background-color: var(--md-accent-fg-color--transparent);
+  color: var(--md-default-fg-color);
+  border: 1px solid var(--md-default-fg-color--lightest);
+}
+
+.md-typeset .portfolio-empty {
+  color: var(--md-default-fg-color--light);
+  font-style: italic;
+}
+
+/* Kartentitel etwas groesser als Fliesstext */
+.md-typeset .portfolio-cards > ul > li > p:first-child {
+  font-size: 0.9rem;
+  margin-bottom: 0.2rem;
+}
+
+/* Feste Spaltenbreite: eine einzelne Karte wird nicht ueber die ganze Breite
+   gezogen. Desktop zwei Spalten, Handy eine. */
+.md-typeset .grid.portfolio-cards {
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 25rem), 1fr));
+}
