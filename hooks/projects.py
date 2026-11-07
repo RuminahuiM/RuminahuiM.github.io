@@ -10,6 +10,11 @@ damit ein Tippfehler in der YAML nicht still auf der Seite landet.
 
 Kategorien mit einer eigenen Seite ("page") kommen automatisch in die
 Navigation, sobald sie mindestens ein Projekt haben.
+
+Zusaetzlich: Kontaktlinks aus mkdocs.yml (extra.kontakt), leere URLs werden
+ausgeblendet.
+    <!-- kontakt -->          inline: [LinkedIn](...) | [GitHub](...)
+    <!-- kontakt: liste -->   als Aufzaehlung mit ausgeschriebener Adresse
 """
 
 from __future__ import annotations
@@ -26,7 +31,10 @@ PLACEHOLDER = re.compile(r"<!--\s*projekte(?:\s*:\s*([a-z0-9-]+))?\s*-->")
 MONTH = re.compile(r"^\d{4}-(0[1-9]|1[0-2])$")
 URL = re.compile(r"^https?://\S+$")
 
+CONTACT = re.compile(r"<!--\s*kontakt(?:\s*:\s*(liste))?\s*-->")
+
 _data: dict = {"categories": [], "projects": []}
+_contacts: list = []
 
 
 def _fail(msg: str) -> None:
@@ -151,35 +159,70 @@ def _render(category_id: str | None) -> str:
     return "\n".join(parts) if parts else _grid([])
 
 
+def _load_contacts(extra) -> list:
+    items = (extra or {}).get("kontakt") or []
+    result = []
+    for c in items:
+        if not isinstance(c, dict) or not c.get("name"):
+            raise PluginError(f"mkdocs.yml extra.kontakt: Eintrag braucht 'name': {c!r}")
+        url = str(c.get("url") or "").strip()
+        if not url:
+            continue
+        if not URL.match(url):
+            raise PluginError(f"mkdocs.yml extra.kontakt: '{c['name']}' braucht eine vollstaendige URL (https://...)")
+        result.append({"name": str(c["name"]), "url": url})
+    return result
+
+
+def _render_contacts(as_list: bool) -> str:
+    if as_list:
+        return "\n".join(
+            f"- {c['name']}: [{re.sub(r'^https?://(www\.)?', '', c['url']).rstrip('/')}]({c['url']})"
+            for c in _contacts
+        ) + "\n"
+    return " | ".join(f"[{c['name']}]({c['url']})" for c in _contacts)
+
+
 # --- MkDocs events ---------------------------------------------------------
 
 def on_config(config, **kwargs):
-    global _data
+    global _data, _contacts
     base = os.path.dirname(config.config_file_path)
     _data = _load(os.path.join(base, DATA_FILE))
+    _contacts = _load_contacts(config.extra)
 
     nav = config.nav
     if nav is None:
         return config
-    in_nav = {list(item.values())[0] for item in nav if isinstance(item, dict)}
+    def nav_index(page: str):
+        return next(
+            (i for i, item in enumerate(nav) if isinstance(item, dict) and page in item.values()),
+            None,
+        )
+
+    # Fehlende Kategorie-Seiten direkt hinter die vorherige Kategorie setzen
+    # (Reihenfolge wie in categories), sonst hinter "Start".
+    anchor = nav_index("index.md")
     for c in _data["categories"]:
         page = c.get("page")
-        has_items = any(p["category"] == c["id"] for p in _data["projects"])
-        if page and has_items and page not in in_nav:
-            # vor "Über mich" einfuegen, sonst ans Ende
-            idx = next(
-                (i for i, item in enumerate(nav) if isinstance(item, dict) and "ueber-mich.md" in item.values()),
-                len(nav),
-            )
-            nav.insert(idx, {c["title"]: page})
-            in_nav.add(page)
+        if not page:
+            continue
+        idx = nav_index(page)
+        if idx is None and any(p["category"] == c["id"] for p in _data["projects"]):
+            pos = (anchor + 1) if anchor is not None else len(nav)
+            nav.insert(pos, {c["title"]: page})
+            idx = pos
+        if idx is not None:
+            anchor = idx
     return config
 
 
 def on_page_markdown(markdown, page, config, files, **kwargs):
-    if "projekte" not in markdown:
-        return markdown
-    return PLACEHOLDER.sub(lambda m: _render(m.group(1)), markdown)
+    if "kontakt" in markdown:
+        markdown = CONTACT.sub(lambda m: _render_contacts(bool(m.group(1))), markdown)
+    if "projekte" in markdown:
+        markdown = PLACEHOLDER.sub(lambda m: _render(m.group(1)), markdown)
+    return markdown
 
 
 def on_serve(server, config, builder, **kwargs):

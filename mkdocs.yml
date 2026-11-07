@@ -32,6 +32,15 @@ theme:
         icon: material/brightness-4
         name: Helles Design
 
+# Kontaktlinks: erscheinen auf Startseite, Über mich und Lebenslauf (Platzhalter <!-- kontakt -->).
+# Leere Werte werden ausgeblendet. Reihenfolge hier = Reihenfolge auf der Seite.
+extra:
+  kontakt:
+    - name: LinkedIn
+      url: ""   # z.B. https://www.linkedin.com/in/<profil>/
+    - name: GitHub
+      url: https://github.com/RuminahuiM
+
 extra_css:
   - stylesheets/extra.css
 
@@ -66,4 +75,5 @@ not_in_nav: |
 nav:
   - Start: index.md
   - Semesterarbeiten: semesterarbeiten.md
+  - Lebenslauf: cv.md
   - Über mich: ueber-mich.md

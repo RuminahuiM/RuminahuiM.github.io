@@ -15,8 +15,8 @@ Mein Schwerpunkt ist die Automatisierung von Infrastruktur und Prozessen rund um
 - Schule: Technische Berufsschule Zürich (TBZ)
 - Klasse: ITCNE25
 
-Die Arbeiten aus dem Studium findest du unter [Semesterarbeiten](semesterarbeiten.md).
+Die Arbeiten aus dem Studium findest du unter [Semesterarbeiten](semesterarbeiten.md), meinen Werdegang im [Lebenslauf](cv.md).
 
 ## Kontakt
 
-Am einfachsten über GitHub: [github.com/RuminahuiM](https://github.com/RuminahuiM)
+<!-- kontakt: liste -->

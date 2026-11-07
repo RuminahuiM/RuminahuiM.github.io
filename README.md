@@ -11,11 +11,13 @@ Gebaut mit Material for MkDocs, gleiche Version und gleiches Theme wie die Proje
 | Pfad | Inhalt |
 | --- | --- |
 | `data/projects.yml` | Projektliste: Kategorien und ein Eintrag pro Projekt |
-| `hooks/projects.py` | MkDocs-Hook: rendert die Projektliste als Karten, prüft die Einträge |
+| `hooks/projects.py` | MkDocs-Hook: rendert Projektliste und Kontaktlinks, prüft die Einträge |
 | `docs/index.md` | Startseite: Vorstellung und alle Projekte |
 | `docs/semesterarbeiten.md` | Nur Semesterarbeiten |
 | `docs/weitere-projekte.md` | Nur weitere Projekte, erscheint in der Navigation erst mit dem ersten Eintrag |
+| `docs/cv.md` | Lebenslauf (öffentliche Fassung), erreichbar unter `/cv/` |
 | `docs/ueber-mich.md` | Über mich |
+| `docs/assets/images/` | Profilbild |
 | `docs/stylesheets/extra.css` | Aussehen der Projektkarten |
 | `.github/workflows/pages.yml` | Build mit `mkdocs build --strict` und Deployment auf GitHub Pages |
 
@@ -65,6 +67,34 @@ Die Reihenfolge in der Datei spielt keine Rolle. Die Seite sortiert nach `start`
 ### Neue Kategorie
 
 Unter `categories` einen Eintrag mit `id`, `title` und `page` ergänzen, dazu eine Seite in `docs/` mit dem Platzhalter `<!-- projekte: <id> -->`. Die Startseite zeigt die neue Kategorie automatisch, die Navigation ebenfalls, sobald es einen Eintrag gibt.
+
+## Profilbild, Lebenslauf und Kontakt
+
+### Profilbild ersetzen
+
+Aktuell ist ein Platzhalter mit Initialen drin (`docs/assets/images/profil-platzhalter.svg`).
+
+1. Foto quadratisch zuschneiden, etwa 400 x 400 px, als JPG unter 200 KB.
+2. Metadaten entfernen (Handyfotos enthalten oft GPS-Koordinaten). In Windows: Rechtsklick auf die Datei > Eigenschaften > Details > "Eigenschaften und persönliche Informationen entfernen" > "Kopie erstellen, bei der alle möglichen Eigenschaften entfernt sind".
+3. Die bereinigte Kopie als `docs/assets/images/profil.jpg` speichern.
+4. In `docs/index.md` den Pfad `assets/images/profil-platzhalter.svg` durch `assets/images/profil.jpg` ersetzen und die Platzhalter-SVG löschen.
+
+### Lebenslauf befüllen
+
+`docs/cv.md` enthält die Struktur mit Platzhaltern. Nur die öffentliche Fassung gehört hierhin, also keine Adresse, kein Telefon, kein Geburtsdatum, keine Zeugnisse und keine Referenzen mit Kontaktdaten. Was einmal committet ist, bleibt in der Git-History öffentlich, auch nach dem Löschen. Wenn alles befüllt ist, die Zeile mit "Platzhalter: Diese Seite wird noch befüllt." entfernen.
+
+Optionaler PDF-Download: PDF nach `docs/assets/cv/` legen und in `docs/cv.md` die auskommentierte Zeile "Als PDF herunterladen" einkommentieren. Dateiname und Link müssen übereinstimmen, sonst bricht der Build ab.
+
+### Kontaktlinks (z.B. LinkedIn)
+
+Die Links stehen zentral in `mkdocs.yml` unter `extra.kontakt` und erscheinen automatisch auf Startseite, Über mich und Lebenslauf. Ein leerer Wert wird ausgeblendet. LinkedIn aktivieren:
+
+```yaml
+extra:
+  kontakt:
+    - name: LinkedIn
+      url: https://www.linkedin.com/in/<profil>/
+```
 
 ## Projektseiten und Hauptseite
 
