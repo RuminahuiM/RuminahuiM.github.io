@@ -76,7 +76,7 @@ def _load(path: str) -> dict:
             _fail(f"{where}: 'end' liegt vor 'start'")
         if not p.get("page") and not p.get("repo"):
             _fail(f"{where}: mindestens 'page' oder 'repo' angeben")
-        for key in ("page", "repo"):
+        for key in ("page", "repo", "product"):
             if p.get(key) and not URL.match(str(p[key])):
                 _fail(f"{where}: '{key}' muss eine vollstaendige URL sein (https://...)")
         topics = p.get("topics") or []
@@ -120,6 +120,8 @@ def _card(p: dict) -> str:
         links.append(f"[Projektseite]({p['page']})")
     if p.get("repo"):
         links.append(f"[Repository]({p['repo']})")
+    if p.get("product"):
+        links.append(f"[Produkt]({p['product']})")
 
     lines = [
         f"-   __[{title}]({target})__",

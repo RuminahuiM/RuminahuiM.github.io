@@ -23,7 +23,7 @@ Gebaut mit Material for MkDocs, gleiche Version und gleiches Theme wie die Proje
 
 ## Neues Projekt hinzufügen
 
-1. In `data/projects.yml` unter `projects:` einen Eintrag ergänzen. Die Vorlage steht am Ende der Datei. Beim allerersten Eintrag `projects: []` durch `projects:` ersetzen.
+1. In `data/projects.yml` unter `projects:` einen Eintrag ergänzen. Die Vorlage steht am Ende der Datei. 
 
     ```yaml
     projects:
@@ -37,6 +37,7 @@ Gebaut mit Material for MkDocs, gleiche Version und gleiches Theme wie die Proje
           Ein bis zwei Sätze, worum es geht.
         page: https://ruminahuim.github.io/<repo-name>/
         repo: https://github.com/RuminahuiM/<repo-name>
+        product: https://github.com/RuminahuiM/<produkt-repo>
     ```
 
 2. Lokal prüfen (siehe unten). Bei einem Fehler in der YAML bricht der Build mit einer Meldung ab, die Projekt und Feld nennt.
@@ -58,7 +59,8 @@ Die Reihenfolge in der Datei spielt keine Rolle. Die Seite sortiert nach `start`
 | `category` | ja | ID einer Kategorie aus `categories`: `semesterarbeiten` oder `weitere-projekte` |
 | `start` | ja | Beginn als `"JJJJ-MM"`, in Anführungszeichen |
 | `summary` | ja | Ein bis zwei Sätze |
-| `page` oder `repo` | mindestens eines | Vollständige URL der Projektseite bzw. des Repositorys |
+| `page` oder `repo` | mindestens eines | Vollständige URL der Projektseite bzw. des Doku-Repositorys |
+| `product` | nein | Vollständige URL des Produkt-Repositorys, falls der Code in einem eigenen Repo liegt. Erscheint als Link "Produkt" |
 | `end` | nein | Ende als `"JJJJ-MM"`. Leer bedeutet laufend, die Karte zeigt dann "seit ..." |
 | `semester` | nein | Nummer der Semesterarbeit |
 | `topics` | nein | Themenfelder als Liste, z.B. `[Cloud, CI/CD]` |

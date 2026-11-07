@@ -11,11 +11,67 @@ categories:
     title: Weitere Projekte
     page: weitere-projekte.md
 
-projects: []
+projects:
+  - title: RDG als DevOps-Projekt mit KI-Wartung
+    category: semesterarbeiten
+    semester: 4
+    topics: [Projektmanagement, DevOps, CI/CD, AI, Microsoft 365]
+    start: "2026-08"
+    end: "2027-01"
+    status: laufend
+    summary: >
+      RDG pflegt Gruppen in Microsoft 365 nach Regeln. In dieser Arbeit wird daraus ein
+      sauberes DevOps-Projekt mit Tests, automatischem Deployment und manueller
+      Release-Freigabe. Danach teste und bewerte ich, wie gut ein KI-Agent die Wartung übernehmen kann.
+    page: https://ruminahuim.github.io/rdg-semesterarbeit/
+    repo: https://github.com/RuminahuiM/rdg-semesterarbeit
+    product: https://github.com/RuminahuiM/rdg
 
-# Vorlage zum Kopieren (unter "projects:" einfügen und "[]" entfernen):
+  - title: Implementing Post-Quantum Cryptography in a Python Authentication Service
+    category: semesterarbeiten
+    semester: 3
+    topics: [Security, Post-Quantum-Kryptografie, Python, FastAPI, React Native, Docker]
+    start: "2026-02"
+    end: "2026-07"
+    summary: >
+      Ein Authentifizierungs-Service in Python, der die neuen NIST-Standards für
+      Post-Quanten-Kryptografie praktisch einsetzt: hybrides PQ-TLS, eine PQ-Sitzungsschicht
+      und ML-DSA-signierte Tokens. Logins über Google und Microsoft werden per Identity
+      Broker in eine PQ-sichere Session überführt.
+    page: https://ruminahuim.github.io/rib-pqc-semesterarbeit/
+    repo: https://github.com/RuminahuiM/rib-pqc-semesterarbeit
+    product: https://github.com/RuminahuiM/rib-pqc
+
+  - title: Automatisiertes Hugo Portfolio
+    category: semesterarbeiten
+    semester: 2
+    topics: [AWS, Ansible, IaC, CI/CD, Hugo]
+    start: "2025-08"
+    end: "2026-01"
+    summary: >
+      Eine statische Portfolio-Website mit Hugo auf AWS. Die Infrastruktur mit S3,
+      CloudFront und HTTPS wird mit Ansible aufgebaut, jede Änderung geht per
+      GitHub Actions automatisch online.
+    page: https://ruminahuim.github.io/hugo-portfolio-semesterarbeit/
+    repo: https://github.com/RuminahuiM/hugo-portfolio-semesterarbeit
+    product: https://github.com/RuminahuiM/hugo-portfolio-setup
+
+  - title: "Azure Dynamic Groups: Access Governance Concept"
+    category: semesterarbeiten
+    semester: 1
+    topics: [Azure, Microsoft 365, PowerShell, Automatisierung, Access Governance]
+    start: "2025-02"
+    end: "2025-07"
+    summary: >
+      Konzept und Proof of Concept für automatische Berechtigungen und Mailverteiler
+      über dynamische Gruppen in Microsoft Entra ID. Umgesetzt mit PowerShell-Runbooks,
+      Logic Apps und einer zentralen Abteilungsliste als Datenquelle.
+    page: https://ruminahuim.github.io/azure-dynamic-groups-semesterarbeit/
+    repo: https://github.com/RuminahuiM/azure-dynamic-groups-semesterarbeit
+
+# Vorlage zum Kopieren:
 #
-#  - title: RDG als DevOps-Projekt mit KI-Wartung
+#  - title: Titel des Projekts
 #    category: semesterarbeiten          # semesterarbeiten | weitere-projekte
 #    semester: 4                         # optional, nur bei Semesterarbeiten
 #    topics: [DevOps, Projektmanagement]  # Themenfelder
@@ -24,5 +80,6 @@ projects: []
 #    status: laufend                     # optional, freier Text
 #    summary: >
 #      Ein bis zwei Sätze, worum es im Projekt geht.
-#    page: https://ruminahuim.github.io/rdg-semesterarbeit/
-#    repo: https://github.com/RuminahuiM/rdg-semesterarbeit
+#    page: https://ruminahuim.github.io/<repo-name>/
+#    repo: https://github.com/RuminahuiM/<repo-name>
+#    product: https://github.com/RuminahuiM/<produkt-repo>   # optional
