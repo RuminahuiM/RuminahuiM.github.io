@@ -127,3 +127,18 @@
 .md-footer-meta {
   border-top: 3px solid var(--brand-yellow);
 }
+
+/* Gantt-Diagramme (Mermaid): Farben fuer die Projektseiten. Die Diagramme lesen diese
+   Variablen ueber ihren themeCSS-Block (Mermaid rendert in einem Shadow DOM, normale
+   Seiten-CSS erreicht es nicht, CSS-Variablen schon). */
+:root {
+  --gantt-task: var(--brand-yellow);
+  --gantt-milestone: #6a2c91;
+  --gantt-crit: #c8382f;
+  --gantt-today: #6a2c91;
+}
+[data-md-color-scheme=slate] {
+  --gantt-milestone: #bca0ca;
+  --gantt-crit: #ef6b5f;
+  --gantt-today: #bca0ca;
+}
