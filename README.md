@@ -137,6 +137,19 @@ extra:
 
 Kontraste nach WCAG sind in `palette.css` dokumentiert. Dunkelgelb (`#e3a400`) nur für Linien und Flächen verwenden, nie als Schrift auf Weiss (Kontrast 2.2:1). Für Links im hellen Modus gibt es den Ockerton `#8a5f00`.
 
+### E-Mail-Adresse (geschützt)
+
+Eine E-Mail-Adresse wird als Eintrag mit `mail` statt `url` eingetragen:
+
+```yaml
+extra:
+  kontakt:
+    - name: E-Mail
+      mail: dodoe.mannale@ruminahui.ch
+```
+
+Die Adresse steht dann nie im Klartext im HTML der Seite, sondern nur umgekehrt und Base64-kodiert in einem `data-m`-Attribut. Das Skript `docs/javascripts/kontakt.js` setzt im Browser daraus den `mailto:`-Link und die sichtbare Adresse zusammen. Das hält einfache Adress-Crawler ab, nicht aber jemanden, der gezielt das Repository liest. Deshalb eine eigene Kontaktadresse verwenden, nicht die private.
+
 ## Projektseiten und Hauptseite
 
 - Ein Projekt-Repo mit eigener Pages-Seite ist unter `https://ruminahuim.github.io/<repo-name>/` erreichbar. Es hat Vorrang vor einem gleichnamigen Ordner dieser Hauptseite. Deshalb in `docs/` keine Ordner mit dem Namen eines Projekt-Repos anlegen.

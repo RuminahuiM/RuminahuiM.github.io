@@ -37,17 +37,22 @@ theme:
         name: Helles Design
 
 # Kontaktlinks: erscheinen auf Startseite, Über mich und Lebenslauf (Platzhalter <!-- kontakt -->).
-# Leere Werte werden ausgeblendet. Reihenfolge hier = Reihenfolge auf der Seite.
+# Eintrag mit url (Link) oder mail (E-Mail-Adresse). Leere Werte werden ausgeblendet. Reihenfolge hier = Reihenfolge auf der Seite.
 extra:
   kontakt:
     - name: LinkedIn
       url: ""   # z.B. https://www.linkedin.com/in/<profil>/
+    - name: E-Mail
+      mail: ""  # z.B. dodoe.mannale@ruminahui.ch; erscheint nie im Klartext im HTML (siehe README)
     - name: GitHub
       url: https://github.com/RuminahuiM
 
 extra_css:
   - assets/brand/palette.css
   - stylesheets/extra.css
+
+extra_javascript:
+  - javascripts/kontakt.js
 
 markdown_extensions:
   - tables

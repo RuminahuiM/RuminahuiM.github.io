@@ -19,6 +19,7 @@ ausgeblendet.
 
 from __future__ import annotations
 
+import base64
 import html
 import os
 import re
@@ -161,13 +162,24 @@ def _render(category_id: str | None) -> str:
     return "\n".join(parts) if parts else _grid([])
 
 
+MAIL = re.compile(r"^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$")
+
+
 def _load_contacts(extra) -> list:
+    """Kontakte aus extra.kontakt. Ein Eintrag hat entweder 'url' (Link) oder
+    'mail' (E-Mail-Adresse). Leere Werte werden ausgeblendet."""
     items = (extra or {}).get("kontakt") or []
     result = []
     for c in items:
         if not isinstance(c, dict) or not c.get("name"):
             raise PluginError(f"mkdocs.yml extra.kontakt: Eintrag braucht 'name': {c!r}")
+        mail = str(c.get("mail") or "").strip()
         url = str(c.get("url") or "").strip()
+        if mail:
+            if not MAIL.match(mail):
+                raise PluginError(f"mkdocs.yml extra.kontakt: '{c['name']}' ist keine gueltige E-Mail-Adresse")
+            result.append({"name": str(c["name"]), "mail": mail})
+            continue
         if not url:
             continue
         if not URL.match(url):
@@ -176,13 +188,24 @@ def _load_contacts(extra) -> list:
     return result
 
 
+def _mail_link(c: dict, label: str) -> str:
+    """Adresse steht nie im Klartext im HTML: nur umgekehrt und Base64-kodiert
+    in einem data-Attribut. docs/javascripts/kontakt.js setzt im Browser den
+    mailto-Link und die sichtbare Adresse zusammen."""
+    token = base64.b64encode(c["mail"][::-1].encode()).decode()
+    return f'[{label}](#){{ .js-mail data-m="{token}" }}'
+
+
 def _render_contacts(as_list: bool) -> str:
+    def link(c, long):
+        if "mail" in c:
+            return _mail_link(c, "E-Mail schreiben" if long else c["name"])
+        if long:
+            return f"[{re.sub(r'^https?://(www\.)?', '', c['url']).rstrip('/')}]({c['url']})"
+        return f"[{c['name']}]({c['url']})"
     if as_list:
-        return "\n".join(
-            f"- {c['name']}: [{re.sub(r'^https?://(www\.)?', '', c['url']).rstrip('/')}]({c['url']})"
-            for c in _contacts
-        ) + "\n"
-    return " | ".join(f"[{c['name']}]({c['url']})" for c in _contacts)
+        return "\n".join(f"- {c['name']}: {link(c, True)}" for c in _contacts) + "\n"
+    return " | ".join(link(c, False) for c in _contacts)
 
 
 # --- MkDocs events ---------------------------------------------------------
