@@ -41,7 +41,7 @@ theme:
 extra:
   kontakt:
     - name: LinkedIn
-      url: ""   # z.B. https://www.linkedin.com/in/<profil>/
+      url: https://www.linkedin.com/in/dodoe-mannale/
     - name: E-Mail
       mail: dodoe.mannale@ruminahui.ch  # erscheint nie im Klartext im HTML (siehe README)
       en:

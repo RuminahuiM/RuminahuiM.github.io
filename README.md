@@ -123,7 +123,7 @@ python scripts/build_pdf.py site cv/ lebenslauf.pdf en/cv/ cv-en.pdf
 
 ### Kontaktlinks (z.B. LinkedIn)
 
-Die Links stehen zentral in `mkdocs.yml` unter `extra.kontakt` und erscheinen automatisch auf Startseite, Über mich und Lebenslauf. Ein leerer Wert wird ausgeblendet. LinkedIn aktivieren:
+Die Links stehen zentral in `mkdocs.yml` unter `extra.kontakt` und erscheinen automatisch auf Startseite, Über mich und Lebenslauf. Ein leerer Wert wird ausgeblendet. Beispiel:
 
 ```yaml
 extra:
