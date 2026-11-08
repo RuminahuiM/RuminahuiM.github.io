@@ -102,7 +102,7 @@ extra:
 
 ## Farben und Logo
 
-Alle Seiten des Portfolios nutzen dieselbe Palette "Anthrazit und Dunkelgelb" mit Aubergine als Zweitfarbe (Themen-Tags, Karten-Rahmen beim Überfahren, Footer) und dasselbe Logo. Beides liegt nur hier:
+Alle Seiten des Portfolios nutzen dieselbe Palette "Anthrazit und Dunkelgelb" mit Aubergine als Zweitfarbe (Themen-Tags, Karten-Rahmen beim Überfahren) und dasselbe Logo. Beides liegt nur hier:
 
 - `docs/assets/brand/palette.css`: Farben (heller und dunkler Modus), gelbe Linie, Buttons, Infoboxen
 - `docs/assets/brand/logo.svg`: Logo, das Code-39-Symbol des Zeichens "R" (breit, schmal, schmal, breit, schmal), wie in der Figma-Datei "Rumi Designs". Auch als Favicon. Die Strichfarbe entspricht dem Gelb der Palette

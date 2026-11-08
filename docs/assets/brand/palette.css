@@ -1,7 +1,7 @@
 /*
  * Farbpalette "Anthrazit und Dunkelgelb" mit Aubergine als Zweitfarbe, fuer alle Seiten des Portfolios.
  * Aubergine (#2e073f, Lavendel #ebd3f8, Violett #6a2c91) aus der Figma-Datei "Rumi Designs",
- * nur sparsam: Themen-Tags, Karten-Rahmen beim Ueberfahren, Footer.
+ * nur sparsam: Themen-Tags und Karten-Rahmen beim Ueberfahren.
  * Zentrale Datei: Die Projektseiten binden sie per URL ein
  *   extra_css: - https://ruminahuim.github.io/assets/brand/palette.css
  * Aenderungen hier wirken nach dem Deployment der Hauptseite ueberall.
@@ -10,7 +10,7 @@
  * Kontrast (WCAG, Text mindestens 4.5:1):
  *   Header weiss auf #23272e 15:1 | Link #8a5f00 auf weiss 5.7:1
  *   Hover #9a6a00 auf weiss 4.7:1 | Link #f2b630 auf Dunkelmodus 8.8:1
- *   Tags #4a1766 auf #f3e8fa 11:1 | dunkel #ebd3f8 auf #3a144a 11:1 | Footer #ebd3f8 auf #2e073f 12.5:1
+ *   Tags #4a1766 auf #f3e8fa 11:1 | dunkel #ebd3f8 auf #3a144a 11:1
  *   Dunkelgelb #e3a400 nur fuer Linien, Flaechen und Markierungen, nie als Text auf weiss.
  */
 
@@ -96,7 +96,7 @@
   height: 1.5rem;
 }
 
-/* Aubergine als Zweitfarbe: Themen-Tags, Karten-Rahmen beim Ueberfahren, Footer */
+/* Aubergine als Zweitfarbe: Themen-Tags und Karten-Rahmen beim Ueberfahren */
 :root {
   --brand-aubergine: #2e073f;
   --brand-violet: #6a2c91;
@@ -119,13 +119,14 @@
 [data-md-color-scheme=slate] .md-typeset .grid.cards > ul > li:hover {
   border-color: #bca0ca;
 }
-.md-footer,
-.md-footer-meta {
-  background-color: var(--brand-aubergine);
-  color: var(--brand-lavender);
+/* Footer wie der Header: Anthrazit, dunkelgelbe Linie oben */
+.md-footer {
+  background-color: var(--md-primary-fg-color);
+  color: var(--md-primary-bg-color);
+  border-top: 3px solid var(--brand-yellow);
 }
 .md-footer-meta {
-  border-top: 3px solid var(--brand-yellow);
+  background-color: var(--md-primary-fg-color--dark);
 }
 
 /* Gantt-Diagramme (Mermaid): Farben fuer die Projektseiten. Die Diagramme lesen diese
