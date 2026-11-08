@@ -1,5 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 66 40" role="img" aria-label="Barcode R">
-  <!-- Code 128 (Zeichensatz B) fuer "R": Start B, R, Pruefziffer, Stopp. Ruhezone 10 Module, scannbar. -->
-  <rect width="66" height="40" rx="5" fill="#e3a400"/>
-  <g fill="#23272e"><rect x="10" y="5" width="2" height="30"/><rect x="13" y="5" width="1" height="30"/><rect x="16" y="5" width="1" height="30"/><rect x="21" y="5" width="2" height="30"/><rect x="26" y="5" width="1" height="30"/><rect x="28" y="5" width="3" height="30"/><rect x="32" y="5" width="2" height="30"/><rect x="35" y="5" width="3" height="30"/><rect x="39" y="5" width="1" height="30"/><rect x="43" y="5" width="2" height="30"/><rect x="48" y="5" width="3" height="30"/><rect x="52" y="5" width="1" height="30"/><rect x="54" y="5" width="2" height="30"/></g>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15 20" role="img" aria-label="R">
+  <!-- Code-39-Symbol des Zeichens "R" (breit, schmal, schmal, breit, schmal; Verhaeltnis 3:1),
+       wie das Logo in der Figma-Datei Rumi Designs (Barcode-Schrift) -->
+  <g fill="#e3a400"><rect x="0" y="0" width="3" height="20"/><rect x="4" y="0" width="1" height="20"/><rect x="6" y="0" width="1" height="20"/><rect x="8" y="0" width="3" height="20"/><rect x="14" y="0" width="1" height="20"/></g>
 </svg>

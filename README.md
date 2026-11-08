@@ -105,7 +105,7 @@ extra:
 Alle Seiten des Portfolios nutzen dieselbe Palette "Anthrazit und Dunkelgelb" und dasselbe Logo. Beides liegt nur hier:
 
 - `docs/assets/brand/palette.css`: Farben (heller und dunkler Modus), gelbe Linie, Buttons, Infoboxen
-- `docs/assets/brand/logo.svg`: Barcode (Code 128, Zeichensatz B) des Zeichens "R" auf dunkelgelbem Grund, auch als Favicon. Mit Ruhezone von 10 Modulen, also tatsächlich scannbar
+- `docs/assets/brand/logo.svg`: Logo, das Code-39-Symbol des Zeichens "R" (breit, schmal, schmal, breit, schmal), wie in der Figma-Datei "Rumi Designs". Auch als Favicon. Die Strichfarbe entspricht dem Gelb der Palette
 
 Die Projektseiten laden die Dateien per URL von dieser Seite. Eine Änderung hier wirkt nach dem Deployment der Hauptseite auf allen Projektseiten, ohne dass dort etwas angepasst werden muss. Nachteil: `mkdocs serve` einer Projektseite zeigt die Farben nur mit Internetverbindung.
 
