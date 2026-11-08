@@ -79,7 +79,7 @@ Unter `categories` einen Eintrag mit `id`, `title` und `page` ergänzen, dazu ei
 
 ### Profilbild ersetzen
 
-Aktuell ist ein Platzhalter mit Initialen drin (`docs/assets/images/profil-platzhalter.svg`).
+Aktuell ist ein Platzhalter mit dem Logo drin (`docs/assets/images/profil-platzhalter.svg`).
 
 1. Foto quadratisch zuschneiden, etwa 400 x 400 px, als JPG unter 200 KB.
 2. Metadaten entfernen (Handyfotos enthalten oft GPS-Koordinaten). In Windows: Rechtsklick auf die Datei > Eigenschaften > Details > "Eigenschaften und persönliche Informationen entfernen" > "Kopie erstellen, bei der alle möglichen Eigenschaften entfernt sind".
