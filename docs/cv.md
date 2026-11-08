@@ -51,7 +51,7 @@ docs/assets/cv/ legen und die Zeile unten einkommentieren.
 
 ## Sprachen
 
-<div class="cv-langs"><div class="cv-lang"><div class="cv-lang__name"><strong>Deutsch</strong><span>Muttersprache</span></div><div class="cv-lang__bar" aria-label="Muttersprache"><span class="cv-seg on native"></span><span class="cv-seg on native"></span><span class="cv-seg on native"></span><span class="cv-seg on native"></span><span class="cv-seg on native"></span><span class="cv-seg on native"></span></div></div><div class="cv-lang"><div class="cv-lang__name"><strong>Spanisch</strong><span>Muttersprache</span></div><div class="cv-lang__bar" aria-label="Muttersprache"><span class="cv-seg on native"></span><span class="cv-seg on native"></span><span class="cv-seg on native"></span><span class="cv-seg on native"></span><span class="cv-seg on native"></span><span class="cv-seg on native"></span></div></div><div class="cv-lang"><div class="cv-lang__name"><strong>Englisch</strong><span>Fliessend (B2)</span></div><div class="cv-lang__bar" aria-label="Fliessend (B2)"><span class="cv-seg on"></span><span class="cv-seg on"></span><span class="cv-seg on"></span><span class="cv-seg on"></span><span class="cv-seg"></span><span class="cv-seg"></span></div></div><div class="cv-lang"><div class="cv-lang__name"><strong>Französisch</strong><span>Grundkenntnisse (A1)</span></div><div class="cv-lang__bar" aria-label="Grundkenntnisse (A1)"><span class="cv-seg on"></span><span class="cv-seg"></span><span class="cv-seg"></span><span class="cv-seg"></span><span class="cv-seg"></span><span class="cv-seg"></span></div></div></div>
+<div class="cv-langs"><div class="cv-lang"><div class="cv-lang__name"><strong>Deutsch</strong><span>Muttersprache</span></div><div class="cv-lang__bar" aria-label="Muttersprache"><span class="cv-seg on native"></span><span class="cv-seg on native"></span><span class="cv-seg on native"></span><span class="cv-seg on native"></span><span class="cv-seg on native"></span><span class="cv-seg on native"></span></div></div><div class="cv-lang"><div class="cv-lang__name"><strong>Spanisch</strong><span>Muttersprache</span></div><div class="cv-lang__bar" aria-label="Muttersprache"><span class="cv-seg on native"></span><span class="cv-seg on native"></span><span class="cv-seg on native"></span><span class="cv-seg on native"></span><span class="cv-seg on native"></span><span class="cv-seg on native"></span></div></div><div class="cv-lang"><div class="cv-lang__name"><strong>Englisch</strong><span>Verhandlungssicher (C1)</span></div><div class="cv-lang__bar" aria-label="Verhandlungssicher (C1)"><span class="cv-seg on"></span><span class="cv-seg on"></span><span class="cv-seg on"></span><span class="cv-seg on"></span><span class="cv-seg on"></span><span class="cv-seg"></span></div></div><div class="cv-lang"><div class="cv-lang__name"><strong>Französisch</strong><span>Grundkenntnisse (A1)</span></div><div class="cv-lang__bar" aria-label="Grundkenntnisse (A1)"><span class="cv-seg on"></span><span class="cv-seg"></span><span class="cv-seg"></span><span class="cv-seg"></span><span class="cv-seg"></span><span class="cv-seg"></span></div></div></div>
 <p class="cv-legend">Sechs Stufen nach dem Gemeinsamen Europäischen Referenzrahmen, von A1 bis C2. Violett: Muttersprache.</p>
 
 ## Zertifikate
@@ -60,7 +60,7 @@ docs/assets/cv/ legen und die Zeile unten einkommentieren.
 
 ## Interessen
 
-Webdesign und 3D-Druck.
+AI-Systeme, Webdesign und 3D-Druck.
 
 ## Kontakt
 
