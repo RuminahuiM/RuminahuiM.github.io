@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img" aria-label="Platzhalter Profilbild">
-  <rect width="400" height="400" fill="#e8eaf6"/>
-  <text x="200" y="200" text-anchor="middle" dominant-baseline="central"
-        font-family="Roboto, Helvetica, Arial, sans-serif" font-size="140" font-weight="500" fill="#3f51b5">DM</text>
+  <rect width="400" height="400" fill="#23272e"/>
+  <text x="200" y="205" text-anchor="middle" dominant-baseline="central"
+        font-family="Roboto, Helvetica, Arial, sans-serif" font-size="140" font-weight="600" fill="#e3a400">DM</text>
 </svg>

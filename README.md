@@ -19,6 +19,7 @@ Gebaut mit Material for MkDocs, gleiche Version und gleiches Theme wie die Proje
 | `docs/ueber-mich.md` | Über mich |
 | `docs/assets/images/` | Profilbild |
 | `docs/stylesheets/extra.css` | Aussehen der Projektkarten |
+| `docs/assets/brand/` | Farbpalette und Logo, zentral für alle Seiten des Portfolios |
 | `docs/documents/` | Nur Weiterleitungen: alte URLs der Hugo-Doku (bis November 2026 direkt unter ruminahuim.github.io) auf `/hugo-portfolio-semesterarbeit/` |
 | `.github/workflows/pages.yml` | Build mit `mkdocs build --strict` und Deployment auf GitHub Pages |
 
@@ -99,10 +100,47 @@ extra:
       url: https://www.linkedin.com/in/<profil>/
 ```
 
+## Farben und Logo
+
+Alle Seiten des Portfolios nutzen dieselbe Palette "Anthrazit und Dunkelgelb" und dasselbe Logo. Beides liegt nur hier:
+
+- `docs/assets/brand/palette.css`: Farben (heller und dunkler Modus), gelbe Linie, Buttons, Infoboxen
+- `docs/assets/brand/logo.svg`: Monogramm "DM", auch als Favicon
+
+Die Projektseiten laden die Dateien per URL von dieser Seite. Eine Änderung hier wirkt nach dem Deployment der Hauptseite auf allen Projektseiten, ohne dass dort etwas angepasst werden muss. Nachteil: `mkdocs serve` einer Projektseite zeigt die Farben nur mit Internetverbindung.
+
+Einstellungen in der `mkdocs.yml` einer Projektseite:
+
+```yaml
+theme:
+  name: material
+  logo: https://ruminahuim.github.io/assets/brand/logo.svg
+  favicon: https://ruminahuim.github.io/assets/brand/logo.svg
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: custom
+      accent: custom
+      # toggle wie bisher
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: custom
+      accent: custom
+      # toggle wie bisher
+
+extra_css:
+  - https://ruminahuim.github.io/assets/brand/palette.css
+
+extra:
+  homepage: https://ruminahuim.github.io/   # Logo führt zurück zum Portfolio
+```
+
+Kontraste nach WCAG sind in `palette.css` dokumentiert. Dunkelgelb (`#e3a400`) nur für Linien und Flächen verwenden, nie als Schrift auf Weiss (Kontrast 2.2:1). Für Links im hellen Modus gibt es den Ockerton `#8a5f00`.
+
 ## Projektseiten und Hauptseite
 
 - Ein Projekt-Repo mit eigener Pages-Seite ist unter `https://ruminahuim.github.io/<repo-name>/` erreichbar. Es hat Vorrang vor einem gleichnamigen Ordner dieser Hauptseite. Deshalb in `docs/` keine Ordner mit dem Namen eines Projekt-Repos anlegen.
-- Neue Projektseite: `mkdocs.yml`, `requirements.txt` und `.github/workflows/pages.yml` aus [rdg-semesterarbeit](https://github.com/RuminahuiM/rdg-semesterarbeit) übernehmen, damit alles gleich aussieht. `site_url` auf `https://ruminahuim.github.io/<repo-name>/` setzen.
+- Neue Projektseite: `mkdocs.yml`, `requirements.txt` und `.github/workflows/pages.yml` aus [rdg-semesterarbeit](https://github.com/RuminahuiM/rdg-semesterarbeit) übernehmen, damit alles gleich aussieht. `site_url` auf `https://ruminahuim.github.io/<repo-name>/` setzen. Farben, Logo und Rücklink stehen im Abschnitt "Farben und Logo".
 
 ## Lokal ansehen und prüfen (PowerShell)
 

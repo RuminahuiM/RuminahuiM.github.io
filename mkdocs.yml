@@ -8,6 +8,8 @@ edit_uri: edit/main/docs/
 
 theme:
   name: material
+  logo: assets/brand/logo.svg
+  favicon: assets/brand/logo.svg
   language: de
   features:
     - navigation.tabs
@@ -21,13 +23,15 @@ theme:
   palette:
     - media: "(prefers-color-scheme: light)"
       scheme: default
-      primary: indigo
+      primary: custom
+      accent: custom
       toggle:
         icon: material/brightness-7
         name: Dunkles Design
     - media: "(prefers-color-scheme: dark)"
       scheme: slate
-      primary: indigo
+      primary: custom
+      accent: custom
       toggle:
         icon: material/brightness-4
         name: Helles Design
@@ -42,6 +46,7 @@ extra:
       url: https://github.com/RuminahuiM
 
 extra_css:
+  - assets/brand/palette.css
   - stylesheets/extra.css
 
 markdown_extensions:

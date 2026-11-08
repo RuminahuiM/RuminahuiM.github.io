@@ -1,0 +1,94 @@
+/*
+ * Farbpalette "Anthrazit und Dunkelgelb" fuer alle Seiten des Portfolios.
+ * Zentrale Datei: Die Projektseiten binden sie per URL ein
+ *   extra_css: - https://ruminahuim.github.io/assets/brand/palette.css
+ * Aenderungen hier wirken nach dem Deployment der Hauptseite ueberall.
+ * Voraussetzung in mkdocs.yml: palette mit primary: custom und accent: custom.
+ *
+ * Kontrast (WCAG, Text mindestens 4.5:1):
+ *   Header weiss auf #23272e 15:1 | Link #8a5f00 auf weiss 5.7:1
+ *   Hover #9a6a00 auf weiss 4.7:1 | Link #f2b630 auf Dunkelmodus 8.8:1
+ *   Dunkelgelb #e3a400 nur fuer Linien, Flaechen und Markierungen, nie als Text auf weiss.
+ */
+
+:root {
+  --brand-yellow: #e3a400;
+  --brand-yellow-strong: #c48e00;
+  --brand-ochre: #8a5f00;
+  --brand-charcoal: #23272e;
+}
+
+/* Heller Modus */
+[data-md-color-primary=custom] {
+  --md-primary-fg-color: #23272e;
+  --md-primary-fg-color--light: #2f343c;
+  --md-primary-fg-color--dark: #16191d;
+  --md-primary-bg-color: #ffffff;
+  --md-primary-bg-color--light: #ffffffb3;
+  --md-typeset-a-color: #8a5f00;
+}
+[data-md-color-accent=custom] {
+  --md-accent-fg-color: #9a6a00;
+  --md-accent-fg-color--transparent: #e3a40024;
+  --md-accent-bg-color: #1a1a1a;
+  --md-accent-bg-color--light: #1a1a1ab3;
+}
+
+/* Dunkler Modus */
+[data-md-color-scheme=slate] {
+  --md-hue: 215;
+}
+[data-md-color-scheme=slate][data-md-color-primary=custom] {
+  --md-primary-fg-color: #16191d;
+  --md-typeset-a-color: #f2b630;
+}
+[data-md-color-scheme=slate][data-md-color-accent=custom] {
+  --md-accent-fg-color: #ffc94d;
+  --md-accent-fg-color--transparent: #e3a4002e;
+}
+
+/* Markenzeichen: gelbe Linie unter dem Header und unter dem aktiven Tab */
+.md-header {
+  border-bottom: 3px solid var(--brand-yellow);
+}
+.md-tabs__item--active .md-tabs__link {
+  box-shadow: inset 0 -3px 0 var(--brand-yellow);
+}
+
+/* Buttons */
+.md-typeset .md-button {
+  color: var(--md-typeset-a-color);
+  border-color: var(--brand-yellow);
+}
+.md-typeset .md-button--primary,
+.md-typeset .md-button:focus,
+.md-typeset .md-button:hover {
+  background-color: var(--brand-yellow);
+  border-color: var(--brand-yellow);
+  color: #1a1a1a;
+}
+
+/* Infoboxen note, info, abstract in den Markenfarben statt Blau.
+   warning, danger, success usw. behalten ihre Signalfarben. */
+.md-typeset .admonition:is(.note, .info, .abstract),
+.md-typeset details:is(.note, .info, .abstract) {
+  border-color: var(--brand-yellow);
+}
+.md-typeset .admonition:is(.note, .info, .abstract):focus-within,
+.md-typeset details:is(.note, .info, .abstract):focus-within {
+  box-shadow: 0 0 0 .2rem #e3a4001a;
+}
+.md-typeset :is(.note, .info, .abstract) > :is(.admonition-title, summary) {
+  background-color: #e3a4001f;
+}
+.md-typeset :is(.note, .info, .abstract) > :is(.admonition-title, summary)::before {
+  background-color: var(--brand-yellow-strong);
+}
+.md-typeset :is(.note, .info, .abstract) > summary::after {
+  color: var(--brand-yellow-strong);
+}
+
+/* Logo im Header etwas groesser, damit das Monogramm lesbar ist */
+.md-header__button.md-logo img {
+  height: 1.6rem;
+}
