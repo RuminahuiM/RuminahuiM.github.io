@@ -69,6 +69,17 @@ projects:
     page: https://ruminahuim.github.io/azure-dynamic-groups-semesterarbeit/
     repo: https://github.com/RuminahuiM/azure-dynamic-groups-semesterarbeit
 
+  - title: Rumis AI Lab
+    category: weitere-projekte
+    topics: [AI, LLM, Docker, AWS, Self-Hosting, CI/CD]
+    start: "2026-03"
+    summary: >
+      Eine modulare AI-Umgebung mit Docker Compose: Open WebUI als Chat-Oberfläche,
+      OpenClaw als autonomer Agent, LiteLLM als Proxy für Claude, GPT und Gemini sowie
+      lokale Modelle über Ollama und llama.cpp. Läuft lokal, auf einem eigenen Server
+      oder per GitHub Actions automatisch auf AWS EC2 mit HTTPS über Let's Encrypt.
+    repo: https://github.com/RuminahuiM/Rumis-AI-Lab
+
 # Vorlage zum Kopieren:
 #
 #  - title: Titel des Projekts
