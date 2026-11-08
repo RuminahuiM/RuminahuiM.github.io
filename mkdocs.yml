@@ -43,7 +43,7 @@ extra:
     - name: LinkedIn
       url: ""   # z.B. https://www.linkedin.com/in/<profil>/
     - name: E-Mail
-      mail: ""  # z.B. dodoe.mannale@ruminahui.ch; erscheint nie im Klartext im HTML (siehe README)
+      mail: dodoe.mannale@ruminahui.ch  # erscheint nie im Klartext im HTML (siehe README)
     - name: GitHub
       url: https://github.com/RuminahuiM
 

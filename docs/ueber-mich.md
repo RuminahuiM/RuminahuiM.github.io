@@ -11,7 +11,7 @@ Mein Schwerpunkt ist die Automatisierung von Infrastruktur und Prozessen rund um
 
 ## Studium
 
-- Studiengang: Dipl. Informatiker/in HF, Fachrichtung Cloud Native
+- Studiengang: Dipl. Informatiker/in HF, Lehrgang Cloud-native Engineer
 - Schule: Technische Berufsschule Zürich (TBZ)
 - Klasse: ITCNE25
 
