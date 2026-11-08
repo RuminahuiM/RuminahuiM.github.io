@@ -24,10 +24,19 @@ jobs:
                   b = await p.chromium.launch()
                   pg = await b.new_page(viewport={"width": 1600, "height": 1000})
                   await pg.goto("https://elpastelazo.ch/", wait_until="networkidle", timeout=60000)
+                  for sel in ["text=Ablehnen", "button[aria-label*=chlie]", "button[aria-label*=lose]"]:
+                      try:
+                          await pg.locator(sel).first.click(timeout=3000)
+                      except Exception as e:
+                          print("skip", sel, e.__class__.__name__)
                   await pg.wait_for_timeout(2500)
                   await pg.screenshot(path="elpastelazo.png")
                   pg2 = await b.new_page(viewport={"width": 390, "height": 844}, device_scale_factor=2)
                   await pg2.goto("https://elpastelazo.ch/", wait_until="networkidle", timeout=60000)
+                  try:
+                      await pg2.locator("text=Ablehnen").first.click(timeout=3000)
+                  except Exception:
+                      pass
                   await pg2.wait_for_timeout(2500)
                   await pg2.screenshot(path="elpastelazo-mobile.png")
                   await b.close()
