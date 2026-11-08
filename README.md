@@ -102,7 +102,7 @@ extra:
 
 ## Farben und Logo
 
-Alle Seiten des Portfolios nutzen dieselbe Palette "Anthrazit und Dunkelgelb" und dasselbe Logo. Beides liegt nur hier:
+Alle Seiten des Portfolios nutzen dieselbe Palette "Aubergine und Gold" (aus der Figma-Datei "Rumi Designs") und dasselbe Logo. Beides liegt nur hier:
 
 - `docs/assets/brand/palette.css`: Farben (heller und dunkler Modus), gelbe Linie, Buttons, Infoboxen
 - `docs/assets/brand/logo.svg`: Logo, das Code-39-Symbol des Zeichens "R" (breit, schmal, schmal, breit, schmal), wie in der Figma-Datei "Rumi Designs". Auch als Favicon. Die Strichfarbe entspricht dem Gelb der Palette
@@ -135,7 +135,7 @@ extra:
   homepage: https://ruminahuim.github.io/   # Logo führt zurück zum Portfolio
 ```
 
-Kontraste nach WCAG sind in `palette.css` dokumentiert. Dunkelgelb (`#e3a400`) nur für Linien und Flächen verwenden, nie als Schrift auf Weiss (Kontrast 2.2:1). Für Links im hellen Modus gibt es den Ockerton `#8a5f00`.
+Kontraste nach WCAG sind in `palette.css` dokumentiert. Gold (`#dcad43`) im hellen Modus nur für Linien, Flächen und Logo verwenden, nie als Schrift auf Weiss. Links sind im hellen Modus violett (`#6a2c91`), im dunklen Modus gold.
 
 ## Projektseiten und Hauptseite
 
