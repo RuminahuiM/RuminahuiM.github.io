@@ -1,61 +1,52 @@
 /*
- * Farbpalette "Aubergine und Gold" fuer alle Seiten des Portfolios.
- * Herkunft: Logo-Farben (Gold #dcad43) und Figma-Datei "Rumi Designs", Palette "Colors 2"
- * (Aubergine #2e073f, Lavendel #ebd3f8, Violett #7a1cac).
- *
+ * Farbpalette "Anthrazit und Dunkelgelb" fuer alle Seiten des Portfolios.
  * Zentrale Datei: Die Projektseiten binden sie per URL ein
  *   extra_css: - https://ruminahuim.github.io/assets/brand/palette.css
  * Aenderungen hier wirken nach dem Deployment der Hauptseite ueberall.
  * Voraussetzung in mkdocs.yml: palette mit primary: custom und accent: custom.
  *
  * Kontrast (WCAG, Text mindestens 4.5:1):
- *   Header lavendel #ebd3f8 auf #2e073f 12.5:1
- *   Link #6a2c91 auf weiss 8.8:1 | Hover #7a1cac auf weiss 8.1:1
- *   Dunkelmodus: Text #ebd3f8 auf #2e073f 12.5:1 | Link gold #dcad43 8.3:1 | Hover #f0c75e 10.7:1
- *   Gold #dcad43 auf weiss nur 2.1:1: im hellen Modus nur fuer Linien, Flaechen und Logo, nie als Schrift.
+ *   Header weiss auf #23272e 15:1 | Link #8a5f00 auf weiss 5.7:1
+ *   Hover #9a6a00 auf weiss 4.7:1 | Link #f2b630 auf Dunkelmodus 8.8:1
+ *   Dunkelgelb #e3a400 nur fuer Linien, Flaechen und Markierungen, nie als Text auf weiss.
  */
+
 :root {
-  --brand-yellow: #dcad43;
-  --brand-yellow-strong: #dcad43;
-  --brand-ochre: #6a2c91;
-  --brand-charcoal: #2e073f;
+  --brand-yellow: #e3a400;
+  --brand-yellow-strong: #c48e00;
+  --brand-ochre: #8a5f00;
+  --brand-charcoal: #23272e;
 }
+
+/* Heller Modus */
 [data-md-color-primary=custom] {
-  --md-primary-fg-color: #2e073f;
-  --md-primary-fg-color--light: #3a144a;
-  --md-primary-fg-color--dark: #22042f;
-  --md-primary-bg-color: #ebd3f8;
-  --md-primary-bg-color--light: #ebd3f8b3;
-  --md-typeset-a-color: #6a2c91;
+  --md-primary-fg-color: #23272e;
+  --md-primary-fg-color--light: #2f343c;
+  --md-primary-fg-color--dark: #16191d;
+  --md-primary-bg-color: #ffffff;
+  --md-primary-bg-color--light: #ffffffb3;
+  --md-typeset-a-color: #8a5f00;
 }
 [data-md-color-accent=custom] {
-  --md-accent-fg-color: #7a1cac;
-  --md-accent-fg-color--transparent: #dcad432e;
+  --md-accent-fg-color: #9a6a00;
+  --md-accent-fg-color--transparent: #e3a40024;
   --md-accent-bg-color: #1a1a1a;
   --md-accent-bg-color--light: #1a1a1ab3;
 }
+
+/* Dunkler Modus */
 [data-md-color-scheme=slate] {
-  --md-hue: 282;
-  --md-default-bg-color: #2e073f;
-  --md-default-bg-color--light: #2e073f8a;
-  --md-default-bg-color--lighter: #2e073f42;
-  --md-default-bg-color--lightest: #2e073f12;
-  --md-default-fg-color: #ebd3f8de;
-  --md-default-fg-color--light: #ebd3f89e;
-  --md-default-fg-color--lighter: #ebd3f852;
-  --md-default-fg-color--lightest: #ebd3f81f;
-  --md-code-bg-color: #3a144a;
-  --md-footer-bg-color: #22042f;
-  --md-footer-bg-color--dark: #22042f;
+  --md-hue: 215;
 }
 [data-md-color-scheme=slate][data-md-color-primary=custom] {
-  --md-primary-fg-color: #22042f;
-  --md-typeset-a-color: #dcad43;
+  --md-primary-fg-color: #16191d;
+  --md-typeset-a-color: #f2b630;
 }
 [data-md-color-scheme=slate][data-md-color-accent=custom] {
-  --md-accent-fg-color: #f0c75e;
-  --md-accent-fg-color--transparent: #dcad4333;
+  --md-accent-fg-color: #ffc94d;
+  --md-accent-fg-color--transparent: #e3a4002e;
 }
+
 /* Markenzeichen: gelbe Linie unter dem Header und unter dem aktiven Tab */
 .md-header {
   border-bottom: 3px solid var(--brand-yellow);
@@ -85,10 +76,10 @@
 }
 .md-typeset .admonition:is(.note, .info, .abstract):focus-within,
 .md-typeset details:is(.note, .info, .abstract):focus-within {
-  box-shadow: 0 0 0 .2rem #dcad431a;
+  box-shadow: 0 0 0 .2rem #e3a4001a;
 }
 .md-typeset :is(.note, .info, .abstract) > :is(.admonition-title, summary) {
-  background-color: #dcad4329;
+  background-color: #e3a4001f;
 }
 .md-typeset :is(.note, .info, .abstract) > :is(.admonition-title, summary)::before {
   background-color: var(--brand-yellow-strong);
@@ -97,7 +88,7 @@
   color: var(--brand-yellow-strong);
 }
 
-/* Logo im Header etwas groesser, damit das Monogramm lesbar ist */
+/* Logo im Header: Code-39-Symbol "R", Seitenverhaeltnis 15:20 */
 .md-header__button.md-logo img {
   height: 1.5rem;
 }
