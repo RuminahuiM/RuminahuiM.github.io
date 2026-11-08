@@ -58,10 +58,20 @@
   box-shadow: inset 0 -3px 0 var(--brand-yellow);
 }
 
-/* Buttons */
+/* Buttons: abgerundet wie die Themen-Tags und Skill-Chips */
 .md-typeset .md-button {
   color: var(--md-typeset-a-color);
   border-color: var(--brand-yellow);
+  border-radius: 2rem;
+  padding: .55em 1.6em;
+}
+/* Mehrere Buttons nebeneinander: <p class="button-row"> ... </p>.
+   Auf dem Handy untereinander, gleich breit, mit Abstand. */
+.md-typeset .button-row { display: flex; flex-wrap: wrap; gap: .6rem; }
+.md-typeset .button-row .md-button { margin: 0; text-align: center; }
+@media screen and (max-width: 44.9375em) {
+  .md-typeset .button-row { flex-direction: column; }
+  .md-typeset .button-row .md-button { width: 100%; }
 }
 .md-typeset .md-button--primary,
 .md-typeset .md-button:focus,
