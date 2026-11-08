@@ -59,10 +59,13 @@ Die Reihenfolge in der Datei spielt keine Rolle. Die Seite sortiert nach `start`
 | --- | --- | --- |
 | `title` | ja | Titel des Projekts |
 | `category` | ja | ID einer Kategorie aus `categories`: `semesterarbeiten` oder `weitere-projekte` |
-| `start` | ja | Beginn als `"JJJJ-MM"`, in Anführungszeichen |
+| `start` | nein | Beginn als `"JJJJ-MM"`, in Anführungszeichen. Ohne Datum steht das Projekt zuoberst und die Karte zeigt keinen Zeitraum |
 | `summary` | ja | Ein bis zwei Sätze |
-| `page` oder `repo` | mindestens eines | Vollständige URL der Projektseite bzw. des Doku-Repositorys |
+| `page`, `repo` oder `website` | mindestens eines | Vollständige URL der Projektseite bzw. des Doku-Repositorys |
 | `product` | nein | Vollständige URL des Produkt-Repositorys, falls der Code in einem eigenen Repo liegt. Erscheint als Link "Produkt" |
+| `website` | nein | Vollständige URL einer Website, z.B. einer Kundenseite. Erscheint als Link "Website" |
+| `image` | nein | Bild oben auf der Karte, Pfad relativ zu `docs/`, z.B. `assets/projekte/name.webp`. Querformat, etwa 1200 x 690 px, WebP |
+| `image_alt` | nein | Beschreibung des Bildes für Screenreader, sonst der Titel |
 | `end` | nein | Ende als `"JJJJ-MM"`. Leer bedeutet laufend, die Karte zeigt dann "seit ..." |
 | `semester` | nein | Nummer der Semesterarbeit |
 | `topics` | nein | Themenfelder als Liste, z.B. `[Cloud, CI/CD]` |

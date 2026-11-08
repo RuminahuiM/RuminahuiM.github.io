@@ -65,7 +65,7 @@ def _load(path: str) -> dict:
         where = f"Projekt {i} ({p.get('title', 'ohne Titel') if isinstance(p, dict) else p!r})"
         if not isinstance(p, dict):
             _fail(f"{where}: Eintrag muss ein Objekt sein")
-        for key in ("title", "category", "start", "summary"):
+        for key in ("title", "category", "summary"):
             if not p.get(key):
                 _fail(f"{where}: Feld '{key}' fehlt")
         if p["category"] not in cat_ids:
@@ -73,11 +73,13 @@ def _load(path: str) -> dict:
         for key in ("start", "end"):
             if p.get(key) and not MONTH.match(str(p[key])):
                 _fail(f"{where}: '{key}' im Format JJJJ-MM angeben, in Anfuehrungszeichen, z.B. \"2026-10\"")
+        if p.get("end") and not p.get("start"):
+            _fail(f"{where}: 'end' ohne 'start'")
         if p.get("end") and str(p["end"]) < str(p["start"]):
             _fail(f"{where}: 'end' liegt vor 'start'")
-        if not p.get("page") and not p.get("repo"):
-            _fail(f"{where}: mindestens 'page' oder 'repo' angeben")
-        for key in ("page", "repo", "product"):
+        if not (p.get("page") or p.get("repo") or p.get("website")):
+            _fail(f"{where}: mindestens 'page', 'repo' oder 'website' angeben")
+        for key in ("page", "repo", "product", "website"):
             if p.get(key) and not URL.match(str(p[key])):
                 _fail(f"{where}: '{key}' muss eine vollstaendige URL sein (https://...)")
         topics = p.get("topics") or []
@@ -85,7 +87,8 @@ def _load(path: str) -> dict:
             _fail(f"{where}: 'topics' muss eine Liste sein")
 
     projects = sorted(projects, key=lambda p: str(p["title"]).lower())
-    projects = sorted(projects, key=lambda p: str(p["start"]), reverse=True)
+    # Projekte ohne Startdatum zuerst (gelten als aktuell), sonst neueste zuerst
+    projects = sorted(projects, key=lambda p: str(p.get("start") or "9999"), reverse=True)
     return {"categories": categories, "projects": projects}
 
 
@@ -95,6 +98,8 @@ def _fmt_month(value) -> str:
 
 
 def _period(p: dict) -> str:
+    if not p.get("start"):
+        return ""
     if p.get("end"):
         return f"{_fmt_month(p['start'])} bis {_fmt_month(p['end'])}"
     return f"seit {_fmt_month(p['start'])}"
@@ -102,12 +107,13 @@ def _period(p: dict) -> str:
 
 def _card(p: dict) -> str:
     title = str(p["title"]).replace("[", r"\[").replace("]", r"\]")
-    target = p.get("page") or p.get("repo")
+    target = p.get("page") or p.get("website") or p.get("repo")
 
     meta = []
     if p.get("semester"):
         meta.append(f"Semester {p['semester']}")
-    meta.append(_period(p))
+    if _period(p):
+        meta.append(_period(p))
     if p.get("status"):
         meta.append(str(p["status"]))
     meta_html = " | ".join(html.escape(m) for m in meta)
@@ -123,11 +129,17 @@ def _card(p: dict) -> str:
         links.append(f"[Repository]({p['repo']})")
     if p.get("product"):
         links.append(f"[Produkt]({p['product']})")
+    if p.get("website"):
+        links.append(f"[Website]({p['website']})")
 
-    lines = [
-        f"-   __[{title}]({target})__",
+    lines = ["-   "]
+    if p.get("image"):
+        alt = html.escape(str(p.get("image_alt") or p["title"]), quote=True)
+        lines = [f"-   [![{alt}]({p['image']}){{ .portfolio-card-img loading=lazy }}]({target})", "", "    "]
+    lines[-1] += f"__[{title}]({target})__"
+    lines += [
         "",
-        f'    <span class="portfolio-meta">{meta_html}</span>',
+        f'    <span class="portfolio-meta">{meta_html}</span>' if meta_html else "",
         "",
         "    ---",
         "",
@@ -214,6 +226,9 @@ def on_config(config, **kwargs):
     global _data, _contacts
     base = os.path.dirname(config.config_file_path)
     _data = _load(os.path.join(base, DATA_FILE))
+    for p in _data["projects"]:
+        if p.get("image") and not os.path.isfile(os.path.join(config.docs_dir, str(p["image"]))):
+            _fail(f"Projekt '{p['title']}': Bild '{p['image']}' nicht gefunden (Pfad relativ zu docs/)")
     _contacts = _load_contacts(config.extra)
 
     nav = config.nav

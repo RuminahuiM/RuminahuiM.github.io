@@ -80,6 +80,16 @@ projects:
       oder per GitHub Actions automatisch auf AWS EC2 mit HTTPS über Let's Encrypt.
     repo: https://github.com/RuminahuiM/Rumis-AI-Lab
 
+  - title: El Pastelazo
+    category: weitere-projekte
+    topics: [Webdesign, Mehrsprachig, Responsive]
+    summary: >
+      Website für El Pastelazo, ein Torten-Atelier aus der Region Basel: Angebot und Preise,
+      Hochzeiten und Events, Kurse, Galerie und Anfrageformular, in vier Sprachen.
+    image: assets/projekte/elpastelazo.webp
+    image_alt: Startseite von elpastelazo.ch
+    website: https://elpastelazo.ch/
+
 # Vorlage zum Kopieren:
 #
 #  - title: Titel des Projekts
@@ -94,3 +104,6 @@ projects:
 #    page: https://ruminahuim.github.io/<repo-name>/
 #    repo: https://github.com/RuminahuiM/<repo-name>
 #    product: https://github.com/RuminahuiM/<produkt-repo>   # optional
+#    website: https://example.ch/        # optional, Link "Website" (z.B. Kundenseite)
+#    image: assets/projekte/<name>.webp  # optional, Bild oben auf der Karte (Pfad relativ zu docs/)
+#    image_alt: Beschreibung des Bildes  # optional

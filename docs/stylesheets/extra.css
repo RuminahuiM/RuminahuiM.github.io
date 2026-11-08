@@ -133,3 +133,19 @@
   .md-typeset .cv-timeline--years > li:first-child::before { left: -1.83rem; }
   .md-typeset .cv-year { position: static; display: block; width: auto; text-align: left; font-size: .8rem; line-height: 1.2; }
 }
+
+/* Projektkarten mit Bild: Bild randlos oben, Titel danach wie gewohnt */
+.md-typeset .portfolio-cards img.portfolio-card-img {
+  display: block;
+  width: calc(100% + 1.6rem);
+  max-width: none;
+  margin: -.8rem -.8rem .2rem;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  object-position: top;
+  border-radius: .1rem .1rem 0 0;
+}
+.md-typeset .portfolio-cards > ul > li > p:has(> a > img.portfolio-card-img) + p {
+  font-size: .9rem;
+  margin-bottom: .2rem;
+}
