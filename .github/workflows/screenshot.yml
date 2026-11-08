@@ -5,46 +5,22 @@ on:
 permissions:
   contents: write
 jobs:
-  shot:
+  fetch:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
       - run: |
-          pip install playwright==1.48.0
-          python -m playwright install --with-deps chromium
-      - run: |
-          python - <<'PY'
-          import asyncio
-          from playwright.async_api import async_playwright
-          async def main():
-              async with async_playwright() as p:
-                  b = await p.chromium.launch()
-                  pg = await b.new_page(viewport={"width": 1600, "height": 1000})
-                  await pg.goto("https://elpastelazo.ch/", wait_until="networkidle", timeout=60000)
-                  for sel in ["text=Ablehnen", "button[aria-label*=chlie]", "button[aria-label*=lose]"]:
-                      try:
-                          await pg.locator(sel).first.click(timeout=3000)
-                      except Exception as e:
-                          print("skip", sel, e.__class__.__name__)
-                  await pg.wait_for_timeout(2500)
-                  await pg.screenshot(path="elpastelazo.png")
-                  pg2 = await b.new_page(viewport={"width": 390, "height": 844}, device_scale_factor=2)
-                  await pg2.goto("https://elpastelazo.ch/", wait_until="networkidle", timeout=60000)
-                  try:
-                      await pg2.locator("text=Ablehnen").first.click(timeout=3000)
-                  except Exception:
-                      pass
-                  await pg2.wait_for_timeout(2500)
-                  await pg2.screenshot(path="elpastelazo-mobile.png")
-                  await b.close()
-          asyncio.run(main())
-          PY
+          mkdir -p check
+          curl -sSfL -o check/cv-de.pdf https://ruminahuim.github.io/downloads/lebenslauf-dodoe-mannale.pdf
+          curl -sSfL -o check/cv-en.pdf https://ruminahuim.github.io/en/downloads/cv-dodoe-mannale.pdf
+          curl -sSfL -o check/rdg.pdf https://ruminahuim.github.io/rdg-semesterarbeit/downloads/rdg-semesterarbeit-gesamtdokument.pdf
+          curl -sSfL -o check/rdg.md https://ruminahuim.github.io/rdg-semesterarbeit/downloads/rdg-semesterarbeit-gesamtdokument.md
+          curl -sSI https://ruminahuim.github.io/rdg-semesterarbeit/downloads/rdg-semesterarbeit-gesamtdokument.md | grep -i content-type > check/md-headers.txt
+          curl -sSfL -o check/en-index.html https://ruminahuim.github.io/en/
+          ls -la check
       - run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898341+github-actions[bot]@users.noreply.github.com"
-          git add elpastelazo.png elpastelazo-mobile.png
-          git commit -m "Screenshot elpastelazo.ch"
+          git add check
+          git commit -m "Live-Check PDFs"
           git push origin HEAD:tmp-screenshot
