@@ -1,0 +1,25 @@
+{#- Vorschau beim Teilen (LinkedIn, Teams, WhatsApp usw.): Open-Graph- und
+    Twitter-Tags. Das Bild liegt in docs/assets/brand/ (social-card*.png),
+    pro Sprache eines (feste Grafik, 1200 x 630 px). -#}
+{% extends "base.html" %}
+
+{% block extrahead %}
+  {%- set lang = config.theme.language or "de" -%}
+  {%- set card = "social-card-en.png" if lang == "en" else "social-card.png" -%}
+  {%- set title = (page.title ~ " | " ~ config.site_name) if page and page.title and not page.is_homepage else config.site_name -%}
+  {%- set desc = (page.meta.description if page and page.meta and page.meta.description else config.site_description) -%}
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="{{ config.site_name }}">
+  <meta property="og:title" content="{{ title }}">
+  <meta property="og:description" content="{{ desc }}">
+  <meta property="og:url" content="{{ page.canonical_url if page and page.canonical_url else config.site_url }}">
+  <meta property="og:image" content="{{ config.site_url }}assets/brand/{{ card }}">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="{{ config.site_name }}, Portfolio">
+  <meta property="og:locale" content="{{ 'en_US' if lang == 'en' else 'de_CH' }}">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ title }}">
+  <meta name="twitter:description" content="{{ desc }}">
+  <meta name="twitter:image" content="{{ config.site_url }}assets/brand/{{ card }}">
+{% endblock %}

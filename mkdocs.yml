@@ -8,6 +8,7 @@ edit_uri: edit/main/docs/
 
 theme:
   name: material
+  custom_dir: overrides   # Vorschau-Tags fuer LinkedIn und Co. (overrides/main.html)
   logo: assets/brand/logo.svg
   favicon: assets/brand/logo.svg
   language: de

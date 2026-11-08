@@ -22,6 +22,7 @@ Gebaut mit Material for MkDocs, gleiche Version und gleiches Theme wie die Proje
 | `docs/assets/images/` | Profilbild |
 | `docs/stylesheets/extra.css` | Aussehen der Projektkarten |
 | `docs/assets/brand/` | Farbpalette und Logo, zentral für alle Seiten des Portfolios |
+| `overrides/main.html` | Vorschau beim Teilen (Open Graph): Titel, Beschreibung und Bild `docs/assets/brand/social-card.png` bzw. `social-card-en.png`, 1200 x 630 px |
 | `docs/documents/` | Nur Weiterleitungen: alte URLs der Hugo-Doku (bis November 2026 direkt unter ruminahuim.github.io) auf `/hugo-portfolio-semesterarbeit/` |
 | `.github/workflows/pages.yml` | Build mit `mkdocs build --strict`, Lebenslauf-PDFs, Deployment auf GitHub Pages |
 
