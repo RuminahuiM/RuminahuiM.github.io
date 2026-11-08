@@ -15,13 +15,15 @@ Gebaut mit Material for MkDocs, gleiche Version und gleiches Theme wie die Proje
 | `docs/index.md` | Startseite: Vorstellung und alle Projekte |
 | `docs/semesterarbeiten.md` | Nur Semesterarbeiten |
 | `docs/weitere-projekte.md` | Nur weitere Projekte, erscheint in der Navigation erst mit dem ersten Eintrag |
-| `docs/cv.md` | Lebenslauf (öffentliche Fassung), erreichbar unter `/cv/` |
+| `docs/cv.md` | Lebenslauf (öffentliche Fassung), erreichbar unter `/cv/`, mit PDF-Download |
+| `docs/*.en.md` | Englische Fassung der Seiten, erreichbar unter `/en/` (siehe "Sprachen") |
+| `scripts/build_pdf.py` | Erzeugt im Workflow die Lebenslauf-PDFs aus der gebauten Seite |
 | `docs/ueber-mich.md` | Über mich |
 | `docs/assets/images/` | Profilbild |
 | `docs/stylesheets/extra.css` | Aussehen der Projektkarten |
 | `docs/assets/brand/` | Farbpalette und Logo, zentral für alle Seiten des Portfolios |
 | `docs/documents/` | Nur Weiterleitungen: alte URLs der Hugo-Doku (bis November 2026 direkt unter ruminahuim.github.io) auf `/hugo-portfolio-semesterarbeit/` |
-| `.github/workflows/pages.yml` | Build mit `mkdocs build --strict` und Deployment auf GitHub Pages |
+| `.github/workflows/pages.yml` | Build mit `mkdocs build --strict`, Lebenslauf-PDFs, Deployment auf GitHub Pages |
 
 ## Neues Projekt hinzufügen
 
@@ -70,10 +72,21 @@ Die Reihenfolge in der Datei spielt keine Rolle. Die Seite sortiert nach `start`
 | `semester` | nein | Nummer der Semesterarbeit |
 | `topics` | nein | Themenfelder als Liste, z.B. `[Cloud, CI/CD]` |
 | `status` | nein | Freier Text, z.B. `laufend` oder `abgeschlossen` |
+| `en` | nein | Englische Fassung: Block mit `title`, `summary`, `topics`, `status`, `image_alt`. Nur angeben, was anders ist als auf Deutsch |
+
+Beispiel für den Block `en`:
+
+```yaml
+    en:
+      title: Automated Hugo portfolio
+      topics: [AWS, Ansible, IaC]
+      summary: >
+        One or two sentences in English.
+```
 
 ### Neue Kategorie
 
-Unter `categories` einen Eintrag mit `id`, `title` und `page` ergänzen, dazu eine Seite in `docs/` mit dem Platzhalter `<!-- projekte: <id> -->`. Die Startseite zeigt die neue Kategorie automatisch, die Navigation ebenfalls, sobald es einen Eintrag gibt.
+Unter `categories` einen Eintrag mit `id`, `title`, `page` und `en: {title: ...}` ergänzen, dazu eine Seite in `docs/` mit dem Platzhalter `<!-- projekte: <id> -->` und ihre englische Fassung `<name>.en.md`. Den deutschen Navigationstitel in `mkdocs.yml` unter `nav_translations` übersetzen. Die Startseite zeigt die neue Kategorie automatisch, die Navigation ebenfalls, sobald es einen Eintrag gibt.
 
 ## Profilbild, Lebenslauf und Kontakt
 
@@ -86,11 +99,27 @@ Aktuell ist ein Platzhalter mit dem Logo drin (`docs/assets/images/profil-platzh
 3. Die bereinigte Kopie als `docs/assets/images/profil.jpg` speichern.
 4. In `docs/index.md` den Pfad `assets/images/profil-platzhalter.svg` durch `assets/images/profil.jpg` ersetzen und die Platzhalter-SVG löschen.
 
-### Lebenslauf befüllen
+### Lebenslauf
 
-`docs/cv.md` enthält die Struktur mit Platzhaltern. Nur die öffentliche Fassung gehört hierhin, also keine Adresse, kein Telefon, kein Geburtsdatum, keine Zeugnisse und keine Referenzen mit Kontaktdaten. Was einmal committet ist, bleibt in der Git-History öffentlich, auch nach dem Löschen. Wenn alles befüllt ist, die Zeile mit "Platzhalter: Diese Seite wird noch befüllt." entfernen.
+`docs/cv.md` (Deutsch) und `docs/cv.en.md` (Englisch). Änderungen immer in beiden Dateien nachführen. Nur die öffentliche Fassung gehört hierhin, also keine Adresse, kein Telefon, kein Geburtsdatum, keine Zeugnisse und keine Referenzen mit Kontaktdaten. Was einmal committet ist, bleibt in der Git-History öffentlich, auch nach dem Löschen.
 
-Optionaler PDF-Download: PDF nach `docs/assets/cv/` legen und in `docs/cv.md` die auskommentierte Zeile "Als PDF herunterladen" einkommentieren. Dateiname und Link müssen übereinstimmen, sonst bricht der Build ab.
+PDF-Download: Der Workflow druckt nach dem Build beide Seiten mit Chromium als PDF (`scripts/build_pdf.py`):
+
+| Sprache | Datei |
+| --- | --- |
+| Deutsch | `/downloads/lebenslauf-dodoe-mannale.pdf` |
+| Englisch | `/en/downloads/cv-dodoe-mannale.pdf` |
+
+Das PDF enthält also immer genau den Stand der Seite. Was im PDF anders ist, steht in `docs/stylesheets/extra.css` unter `@media print`: Kopfzeile mit Name, ohne Download-Button und ohne E-Mail-Adresse (Schutz vor Crawlern, PDFs werden von Suchmaschinen indexiert). Bei `mkdocs serve` lokal führt der Button ins Leere, weil die PDFs erst im Workflow entstehen.
+
+PDF lokal erzeugen (optional):
+
+```powershell
+pip install playwright
+python -m playwright install chromium
+mkdocs build
+python scripts/build_pdf.py site cv/ lebenslauf.pdf en/cv/ cv-en.pdf
+```
 
 ### Kontaktlinks (z.B. LinkedIn)
 
@@ -157,6 +186,21 @@ Die Adresse steht dann nie im Klartext im HTML der Seite, sondern nur umgekehrt 
 
 - Ein Projekt-Repo mit eigener Pages-Seite ist unter `https://ruminahuim.github.io/<repo-name>/` erreichbar. Es hat Vorrang vor einem gleichnamigen Ordner dieser Hauptseite. Deshalb in `docs/` keine Ordner mit dem Namen eines Projekt-Repos anlegen.
 - Neue Projektseite: `mkdocs.yml`, `requirements.txt` und `.github/workflows/pages.yml` aus [rdg-semesterarbeit](https://github.com/RuminahuiM/rdg-semesterarbeit) übernehmen, damit alles gleich aussieht. `site_url` auf `https://ruminahuim.github.io/<repo-name>/` setzen. Farben, Logo und Rücklink stehen im Abschnitt "Farben und Logo".
+
+## Sprachen
+
+Die Hauptseite ist zweisprachig (Deutsch und Englisch) mit dem Plugin [mkdocs-static-i18n](https://github.com/ultrabug/mkdocs-static-i18n). Die Projektseiten (Semesterarbeiten) bleiben einsprachig.
+
+| Was | Wo |
+| --- | --- |
+| Deutsche Seite | `docs/<name>.md`, erreichbar unter `/` |
+| Englische Seite | `docs/<name>.en.md`, erreichbar unter `/en/` |
+| Navigation | `mkdocs.yml`, `plugins > i18n > languages > en > nav_translations` |
+| Projekttexte | `data/projects.yml`, Block `en` pro Projekt und Kategorie |
+| Feste Texte auf den Karten | `hooks/projects.py`, Tabelle `TEXT` |
+| Kontaktnamen | `mkdocs.yml`, `extra.kontakt`, Block `en` |
+
+Der Sprachumschalter oben im Header führt auf die gleiche Seite in der anderen Sprache. Fehlt eine `.en.md`, zeigt die englische Fassung den deutschen Text.
 
 ## Lokal ansehen und prüfen (PowerShell)
 

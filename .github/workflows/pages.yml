@@ -25,6 +25,14 @@ jobs:
           cache: pip
       - run: pip install -r requirements.txt
       - run: mkdocs build --strict
+      # Lebenslauf als PDF (Deutsch und Englisch) aus der gebauten Seite
+      - name: Build CV PDFs
+        run: |
+          pip install playwright==1.48.0
+          python -m playwright install --with-deps chromium
+          python scripts/build_pdf.py site \
+            cv/ site/downloads/lebenslauf-dodoe-mannale.pdf \
+            en/cv/ site/en/downloads/cv-dodoe-mannale.pdf
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v4
         with:

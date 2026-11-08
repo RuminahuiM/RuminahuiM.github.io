@@ -18,13 +18,19 @@ Aufbau: HTML-Bausteine mit den Klassen cv-* (Stil in stylesheets/extra.css).
 - Sprachen: 6 Segmente = A1 bis C2. Gefuellte Segmente bekommen "on",
   Muttersprachen zusaetzlich "native".
 
-PDF-Download: Nur ein PDF ohne private Angaben verwenden. PDF nach
-docs/assets/cv/ legen und die Zeile unten einkommentieren.
+PDF-Download: Das PDF wird bei jedem Push aus dieser Seite erzeugt
+(scripts/build_pdf.py im Workflow), es enthaelt also genau diesen Inhalt.
+Im PDF ausgeblendet: Download-Button und E-Mail-Adresse (Schutz vor Crawlern).
+Der Block cv-print-head erscheint nur im PDF bzw. beim Drucken.
+
+Englische Fassung: cv.en.md. Aenderungen in beiden Dateien nachfuehren.
 -->
+
+<div class="cv-print-head"><strong>Dodoe Rumiñahui Mannale</strong><span>ICT System Engineer | Zürich | ruminahuim.github.io</span></div>
 
 # Lebenslauf
 
-<!-- [Als PDF herunterladen](assets/cv/lebenslauf-dodoe-mannale.pdf){ .md-button } -->
+<p class="cv-download"><a class="md-button" href="../downloads/lebenslauf-dodoe-mannale.pdf" download>Als PDF herunterladen</a></p>
 
 <p class="cv-lead">ICT System Engineer aus Zürich mit Fokus auf Automatisierung und AI. Mein Schwerpunkt ist der Betrieb und die Automatisierung von Infrastruktur rund um Microsoft 365 und Azure, zunehmend auch auf AWS. Daneben baue ich AI-Systeme, die im Alltag wirklich eingesetzt werden. Berufsbegleitend studiere ich an der TBZ zum dipl. Informatiker HF, Lehrgang Cloud-native Engineer.</p>
 

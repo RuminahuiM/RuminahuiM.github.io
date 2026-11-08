@@ -1,6 +1,7 @@
 /* Setzt E-Mail-Links erst im Browser zusammen, damit die Adresse nicht im
    Klartext im HTML steht (Schutz vor einfachen Adress-Crawlern).
-   Erwartet: <a class="js-mail" data-m="BASE64(umgekehrte Adresse)">. */
+   Erwartet: <a class="js-mail" data-m="BASE64(umgekehrte Adresse)">.
+   Mit zusaetzlicher Klasse js-mail--show wird die Adresse als Linktext gezeigt. */
 (function () {
   function decode(token) {
     try { return atob(token).split("").reverse().join(""); } catch (e) { return ""; }
@@ -10,7 +11,7 @@
       var addr = decode(a.getAttribute("data-m"));
       if (!addr || addr.indexOf("@") < 1) return;
       a.href = "mailto:" + addr;
-      if (a.textContent === "E-Mail schreiben") a.textContent = addr;
+      if (a.classList.contains("js-mail--show")) a.textContent = addr;
       a.removeAttribute("data-m");
     });
   }

@@ -149,3 +149,21 @@
   font-size: .9rem;
   margin-bottom: .2rem;
 }
+
+/* ===== Lebenslauf: Download-Button und PDF (Druckansicht) ===== */
+.md-typeset .cv-download { margin: -.4rem 0 1rem; }
+.md-typeset .cv-print-head { display: none; }
+@media print {
+  .md-grid { max-width: none; }                          /* volle Seitenbreite im PDF */
+  .md-main__inner, .md-content__inner { margin: 0; padding: 0; }
+  .md-typeset .cv-download,
+  .md-typeset li:has(> a.js-mail) { display: none !important; }   /* Button und E-Mail nicht ins PDF */
+  .md-typeset .cv-print-head { display: flex; flex-direction: column; margin-bottom: .6rem; padding-bottom: .5rem; border-bottom: 3px solid var(--brand-yellow); }
+  .md-typeset .cv-print-head strong { font-size: 1.5rem; line-height: 1.2; color: #23272e; }
+  .md-typeset .cv-print-head span { font-size: .75rem; color: var(--md-default-fg-color--light); }
+  .md-typeset .cv-print-head + h1 { font-size: 1.1rem; margin: .4rem 0 .6rem; }
+  .md-typeset .cv-timeline > li, .md-typeset .cv-lang, .md-typeset .cv-skillrow,
+  .md-typeset .cv-certs > div { break-inside: avoid; }
+  .md-typeset h2 { break-after: avoid; }
+  .md-typeset .cv-timeline > li::before { box-shadow: none; }
+}

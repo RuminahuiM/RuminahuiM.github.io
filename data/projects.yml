@@ -2,14 +2,20 @@
 # Ein neues Projekt = ein neuer Eintrag unter "projects". Reihenfolge egal,
 # die Seite sortiert automatisch nach "start" (neueste zuerst).
 # Anleitung und Feldbeschreibung: README.md, Abschnitt "Neues Projekt hinzufügen".
+# Englische Fassung: Block "en:" mit den übersetzten Feldern (title, summary,
+# topics, status, image_alt). Fehlt ein Feld, erscheint auf Englisch der deutsche Text.
 
 categories:
   - id: semesterarbeiten
     title: Semesterarbeiten
     page: semesterarbeiten.md
+    en:
+      title: Semester projects
   - id: weitere-projekte
     title: Weitere Projekte
     page: weitere-projekte.md
+    en:
+      title: Other projects
 
 projects:
   - title: RDG als DevOps-Projekt mit KI-Wartung
@@ -26,6 +32,14 @@ projects:
     page: https://ruminahuim.github.io/rdg-semesterarbeit/
     repo: https://github.com/RuminahuiM/rdg-semesterarbeit
     product: https://github.com/RuminahuiM/rdg
+    en:
+      title: RDG as a DevOps project with AI maintenance
+      topics: [Project management, DevOps, CI/CD, AI, Microsoft 365]
+      status: ongoing
+      summary: >
+        RDG maintains groups in Microsoft 365 based on rules. In this project I turn it into
+        a clean DevOps project with tests, automated deployment and manual release approval.
+        Then I test and evaluate how well an AI agent can take over maintenance.
 
   - title: Implementing Post-Quantum Cryptography in a Python Authentication Service
     category: semesterarbeiten
@@ -41,6 +55,13 @@ projects:
     page: https://ruminahuim.github.io/rib-pqc-semesterarbeit/
     repo: https://github.com/RuminahuiM/rib-pqc-semesterarbeit
     product: https://github.com/RuminahuiM/rib-pqc
+    en:
+      topics: [Security, Post-quantum cryptography, Python, FastAPI, React Native, Docker]
+      summary: >
+        An authentication service in Python that puts the new NIST standards for
+        post-quantum cryptography into practice: hybrid PQ TLS, a PQ session layer and
+        ML-DSA signed tokens. Logins via Google and Microsoft are turned into a PQ-secure
+        session by an identity broker.
 
   - title: Automatisiertes Hugo Portfolio
     category: semesterarbeiten
@@ -55,6 +76,12 @@ projects:
     page: https://ruminahuim.github.io/hugo-portfolio-semesterarbeit/
     repo: https://github.com/RuminahuiM/hugo-portfolio-semesterarbeit
     product: https://github.com/RuminahuiM/hugo-portfolio-setup
+    en:
+      title: Automated Hugo portfolio
+      summary: >
+        A static portfolio website built with Hugo on AWS. The infrastructure with S3,
+        CloudFront and HTTPS is set up with Ansible, and every change goes live
+        automatically via GitHub Actions.
 
   - title: "Azure Dynamic Groups: Access Governance Concept"
     category: semesterarbeiten
@@ -68,6 +95,12 @@ projects:
       Logic Apps und einer zentralen Abteilungsliste als Datenquelle.
     page: https://ruminahuim.github.io/azure-dynamic-groups-semesterarbeit/
     repo: https://github.com/RuminahuiM/azure-dynamic-groups-semesterarbeit
+    en:
+      topics: [Azure, Microsoft 365, PowerShell, Automation, Access governance]
+      summary: >
+        Concept and proof of concept for automatic permissions and mailing lists using
+        dynamic groups in Microsoft Entra ID. Built with PowerShell runbooks, Logic Apps
+        and a central department list as the data source.
 
   - title: Rumis AI Lab
     category: weitere-projekte
@@ -79,6 +112,12 @@ projects:
       lokale Modelle über Ollama und llama.cpp. Läuft lokal, auf einem eigenen Server
       oder per GitHub Actions automatisch auf AWS EC2 mit HTTPS über Let's Encrypt.
     repo: https://github.com/RuminahuiM/Rumis-AI-Lab
+    en:
+      summary: >
+        A modular AI environment with Docker Compose: Open WebUI as the chat interface,
+        OpenClaw as an autonomous agent, LiteLLM as a proxy for Claude, GPT and Gemini, and
+        local models via Ollama and llama.cpp. Runs locally, on your own server or
+        automatically on AWS EC2 via GitHub Actions, with HTTPS through Let's Encrypt.
 
   - title: El Pastelazo
     category: weitere-projekte
@@ -89,6 +128,12 @@ projects:
     image: assets/projekte/elpastelazo.webp
     image_alt: Startseite von elpastelazo.ch
     website: https://elpastelazo.ch/
+    en:
+      topics: [Web design, Multilingual, Responsive]
+      image_alt: Home page of elpastelazo.ch
+      summary: >
+        Website for El Pastelazo, a cake studio from the Basel region: offers and prices,
+        weddings and events, classes, gallery and enquiry form, in four languages.
 
 # Vorlage zum Kopieren:
 #
@@ -107,3 +152,8 @@ projects:
 #    website: https://example.ch/        # optional, Link "Website" (z.B. Kundenseite)
 #    image: assets/projekte/<name>.webp  # optional, Bild oben auf der Karte (Pfad relativ zu docs/)
 #    image_alt: Beschreibung des Bildes  # optional
+#    en:                                 # optional, englische Fassung
+#      title: English title              # nur angeben, wenn anders als Deutsch
+#      summary: >
+#        One or two sentences in English.
+#      topics: [DevOps, Project management]

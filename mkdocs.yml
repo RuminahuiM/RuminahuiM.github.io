@@ -44,6 +44,8 @@ extra:
       url: ""   # z.B. https://www.linkedin.com/in/<profil>/
     - name: E-Mail
       mail: dodoe.mannale@ruminahui.ch  # erscheint nie im Klartext im HTML (siehe README)
+      en:
+        name: Email
     - name: GitHub
       url: https://github.com/RuminahuiM
 
@@ -68,6 +70,34 @@ markdown_extensions:
 plugins:
   - search:
       lang: de
+  # Zweisprachig: Seite.md = Deutsch, Seite.en.md = Englisch (siehe README, "Sprachen").
+  # Englisch liegt unter /en/. Fehlt eine .en.md, erscheint dort die deutsche Seite.
+  - i18n:
+      docs_structure: suffix
+      fallback_to_default: true
+      reconfigure_material: true
+      reconfigure_search: true
+      languages:
+        - locale: de
+          name: Deutsch
+          default: true
+          build: true
+        - locale: en
+          name: English
+          build: true
+          site_description: "Portfolio: semester projects and other projects by Dodoe Rumiñahui Mannale"
+          nav_translations:
+            Start: Home
+            Semesterarbeiten: Semester projects
+            Weitere Projekte: Other projects
+            Lebenslauf: CV
+            Über mich: About me
+          theme:
+            palette:
+              - toggle:
+                  name: Switch to dark mode
+              - toggle:
+                  name: Switch to light mode
 
 # Rendert die Projektliste aus data/projects.yml in die Seiten (siehe README).
 # Fuegt "Weitere Projekte" automatisch in die Navigation ein, sobald es dort Eintraege gibt.
@@ -80,7 +110,7 @@ validation:
 
 # Die Seite ist erst in der Navigation, wenn es Eintraege gibt (macht der Hook).
 not_in_nav: |
-  /weitere-projekte.md
+  /weitere-projekte*.md
 
 nav:
   - Start: index.md
