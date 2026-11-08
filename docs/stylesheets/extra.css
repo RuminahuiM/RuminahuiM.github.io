@@ -87,3 +87,49 @@
   color: var(--md-default-fg-color--light);
   font-style: italic;
 }
+
+/* ===== Lebenslauf (cv.md) ===== */
+.md-typeset .cv-lead { font-size: .9rem; color: var(--md-default-fg-color--light); }
+.md-typeset .cv-meta { color: var(--md-default-fg-color--light); font-size: .72rem; margin: 0 0 .4rem; }
+/* Zeitleiste */
+.md-typeset .cv-timeline { list-style: none; margin: 0 0 1rem; padding: 0 0 0 1.4rem; border-left: 2px solid var(--md-default-fg-color--lightest); }
+.md-typeset .cv-timeline > li { position: relative; margin: 0 0 1.4rem; }
+[dir] .md-typeset .cv-timeline > li { margin-left: 0; }  /* Material-Einzug fuer ol li aufheben */
+.md-typeset .cv-timeline > li::before { content: ""; position: absolute; left: -1.82rem; top: .35rem; width: .7rem; height: .7rem; border-radius: 50%; background: var(--brand-yellow); box-shadow: 0 0 0 .2rem var(--md-default-bg-color); }
+.md-typeset .cv-timeline > li:first-child::before { background: var(--md-default-bg-color); border: 3px solid var(--brand-yellow); width: .5rem; height: .5rem; left: -1.83rem; }
+.md-typeset .cv-timeline h3 { margin: 0; font-size: .85rem; font-weight: 700; }
+.md-typeset .cv-timeline ul { margin-top: .2rem; }
+.md-typeset .cv-timeline ul li { margin-bottom: .1rem; }
+.md-typeset .cv-timeline--years { padding-left: 4.8rem; border: 0; position: relative; }
+.md-typeset .cv-timeline--years::before { content: ""; position: absolute; left: 3.4rem; top: .4rem; bottom: 0; width: 2px; background: var(--md-default-fg-color--lightest); }
+.md-typeset .cv-timeline--years > li::before { left: -1.69rem; }
+.md-typeset .cv-timeline--years > li:first-child::before { left: -1.74rem; }
+.md-typeset .cv-year { position: absolute; left: -4.8rem; width: 2.8rem; text-align: right; top: 0; font-size: 1.05rem; font-weight: 700; color: var(--md-typeset-a-color); letter-spacing: -.02em; }
+/* Chips */
+.md-typeset .cv-chip { display: inline-block; font-size: .64rem; line-height: 1.6; padding: 0 .55rem; margin: 0 .15rem .3rem 0; border-radius: .8rem; border: 1px solid var(--md-default-fg-color--lightest); color: var(--md-default-fg-color--light); }
+.md-typeset .cv-chip--core { background: #f3e8fa; border-color: #e2cdef; color: #4a1766; font-weight: 600; }
+[data-md-color-scheme=slate] .md-typeset .cv-chip--core { background: #3a144a; border-color: #5d3a6d; color: #ebd3f8; }
+.md-typeset .cv-legend { font-size: .7rem; }
+/* Sprachen (Segmente A1 bis C2) und Zertifikate */
+.md-typeset .cv-langs { display: grid; gap: .7rem; grid-template-columns: repeat(auto-fill, minmax(min(100%, 15rem), 1fr)); }
+.md-typeset .cv-lang__name { display: flex; justify-content: space-between; align-items: baseline; gap: .5rem; font-size: .75rem; }
+.md-typeset .cv-lang__name span { color: var(--md-default-fg-color--light); font-size: .66rem; }
+.md-typeset .cv-lang__bar { display: grid; grid-template-columns: repeat(6, 1fr); gap: 3px; margin-top: .3rem; }
+.md-typeset .cv-seg { height: .4rem; border-radius: 2px; background: var(--md-default-fg-color--lightest); }
+.md-typeset .cv-seg.on { background: var(--brand-yellow); }
+.md-typeset .cv-seg.on.native { background: var(--brand-violet); }
+[data-md-color-scheme=slate] .md-typeset .cv-seg.on.native { background: #bca0ca; }
+.md-typeset .cv-certs { display: grid; gap: .6rem; grid-template-columns: repeat(auto-fill, minmax(min(100%, 15rem), 1fr)); font-size: .75rem; }
+.md-typeset .cv-certs > div { display: flex; flex-direction: column; border-left: 3px solid var(--brand-yellow); padding-left: .6rem; }
+.md-typeset .cv-certs span { color: var(--md-default-fg-color--light); font-size: .68rem; }
+/* Skills in Zeilen */
+.md-typeset .cv-skillrow { display: grid; grid-template-columns: 12rem 1fr; gap: 1rem; padding: .5rem 0 .2rem; border-bottom: 1px solid var(--md-default-fg-color--lightest); }
+.md-typeset .cv-skillrow__cat { font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: var(--md-typeset-a-color); padding-top: .15rem; }
+@media screen and (max-width: 44.9375em) { .md-typeset .cv-skillrow { grid-template-columns: 1fr; gap: .2rem; } }/* Handy: Jahr ueber dem Titel statt in eigener Spalte */
+@media screen and (max-width: 44.9375em) {
+  .md-typeset .cv-timeline--years { padding-left: 1.4rem; border-left: 2px solid var(--md-default-fg-color--lightest); }
+  .md-typeset .cv-timeline--years::before { display: none; }
+  .md-typeset .cv-timeline--years > li::before { left: -1.82rem; }
+  .md-typeset .cv-timeline--years > li:first-child::before { left: -1.83rem; }
+  .md-typeset .cv-year { position: static; display: block; width: auto; text-align: left; font-size: .8rem; line-height: 1.2; }
+}

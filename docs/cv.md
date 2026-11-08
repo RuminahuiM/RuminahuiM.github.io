@@ -9,92 +9,53 @@ hide:
 Geburtsdatum, Zeugnisse, Referenzen mit Kontaktdaten. Alles, was hier
 committet wird, bleibt in der Git-History öffentlich, auch nach dem Löschen.
 
+Aufbau: HTML-Bausteine mit den Klassen cv-* (Stil in stylesheets/extra.css).
+- Zeitleiste: <ol class="cv-timeline cv-timeline--years">, ein <li> pro Station,
+  Jahr in <span class="cv-year">. Die neueste Station steht oben.
+- Skills: eine <div class="cv-skillrow"> pro Kategorie. Schwerpunkte mit
+  <span class="cv-chip cv-chip--core">, weitere mit <span class="cv-chip">.
+- Sprachen: 6 Segmente = A1 bis C2. Gefuellte Segmente bekommen "on",
+  Muttersprachen zusaetzlich "native".
+
 PDF-Download: Nur ein PDF ohne private Angaben verwenden. PDF nach
-docs/assets/cv/ legen und die Zeile unten einkommentieren (Kommentarzeichen
-entfernen). Vorher nicht, sonst schlägt der Build mit --strict fehl.
+docs/assets/cv/ legen und die Zeile unten einkommentieren.
 -->
 
 # Lebenslauf
 
 <!-- [Als PDF herunterladen](assets/cv/lebenslauf-dodoe-mannale.pdf){ .md-button } -->
 
-## Profil
-
-ICT System Engineer aus Zürich mit Fokus auf Automatisierung und AI. Mein Schwerpunkt ist der Betrieb und die Automatisierung von Infrastruktur rund um Microsoft 365 und Azure, zunehmend auch auf AWS. Daneben baue ich AI-Systeme, die im Alltag wirklich eingesetzt werden. Berufsbegleitend studiere ich an der TBZ Cloud Native HF.
+<p class="cv-lead">ICT System Engineer aus Zürich mit Fokus auf Automatisierung und AI. Mein Schwerpunkt ist der Betrieb und die Automatisierung von Infrastruktur rund um Microsoft 365 und Azure, zunehmend auch auf AWS. Daneben baue ich AI-Systeme, die im Alltag wirklich eingesetzt werden. Berufsbegleitend studiere ich Cloud Native HF an der TBZ.</p>
 
 ## Berufserfahrung
 
-### System Engineer
-
-<p class="portfolio-meta">Non-Profit-Organisation, Zürich | 02.2025 bis heute</p>
-
-- Betrieb und Ausbau von Server- (VMware) und Azure-Cloud-Infrastruktur an mehreren Standorten schweizweit
-- Administration von Microsoft 365 (SharePoint, Teams, Entra ID, Defender) sowie Device Management mit Intune
-- Prozessautomatisierung mit Azure Automation, PowerShell, Power Automate und Logic Apps
-- Projektleitung intern und mit Partnern, unter anderem Intune-Rollout und Aufbau eines internen KI-Systems (Open WebUI und vLLM) für AI-Inferencing im eigenen Haus
-
-### System Engineer
-
-<p class="portfolio-meta">IT-Dienstleister, Region Zürcher Oberland | 08.2023 bis 01.2025</p>
-
-- Support und Beratung von Kunden vor Ort, telefonisch und remote (1st und 2nd Level)
-- Mitarbeit in Kunden-IT-Projekten sowie Testing und Einführung neuer Hard- und Software
-- Entwicklung von Azure-Automatisierungstools, Programmierung und Scripting im Entwicklungsteam, inklusive ChatGPT-Integration ins Ticketsystem
-
-### System Engineer
-
-<p class="portfolio-meta">IT-Dienstleister, Thurgau | 08.2022 bis 07.2023</p>
-
-- PowerShell-Automatisierung von Cloud-Umgebungen (Swiss Cloud)
-- Betreuung und Organisation von Lehrlingsanlässen
-
-### Lehre Betriebsinformatiker EFZ
-
-<p class="portfolio-meta">IT-Dienstleister, Thurgau | 08.2018 bis 08.2022</p>
-
-- 1st-Level-Support sowie Assemblieren und Ausliefern von Hardware
-- Konzeption und Dokumentation von IT-Lösungen
+<ol class="cv-timeline cv-timeline--years">
+<li><span class="cv-year">2025</span><h3>System Engineer</h3><p class="cv-meta">Non-Profit-Organisation, Zürich | 02.2025 bis heute</p><ul><li>Betrieb und Ausbau von Server- (VMware) und Azure-Cloud-Infrastruktur an mehreren Standorten schweizweit</li><li>Administration von Microsoft 365 (SharePoint, Teams, Entra ID, Defender) und Device Management mit Intune</li><li>Prozessautomatisierung mit Azure Automation, PowerShell, Power Automate und Logic Apps</li><li>Projektleitung, u.a. Intune-Rollout und Aufbau eines internen KI-Systems (Open WebUI und vLLM)</li></ul></li>
+<li><span class="cv-year">2023</span><h3>System Engineer</h3><p class="cv-meta">IT-Dienstleister, Region Zürcher Oberland | 08.2023 bis 01.2025</p><ul><li>Support und Beratung von Kunden (1st und 2nd Level)</li><li>Mitarbeit in Kunden-IT-Projekten, Testing und Einführung neuer Hard- und Software</li><li>Azure-Automatisierungstools, ChatGPT-Integration ins Ticketsystem</li></ul></li>
+<li><span class="cv-year">2022</span><h3>System Engineer</h3><p class="cv-meta">IT-Dienstleister, Thurgau | 08.2022 bis 07.2023</p><ul><li>PowerShell-Automatisierung von Cloud-Umgebungen (Swiss Cloud)</li><li>Betreuung und Organisation von Lehrlingsanlässen</li></ul></li>
+<li><span class="cv-year">2018</span><h3>Lehre Betriebsinformatiker EFZ</h3><p class="cv-meta">IT-Dienstleister, Thurgau | 08.2018 bis 08.2022</p><ul><li>1st-Level-Support, Assemblieren und Ausliefern von Hardware</li><li>Konzeption und Dokumentation von IT-Lösungen</li></ul></li>
+</ol>
 
 ## Ausbildung
 
-### Cloud Native HF
-
-<p class="portfolio-meta">Technische Berufsschule Zürich (TBZ), Klasse ITCNE25 | 02.2025 bis heute</p>
-
-Schwerpunkte: Cloud-Infrastruktur und Infrastructure as Code, Container und Kubernetes, DevOps (CI/CD, Terraform), Datenbanksysteme, IT-Sicherheit. Die Semesterarbeiten findest du unter [Semesterarbeiten](semesterarbeiten.md).
-
-### Informatiker EFZ, Fachrichtung Betriebsinformatik
-
-<p class="portfolio-meta">Bildungszentrum für Technik Frauenfeld (BZTF) | 2018 bis 08.2022</p>
-
-Netzwerk, Programmierung, Server-Infrastrukturen, Cloud. Abschluss mit dem Fähigkeitszeugnis Informatiker EFZ.
-
-## Zertifikate
-
-| Zertifikat | Aussteller | Datum |
-| --- | --- | --- |
-| Fähigkeitszeugnis Informatiker EFZ | Bildungszentrum für Technik Frauenfeld (BZTF) | 08.2022 |
-| English B2 Technical | telc | 10.2020 |
+<ol class="cv-timeline">
+<li><h3>Cloud Native HF</h3><p class="cv-meta">Technische Berufsschule Zürich (TBZ), Klasse ITCNE25 | 02.2025 bis heute</p><p>Cloud-Infrastruktur und Infrastructure as Code, Container und Kubernetes, DevOps (CI/CD, Terraform), Datenbanksysteme, IT-Sicherheit. Die Arbeiten findest du unter <a href="../semesterarbeiten/">Semesterarbeiten</a>.</p></li>
+<li><h3>Informatiker EFZ, Betriebsinformatik</h3><p class="cv-meta">Bildungszentrum für Technik Frauenfeld (BZTF) | 2018 bis 08.2022</p><p>Netzwerk, Programmierung, Server-Infrastrukturen, Cloud</p></li>
+</ol>
 
 ## Skills
 
-| Bereich | Technologien |
-| --- | --- |
-| Cloud und Infrastruktur | Azure, VMware, Microsoft 365, Entra ID, Intune, Veeam, Synology, AWS, Linux |
-| Netzwerk und Security | Palo Alto Firewalls, Cisco, UniFi, IT-Sicherheit |
-| Automatisierung und Scripting | PowerShell, Azure Automation, Power Automate, Logic Apps, Python, Ansible |
-| Cloud Native und DevOps | Kubernetes, Terraform, CI/CD, Docker, Helm, GitHub Actions, GitOps mit Argo CD |
-| AI und Tools | Open WebUI, vLLM, Claude, Claude Code, ChatGPT, AI-Integration in Arbeitsprozesse |
-| Monitoring und Observability | Grafana, Prometheus, PRTG |
+<p class="cv-legend"><span class="cv-chip cv-chip--core">Schwerpunkt</span> <span class="cv-chip">weitere Erfahrung</span></p>
+<div class="cv-skillrows"><div class="cv-skillrow"><span class="cv-skillrow__cat">Cloud und Infrastruktur</span><span><span class="cv-chip cv-chip--core">Azure</span> <span class="cv-chip cv-chip--core">Microsoft 365</span> <span class="cv-chip">Entra ID</span> <span class="cv-chip cv-chip--core">Intune</span> <span class="cv-chip">VMware</span> <span class="cv-chip">AWS</span> <span class="cv-chip">Linux</span> <span class="cv-chip">Veeam</span> <span class="cv-chip">Synology</span></span></div><div class="cv-skillrow"><span class="cv-skillrow__cat">Automatisierung und Scripting</span><span><span class="cv-chip cv-chip--core">PowerShell</span> <span class="cv-chip cv-chip--core">Azure Automation</span> <span class="cv-chip">Logic Apps</span> <span class="cv-chip">Power Automate</span> <span class="cv-chip">Python</span> <span class="cv-chip">Ansible</span></span></div><div class="cv-skillrow"><span class="cv-skillrow__cat">Cloud Native und DevOps</span><span><span class="cv-chip cv-chip--core">Kubernetes</span> <span class="cv-chip">Docker</span> <span class="cv-chip cv-chip--core">Terraform</span> <span class="cv-chip">Helm</span> <span class="cv-chip">GitHub Actions</span> <span class="cv-chip">CI/CD</span> <span class="cv-chip">Argo CD</span></span></div><div class="cv-skillrow"><span class="cv-skillrow__cat">AI und Tools</span><span><span class="cv-chip cv-chip--core">Open WebUI</span> <span class="cv-chip">vLLM</span> <span class="cv-chip cv-chip--core">Claude Code</span> <span class="cv-chip">Claude</span> <span class="cv-chip">ChatGPT</span> <span class="cv-chip">AI-Integration</span></span></div><div class="cv-skillrow"><span class="cv-skillrow__cat">Netzwerk und Security</span><span><span class="cv-chip">Palo Alto</span> <span class="cv-chip">Cisco</span> <span class="cv-chip">UniFi</span> <span class="cv-chip">IT-Sicherheit</span></span></div><div class="cv-skillrow"><span class="cv-skillrow__cat">Monitoring</span><span><span class="cv-chip">Grafana</span> <span class="cv-chip">Prometheus</span> <span class="cv-chip">PRTG</span></span></div></div>
 
 ## Sprachen
 
-| Sprache | Niveau |
-| --- | --- |
-| Deutsch | Muttersprache |
-| Spanisch | Muttersprache |
-| Englisch | Fliessend (B2, Technical English zertifiziert) |
-| Französisch | Grundkenntnisse |
+<div class="cv-langs"><div class="cv-lang"><div class="cv-lang__name"><strong>Deutsch</strong><span>Muttersprache</span></div><div class="cv-lang__bar" aria-label="Muttersprache"><span class="cv-seg on native"></span><span class="cv-seg on native"></span><span class="cv-seg on native"></span><span class="cv-seg on native"></span><span class="cv-seg on native"></span><span class="cv-seg on native"></span></div></div><div class="cv-lang"><div class="cv-lang__name"><strong>Spanisch</strong><span>Muttersprache</span></div><div class="cv-lang__bar" aria-label="Muttersprache"><span class="cv-seg on native"></span><span class="cv-seg on native"></span><span class="cv-seg on native"></span><span class="cv-seg on native"></span><span class="cv-seg on native"></span><span class="cv-seg on native"></span></div></div><div class="cv-lang"><div class="cv-lang__name"><strong>Englisch</strong><span>Fliessend (B2)</span></div><div class="cv-lang__bar" aria-label="Fliessend (B2)"><span class="cv-seg on"></span><span class="cv-seg on"></span><span class="cv-seg on"></span><span class="cv-seg on"></span><span class="cv-seg"></span><span class="cv-seg"></span></div></div><div class="cv-lang"><div class="cv-lang__name"><strong>Französisch</strong><span>Grundkenntnisse (A1)</span></div><div class="cv-lang__bar" aria-label="Grundkenntnisse (A1)"><span class="cv-seg on"></span><span class="cv-seg"></span><span class="cv-seg"></span><span class="cv-seg"></span><span class="cv-seg"></span><span class="cv-seg"></span></div></div></div>
+<p class="cv-legend">Sechs Stufen nach dem Gemeinsamen Europäischen Referenzrahmen, von A1 bis C2. Violett: Muttersprache.</p>
+
+## Zertifikate
+
+<div class="cv-certs"><div><strong>Fähigkeitszeugnis Informatiker EFZ</strong><span>BZTF Frauenfeld | 08.2022</span></div><div><strong>English B2 Technical</strong><span>telc | 10.2020</span></div></div>
 
 ## Interessen
 
