@@ -30,7 +30,13 @@ Englische Fassung: cv.en.md. Aenderungen in beiden Dateien nachfuehren.
 
 # Lebenslauf
 
-<p class="cv-lead">ICT System Engineer aus Zürich mit Fokus auf Automatisierung und AI. Mein Schwerpunkt ist der Betrieb und die Automatisierung von Infrastruktur rund um Microsoft 365 und Azure, zunehmend auch auf AWS. Daneben baue ich AI-Systeme, die im Alltag wirklich eingesetzt werden. Berufsbegleitend studiere ich an der TBZ zum dipl. Informatiker HF, Lehrgang Cloud-native Engineer.</p>
+<div class="cv-intro" markdown>
+
+![Dodoe Rumiñahui Mannale](assets/images/profil-cv.jpg){ .cv-photo width="150" height="188" }
+
+<p class="cv-lead">ICT System Engineer aus Zürich mit Fokus auf Automatisierung und AI. Mein Schwerpunkt ist der Betrieb und die Automatisierung von Infrastruktur rund um Microsoft 365 und Azure, zunehmend auch auf AWS. Daneben baue ich AI-Systeme, die ich im Alltag einsetze. Berufsbegleitend studiere ich an der TBZ zum dipl. Informatiker HF, Lehrgang Cloud-native Engineer.</p>
+
+</div>
 
 ## Berufserfahrung
 

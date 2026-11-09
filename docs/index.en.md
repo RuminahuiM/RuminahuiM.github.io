@@ -6,8 +6,8 @@ hide:
 
 <div class="portfolio-hero" markdown>
 
-<!-- Profile picture: same file as in index.md (see README) -->
-![Dodoe Rumiñahui Mannale](assets/images/profil-platzhalter.svg){ .portfolio-avatar width="160" height="160" }
+<!-- Profile picture: same file as in index.md (see README, "Profilbild") -->
+![Dodoe Rumiñahui Mannale](assets/images/profil.jpg){ .portfolio-avatar width="160" height="160" }
 
 <div markdown>
 

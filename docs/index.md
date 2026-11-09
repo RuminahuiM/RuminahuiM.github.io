@@ -7,7 +7,7 @@ hide:
 <div class="portfolio-hero" markdown>
 
 <!-- Profilbild: Datei nach docs/assets/images/ legen und den Pfad hier anpassen (siehe README) -->
-![Dodoe Rumiñahui Mannale](assets/images/profil-platzhalter.svg){ .portfolio-avatar width="160" height="160" }
+![Dodoe Rumiñahui Mannale](assets/images/profil.jpg){ .portfolio-avatar width="160" height="160" }
 
 <div markdown>
 

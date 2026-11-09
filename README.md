@@ -93,12 +93,14 @@ Unter `categories` einen Eintrag mit `id`, `title`, `page` und `en: {title: ...}
 
 ### Profilbild ersetzen
 
-Aktuell ist ein Platzhalter mit dem Logo drin (`docs/assets/images/profil-platzhalter.svg`).
+Zwei Dateien, beide ohne Metadaten (Handyfotos enthalten oft GPS-Koordinaten):
 
-1. Foto quadratisch zuschneiden, etwa 400 x 400 px, als JPG unter 200 KB.
-2. Metadaten entfernen (Handyfotos enthalten oft GPS-Koordinaten). In Windows: Rechtsklick auf die Datei > Eigenschaften > Details > "Eigenschaften und persönliche Informationen entfernen" > "Kopie erstellen, bei der alle möglichen Eigenschaften entfernt sind".
-3. Die bereinigte Kopie als `docs/assets/images/profil.jpg` speichern.
-4. In `docs/index.md` den Pfad `assets/images/profil-platzhalter.svg` durch `assets/images/profil.jpg` ersetzen und die Platzhalter-SVG löschen.
+| Datei | Verwendung | Format |
+| --- | --- | --- |
+| `docs/assets/images/profil.jpg` | Startseite (rund zugeschnitten) | quadratisch, 480 x 480 px |
+| `docs/assets/images/profil-cv.jpg` | Lebenslauf, Webseite und PDF | 4:5, 480 x 600 px |
+
+Neues Foto: zuschneiden, als JPG unter 200 KB speichern und Metadaten entfernen. In Windows: Rechtsklick auf die Datei > Eigenschaften > Details > "Eigenschaften und persönliche Informationen entfernen" > "Kopie erstellen, bei der alle möglichen Eigenschaften entfernt sind". Dann die beiden Dateien oben ersetzen, gleiche Namen.
 
 ### Lebenslauf
 

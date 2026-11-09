@@ -32,7 +32,13 @@ Englische Fassung: cv.en.md. Aenderungen in beiden Dateien nachfuehren.
 
 # CV
 
-<p class="cv-lead">ICT system engineer from Zurich, focused on automation and AI. My main focus is operating and automating infrastructure around Microsoft 365 and Azure, and more and more on AWS. On the side I build AI systems that are actually used day to day. Alongside work I am studying for the Dipl. Informatiker HF (Cloud-native Engineer) at TBZ.</p>
+<div class="cv-intro" markdown>
+
+![Dodoe Rumiñahui Mannale](assets/images/profil-cv.jpg){ .cv-photo width="150" height="188" }
+
+<p class="cv-lead">ICT system engineer from Zurich, focused on automation and AI. My main focus is operating and automating infrastructure around Microsoft 365 and Azure, and more and more on AWS. On the side I build AI systems that I use day to day. Alongside work I am studying for the Dipl. Informatiker HF (Cloud-native Engineer) at TBZ.</p>
+
+</div>
 
 ## Work experience
 
