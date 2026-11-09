@@ -11,18 +11,21 @@ Gebaut mit Material for MkDocs, gleiche Version und gleiches Theme wie die Proje
 | Pfad | Inhalt |
 | --- | --- |
 | `data/projects.yml` | Projektliste: Kategorien und ein Eintrag pro Projekt |
-| `hooks/projects.py` | MkDocs-Hook: rendert Projektliste und Kontaktlinks, prüft die Einträge |
-| `docs/index.md` | Startseite: Vorstellung und alle Projekte |
-| `docs/semesterarbeiten.md` | Nur Semesterarbeiten |
-| `docs/weitere-projekte.md` | Nur weitere Projekte, erscheint in der Navigation erst mit dem ersten Eintrag |
+| `hooks/projects.py` | MkDocs-Hook: rendert das Projekt-Karussell und die Kontaktlinks, prüft die Einträge |
+| `docs/index.md` | Startseite als One-Pager: Foto, Vorstellung, Buttons, drei Kurzfakten |
+| `docs/projekte.md` | Projektseite `/projekte/`: alle Projekte als Karussell mit Filter |
 | `docs/cv.md` | Lebenslauf (öffentliche Fassung), erreichbar unter `/cv/`, mit PDF-Download |
 | `docs/*.en.md` | Englische Fassung der Seiten, erreichbar unter `/en/` (siehe "Sprachen") |
 | `scripts/build_pdf.py` | Erzeugt im Workflow die Lebenslauf-PDFs aus der gebauten Seite |
-| `docs/ueber-mich.md` | Über mich |
 | `docs/assets/images/` | Profilbild |
-| `docs/stylesheets/extra.css` | Aussehen der Projektkarten |
+| `docs/assets/fonts/` | Schrift Inter (WOFF, nur lateinische Zeichen), selbst gehostet, Lizenz in `OFL.txt` |
+| `docs/stylesheets/extra.css` | Design der Hauptseite (siehe "Design") |
+| `docs/javascripts/` | `kontakt.js` (geschützte E-Mail), `projekte.js` (Karussell: Pfeile, Filter, Fortschritt) |
 | `docs/assets/brand/` | Farbpalette und Logo, zentral für alle Seiten des Portfolios |
-| `overrides/main.html` | Vorschau beim Teilen (Open Graph): Titel, Beschreibung und Bild `docs/assets/brand/social-card.png` bzw. `social-card-en.png`, 1200 x 630 px |
+| `overrides/main.html` | Grundgerüst aller Seiten, Vorschau beim Teilen (Open Graph): Titel, Beschreibung und Bild `docs/assets/brand/social-card.png` bzw. `social-card-en.png`, 1200 x 630 px |
+| `overrides/home.html` | Vorlage der Startseite (Foto links, Text rechts) |
+| `overrides/partials/header.html` | Eigene Kopfzeile: Name, Navigation, Sprachwahl, Hell/Dunkel |
+| `docs/ueber-mich/`, `docs/semesterarbeiten/`, `docs/weitere-projekte/` (und unter `docs/en/`) | Nur Weiterleitungen der früheren Seiten auf Startseite bzw. `/projekte/` |
 | `docs/documents/` | Nur Weiterleitungen: alte URLs der Hugo-Doku (bis November 2026 direkt unter ruminahuim.github.io) auf `/hugo-portfolio-semesterarbeit/` |
 | `.github/workflows/pages.yml` | Build mit `mkdocs build --strict`, Lebenslauf-PDFs, Deployment auf GitHub Pages |
 
@@ -54,7 +57,7 @@ Gebaut mit Material for MkDocs, gleiche Version und gleiches Theme wie die Proje
     git push
     ```
 
-Die Reihenfolge in der Datei spielt keine Rolle. Die Seite sortiert nach `start`, neueste zuerst.
+Die Reihenfolge in der Datei spielt keine Rolle. Die Seite sortiert nach `start`, neueste zuerst, Projekte ohne Startdatum ganz vorne.
 
 ### Felder
 
@@ -70,7 +73,8 @@ Die Reihenfolge in der Datei spielt keine Rolle. Die Seite sortiert nach `start`
 | `image` | nein | Bild oben auf der Karte, Pfad relativ zu `docs/`, z.B. `assets/projekte/name.webp`. Querformat, etwa 1200 x 690 px, WebP |
 | `image_alt` | nein | Beschreibung des Bildes für Screenreader, sonst der Titel |
 | `end` | nein | Ende als `"JJJJ-MM"`. Leer bedeutet laufend, die Karte zeigt dann "seit ..." |
-| `semester` | nein | Nummer der Semesterarbeit |
+| `semester` | nein | Nummer der Semesterarbeit, erscheint oben auf der Karte ("Semesterarbeit 4") |
+| `short` | nein | Kürzel auf dem Kartenbild, wenn es kein `image` gibt, 1 bis 4 Zeichen, z.B. `RDG`. Ohne Angabe: Anfangsbuchstaben des Titels |
 | `topics` | nein | Themenfelder als Liste, z.B. `[Cloud, CI/CD]` |
 | `status` | nein | Freier Text, z.B. `laufend` oder `abgeschlossen` |
 | `en` | nein | Englische Fassung: Block mit `title`, `summary`, `topics`, `status`, `image_alt`. Nur angeben, was anders ist als auf Deutsch |
@@ -87,20 +91,15 @@ Beispiel für den Block `en`:
 
 ### Neue Kategorie
 
-Unter `categories` einen Eintrag mit `id`, `title`, `page` und `en: {title: ...}` ergänzen, dazu eine Seite in `docs/` mit dem Platzhalter `<!-- projekte: <id> -->` und ihre englische Fassung `<name>.en.md`. Den deutschen Navigationstitel in `mkdocs.yml` unter `nav_translations` übersetzen. Die Startseite zeigt die neue Kategorie automatisch, die Navigation ebenfalls, sobald es einen Eintrag gibt.
+Unter `categories` einen Eintrag mit `id`, `title` (Filter-Button) und `kind` (Bezeichnung oben auf der Karte, z.B. "Weiteres Projekt") ergänzen, dazu `en: {title: ..., kind: ...}`. Die Projektseite zeigt den neuen Filter automatisch, sobald es einen Eintrag gibt. Für eine eigene Seite mit nur einer Kategorie den Platzhalter `<!-- projekte: <id> -->` verwenden.
 
 ## Profilbild, Lebenslauf und Kontakt
 
 ### Profilbild ersetzen
 
-Zwei Dateien, beide ohne Metadaten (Handyfotos enthalten oft GPS-Koordinaten):
+Eine Datei für Startseite, Lebenslauf und PDF: `docs/assets/images/profil.jpg`, Hochformat etwa 3:4 (aktuell 896 x 1195 px), Gesicht im oberen Drittel. Die Seiten schneiden das Bild selbst zu (Startseite volle Höhe, Lebenslauf Querstreifen).
 
-| Datei | Verwendung | Format |
-| --- | --- | --- |
-| `docs/assets/images/profil.jpg` | Startseite (rund zugeschnitten) | quadratisch, 480 x 480 px |
-| `docs/assets/images/profil-cv.jpg` | Lebenslauf, Webseite und PDF | 4:5, 480 x 600 px |
-
-Neues Foto: zuschneiden, als JPG unter 200 KB speichern und Metadaten entfernen. In Windows: Rechtsklick auf die Datei > Eigenschaften > Details > "Eigenschaften und persönliche Informationen entfernen" > "Kopie erstellen, bei der alle möglichen Eigenschaften entfernt sind". Dann die beiden Dateien oben ersetzen, gleiche Namen.
+Neues Foto: als JPG unter 200 KB speichern und Metadaten entfernen (Handyfotos enthalten oft GPS-Koordinaten). In Windows: Rechtsklick auf die Datei > Eigenschaften > Details > "Eigenschaften und persönliche Informationen entfernen" > "Kopie erstellen, bei der alle möglichen Eigenschaften entfernt sind". Dann `profil.jpg` ersetzen, gleicher Name. Hat das neue Foto eine andere Grösse, `width` und `height` in `overrides/home.html` anpassen.
 
 ### Lebenslauf
 
@@ -113,7 +112,7 @@ PDF-Download: Der Workflow druckt nach dem Build beide Seiten mit Chromium als P
 | Deutsch | `/downloads/lebenslauf-dodoe-mannale.pdf` |
 | Englisch | `/en/downloads/cv-dodoe-mannale.pdf` |
 
-Das PDF enthält also immer genau den Stand der Seite. Was im PDF anders ist, steht in `docs/stylesheets/extra.css` unter `@media print`: Kopfzeile mit Name, ohne Download-Button und ohne E-Mail-Adresse (Schutz vor Crawlern, PDFs werden von Suchmaschinen indexiert). Bei `mkdocs serve` lokal führt der Button ins Leere, weil die PDFs erst im Workflow entstehen.
+Das PDF enthält also immer genau den Stand der Seite. Was im PDF anders ist, steht in `docs/stylesheets/extra.css` unter `@media print`: zwei Spalten ohne Kopfzeile, ohne Download-Button und ohne E-Mail-Adresse (Schutz vor Crawlern, PDFs werden von Suchmaschinen indexiert). Ein Abschnitt mit `## Titel { .cv-newpage }` beginnt im PDF auf einer neuen Seite (aktuell "Ausbildung"). Bei `mkdocs serve` lokal führt der Button ins Leere, weil die PDFs erst im Workflow entstehen.
 
 PDF lokal erzeugen (optional):
 
@@ -126,7 +125,7 @@ python scripts/build_pdf.py site cv/ lebenslauf.pdf en/cv/ cv-en.pdf
 
 ### Kontaktlinks (z.B. LinkedIn)
 
-Die Links stehen zentral in `mkdocs.yml` unter `extra.kontakt` und erscheinen automatisch auf Startseite, Über mich und Lebenslauf. Ein leerer Wert wird ausgeblendet. Beispiel:
+Die Links stehen zentral in `mkdocs.yml` unter `extra.kontakt` und erscheinen automatisch auf Startseite und Lebenslauf (Platzhalter `<!-- kontakt -->`). Ein leerer Wert wird ausgeblendet. Beispiel:
 
 ```yaml
 extra:
@@ -185,6 +184,18 @@ extra:
 
 Die Adresse steht dann nie im Klartext im HTML der Seite, sondern nur umgekehrt und Base64-kodiert in einem `data-m`-Attribut. Das Skript `docs/javascripts/kontakt.js` setzt im Browser daraus den `mailto:`-Link und die sichtbare Adresse zusammen. Das hält einfache Adress-Crawler ab, nicht aber jemanden, der gezielt das Repository liest. Deshalb eine eigene Kontaktadresse verwenden, nicht die private.
 
+## Design
+
+Startseite, Projekte und Lebenslauf haben ein eigenes Layout auf Basis von Material for MkDocs (gleiche Technik wie bisher, nur eigene Vorlagen in `overrides/` und eigenes CSS):
+
+- **Kopfzeile** (`overrides/partials/header.html`): Logo und Name links, rechts die Seiten aus `nav` in `mkdocs.yml` (ohne Start), Sprachwahl DE | EN und Hell/Dunkel. Keine Suche, keine Seitenleisten, kein Footer.
+- **Startseite** (`overrides/home.html`, Front Matter `template: home.html`): auf dem Desktop genau eine Bildschirmhöhe, auf dem Handy untereinander.
+- **Projekte und Lebenslauf** (`overrides/main.html`): volle Breite, Front Matter `layout: projekte` bzw. `layout: cv` setzt die CSS-Klasse `pf-page--<layout>`.
+- **Farben**: `docs/stylesheets/extra.css`, Abschnitt 1, je ein Block für hell und dunkel (`--pf-*`). Die Markenfarben selbst stehen weiterhin in `palette.css`.
+- **Schrift**: Inter, selbst gehostet unter `docs/assets/fonts/` (kein Google Fonts), in `mkdocs.yml` ist `font: false` gesetzt.
+
+Die Projektseiten (Semesterarbeiten) laden `extra.css` nicht und behalten das normale Material-Layout.
+
 ## Projektseiten und Hauptseite
 
 - Ein Projekt-Repo mit eigener Pages-Seite ist unter `https://ruminahuim.github.io/<repo-name>/` erreichbar. Es hat Vorrang vor einem gleichnamigen Ordner dieser Hauptseite. Deshalb in `docs/` keine Ordner mit dem Namen eines Projekt-Repos anlegen.
@@ -200,7 +211,7 @@ Die Hauptseite ist zweisprachig (Deutsch und Englisch) mit dem Plugin [mkdocs-st
 | Englische Seite | `docs/<name>.en.md`, erreichbar unter `/en/` |
 | Navigation | `mkdocs.yml`, `plugins > i18n > languages > en > nav_translations` |
 | Projekttexte | `data/projects.yml`, Block `en` pro Projekt und Kategorie |
-| Feste Texte auf den Karten | `hooks/projects.py`, Tabelle `TEXT` |
+| Feste Texte auf den Karten und im Karussell | `hooks/projects.py`, Tabelle `TEXT` |
 | Kontaktnamen | `mkdocs.yml`, `extra.kontakt`, Block `en` |
 
 Der Sprachumschalter oben im Header führt auf die gleiche Seite in der anderen Sprache. Fehlt eine `.en.md`, zeigt die englische Fassung den deutschen Text.

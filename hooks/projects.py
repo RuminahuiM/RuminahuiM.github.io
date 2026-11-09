@@ -1,15 +1,18 @@
-"""MkDocs-Hook: Projektliste aus data/projects.yml als Karten rendern.
+"""MkDocs-Hook: Projektliste aus data/projects.yml als Karussell rendern.
 
 Platzhalter in einer Markdown-Seite:
-    <!-- projekte -->                    alle Projekte, gruppiert nach Kategorie
+    <!-- projekte -->                    alle Projekte, mit Filter nach Kategorie
     <!-- projekte: semesterarbeiten -->  nur eine Kategorie (ID aus categories)
 
-Sortierung: neueste zuerst (nach "start", bei Gleichstand nach Titel).
+Ausgabe: reines HTML (Filter, Karten, Pfeile, Fortschrittsbalken). Das
+Verhalten (Blaettern, Filtern) steckt in docs/javascripts/projekte.js, das
+Aussehen in docs/stylesheets/extra.css (Abschnitt "Projekte"). Ohne
+JavaScript laesst sich die Kartenreihe trotzdem seitlich scrollen.
+
+Sortierung: Projekte ohne Startdatum zuerst, dann neueste zuerst (nach
+"start", bei Gleichstand nach Titel).
 Ungueltige Eintraege brechen den Build mit einer klaren Fehlermeldung ab,
 damit ein Tippfehler in der YAML nicht still auf der Seite landet.
-
-Kategorien mit einer eigenen Seite ("page") kommen automatisch in die
-Navigation, sobald sie mindestens ein Projekt haben.
 
 Zusaetzlich: Kontaktlinks aus mkdocs.yml (extra.kontakt), leere URLs werden
 ausgeblendet.
@@ -18,7 +21,7 @@ Sprachen: Die Seite wird mit mkdocs-static-i18n pro Sprache gebaut. Die
 Sprache des aktuellen Builds steht in theme.language. Projekte, Kategorien
 und Kontakte koennen einen Block "en:" mit uebersetzten Feldern haben
 (title, summary, topics, status, image_alt bzw. name). Fehlt ein Feld, gilt Deutsch.
-    <!-- kontakt -->          inline: [LinkedIn](...) | [GitHub](...)
+    <!-- kontakt -->          inline: [LinkedIn](...) [GitHub](...)
     <!-- kontakt: liste -->   als Aufzaehlung mit ausgeschriebener Adresse
 """
 
@@ -43,7 +46,8 @@ _data: dict = {"categories": [], "projects": []}
 _contacts: list = []
 
 DEFAULT_LANG = "de"
-TRANSLATABLE = ("title", "summary", "topics", "status", "image_alt", "name")
+TRANSLATABLE = ("title", "summary", "topics", "status", "image_alt", "name", "kind")
+SHORT = re.compile(r"^[A-Za-z0-9]{1,4}$")
 
 # Feste Texte auf den Karten und bei den Kontakten, pro Sprache
 TEXT = {
@@ -57,6 +61,12 @@ TEXT = {
         "website": "Website",
         "empty": "Noch keine Einträge. Die Liste wird laufend ergänzt.",
         "mail": "E-Mail schreiben",
+        "all": "Alle",
+        "filter": "Projekte filtern",
+        "list": "Projekte",
+        "prev": "Vorheriges Projekt",
+        "next": "Nächstes Projekt",
+        "count": "{i} von {n}",
     },
     "en": {
         "semester": "Semester {n}",
@@ -68,6 +78,12 @@ TEXT = {
         "website": "Website",
         "empty": "No entries yet. The list is updated regularly.",
         "mail": "Send an email",
+        "all": "All",
+        "filter": "Filter projects",
+        "list": "Projects",
+        "prev": "Previous project",
+        "next": "Next project",
+        "count": "{i} of {n}",
     },
 }
 
@@ -135,6 +151,8 @@ def _load(path: str) -> dict:
         for key in ("page", "repo", "product", "website"):
             if p.get(key) and not URL.match(str(p[key])):
                 _fail(f"{where}: '{key}' muss eine vollstaendige URL sein (https://...)")
+        if p.get("short") and not SHORT.match(str(p["short"])):
+            _fail(f"{where}: 'short' sind 1 bis 4 Buchstaben oder Ziffern, z.B. RDG")
         topics = p.get("topics") or []
         if not isinstance(topics, list):
             _fail(f"{where}: 'topics' muss eine Liste sein")
@@ -169,69 +187,90 @@ def _period(p: dict, lang: str) -> str:
     return _t(lang, "since", start=_fmt_month(p["start"]))
 
 
-def _card(p: dict, lang: str) -> str:
+def _esc(value) -> str:
+    return html.escape(" ".join(str(value).split()), quote=True)
+
+
+def _short(p: dict) -> str:
+    """Kuerzel auf dem Kartenbild ohne Foto: Feld 'short', sonst Initialen."""
+    if p.get("short"):
+        return str(p["short"])
+    return "".join(w[0] for w in re.findall(r"[A-Za-z0-9]+", str(p["title"])))[:3].upper()
+
+
+def _card(p: dict, lang: str, prefix: str) -> str:
+    cat = _loc(next(c for c in _data["categories"] if c["id"] == p["category"]), lang)
     p = _loc(p, lang)
-    title = str(p["title"]).replace("[", r"\[").replace("]", r"\]")
     target = p.get("page") or p.get("website") or p.get("repo")
 
-    meta = []
+    kind = str(cat.get("kind") or cat["title"])
     if p.get("semester"):
-        meta.append(_t(lang, "semester", n=p["semester"]))
-    if _period(p, lang):
-        meta.append(_period(p, lang))
-    if p.get("status"):
-        meta.append(str(p["status"]))
-    meta_html = " | ".join(html.escape(m) for m in meta)
+        kind = f"{kind} {p['semester']}"
+    when = [x for x in (_period(p, lang), str(p.get("status") or "")) if x]
 
-    summary = " ".join(str(p["summary"]).split())
-    tags = " ".join(
-        f'<span class="portfolio-tag">{html.escape(str(t))}</span>' for t in (p.get("topics") or [])
-    )
-    links = []
-    for key in ("page", "repo", "product", "website"):
-        if p.get(key):
-            links.append(f"[{_t(lang, key)}]({p[key]})")
-
-    lines = ["-   "]
     if p.get("image"):
-        alt = html.escape(str(p.get("image_alt") or p["title"]), quote=True)
-        lines = [f"-   [![{alt}]({p['image']}){{ .portfolio-card-img loading=lazy }}]({target})", "", "    "]
-    lines[-1] += f"__[{title}]({target})__"
-    lines += [
-        "",
-        f'    <span class="portfolio-meta">{meta_html}</span>' if meta_html else "",
-        "",
-        "    ---",
-        "",
-        f"    {summary}",
-        "",
-    ]
-    if tags:
-        lines += [f'    <span class="portfolio-tags">{tags}</span>', ""]
-    lines += [f"    {' | '.join(links)}", ""]
-    return "\n".join(lines)
+        alt = _esc(p.get("image_alt") or p["title"])
+        thumb = (f'<div class="pf-card__thumb pf-card__thumb--img">'
+                 f'<img src="{prefix}{_esc(p["image"])}" alt="{alt}" loading="lazy"></div>')
+    else:
+        thumb = (f'<div class="pf-card__thumb" aria-hidden="true"><span class="pf-card__bars"></span>'
+                 f'<span class="pf-card__short">{_esc(_short(p))}</span></div>')
+
+    tags = "".join(f'<span class="pf-tag">{_esc(t)}</span>' for t in (p.get("topics") or []))
+    links = "".join(
+        f'<a href="{_esc(p[key])}">{_t(lang, key)}</a>'
+        for key in ("page", "repo", "product", "website") if p.get(key)
+    )
+    return (
+        f'<article class="pf-card" data-cat="{_esc(p["category"])}">{thumb}'
+        f'<div class="pf-card__body">'
+        f'<p class="pf-card__kind">{_esc(kind)}'
+        + (f' <span>{_esc(", ".join(when))}</span>' if when else "")
+        + f'</p><h2 class="pf-card__title"><a href="{_esc(target)}">{_esc(p["title"])}</a></h2>'
+        f'<p class="pf-card__text">{_esc(p["summary"])}</p>'
+        + (f'<p class="pf-card__tags">{tags}</p>' if tags else "")
+        + f'<p class="pf-card__links">{links}</p></div></article>'
+    )
 
 
-def _grid(projects: list, lang: str) -> str:
-    if not projects:
-        return f'<p class="portfolio-empty">{_t(lang, "empty")}</p>\n'
-    cards = "\n".join(_card(p, lang) for p in projects)
-    return f'<div class="grid cards portfolio-cards" markdown>\n\n{cards}\n</div>\n'
-
-
-def _render(category_id: str | None, lang: str) -> str:
+def _render(category_id: str | None, lang: str, prefix: str) -> str:
     projects = _data["projects"]
+    cats = _data["categories"]
     if category_id:
-        if category_id not in [c["id"] for c in _data["categories"]]:
+        if category_id not in [c["id"] for c in cats]:
             _fail(f"Platzhalter verweist auf unbekannte Kategorie '{category_id}'")
-        return _grid([p for p in projects if p["category"] == category_id], lang)
+        projects = [p for p in projects if p["category"] == category_id]
+    if not projects:
+        return f'<p class="pf-empty">{_t(lang, "empty")}</p>\n'
 
-    parts = []
-    for c in _data["categories"]:
-        items = [p for p in projects if p["category"] == c["id"]]
-        if items:
-            parts.append(f"## {_loc(c, lang)['title']}\n\n{_grid(items, lang)}")
-    return "\n".join(parts) if parts else _grid([], lang)
+    used = [c for c in cats if any(p["category"] == c["id"] for p in projects)]
+    filt = ""
+    if len(used) > 1:
+        pills = [f'<button type="button" class="pf-pill" data-filter="all" aria-pressed="true">{_t(lang, "all")}</button>']
+        pills += [
+            f'<button type="button" class="pf-pill" data-filter="{_esc(c["id"])}" aria-pressed="false">'
+            f'{_esc(_loc(c, lang)["title"])}</button>'
+            for c in used
+        ]
+        filt = f'<div class="pf-carousel__filter" role="group" aria-label="{_t(lang, "filter")}">{"".join(pills)}</div>'
+
+    cards = "".join(_card(p, lang, prefix) for p in projects)
+    arrow = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="{d}"/></svg>'
+    ctrl = (
+        '<div class="pf-carousel__ctrl">'
+        f'<button type="button" class="pf-arrow" data-dir="-1" aria-label="{_t(lang, "prev")}">'
+        + arrow.format(d="M15 5l-7 7 7 7") + '</button>'
+        f'<button type="button" class="pf-arrow" data-dir="1" aria-label="{_t(lang, "next")}">'
+        + arrow.format(d="M9 5l7 7-7 7") + '</button>'
+        '<div class="pf-progress" aria-hidden="true"><i></i></div>'
+        f'<span class="pf-count" aria-live="polite">{_t(lang, "count", i=1, n=len(projects))}</span>'
+        '</div>'
+    )
+    return (
+        f'<div class="pf-carousel" data-count="{_esc(TEXT[lang]["count"])}">{filt}'
+        f'<div class="pf-carousel__track" tabindex="0" role="region" aria-label="{_t(lang, "list")}">{cards}</div>'
+        f'{ctrl}</div>\n'
+    )
 
 
 MAIL = re.compile(r"^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$")
@@ -280,7 +319,7 @@ def _render_contacts(as_list: bool, lang: str) -> str:
         return f"[{c['name']}]({c['url']})"
     if as_list:
         return "\n".join(f"- {c['name']}: {link(c, True)}" for c in contacts) + "\n"
-    return " | ".join(link(c, False) for c in contacts)
+    return " ".join(link(c, False) for c in contacts)
 
 
 # --- MkDocs events ---------------------------------------------------------
@@ -294,29 +333,6 @@ def on_config(config, **kwargs):
             _fail(f"Projekt '{p['title']}': Bild '{p['image']}' nicht gefunden (Pfad relativ zu docs/)")
     _contacts = _load_contacts(config.extra)
 
-    nav = config.nav
-    if nav is None:
-        return config
-    def nav_index(page: str):
-        return next(
-            (i for i, item in enumerate(nav) if isinstance(item, dict) and page in item.values()),
-            None,
-        )
-
-    # Fehlende Kategorie-Seiten direkt hinter die vorherige Kategorie setzen
-    # (Reihenfolge wie in categories), sonst hinter "Start".
-    anchor = nav_index("index.md")
-    for c in _data["categories"]:
-        page = c.get("page")
-        if not page:
-            continue
-        idx = nav_index(page)
-        if idx is None and any(p["category"] == c["id"] for p in _data["projects"]):
-            pos = (anchor + 1) if anchor is not None else len(nav)
-            nav.insert(pos, {c["title"]: page})
-            idx = pos
-        if idx is not None:
-            anchor = idx
     return config
 
 
@@ -325,7 +341,9 @@ def on_page_markdown(markdown, page, config, files, **kwargs):
     if "kontakt" in markdown:
         markdown = CONTACT.sub(lambda m: _render_contacts(bool(m.group(1)), lang), markdown)
     if "projekte" in markdown:
-        markdown = PLACEHOLDER.sub(lambda m: _render(m.group(1), lang), markdown)
+        # Bildpfade im HTML relativ zur Seite (z.B. projekte/ -> ../assets/...)
+        prefix = "../" * page.url.count("/")
+        markdown = PLACEHOLDER.sub(lambda m: _render(m.group(1), lang, prefix), markdown)
     return markdown
 
 

@@ -1,0 +1,21 @@
+{#- Startseite als One-Pager: Foto links, rechts Kopfzeile und Text.
+    Auf dem Desktop genau eine Bildschirmhoehe, auf dem Handy untereinander
+    (Kopfzeile, Foto, Text). Der Text kommt aus index.md bzw. index.en.md.
+    Foto: docs/assets/images/profil.jpg (siehe README, "Profilbild"). -#}
+{% extends "main.html" %}
+
+{% block header %}{% endblock %}
+
+{% block container %}
+  <div class="pf-home" data-md-component="content">
+    <div class="pf-home__photo">
+      <img src="{{ 'assets/images/profil.jpg' | url }}" alt="{{ config.site_name }}" width="896" height="1195" fetchpriority="high">
+    </div>
+    <div class="pf-home__main">
+      {% include "partials/header.html" %}
+      <article class="md-typeset pf-home__text">
+        {{ page.content }}
+      </article>
+    </div>
+  </div>
+{% endblock %}

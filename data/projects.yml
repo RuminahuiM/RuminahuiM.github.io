@@ -1,6 +1,8 @@
-# Projektliste der Portfolio-Seite.
+# Projektliste der Portfolio-Seite (Karussell auf der Seite "Projekte").
 # Ein neues Projekt = ein neuer Eintrag unter "projects". Reihenfolge egal,
 # die Seite sortiert automatisch nach "start" (neueste zuerst).
+# Kategorien: "title" erscheint als Filter, "kind" oben auf der Karte
+# (bei Semesterarbeiten mit der Nummer aus "semester").
 # Anleitung und Feldbeschreibung: README.md, Abschnitt "Neues Projekt hinzufügen".
 # Englische Fassung: Block "en:" mit den übersetzten Feldern (title, summary,
 # topics, status, image_alt). Fehlt ein Feld, erscheint auf Englisch der deutsche Text.
@@ -8,17 +10,20 @@
 categories:
   - id: semesterarbeiten
     title: Semesterarbeiten
-    page: semesterarbeiten.md
+    kind: Semesterarbeit
     en:
       title: Semester projects
+      kind: Semester project
   - id: weitere-projekte
     title: Weitere Projekte
-    page: weitere-projekte.md
+    kind: Weiteres Projekt
     en:
       title: Other projects
+      kind: Other project
 
 projects:
   - title: RDG als DevOps-Projekt mit KI-Wartung
+    short: RDG
     category: semesterarbeiten
     semester: 4
     topics: [Projektmanagement, DevOps, CI/CD, AI, Microsoft 365]
@@ -42,6 +47,7 @@ projects:
         Then I test and evaluate how well an AI agent can take over maintenance.
 
   - title: Implementing Post-Quantum Cryptography in a Python Authentication Service
+    short: PQC
     category: semesterarbeiten
     semester: 3
     topics: [Security, Post-Quantum-Kryptografie, Python, FastAPI, React Native, Docker]
@@ -64,6 +70,7 @@ projects:
         session by an identity broker.
 
   - title: Automatisiertes Hugo Portfolio
+    short: IaC
     category: semesterarbeiten
     semester: 2
     topics: [AWS, Ansible, IaC, CI/CD, Hugo]
@@ -84,6 +91,7 @@ projects:
         automatically via GitHub Actions.
 
   - title: "Azure Dynamic Groups: Access Governance Concept"
+    short: ADG
     category: semesterarbeiten
     semester: 1
     topics: [Azure, Microsoft 365, PowerShell, Automatisierung, Access Governance]
@@ -103,6 +111,7 @@ projects:
         and a central department list as the data source.
 
   - title: Rumis AI Lab
+    short: AI
     category: weitere-projekte
     topics: [AI, LLM, Docker, AWS, Self-Hosting, CI/CD]
     start: "2026-03"
@@ -139,6 +148,7 @@ projects:
 #
 #  - title: Titel des Projekts
 #    category: semesterarbeiten          # semesterarbeiten | weitere-projekte
+#    short: RDG                          # optional, Kuerzel auf dem Kartenbild (1 bis 4 Zeichen)
 #    semester: 4                         # optional, nur bei Semesterarbeiten
 #    topics: [DevOps, Projektmanagement]  # Themenfelder
 #    start: "2026-10"                    # JJJJ-MM, in Anführungszeichen

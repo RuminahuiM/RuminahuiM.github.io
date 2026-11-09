@@ -8,19 +8,13 @@ edit_uri: edit/main/docs/
 
 theme:
   name: material
-  custom_dir: overrides   # Vorschau-Tags fuer LinkedIn und Co. (overrides/main.html)
+  custom_dir: overrides   # eigene Kopfzeile und Seitenvorlagen (siehe README, "Design")
+  font: false             # Schrift Inter wird in overrides/main.html geladen
   logo: assets/brand/logo.svg
   favicon: assets/brand/logo.svg
   language: de
   features:
-    - navigation.tabs
-    - navigation.sections
-    - navigation.top
-    - navigation.indexes
-    - navigation.footer
-    - search.highlight
     - content.code.copy
-    - toc.follow
   palette:
     - media: "(prefers-color-scheme: light)"
       scheme: default
@@ -37,7 +31,7 @@ theme:
         icon: material/brightness-4
         name: Helles Design
 
-# Kontaktlinks: erscheinen auf Startseite, Über mich und Lebenslauf (Platzhalter <!-- kontakt -->).
+# Kontaktlinks: erscheinen auf Startseite und Lebenslauf (Platzhalter <!-- kontakt -->).
 # Eintrag mit url (Link) oder mail (E-Mail-Adresse). Leere Werte werden ausgeblendet. Reihenfolge hier = Reihenfolge auf der Seite.
 extra:
   kontakt:
@@ -56,6 +50,7 @@ extra_css:
 
 extra_javascript:
   - javascripts/kontakt.js
+  - javascripts/projekte.js
 
 markdown_extensions:
   - tables
@@ -63,21 +58,17 @@ markdown_extensions:
   - attr_list
   - md_in_html
   - footnotes
-  - toc:
-      permalink: true
+  - toc
   - pymdownx.details
   - pymdownx.superfences
 
 plugins:
-  - search:
-      lang: de
   # Zweisprachig: Seite.md = Deutsch, Seite.en.md = Englisch (siehe README, "Sprachen").
   # Englisch liegt unter /en/. Fehlt eine .en.md, erscheint dort die deutsche Seite.
   - i18n:
       docs_structure: suffix
       fallback_to_default: true
       reconfigure_material: true
-      reconfigure_search: true
       languages:
         - locale: de
           name: Deutsch
@@ -89,10 +80,8 @@ plugins:
           site_description: "Portfolio of Dodoe Rumiñahui Mannale, system engineer in Zurich: semester projects from the Dipl. Informatiker HF studies, CV and own projects on automation, cloud and AI."
           nav_translations:
             Start: Home
-            Semesterarbeiten: Semester projects
-            Weitere Projekte: Other projects
+            Projekte: Projects
             Lebenslauf: CV
-            Über mich: About me
           theme:
             palette:
               - toggle:
@@ -100,8 +89,7 @@ plugins:
               - toggle:
                   name: Switch to light mode
 
-# Rendert die Projektliste aus data/projects.yml in die Seiten (siehe README).
-# Fuegt "Weitere Projekte" automatisch in die Navigation ein, sobald es dort Eintraege gibt.
+# Rendert die Projektkarten aus data/projects.yml und die Kontaktlinks (siehe README).
 hooks:
   - hooks/projects.py
 
@@ -109,12 +97,8 @@ validation:
   links:
     anchors: warn
 
-# Die Seite ist erst in der Navigation, wenn es Eintraege gibt (macht der Hook).
-not_in_nav: |
-  /weitere-projekte*.md
-
+# Hauptnavigation in der Kopfzeile (Start erscheint dort als Name links)
 nav:
   - Start: index.md
-  - Semesterarbeiten: semesterarbeiten.md
+  - Projekte: projekte.md
   - Lebenslauf: cv.md
-  - Über mich: ueber-mich.md

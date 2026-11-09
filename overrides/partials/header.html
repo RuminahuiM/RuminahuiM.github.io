@@ -1,0 +1,34 @@
+{#- Eigene Kopfzeile der Portfolio-Seite (ersetzt die von Material).
+    Links: Logo und Name (fuehrt zur Startseite). Rechts: Seiten aus "nav"
+    in mkdocs.yml (ohne Start), Sprachwahl DE | EN und Hell/Dunkel-Schalter.
+    Keine Suche, keine Tabs, kein Repository-Link.
+    data-md-component="header" muss bleiben, das JavaScript von Material
+    erwartet das Element. -#}
+<header class="md-header pf-header" data-md-component="header">
+  <nav class="pf-header__inner" aria-label="{{ lang.t('header') }}">
+    <a href="{{ nav.homepage.url | url }}" class="pf-brand" title="{{ config.site_name | e }}">
+      <img src="{{ config.theme.logo | url }}" alt="" width="15" height="20">
+      <span class="pf-brand__name">{{ config.site_name }}</span>
+    </a>
+    <div class="pf-nav">
+      {%- for item in nav %}
+        {%- if not (item.is_page and (item.is_homepage or item.url == nav.homepage.url)) %}
+          <a href="{{ item.url | url }}" class="pf-nav__link{% if item.active %} pf-nav__link--active{% endif %}"{% if item.active %} aria-current="page"{% endif %}>{{ item.title }}</a>
+        {%- endif %}
+      {%- endfor %}
+      {%- if config.extra.alternate %}
+        {%- set current = config.theme.language or "de" %}
+        <span class="pf-lang" role="group" aria-label="{{ lang.t('select.language') }}">
+          {%- for alt in config.extra.alternate %}
+            {%- if not loop.first %}<span class="pf-lang__sep" aria-hidden="true">|</span>{% endif -%}
+            <a href="{{ alt.link | url }}" lang="{{ alt.lang }}" title="{{ alt.name }}" class="pf-lang__link{% if alt.lang == current %} pf-lang__link--active{% endif %}"{% if alt.lang == current %} aria-current="true"{% endif %}>{{ alt.lang | upper }}</a>
+          {%- endfor -%}
+        </span>
+      {%- endif %}
+      {% if config.theme.palette and not config.theme.palette is mapping %}
+        {% include "partials/palette.html" %}
+        {% include "partials/javascripts/palette.html" %}
+      {% endif %}
+    </div>
+  </nav>
+</header>

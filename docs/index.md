@@ -1,25 +1,29 @@
 ---
+template: home.html
+title: Start
 hide:
-  - navigation
   - toc
 ---
 
-<div class="portfolio-hero" markdown>
-
-<!-- Profilbild: Datei nach docs/assets/images/ legen und den Pfad hier anpassen (siehe README) -->
-![Dodoe Rumiñahui Mannale](assets/images/profil.jpg){ .portfolio-avatar width="160" height="160" }
-
-<div markdown>
+<!--
+Startseite (One-Pager). Aufbau und Foto kommen aus overrides/home.html,
+hier steht nur der Text. Englische Fassung: index.en.md.
+Die drei Kurzfakten unten: je <div><strong>Titel</strong><span>Text</span></div>.
+-->
 
 # Dodoe Rumiñahui Mannale
 
-<p class="portfolio-lead">System Engineer aus Zürich mit Fokus auf Automatisierung und AI.</p>
+System Engineer in Zürich. Ich halte Microsoft 365 und Azure am Laufen, automatisiere den Rest mit PowerShell und baue AI-Systeme, die ich im Alltag einsetze.
+{: .pf-home__intro }
 
+[Projekte ansehen](projekte.md){ .md-button .md-button--primary } [Lebenslauf](cv.md){ .md-button }
+{: .pf-home__actions }
+
+Kontakt: <!-- kontakt -->
+{: .pf-contact }
+
+<div class="pf-facts">
+<div><strong>Seit 2018 in der IT</strong><span>Lehre, danach System Engineer bei drei Arbeitgebern</span></div>
+<div><strong>Studium HF</strong><span>Dipl. Informatiker, Cloud-native Engineer an der TBZ</span></div>
+<div><strong>Gerade dran</strong><span>RDG: Gruppen in Microsoft 365, gewartet von einem KI-Agenten</span></div>
 </div>
-</div>
-
-Mein Schwerpunkt ist die Automatisierung von Infrastruktur und Prozessen rund um Microsoft 365 und Azure. Zunehmend arbeite ich auch mit AWS und automatisiere dort Infrastruktur und Deployments. Daneben baue ich AI-Systeme, die ich im Alltag wirklich einsetze. Hier sammle ich meine Semesterarbeiten aus dem Studium Dipl. Informatiker/in HF, Lehrgang Cloud-native Engineer, an der TBZ sowie eigene Projekte. Die Liste wird laufend ergänzt.
-
-[Lebenslauf](cv.md) | [Über mich](ueber-mich.md) | <!-- kontakt -->
-
-<!-- projekte -->

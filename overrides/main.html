@@ -1,6 +1,12 @@
-{#- Vorschau beim Teilen (LinkedIn, Teams, WhatsApp usw.): Open-Graph- und
-    Twitter-Tags. Das Bild liegt in docs/assets/brand/ (social-card*.png),
-    pro Sprache eines (feste Grafik, 1200 x 630 px). -#}
+{#- Grundgeruest aller Seiten der Portfolio-Seite.
+    - Vorschau beim Teilen (LinkedIn, Teams, WhatsApp usw.): Open-Graph- und
+      Twitter-Tags. Das Bild liegt in docs/assets/brand/ (social-card*.png),
+      pro Sprache eines (feste Grafik, 1200 x 630 px).
+    - Keine Seitenleisten und kein Footer: Navigation steht in der Kopfzeile
+      (overrides/partials/header.html).
+    - Inhalt volle Breite in <div class="pf-page pf-page--NAME">. NAME kommt aus
+      dem Front Matter der Seite (layout: projekte), damit extra.css jede Seite
+      gezielt gestalten kann. Die Startseite hat eine eigene Vorlage (home.html). -#}
 {% extends "base.html" %}
 
 {% block extrahead %}
@@ -22,4 +28,20 @@
   <meta name="twitter:title" content="{{ title }}">
   <meta name="twitter:description" content="{{ desc }}">
   <meta name="twitter:image" content="{{ config.site_url }}assets/brand/{{ card }}">
+  {#- Schrift Inter liegt auf der eigenen Seite (docs/assets/fonts), kein Google Fonts -#}
+  <link rel="preload" href="{{ 'assets/fonts/inter-400.woff' | url }}" as="font" type="font/woff" crossorigin>
+  <link rel="preload" href="{{ 'assets/fonts/inter-800.woff' | url }}" as="font" type="font/woff" crossorigin>
 {% endblock %}
+
+{% block site_nav %}{% endblock %}
+
+{% block container %}
+  {%- set layout = page.meta.layout if page and page.meta and page.meta.layout else "page" -%}
+  <div class="pf-page pf-page--{{ layout }}" data-md-component="content">
+    <article class="md-typeset pf-page__inner">
+      {{ page.content }}
+    </article>
+  </div>
+{% endblock %}
+
+{% block footer %}{% endblock %}

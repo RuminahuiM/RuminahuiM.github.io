@@ -1,25 +1,25 @@
 ---
+template: home.html
+title: Home
 hide:
-  - navigation
   - toc
 ---
 
-<div class="portfolio-hero" markdown>
-
-<!-- Profile picture: same file as in index.md (see README, "Profilbild") -->
-![Dodoe Rumiñahui Mannale](assets/images/profil.jpg){ .portfolio-avatar width="160" height="160" }
-
-<div markdown>
+<!-- Home page (one-pager), English version of index.md. Keep both in sync. -->
 
 # Dodoe Rumiñahui Mannale
 
-<p class="portfolio-lead">System engineer from Zurich, focused on automation and AI.</p>
+System engineer in Zurich. I keep Microsoft 365 and Azure running, automate the rest with PowerShell and build AI systems that I use every day.
+{: .pf-home__intro }
 
+[View projects](projekte.md){ .md-button .md-button--primary } [CV](cv.md){ .md-button }
+{: .pf-home__actions }
+
+Contact: <!-- kontakt -->
+{: .pf-contact }
+
+<div class="pf-facts">
+<div><strong>In IT since 2018</strong><span>Apprenticeship, then system engineer at three employers</span></div>
+<div><strong>Studies</strong><span>Dipl. Informatiker HF, Cloud-native Engineer at TBZ</span></div>
+<div><strong>Currently</strong><span>RDG: Microsoft 365 groups, maintained by an AI agent</span></div>
 </div>
-</div>
-
-My main focus is automating infrastructure and processes around Microsoft 365 and Azure. More and more I also work with AWS, where I automate infrastructure and deployments. On the side I build AI systems that I actually use day to day. This page collects my semester projects from the Dipl. Informatiker/in HF programme (Cloud-native Engineer) at TBZ, a Swiss college of higher education, as well as my own projects. The list is updated regularly.
-
-[CV](cv.md) | [About me](ueber-mich.md) | <!-- kontakt -->
-
-<!-- projekte -->
