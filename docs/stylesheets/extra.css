@@ -319,13 +319,63 @@ body { background-color: var(--pf-surface); }
 .pf-card__thumb { position: relative; aspect-ratio: 1200 / 687; flex-shrink: 0; background-color: var(--pf-thumb); }
 /* Projektbild ganz zeigen: Format der Karte = Format der Bilder (1200 x 687) */
 .pf-card__thumb--img img { display: block; width: 100%; height: 100%; object-fit: contain; }
-/* Kartenbild ohne Foto: Logo-Balken (Code 39 "R") und Kuerzel */
+/* Kartenbild ohne Foto: generierter Farbverlauf in den Markenfarben, dazu
+   Logo-Balken (Code 39 "R") und Kuerzel. Welcher Verlauf: Feld "gradient"
+   (1 bis 6) in data/projects.yml, sonst automatisch aus dem Titel. */
+.pf-card__thumb[class*="pf-grad--"] {
+  overflow: hidden;
+  isolation: isolate;
+  --g-fg: #ffffff;
+  --g-bars: rgba(255, 255, 255, .9);
+}
+.pf-card__thumb[class*="pf-grad--"]::after {   /* feine Koernung gegen Farbbaender */
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  opacity: .22;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+/* 1 Nacht: Anthrazit mit dunkelgelbem Licht */
+.pf-card__thumb.pf-grad--1 { background:
+  radial-gradient(60% 90% at 88% 105%, #e3a400cc 0%, transparent 70%),
+  radial-gradient(50% 70% at 10% 0%, #4a515c 0%, transparent 70%),
+  linear-gradient(135deg, #2b3038 0%, #1b1f25 100%); }
+/* 2 Gold: Dunkelgelb zu Ocker */
+.pf-card__thumb.pf-grad--2 { background:
+  radial-gradient(55% 80% at 15% 10%, #ffd36a 0%, transparent 65%),
+  radial-gradient(70% 90% at 95% 100%, #8a5f00 0%, transparent 70%),
+  linear-gradient(135deg, #e8b021 0%, #c48e00 100%);
+  --g-fg: #1b1f25; --g-bars: rgba(27, 31, 37, .85); }
+/* 3 Aubergine: tiefes Violett mit einem Hauch Gelb */
+.pf-card__thumb.pf-grad--3 { background:
+  radial-gradient(45% 70% at 92% 8%, #e3a40099 0%, transparent 70%),
+  radial-gradient(70% 100% at 0% 100%, #6a2c91 0%, transparent 70%),
+  linear-gradient(160deg, #3a144a 0%, #1e0529 100%); }
+/* 4 Schiefer: Blaugrau wie der Fotohintergrund, lavendelfarbenes Licht */
+.pf-card__thumb.pf-grad--4 { background:
+  radial-gradient(55% 80% at 85% 15%, #bca0ca88 0%, transparent 70%),
+  radial-gradient(60% 90% at 10% 100%, #e3a40066 0%, transparent 70%),
+  linear-gradient(135deg, #4a5a66 0%, #26313a 100%); }
+/* 5 Sand: hell und warm */
+.pf-card__thumb.pf-grad--5 { background:
+  radial-gradient(55% 85% at 90% 100%, #e3a40088 0%, transparent 70%),
+  radial-gradient(50% 70% at 5% 5%, #ebd3f8 0%, transparent 70%),
+  linear-gradient(135deg, #f7f1e3 0%, #ece6da 100%);
+  --g-fg: #23272e; --g-bars: rgba(35, 39, 46, .85); }
+/* 6 Glut: Anthrazit zu Ocker, diagonal */
+.pf-card__thumb.pf-grad--6 { background:
+  radial-gradient(70% 90% at 100% 0%, #c48e00 0%, transparent 65%),
+  radial-gradient(50% 80% at 30% 120%, #6a2c9166 0%, transparent 70%),
+  linear-gradient(200deg, #3d3426 0%, #1b1f25 70%); }
 .pf-card__bars {
   position: absolute;
   top: 1.2rem;
   right: 1.3rem;
   width: 3rem;
   height: 4rem;
+  --pf-bars: var(--g-bars, var(--pf-ink));
   background: linear-gradient(90deg,
     var(--pf-bars) 0 20%, transparent 20% 26.67%,
     var(--pf-bars) 26.67% 33.33%, transparent 33.33% 40%,
@@ -333,7 +383,7 @@ body { background-color: var(--pf-surface); }
     var(--pf-bars) 53.33% 73.33%, transparent 73.33% 93.33%,
     var(--pf-bars) 93.33% 100%);
 }
-.pf-card__short { position: absolute; left: 1.4rem; bottom: 1.1rem; color: var(--pf-ink); font-size: 1.7rem; font-weight: 800; letter-spacing: -.03em; }
+.pf-card__short { position: absolute; left: 1.4rem; bottom: 1.1rem; color: var(--g-fg, var(--pf-ink)); font-size: 1.9rem; font-weight: 800; letter-spacing: -.035em; }
 .pf-card__body { display: flex; flex: 1; flex-direction: column; padding: 1rem 1.3rem 1.2rem; }
 .md-typeset .pf-card__kind { margin: 0; color: var(--pf-link); font-size: .65rem; font-weight: 600; }
 .md-typeset .pf-card__kind span { margin-left: .3rem; color: var(--pf-muted); font-weight: 500; }

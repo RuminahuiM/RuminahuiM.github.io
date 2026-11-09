@@ -31,6 +31,7 @@ import base64
 import html
 import os
 import re
+import zlib
 
 import yaml
 from mkdocs.exceptions import PluginError
@@ -153,6 +154,8 @@ def _load(path: str) -> dict:
                 _fail(f"{where}: '{key}' muss eine vollstaendige URL sein (https://...)")
         if p.get("short") and not SHORT.match(str(p["short"])):
             _fail(f"{where}: 'short' sind 1 bis 4 Buchstaben oder Ziffern, z.B. RDG")
+        if p.get("gradient") is not None and (not isinstance(p["gradient"], int) or not 1 <= p["gradient"] <= GRADIENTS):
+            _fail(f"{where}: 'gradient' ist eine Zahl von 1 bis {GRADIENTS}")
         topics = p.get("topics") or []
         if not isinstance(topics, list):
             _fail(f"{where}: 'topics' muss eine Liste sein")
@@ -198,6 +201,16 @@ def _short(p: dict) -> str:
     return "".join(w[0] for w in re.findall(r"[A-Za-z0-9]+", str(p["title"])))[:3].upper()
 
 
+GRADIENTS = 6   # Anzahl Farbverlaeufe in extra.css (.pf-grad--1 bis --6)
+
+
+def _gradient(p: dict) -> int:
+    """Farbverlauf fuer Karten ohne Bild: Feld 'gradient', sonst stabil aus dem Titel."""
+    if p.get("gradient"):
+        return int(p["gradient"])
+    return zlib.crc32(str(p["title"]).encode()) % GRADIENTS + 1
+
+
 def _card(p: dict, lang: str, prefix: str) -> str:
     cat = _loc(next(c for c in _data["categories"] if c["id"] == p["category"]), lang)
     p = _loc(p, lang)
@@ -213,7 +226,7 @@ def _card(p: dict, lang: str, prefix: str) -> str:
         thumb = (f'<div class="pf-card__thumb pf-card__thumb--img">'
                  f'<img src="{prefix}{_esc(p["image"])}" alt="{alt}" loading="lazy"></div>')
     else:
-        thumb = (f'<div class="pf-card__thumb" aria-hidden="true"><span class="pf-card__bars"></span>'
+        thumb = (f'<div class="pf-card__thumb pf-grad--{_gradient(p)}" aria-hidden="true"><span class="pf-card__bars"></span>'
                  f'<span class="pf-card__short">{_esc(_short(p))}</span></div>')
 
     tags = "".join(f'<span class="pf-tag">{_esc(t)}</span>' for t in (p.get("topics") or []))

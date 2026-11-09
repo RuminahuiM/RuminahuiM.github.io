@@ -75,6 +75,7 @@ Die Reihenfolge in der Datei spielt keine Rolle. Die Seite sortiert nach `start`
 | `end` | nein | Ende als `"JJJJ-MM"`. Leer bedeutet laufend, die Karte zeigt dann "seit ..." |
 | `semester` | nein | Nummer der Semesterarbeit, erscheint oben auf der Karte ("Semesterarbeit 4") |
 | `short` | nein | Kürzel auf dem Kartenbild, wenn es kein `image` gibt, 1 bis 4 Zeichen, z.B. `RDG`. Ohne Angabe: Anfangsbuchstaben des Titels |
+| `gradient` | nein | Farbverlauf als Kartenbild, wenn es kein `image` gibt: 1 Nacht, 2 Gold, 3 Aubergine, 4 Schiefer, 5 Sand, 6 Glut (Farben in `extra.css`). Ohne Angabe wird einer fest aus dem Titel gewählt |
 | `topics` | nein | Themenfelder als Liste, z.B. `[Cloud, CI/CD]` |
 | `status` | nein | Freier Text, z.B. `laufend` oder `abgeschlossen` |
 | `en` | nein | Englische Fassung: Block mit `title`, `summary`, `topics`, `status`, `image_alt`. Nur angeben, was anders ist als auf Deutsch |

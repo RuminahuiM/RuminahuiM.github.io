@@ -24,6 +24,7 @@ categories:
 projects:
   - title: RDG als DevOps-Projekt mit KI-Wartung
     short: RDG
+    gradient: 1
     category: semesterarbeiten
     semester: 4
     topics: [Projektmanagement, DevOps, CI/CD, AI, Microsoft 365]
@@ -48,6 +49,7 @@ projects:
 
   - title: Implementing Post-Quantum Cryptography in a Python Authentication Service
     short: PQC
+    gradient: 4
     category: semesterarbeiten
     semester: 3
     topics: [Security, Post-Quantum-Kryptografie, Python, FastAPI, React Native, Docker]
@@ -71,6 +73,7 @@ projects:
 
   - title: Automatisiertes Hugo Portfolio
     short: IaC
+    gradient: 2
     category: semesterarbeiten
     semester: 2
     topics: [AWS, Ansible, IaC, CI/CD, Hugo]
@@ -92,6 +95,7 @@ projects:
 
   - title: "Azure Dynamic Groups: Access Governance Concept"
     short: ADG
+    gradient: 6
     category: semesterarbeiten
     semester: 1
     topics: [Azure, Microsoft 365, PowerShell, Automatisierung, Access Governance]
@@ -112,6 +116,7 @@ projects:
 
   - title: Rumis AI Lab
     short: AI
+    gradient: 3
     category: weitere-projekte
     topics: [AI, LLM, Docker, AWS, Self-Hosting, CI/CD]
     start: "2026-03"
@@ -149,6 +154,7 @@ projects:
 #  - title: Titel des Projekts
 #    category: semesterarbeiten          # semesterarbeiten | weitere-projekte
 #    short: RDG                          # optional, Kuerzel auf dem Kartenbild (1 bis 4 Zeichen)
+#    gradient: 1                         # optional, Farbverlauf ohne Bild: 1 Nacht, 2 Gold, 3 Aubergine, 4 Schiefer, 5 Sand, 6 Glut
 #    semester: 4                         # optional, nur bei Semesterarbeiten
 #    topics: [DevOps, Projektmanagement]  # Themenfelder
 #    start: "2026-10"                    # JJJJ-MM, in Anführungszeichen
