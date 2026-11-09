@@ -20,7 +20,7 @@ Gebaut mit Material for MkDocs, gleiche Version und gleiches Theme wie die Proje
 | `docs/assets/images/` | Profilbild |
 | `docs/assets/fonts/` | Schrift Inter (WOFF, nur lateinische Zeichen), selbst gehostet, Lizenz in `OFL.txt` |
 | `docs/stylesheets/extra.css` | Design der Hauptseite (siehe "Design") |
-| `docs/javascripts/` | `kontakt.js` (geschützte E-Mail), `projekte.js` (Karussell: Pfeile, Filter, Fortschritt) |
+| `docs/javascripts/` | `kontakt.js` (geschützte E-Mail), `projekte.js` (Karussell: Pfeile, Filter, Fortschritt), `cv.js` (linke Spalte im Lebenslauf bleibt stehen) |
 | `docs/assets/brand/` | Farbpalette und Logo, zentral für alle Seiten des Portfolios |
 | `overrides/main.html` | Grundgerüst aller Seiten, Vorschau beim Teilen (Open Graph): Titel, Beschreibung und Bild `docs/assets/brand/social-card.png` bzw. `social-card-en.png`, 1200 x 630 px |
 | `overrides/home.html` | Vorlage der Startseite (Foto links, Text rechts) |
@@ -97,7 +97,7 @@ Unter `categories` einen Eintrag mit `id`, `title` (Filter-Button) und `kind` (B
 
 ### Profilbild ersetzen
 
-Eine Datei für Startseite, Lebenslauf und PDF: `docs/assets/images/profil.jpg`, Hochformat etwa 3:4 (aktuell 896 x 1195 px), Gesicht im oberen Drittel. Die Seiten schneiden das Bild selbst zu (Startseite volle Höhe, Lebenslauf Querstreifen).
+Eine Datei für Startseite, Lebenslauf und PDF: `docs/assets/images/profil.jpg`, Hochformat etwa 3:4 (aktuell 896 x 1195 px), Gesicht im oberen Drittel. Das Foto wird überall ganz gezeigt, nicht zugeschnitten.
 
 Neues Foto: als JPG unter 200 KB speichern und Metadaten entfernen (Handyfotos enthalten oft GPS-Koordinaten). In Windows: Rechtsklick auf die Datei > Eigenschaften > Details > "Eigenschaften und persönliche Informationen entfernen" > "Kopie erstellen, bei der alle möglichen Eigenschaften entfernt sind". Dann `profil.jpg` ersetzen, gleicher Name. Hat das neue Foto eine andere Grösse, `width` und `height` in `overrides/home.html` anpassen.
 

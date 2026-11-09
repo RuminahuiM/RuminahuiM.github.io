@@ -51,6 +51,7 @@ extra_css:
 extra_javascript:
   - javascripts/kontakt.js
   - javascripts/projekte.js
+  - javascripts/cv.js
 
 markdown_extensions:
   - tables

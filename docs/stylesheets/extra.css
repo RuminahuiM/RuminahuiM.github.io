@@ -173,25 +173,39 @@ body { background-color: var(--pf-surface); }
 /* ===== 4. Startseite ===== */
 .pf-home {
   display: grid;
-  grid-template-columns: 42% 1fr;
+  grid-template-columns: auto minmax(0, 1fr);
   min-height: 100vh;
   min-height: 100dvh;
   background-color: var(--pf-surface);
 }
-.pf-home__photo { position: relative; background-color: var(--pf-thumb); overflow: hidden; }
+/* Foto immer ganz sichtbar: Spaltenbreite folgt dem Seitenverhaeltnis des
+   Bildes (896 x 1195). Nur bei sehr hohen, schmalen Fenstern (max. halbe
+   Breite) wird seitlich etwas abgeschnitten. */
+.pf-home__photo {
+  position: sticky;
+  top: 0;
+  align-self: start;
+  height: 100vh;
+  height: 100dvh;
+  aspect-ratio: 896 / 1195;
+  max-width: 50vw;
+  overflow: hidden;
+  background-color: var(--pf-thumb);
+}
 .pf-home__photo img {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center 18%;
+  object-position: center top;
 }
 .pf-home__main {
   display: flex;
   flex-direction: column;
   min-width: 0;
   padding: 0 clamp(1.5rem, 5vw, 4.8rem) 0 clamp(1.5rem, 4.6vw, 4.4rem);
+  container-type: inline-size;   /* Namensgroesse richtet sich nach der Textspalte */
 }
 .pf-home .md-header.pf-header { position: static; background: transparent; border: 0; }
 .pf-home .pf-header__inner { padding: clamp(1rem, 3vh, 1.8rem) 0 0; height: auto; }
@@ -201,6 +215,7 @@ body { background-color: var(--pf-surface); }
   padding-top: 2rem;
   color: var(--pf-ink);
   font-size: min(5.6vw, 9.4vh, 4rem);
+  font-size: min(9cqi, 9.4vh, 4rem);
   font-weight: 800;
   line-height: .98;
   letter-spacing: -.035em;
@@ -225,15 +240,16 @@ body { background-color: var(--pf-surface); }
 .md-typeset .pf-facts strong { display: block; margin-bottom: .3rem; color: var(--pf-ink); font-size: .75rem; }
 .md-typeset .pf-facts span { display: block; color: var(--pf-muted); font-size: .7rem; line-height: 1.5; }
 
-/* Handy und schmales Tablet: Kopfzeile, Foto, Text untereinander */
-@media screen and (max-width: 47.9375em) {
+/* Handy, Tablet hochkant und alle Fenster hoeher als breit: Kopfzeile,
+   Foto, Text untereinander */
+@media screen and (max-width: 47.9375em), screen and (max-aspect-ratio: 1/1) {
   .pf-home { display: flex; flex-direction: column; }
   .pf-home__main { display: contents; }
   .pf-home .md-header.pf-header { order: 1; }
   .pf-home .pf-header__inner { padding: .9rem 1rem; }
-  .pf-home__photo { order: 2; height: min(112vw, 68vh); }
-  .pf-home__text { order: 3; padding: 0 1.2rem 1.6rem; }
-  .pf-home__text.md-typeset h1 { font-size: 2.3rem; padding-top: 1.4rem; }
+  .pf-home__photo { order: 2; position: relative; width: 100%; max-width: none; height: auto; }
+  .pf-home__text { order: 3; padding: 0 var(--pf-gutter) 1.6rem; }
+  .pf-home__text.md-typeset h1 { font-size: clamp(2.3rem, 8vw, 4rem); padding-top: 1.4rem; }
   .md-typeset .pf-facts { grid-template-columns: 1fr; gap: .9rem; margin-top: 1.8rem; }
 }
 
@@ -300,8 +316,9 @@ body { background-color: var(--pf-surface); }
 .pf-card[hidden] { display: none; }
 .pf-card.is-current, .pf-card:hover { box-shadow: var(--pf-shadow); }
 [data-md-color-scheme=slate] .pf-card.is-current { border-color: var(--brand-yellow); }
-.pf-card__thumb { position: relative; height: 10.5rem; flex-shrink: 0; background-color: var(--pf-thumb); }
-.pf-card__thumb--img img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: top; }
+.pf-card__thumb { position: relative; aspect-ratio: 1200 / 687; flex-shrink: 0; background-color: var(--pf-thumb); }
+/* Projektbild ganz zeigen: Format der Karte = Format der Bilder (1200 x 687) */
+.pf-card__thumb--img img { display: block; width: 100%; height: 100%; object-fit: contain; }
 /* Kartenbild ohne Foto: Logo-Balken (Code 39 "R") und Kuerzel */
 .pf-card__bars {
   position: absolute;
@@ -362,7 +379,6 @@ body { background-color: var(--pf-surface); }
   .pf-page--projekte .pf-page__inner { grid-template-columns: minmax(0, 1fr); grid-template-areas: "title" "lead" "filter" "track" "ctrl"; }
   .pf-carousel__filter { padding: 1.2rem var(--pf-gutter) 0; }
   .pf-carousel__track { padding-top: 1.2rem; gap: 1rem; }
-  .pf-card__thumb { height: 10rem; }
 }
 
 /* ===== 6. Lebenslauf ===== */
@@ -373,19 +389,15 @@ body { background-color: var(--pf-surface); }
   min-height: calc(100vh - var(--pf-header-h));
   background: linear-gradient(90deg, var(--pf-paper) 0 calc(var(--cv-side) - 1px), var(--pf-line) calc(var(--cv-side) - 1px) var(--cv-side), transparent var(--cv-side));
 }
-/* Linke Spalte bleibt beim Scrollen stehen; ist sie hoeher als das Fenster,
-   scrollt sie fuer sich */
-.cv-side {
-  position: sticky;
-  top: calc(var(--pf-header-h) + 1px);
-  align-self: start;
-  max-height: calc(100vh - var(--pf-header-h) - 1px);
-  overflow-y: auto;
-  scrollbar-width: thin;
-  padding-right: 1px;
+/* Linke Spalte: scrollt mit, bis ihr Ende sichtbar ist, und bleibt dann
+   stehen. Den Abstand oben setzt javascripts/cv.js (Klasse cv-side--sticky);
+   ohne JavaScript scrollt sie normal mit. */
+.cv-side { align-self: start; padding-right: 1px; }
+@media screen and (min-width: 60em) {
+  .cv-side--sticky { position: sticky; top: calc(var(--pf-header-h) + 1px); }
 }
 .md-typeset .cv-side > p:first-child { margin: 0; }
-.md-typeset .cv-photo { display: block; width: 100%; height: clamp(12rem, 34vh, 20rem); object-fit: cover; object-position: center 18%; }
+.md-typeset .cv-photo { display: block; width: 100%; height: auto; }
 .cv-side__in { padding: 1.6rem 2.4rem 2.4rem; }
 .md-typeset .cv-side h1 { margin: 0; color: var(--pf-ink); font-size: 1.9rem; font-weight: 800; line-height: 1.04; letter-spacing: -.035em; }
 .md-typeset .cv-role { margin: .5rem 0 0; color: var(--pf-link); font-size: .8rem; font-weight: 600; }
@@ -425,7 +437,7 @@ body { background-color: var(--pf-surface); }
 @media screen and (max-width: 59.9375em) {
   .cv-layout { grid-template-columns: minmax(0, 1fr); background: none; }
   .cv-side { position: static; max-height: none; overflow: visible; background-color: var(--pf-paper); border-bottom: 1px solid var(--pf-line); }
-  .md-typeset .cv-photo { height: min(100vw, 24rem); }
+  .md-typeset .cv-photo { max-width: 24rem; }
   .cv-side__in { padding: 1.4rem var(--pf-gutter) 1.8rem; }
   .cv-main { padding: 0 var(--pf-gutter) 2.5rem; }
 }
@@ -443,7 +455,7 @@ body { background-color: var(--pf-surface); }
   .cv-layout { display: block; min-height: 0; background: none; }
   .cv-side { float: left; width: 13.5rem; position: static; max-height: none; overflow: visible; padding-right: 1.1rem; border-right: 1px solid var(--pf-line); }
   .cv-side__in { padding: .9rem 0 0; }
-  .md-typeset .cv-photo { height: 11rem; border-radius: .4rem; }
+  .md-typeset .cv-photo { width: 9.5rem; border-radius: .4rem; }
   .md-typeset .cv-side h1 { font-size: 1.5rem; }
   .md-typeset .cv-lead { font-size: .68rem; }
   .md-typeset .cv-side h2 { margin: 1.1rem 0 .3rem; }
