@@ -13,7 +13,7 @@ Die drei Kurzfakten unten: je <div><strong>Titel</strong><span>Text</span></div>
 
 # Dodoe Rumiñahui Mannale
 
-System Engineer in Zürich. Ich halte Microsoft 365 und Azure am Laufen, automatisiere den Rest mit PowerShell und baue AI-Systeme, die ich im Alltag einsetze.
+Ich bin System Engineer in Zürich und arbeite vor allem mit Microsoft 365 und Azure. Hier sammle ich meine Semesterarbeiten aus dem Studium und eigene Projekte rund um Automatisierung, Cloud und AI.
 {: .pf-home__intro }
 
 [Projekte ansehen](projekte.md){ .md-button .md-button--primary } [Lebenslauf](cv.md){ .md-button }

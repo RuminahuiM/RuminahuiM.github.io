@@ -9,7 +9,7 @@ hide:
 
 # Dodoe Rumiñahui Mannale
 
-System engineer in Zurich. I keep Microsoft 365 and Azure running, automate the rest with PowerShell and build AI systems that I use every day.
+I am a system engineer in Zurich and work mainly with Microsoft 365 and Azure. This is where I collect my semester projects from my studies and my own projects around automation, cloud and AI.
 {: .pf-home__intro }
 
 [View projects](projekte.md){ .md-button .md-button--primary } [CV](cv.md){ .md-button }
