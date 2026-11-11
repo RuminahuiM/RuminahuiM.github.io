@@ -9,7 +9,7 @@ hide:
 
 # Dodoe Rumiñahui Mannale
 
-I am a system engineer in Zurich and work mainly with Microsoft 365 and Azure. This is where I collect my semester projects from my studies and my own projects around automation, cloud and AI.
+I am a system engineer in Zurich and work mainly with Microsoft 365 and Azure. This is where I collect the semester projects from my ongoing HF studies and my own projects around automation, cloud and AI.
 {: .pf-home__intro }
 
 [View projects](projekte.md){ .md-button .md-button--primary } [CV](cv.md){ .md-button }
@@ -20,6 +20,6 @@ Contact: <!-- kontakt -->
 
 <div class="pf-facts">
 <div><strong>In IT since 2018</strong><span>Apprenticeship, then system engineer at three employers</span></div>
-<div><strong>Studies</strong><span>Dipl. Informatiker HF, Cloud-native Engineer at TBZ</span></div>
+<div><strong>Currently studying</strong><span>Part-time at TBZ, working towards the Dipl. Informatiker HF (Cloud-native Engineer)</span></div>
 <div><strong>Currently</strong><span>RDG: Microsoft 365 groups, maintained by an AI agent</span></div>
 </div>
