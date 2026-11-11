@@ -15,7 +15,7 @@ Aufbau: zwei Spalten (Stil in stylesheets/extra.css, Abschnitt "Lebenslauf").
   Sprachen, Zertifikate, Interessen. Bleibt beim Scrollen stehen.
 - Rechts <div class="cv-main">: Berufserfahrung, Ausbildung, Skills.
 - Stationen: <div class="cv-item"> mit Jahr in <span class="cv-year">,
-  die neueste oben.
+  die neueste oben. Optional Endjahr darunter: <small>bis 2028</small>.
 - Skills: eine <div class="cv-skillrow"> pro Kategorie. Schwerpunkte mit
   <span class="cv-chip cv-chip--core">, weitere mit <span class="cv-chip">.
 - Sprachen: 6 Segmente = A1 bis C2. Gefuellte Segmente bekommen "on",
@@ -78,8 +78,8 @@ AI-Systeme, Webdesign und 3D-Druck.
 ## Ausbildung { .cv-newpage }
 
 <div class="cv-items">
-<div class="cv-item"><span class="cv-year">2025</span><div><h3>Dipl. Informatiker/in HF, Cloud-native Engineer</h3><p class="cv-meta">Technische Berufsschule Zürich (TBZ), Klasse ITCNE25 <span>02.2025 bis heute</span></p><p>Cloud-Infrastruktur und Infrastructure as Code, Container und Kubernetes, DevOps (CI/CD, Terraform), Datenbanksysteme, IT-Sicherheit. Die Semesterarbeiten findest du unter <a href="../projekte/">Projekte</a>.</p></div></div>
-<div class="cv-item"><span class="cv-year">2018</span><div><h3>Informatiker EFZ, Betriebsinformatik</h3><p class="cv-meta">Bildungszentrum für Technik Frauenfeld (BZTF) <span>2018 bis 08.2022</span></p><p>Netzwerk, Programmierung, Server-Infrastrukturen, Cloud</p></div></div>
+<div class="cv-item"><span class="cv-year">2025<small>bis 2028</small></span><div><h3>Dipl. Informatiker/in HF, Cloud-native Engineer</h3><p class="cv-meta">Technische Berufsschule Zürich (TBZ), Klasse ITCNE25 <span>02.2025 bis 02.2028, laufend</span></p><p>Cloud-Infrastruktur und Infrastructure as Code, Container und Kubernetes, DevOps (CI/CD, Terraform), Datenbanksysteme, IT-Sicherheit. Die Semesterarbeiten findest du unter <a href="../projekte/">Projekte</a>.</p></div></div>
+<div class="cv-item"><span class="cv-year">2018<small>bis 2022</small></span><div><h3>Informatiker EFZ, Betriebsinformatik</h3><p class="cv-meta">Bildungszentrum für Technik Frauenfeld (BZTF) <span>08.2018 bis 08.2022</span></p><p>Netzwerk, Programmierung, Server-Infrastrukturen, Cloud</p></div></div>
 </div>
 
 ## Skills

@@ -55,8 +55,8 @@ AI systems, web design and 3D printing.
 ## Education { .cv-newpage }
 
 <div class="cv-items">
-<div class="cv-item"><span class="cv-year">2025</span><div><h3>Dipl. Informatiker/in HF, Cloud-native Engineer</h3><p class="cv-meta">Technische Berufsschule Zürich (TBZ), class ITCNE25 <span>02.2025 to present</span></p><p>Swiss Federal Diploma of Higher Education in Computer Science. Cloud infrastructure and infrastructure as code, containers and Kubernetes, DevOps (CI/CD, Terraform), database systems, IT security. See my semester projects under <a href="../projekte/">Projects</a>.</p></div></div>
-<div class="cv-item"><span class="cv-year">2018</span><div><h3>IT specialist EFZ, system engineering</h3><p class="cv-meta">Bildungszentrum für Technik Frauenfeld (BZTF) <span>2018 to 08.2022</span></p><p>Swiss Federal VET Diploma. Networking, programming, server infrastructure, cloud</p></div></div>
+<div class="cv-item"><span class="cv-year">2025<small>to 2028</small></span><div><h3>Dipl. Informatiker/in HF, Cloud-native Engineer</h3><p class="cv-meta">Technische Berufsschule Zürich (TBZ), class ITCNE25 <span>02.2025 to 02.2028, ongoing</span></p><p>Swiss Federal Diploma of Higher Education in Computer Science. Cloud infrastructure and infrastructure as code, containers and Kubernetes, DevOps (CI/CD, Terraform), database systems, IT security. See my semester projects under <a href="../projekte/">Projects</a>.</p></div></div>
+<div class="cv-item"><span class="cv-year">2018<small>to 2022</small></span><div><h3>IT specialist EFZ, system engineering</h3><p class="cv-meta">Bildungszentrum für Technik Frauenfeld (BZTF) <span>08.2018 to 08.2022</span></p><p>Swiss Federal VET Diploma. Networking, programming, server infrastructure, cloud</p></div></div>
 </div>
 
 ## Skills
